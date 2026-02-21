@@ -1,0 +1,84 @@
+Relatorio tecnico - Justificativas objetivas das decisoes adotadas
+
+Projeto: TP1 - Programacao Assembly ARM64
+Arquivos: q1.s a q12.s
+Arquitetura alvo: AArch64 (ARM64)
+
+1) Comandos de compilacao e execucao (Raspberry Pi Zero 2W)
+
+Opcao A - compilacao nativa no Raspberry Pi OS 64-bit:
+- as qN.s -o qN.o
+- ld qN.o -o qN
+- ./qN
+
+Opcao B - fluxo cruzado (ambiente x86_64 + QEMU):
+- aarch64-linux-gnu-as qN.s -o qN.o
+- aarch64-linux-gnu-ld qN.o -o qN
+- qemu-aarch64 ./qN
+
+Depuracao (quando solicitado):
+- aarch64-linux-gnu-as -g qN.s -o qN.o
+- aarch64-linux-gnu-ld qN.o -o qN
+- qemu-aarch64 -g 1234 ./qN
+- gdb-multiarch ./qN
+- set architecture aarch64
+- target remote :1234
+
+2) Justificativas gerais de projeto
+
+- Foi utilizado Linux syscall ABI de AArch64 para evitar dependencias de runtime C e manter comportamento deterministico.
+- Foi adotado padrao de montagem + linkagem manual (as/ld) para evidenciar controle de baixo nivel exigido pelo enunciado.
+- Os codigos de retorno foram usados como criterio objetivo de validacao automatica de cada exercicio.
+- Registradores de trabalho dedicados (ex.: x19) foram mantidos nos exercicios de rastreabilidade para facilitar auditoria via GDB.
+- Labels tecnicos (ex.: before_exit) foram usados para criar pontos de parada consistentes na depuracao.
+- Operacoes que dependem de flags (subs/adds/cmp) foram escolhidas para permitir verificacao direta de Z, V, C e N.
+
+3) Justificativas objetivas por exercicio
+
+Q1 - Hello World:
+- Mensagem fixa em .data e syscall write para stdout garantem saida exata.
+- Encerramento por syscall exit com x0=0 garante status de sucesso.
+
+Q2 - Comprimento da mensagem:
+- Comprimento calculado em assembly (len = . - msg) evita erro manual de contagem de bytes.
+- Validacao por tamanho de arquivo confirma consistencia entre conteudo e parametro de write.
+
+Q3 - Codigo de retorno:
+- Nao ha escrita em stdout para isolar o objetivo do exercicio (somente status de saida).
+- x0=7 antes de exit implementa diretamente o requisito de retorno parametrizado.
+
+Q4 - Soma/subtracao rastreavel:
+- Resultado intermediario/final foi mantido em registrador dedicado para inspecao no breakpoint.
+- Uso de simbolos de debug (-g) permite auditoria do estado sem alterar a logica do programa.
+
+Q5 - Complemento de dois:
+- Valor negativo foi produzido por aritmetica (subtracao), nao por literal preconvertido, para demonstrar o conceito.
+- Confirmacao em hexadecimal evidencia representacao em complemento de dois de 64 bits.
+
+Q6 - Deteccao de zero:
+- Instrucao que atualiza flags (subs) foi usada para acionar decisao condicional por Z.
+- Caminhos de retorno distintos (0/1) permitem verificar funcionalmente o desvio tomado.
+
+Q7 - ASCII minuscula para maiuscula:
+- Conversao foi feita por relacao numerica ASCII (diferenca de 32), sem tabelas.
+- Resultado em registrador auditavel permite prova objetiva da conversao para 0x47.
+
+Q8 - Comparacao tricotomica:
+- Estrutura de comparacao separa os tres cenarios (<, ==, >) com codificacao de retorno 0/1/2.
+- Implementacao evita ambiguidade e torna o resultado verificavel por um unico valor de saida.
+
+Q9 - Validacao de faixa [0,10]:
+- Comparacoes de limite inferior e superior foram modeladas para intervalo fechado (inclusivo).
+- Retorno binario (dentro/fora) simplifica criterio de aceite e teste.
+
+Q10 - Overflow com sinal:
+- Soma em 32 bits com caso limite (0x7fffffff + 1) foi escolhida por provocar overflow assinado de forma controlada.
+- Deteccao por flag V justifica retorno diagnostico 1 quando overflow ocorre.
+
+Q11 - Signed vs unsigned:
+- Mesmo padrao de bits comparado sob duas interpretacoes demonstra diferenca sem alterar operandos.
+- Codificacao por bits no retorno (bit0 signed, bit1 unsigned) facilita auditoria do resultado combinado.
+
+Q12 - Rotina integrada:
+- Sequencia aritmetica + comparacao + desvio reflete pipeline minimo de decisao em assembly.
+- Retorno booleano final (1 se verdadeiro, 0 caso contrario) atende criterio de validacao simples e objetivo.
