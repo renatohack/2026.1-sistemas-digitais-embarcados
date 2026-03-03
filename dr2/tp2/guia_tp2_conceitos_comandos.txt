@@ -1,0 +1,69 @@
+Guia Geral TP2 - Conceitos e Comandos (Assembly ARM64)
+
+1) Mapa de memoria basico
+- .text: codigo executavel (instrucoes).
+- .data: dados inicializados (ja tem valor no binario).
+- .bss: dados nao inicializados (espaco reservado, sem valor inicial no arquivo).
+
+2) Constante de montagem x variavel em memoria
+- Constante de montagem: .equ NOME, valor. Nao vira uma celula de memoria em .data/.bss.
+- Variavel em memoria: simbolo em .data ou .bss, acessado por endereco.
+
+3) Forma didatica de pegar endereco de simbolo
+- Nos exercicios, foi usado: ldr xN, =simbolo
+- Esse formato e uma pseudo-instrucao do montador para carregar o endereco de um simbolo.
+
+4) Leitura e escrita em memoria
+- LDR: copia da memoria para registrador.
+- STR: copia de registrador para memoria.
+- Exemplo:
+  ldr x0, =valor
+  ldr x1, [x0]    ; leitura
+  str x1, [x0]    ; escrita
+
+5) Endianness no ARM64
+- ARM64 Linux usa little-endian: byte menos significativo fica no menor endereco.
+- Exemplo: 0x12345678 em memoria vira bytes 78 56 34 12.
+
+6) Vetores e offsets
+- word (32 bits): cada indice avanca 4 bytes.
+- dword/quad (64 bits): cada indice avanca 8 bytes.
+- Acesso por offset fixo: [base, #offset].
+- Acesso por indice escalado (quando pedido): [base, indice, lsl #3] para 64 bits.
+
+7) Strings terminadas em zero
+- .asciz cria bytes ASCII e adiciona 0x00 no final.
+- Rotinas de string percorrem byte a byte e param no 0x00.
+
+8) Stack (pilha)
+- SP aponta para o topo da pilha.
+- Regra pratica: reservar/liberar em multiplos de 16 bytes para alinhamento.
+- Preservacao de temporarios:
+  sub sp, sp, #N
+  str ... [sp, #offset]
+  ldr ... [sp, #offset]
+  add sp, sp, #N
+- Se reserva e libera o mesmo N, SP volta ao valor inicial.
+
+9) Ferramentas usadas no TP2
+- Montar: aarch64-linux-gnu-as -g -o qX.o qX.s
+- Linkar: aarch64-linux-gnu-ld -o qX qX.o
+- Rodar no emulador: qemu-aarch64 ./qX
+- Tabela de simbolos: aarch64-linux-gnu-objdump -t qX
+- Cabecalho de secoes: aarch64-linux-gnu-objdump -h qX
+- Disassembly: aarch64-linux-gnu-objdump -d qX
+
+10) Fluxo de validacao com QEMU + GDB
+- Terminal 1: qemu-aarch64 -g 1234 ./qX
+- Terminal 2:
+  gdb-multiarch ./qX
+  set architecture aarch64
+  target remote :1234
+  break <label>
+  continue
+  (comandos de inspeacao: x/gx, x/s, x/4bx, info registers)
+
+11) O que imprimir como evidencia no relatorio
+- Dumps de objdump quando o enunciado pedir secao/simbolo/instrucao.
+- Dumps do GDB de memoria/registradores exatamente como o enunciado pedir.
+- Justificativa objetiva da escolha de secao (.data/.bss), offsets usados e preservacao de stack.
