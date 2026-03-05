@@ -1,0 +1,111 @@
+//
+//Written by GowinSynthesis
+//Tool Version "V1.9.12.01 (64-bit)"
+//Thu Mar  5 01:16:41 2026
+
+//Source file index table:
+//file0 "\C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/logic_block.v"
+//file1 "\C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/top.v"
+//file2 "\C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/top_tb.v"
+`timescale 100 ps/100 ps
+module Logic_Block (
+  o_LED_2_d,
+  i_Switch_1_d,
+  o_LED_3_d,
+  o_LED_1_d
+)
+;
+input o_LED_2_d;
+input i_Switch_1_d;
+input o_LED_3_d;
+output o_LED_1_d;
+wire VCC;
+wire GND;
+  LUT3 o_LED_1_d_s (
+    .F(o_LED_1_d),
+    .I0(o_LED_2_d),
+    .I1(i_Switch_1_d),
+    .I2(o_LED_3_d) 
+);
+defparam o_LED_1_d_s.INIT=8'h8F;
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+endmodule /* Logic_Block */
+module Top (
+  i_Switch_1,
+  i_Switch_2,
+  i_Switch_3,
+  i_Switch_4,
+  o_LED_1,
+  o_LED_2,
+  o_LED_3,
+  o_LED_4
+)
+;
+input i_Switch_1;
+input i_Switch_2;
+input i_Switch_3;
+input i_Switch_4;
+output o_LED_1;
+output o_LED_2;
+output o_LED_3;
+output o_LED_4;
+wire i_Switch_1_d;
+wire o_LED_2_d;
+wire o_LED_3_d;
+wire o_LED_4_d;
+wire o_LED_1_d;
+wire VCC;
+wire GND;
+  IBUF i_Switch_1_ibuf (
+    .O(i_Switch_1_d),
+    .I(i_Switch_1) 
+);
+  IBUF i_Switch_2_ibuf (
+    .O(o_LED_2_d),
+    .I(i_Switch_2) 
+);
+  IBUF i_Switch_3_ibuf (
+    .O(o_LED_3_d),
+    .I(i_Switch_3) 
+);
+  IBUF i_Switch_4_ibuf (
+    .O(o_LED_4_d),
+    .I(i_Switch_4) 
+);
+  OBUF o_LED_1_obuf (
+    .O(o_LED_1),
+    .I(o_LED_1_d) 
+);
+  OBUF o_LED_2_obuf (
+    .O(o_LED_2),
+    .I(o_LED_2_d) 
+);
+  OBUF o_LED_3_obuf (
+    .O(o_LED_3),
+    .I(o_LED_3_d) 
+);
+  OBUF o_LED_4_obuf (
+    .O(o_LED_4),
+    .I(o_LED_4_d) 
+);
+  Logic_Block u_logic_block (
+    .o_LED_2_d(o_LED_2_d),
+    .i_Switch_1_d(i_Switch_1_d),
+    .o_LED_3_d(o_LED_3_d),
+    .o_LED_1_d(o_LED_1_d)
+);
+  VCC VCC_cZ (
+    .V(VCC)
+);
+  GND GND_cZ (
+    .G(GND)
+);
+  GSR GSR (
+    .GSRI(VCC) 
+);
+endmodule /* Top */

@@ -1,0 +1,30 @@
+[
+ {
+  "InstFile" : "C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/top_tb.v",
+  "InstLine" : 3,
+  "InstName" : "Top_tb",
+  "ModuleFile" : "C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/top_tb.v",
+  "ModuleLine" : 3,
+  "ModuleName" : "Top_tb",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/top_tb.v",
+    "InstLine" : 15,
+    "InstName" : "dut",
+    "ModuleFile" : "C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/top.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "Top",
+    "SubInsts" : [
+     {
+      "InstFile" : "C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/top.v",
+      "InstLine" : 14,
+      "InstName" : "u_logic_block",
+      "ModuleFile" : "C:/Users/Renat/Desktop/DRs/dr1/tp2/tp2_tang_nano_9k/src/logic_block.v",
+      "ModuleLine" : 1,
+      "ModuleName" : "Logic_Block"
+     }
+    ]
+   }
+  ]
+ }
+]

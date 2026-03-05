@@ -1,0 +1,18 @@
+---
+# Note: The contents of this file are automatically generated.
+# Any changes made by hand may be overwritten.
+version: '0.2'
+work_dir: .
+design_root_dir: C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\src
+simulations:
+  - name: top_tb
+    options: '-top work.Top_tb'
+source_files:
+  - language: verilog
+    path: src/logic_block.v
+  - language: verilog
+    path: src/top.v
+  - language: verilog
+    path: src/top_tb.v
+library_search_paths:
+  - $STD_LIBS\ieee93
