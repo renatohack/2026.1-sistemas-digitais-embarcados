@@ -1,7 +1,7 @@
 Reading netlist file: "C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\impl\gwsynthesis\tp2_tang_nano_9k.vg"
 Parsing netlist file "C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\impl\gwsynthesis\tp2_tang_nano_9k.vg" completed
 Processing netlist completed
-Reading constraint file: "C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\src\constraints.cst"
+Reading constraint file: "C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\src\tp2_tang_nano_9k.cst"
 Physical Constraint parsed completed
 Running placement......
 [10%] Placement Phase 0 completed
@@ -25,5 +25,5 @@ Generate file "C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\impl\pnr\tp2_
 Generate file "C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\impl\pnr\tp2_tang_nano_9k.rpt.html" completed
 Generate file "C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\impl\pnr\tp2_tang_nano_9k.rpt.txt" completed
 Generate file "C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\impl\pnr\tp2_tang_nano_9k.tr.html" completed
-Thu Mar  5 01:16:44 2026
+Thu Mar  5 20:20:52 2026
 

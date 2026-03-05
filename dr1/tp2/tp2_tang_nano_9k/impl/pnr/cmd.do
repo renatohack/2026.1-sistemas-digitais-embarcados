@@ -1,7 +1,7 @@
 -d C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\impl\gwsynthesis\tp2_tang_nano_9k.vg
 -p GW1NR-9C-QFN88P-6
 -pn GW1NR-LV9QN88PC6/I5
--cst C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\src\constraints.cst
+-cst C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\src\tp2_tang_nano_9k.cst
 -cfg C:\Users\Renat\Desktop\DRs\dr1\tp2\tp2_tang_nano_9k\impl\pnr\device.cfg
 -bit
 -tr
