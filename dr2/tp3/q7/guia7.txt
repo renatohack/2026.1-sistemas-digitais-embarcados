@@ -1,0 +1,35 @@
+Guia da questao 7 (WSL + QEMU AArch64)
+
+Objetivo
+- Validar conversao em double: C -> F.
+
+Arquivo
+- q7.s
+
+Passo a passo
+1) Entre na pasta:
+   cd q7
+
+2) Monte e linke:
+   aarch64-linux-gnu-as -g -o q7.o q7.s
+   aarch64-linux-gnu-ld -o q7 q7.o
+
+3) Rode:
+   qemu-aarch64 ./q7
+
+4) Validacao no GDB:
+   Terminal 1:
+   qemu-aarch64 -g 1234 ./q7
+
+   Terminal 2:
+   gdb-multiarch ./q7
+   (gdb) target remote :1234
+   (gdb) b celsiusToFahrenheit
+   (gdb) c
+   (gdb) finish
+   (gdb) p *(double*)&result_f0
+   (gdb) p *(double*)&result_f100
+
+Resultados esperados
+- result_f0   = 32.0
+- result_f100 = 212.0

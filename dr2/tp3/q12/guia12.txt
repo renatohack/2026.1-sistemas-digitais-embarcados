@@ -1,0 +1,45 @@
+Guia da questao 12 (WSL + QEMU AArch64)
+
+Objetivo
+- Comparar precisao entre float e double na formula da energia cinetica:
+  E = 0.5 * m * v^2
+
+Arquivos
+- main.S
+- lib.S
+
+Passo a passo
+1) Entre na pasta:
+   cd q12
+
+2) Monte:
+   aarch64-linux-gnu-as -g -o main.o main.S
+   aarch64-linux-gnu-as -g -o lib.o lib.S
+
+3) Linke:
+   aarch64-linux-gnu-ld -o main main.o lib.o
+
+4) Rode:
+   qemu-aarch64 ./main
+
+5) Validacao no GDB:
+   Terminal 1:
+   qemu-aarch64 -g 1234 ./main
+
+   Terminal 2:
+   gdb-multiarch ./main
+   (gdb) target remote :1234
+   (gdb) b ke_f32
+   (gdb) c
+   (gdb) finish
+   (gdb) p *(float*)&result_ke_f32
+   (gdb) p *(double*)&result_ke_f64
+
+Comparacao da diferenca (no proprio GDB)
+- Depois de imprimir os dois resultados, calcule:
+  (gdb) set $ef32 = (double)*(float*)&result_ke_f32
+  (gdb) set $ef64 = *(double*)&result_ke_f64
+  (gdb) p $ef64 - $ef32
+
+Observacao para o relatorio
+- Registre a diferenca observada (erro absoluto ou relativo), como pedido.
