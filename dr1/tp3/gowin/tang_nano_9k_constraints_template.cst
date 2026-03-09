@@ -1,0 +1,15 @@
+// Template de constraints para Tang Nano 9K
+// Substitua os placeholders PIN_* pelos pinos reais da sua placa/revisao.
+// Consulte o pinout oficial da sua Tang Nano 9K antes da sintese final.
+
+IO_LOC "clk"   PIN_CLK;
+IO_PORT "clk"  IO_TYPE=LVCMOS33;
+
+IO_LOC "reset"   PIN_RESET;
+IO_PORT "reset"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC "led0"   PIN_LED0;
+IO_PORT "led0"  IO_TYPE=LVCMOS33 DRIVE=8;
+
+IO_LOC "led1"   PIN_LED1;
+IO_PORT "led1"  IO_TYPE=LVCMOS33 DRIVE=8;
