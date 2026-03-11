@@ -50,6 +50,7 @@ _start:
     adr x9, inv_nan               // Endereco para salvar retorno NaN.
     str d0, [x9]                  // Salva NaN retornado.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra.

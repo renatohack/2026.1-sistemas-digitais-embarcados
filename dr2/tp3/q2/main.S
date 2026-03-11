@@ -44,6 +44,7 @@ loop_tests:
     subs x3, x3, #1               // Decrementa contador.
     b.ne loop_tests               // Continua ate testar os 4 caracteres.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra.

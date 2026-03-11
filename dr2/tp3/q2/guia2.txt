@@ -9,31 +9,28 @@ Arquivos
 
 Passo a passo
 1) Entre na pasta:
-   cd q2
+cd q2
 
 2) Monte:
-   aarch64-linux-gnu-as -g -o main.o main.S
-   aarch64-linux-gnu-as -g -o lib.o lib.S
+aarch64-linux-gnu-as -g -o main.o main.S
+aarch64-linux-gnu-as -g -o lib.o lib.S
 
 3) Linke:
-   aarch64-linux-gnu-ld -o main main.o lib.o
+aarch64-linux-gnu-ld -o main main.o lib.o
 
 4) Execucao simples:
-   qemu-aarch64 ./main
+qemu-aarch64 ./main
 
 5) Validacao no GDB:
-   Terminal 1:
-   qemu-aarch64 -g 1234 ./main
+Terminal 1:
+qemu-aarch64 -g 1234 ./main
 
-   Terminal 2:
-   gdb-multiarch ./main
-   (gdb) target remote :1234
-   (gdb) b isAlnum
-   (gdb) c
-   (gdb) c
-   (gdb) c
-   (gdb) c
-   (gdb) x/4ub &results
+Terminal 2:
+gdb-multiarch ./main
+target remote :1234
+b after_results_saved
+c
+x/4ub &results
 
 Resultado esperado em results
 - 'A'   -> 1

@@ -50,6 +50,7 @@ _start:
     adr x9, result_ke_f64         // Endereco para salvar E double.
     str d0, [x9]                  // Salva resultado double.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra.

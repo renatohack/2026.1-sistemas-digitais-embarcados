@@ -45,6 +45,7 @@ _start:
     adr x1, caller_x19_after      // X1 aponta para area de debug do X19.
     str x19, [x1]                 // Salva X19 apos retorno para validar preservacao.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra programa.

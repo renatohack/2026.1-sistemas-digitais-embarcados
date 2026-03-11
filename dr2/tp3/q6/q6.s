@@ -56,6 +56,7 @@ _start:
     adr x3, s_div0                // Endereco para salvar status do caso DIV0.
     str w1, [x3]                  // Salva status.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra.

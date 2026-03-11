@@ -45,6 +45,7 @@ _start:
     adr x9, result_mix2           // Endereco para salvar resultado 2.
     str s0, [x9]                  // Salva mix do teste 2.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra.

@@ -42,6 +42,7 @@ _start:
     adr x1, result_n0             // Endereco para salvar resultado de n=0.
     str x0, [x1]                  // Salva 1 em memoria.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra programa.

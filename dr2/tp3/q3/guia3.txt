@@ -2,9 +2,9 @@ Guia da questao 3 (WSL + QEMU AArch64)
 
 Objetivo
 - Validar chamadas aninhadas com preservacao de contexto:
-  1) string normalizada,
-  2) hash fixo retornado,
-  3) registrador callee-saved preservado.
+1) string normalizada,
+2) hash fixo retornado,
+3) registrador callee-saved preservado.
 
 Arquivos
 - main.S
@@ -12,31 +12,30 @@ Arquivos
 
 Passo a passo
 1) Entre na pasta:
-   cd q3
+cd q3
 
 2) Monte:
-   aarch64-linux-gnu-as -g -o main.o main.S
-   aarch64-linux-gnu-as -g -o lib.o lib.S
+aarch64-linux-gnu-as -g -o main.o main.S
+aarch64-linux-gnu-as -g -o lib.o lib.S
 
 3) Linke:
-   aarch64-linux-gnu-ld -o main main.o lib.o
+aarch64-linux-gnu-ld -o main main.o lib.o
 
 4) Rode no QEMU:
-   qemu-aarch64 ./main
+qemu-aarch64 ./main
 
 5) Validacao no GDB:
-   Terminal 1:
-   qemu-aarch64 -g 1234 ./main
+Terminal 1:
+qemu-aarch64 -g 1234 ./main
 
-   Terminal 2:
-   gdb-multiarch ./main
-   (gdb) target remote :1234
-   (gdb) b normalizeThenHashStub
-   (gdb) c
-   (gdb) finish
-   (gdb) x/s &buffer
-   (gdb) x/gx &hash_result
-   (gdb) x/gx &caller_x19_after
+Terminal 2:
+gdb-multiarch ./main
+target remote :1234
+b after_results_saved
+c
+x/s &buffer
+x/gx &hash_result
+x/gx &caller_x19_after
 
 Resultados esperados
 - buffer: "abc-def123!"

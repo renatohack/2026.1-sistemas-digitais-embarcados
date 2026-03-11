@@ -44,6 +44,7 @@ _start:
     adr x3, result_acc            // X3 aponta para area de resultado.
     str x0, [x3]                  // Salva acumulador final em memoria.
 
+after_result_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra.

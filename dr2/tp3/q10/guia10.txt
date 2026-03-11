@@ -8,29 +8,28 @@ Arquivo
 
 Passo a passo
 1) Entre na pasta:
-   cd q10
+cd q10
 
 2) Monte e linke:
-   aarch64-linux-gnu-as -g -o q10.o q10.s
-   aarch64-linux-gnu-ld -o q10 q10.o
+aarch64-linux-gnu-as -g -o q10.o q10.s
+aarch64-linux-gnu-ld -o q10 q10.o
 
 3) Rode:
-   qemu-aarch64 ./q10
+qemu-aarch64 ./q10
 
 4) Validacao no GDB:
-   Terminal 1:
-   qemu-aarch64 -g 1234 ./q10
+Terminal 1:
+qemu-aarch64 -g 1234 ./q10
 
-   Terminal 2:
-   gdb-multiarch ./q10
-   (gdb) target remote :1234
-   (gdb) b safeInv
-   (gdb) c
-   (gdb) finish
-   (gdb) x/wd &status_div0
-   (gdb) p *(double*)&inv_div0
-   (gdb) x/wd &status_nan
-   (gdb) p *(double*)&inv_nan
+Terminal 2:
+gdb-multiarch ./q10
+target remote :1234
+b after_results_saved
+c
+x/wd &status_div0
+p *(double*)&inv_div0
+x/wd &status_nan
+p *(double*)&inv_nan
 
 Resultados esperados
 - status_div0 = 1 e inv_div0 = +Inf ou -Inf

@@ -41,6 +41,7 @@ _start:
     adr x9, result_f100           // Endereco para salvar resultado de 100.0.
     str d0, [x9]                  // Salva resultado.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra.

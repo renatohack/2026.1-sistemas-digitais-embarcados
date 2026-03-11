@@ -48,6 +48,7 @@ _start:
     adr x9, y_wrap_msub           // Endereco para salvar resultado MSUB.
     str x0, [x9]                  // Salva resultado com wrap-around.
 
+after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
     mov x8, #93                   // Syscall exit.
     svc #0                        // Encerra.
