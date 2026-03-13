@@ -24,9 +24,9 @@
 // Exercicio 12 - Harness para comparar ke_f32 e ke_f64
 //
 // Como funciona:
-// 1) Carrega m=0.1 e v=30000.0 em float, chama ke_f32 e guarda resultado.
-// 2) Carrega m=0.1 e v=30000.0 em double, chama ke_f64 e guarda resultado.
-// 3) Programa encerra e os valores ficam em memoria para comparacao no GDB.
+// 1) Executa o caso pedido no enunciado: m=0.1 e v=30000.0.
+// 2) Executa um segundo caso: m=0.1 e v=123456.789.
+// 3) Salva os quatro resultados em memoria para comparacao no GDB.
 
 .text
 .global _start
@@ -34,21 +34,37 @@
 .extern ke_f64
 
 _start:
-    adr x9, m32_test              // Endereco de m float.
+    adr x9, m32_test_case1        // Endereco de m float do caso 1.
     ldr s0, [x9]                  // S0 = m (float).
-    adr x9, v32_test              // Endereco de v float.
+    adr x9, v32_test_case1        // Endereco de v float do caso 1.
     ldr s1, [x9]                  // S1 = v (float).
-    bl ke_f32                     // Calcula E em float.
-    adr x9, result_ke_f32         // Endereco para salvar E float.
-    str s0, [x9]                  // Salva resultado float.
+    bl ke_f32                     // Calcula E em float para o caso 1.
+    adr x9, result_ke_f32_case1   // Endereco para salvar E float do caso 1.
+    str s0, [x9]                  // Salva resultado float do caso 1.
 
-    adr x9, m64_test              // Endereco de m double.
+    adr x9, m64_test_case1        // Endereco de m double do caso 1.
     ldr d0, [x9]                  // D0 = m (double).
-    adr x9, v64_test              // Endereco de v double.
+    adr x9, v64_test_case1        // Endereco de v double do caso 1.
     ldr d1, [x9]                  // D1 = v (double).
-    bl ke_f64                     // Calcula E em double.
-    adr x9, result_ke_f64         // Endereco para salvar E double.
-    str d0, [x9]                  // Salva resultado double.
+    bl ke_f64                     // Calcula E em double para o caso 1.
+    adr x9, result_ke_f64_case1   // Endereco para salvar E double do caso 1.
+    str d0, [x9]                  // Salva resultado double do caso 1.
+
+    adr x9, m32_test_case2        // Endereco de m float do caso 2.
+    ldr s0, [x9]                  // S0 = m (float).
+    adr x9, v32_test_case2        // Endereco de v float do caso 2.
+    ldr s1, [x9]                  // S1 = v (float).
+    bl ke_f32                     // Calcula E em float para o caso 2.
+    adr x9, result_ke_f32_case2   // Endereco para salvar E float do caso 2.
+    str s0, [x9]                  // Salva resultado float do caso 2.
+
+    adr x9, m64_test_case2        // Endereco de m double do caso 2.
+    ldr d0, [x9]                  // D0 = m (double).
+    adr x9, v64_test_case2        // Endereco de v double do caso 2.
+    ldr d1, [x9]                  // D1 = v (double).
+    bl ke_f64                     // Calcula E em double para o caso 2.
+    adr x9, result_ke_f64_case2   // Endereco para salvar E double do caso 2.
+    str d0, [x9]                  // Salva resultado double do caso 2.
 
 after_results_saved:
     mov x0, #0                    // Codigo de saida 0.
@@ -56,15 +72,28 @@ after_results_saved:
     svc #0                        // Encerra.
 
 .data
-m32_test:
-    .float 0.1                    // m em float.
-v32_test:
-    .float 30000.0                // v em float.
-m64_test:
-    .double 0.1                   // m em double.
-v64_test:
-    .double 30000.0               // v em double.
-result_ke_f32:
-    .float 0.0                    // Resultado ke_f32.
-result_ke_f64:
-    .double 0.0                   // Resultado ke_f64.
+m32_test_case1:
+    .float 0.1                    // m em float do caso pedido no enunciado.
+v32_test_case1:
+    .float 30000.0                // v em float do caso pedido no enunciado.
+m64_test_case1:
+    .double 0.1                   // m em double do caso pedido no enunciado.
+v64_test_case1:
+    .double 30000.0               // v em double do caso pedido no enunciado.
+result_ke_f32_case1:
+    .float 0.0                    // Resultado ke_f32 do caso 1.
+result_ke_f64_case1:
+    .double 0.0                   // Resultado ke_f64 do caso 1.
+
+m32_test_case2:
+    .float 0.1                    // m em float do caso adicional.
+v32_test_case2:
+    .float 123456.789             // v em float do caso adicional.
+m64_test_case2:
+    .double 0.1                   // m em double do caso adicional.
+v64_test_case2:
+    .double 123456.789            // v em double do caso adicional.
+result_ke_f32_case2:
+    .float 0.0                    // Resultado ke_f32 do caso 2.
+result_ke_f64_case2:
+    .double 0.0                   // Resultado ke_f64 do caso 2.

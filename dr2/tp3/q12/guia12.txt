@@ -3,6 +3,7 @@ Guia da questao 12 (WSL + QEMU AArch64)
 Objetivo
 - Comparar precisao entre float e double na formula da energia cinetica:
 E = 0.5 * m * v^2
+- Manter o caso pedido no enunciado e incluir um segundo caso que mostre diferenca real.
 
 Arquivos
 - main.S
@@ -31,14 +32,31 @@ gdb-multiarch ./main
 target remote :1234
 b after_results_saved
 c
-p *(float*)&result_ke_f32
-p *(double*)&result_ke_f64
 
-Comparacao da diferenca (no proprio GDB)
-- Depois de imprimir os dois resultados, calcule:
-set $ef32 = (double)*(float*)&result_ke_f32
-set $ef64 = *(double*)&result_ke_f64
-p $ef64 - $ef32
+Caso 1 (pedido no enunciado: m=0.1, v=30000.0):
+p *(float*)&result_ke_f32_case1
+p *(double*)&result_ke_f64_case1
+
+Comparacao da diferenca do caso 1:
+set $ef32_case1 = (double)*(float*)&result_ke_f32_case1
+set $ef64_case1 = *(double*)&result_ke_f64_case1
+p $ef64_case1 - $ef32_case1
+
+Caso 2 (adicional para evidenciar diferenca: m=0.1, v=123456.789):
+p *(float*)&result_ke_f32_case2
+p *(double*)&result_ke_f64_case2
+
+Comparacao da diferenca do caso 2:
+set $ef32_case2 = (double)*(float*)&result_ke_f32_case2
+set $ef64_case2 = *(double*)&result_ke_f64_case2
+p $ef64_case2 - $ef32_case2
+
+Resultados esperados
+- Caso 1: os dois resultados tendem a coincidir em 45000000.0, com diferenca 0.
+- Caso 2: os resultados devem divergir. Tipicamente:
+  float  -> 762078912.0
+  double -> 762078937.509526...
+  diferenca -> cerca de 25.509526...
 
 Observacao para o relatorio
-- Registre a diferenca observada (erro absoluto ou relativo), como pedido.
+- Registre a diferenca observada em cada caso. O caso 1 mostra que nem todo teste evidencia erro; o caso 2 mostra a perda de precisao de forma clara.
