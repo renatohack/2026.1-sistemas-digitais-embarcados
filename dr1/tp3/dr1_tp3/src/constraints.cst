@@ -1,0 +1,15 @@
+// Constraints para Tang Nano 9K
+// Projeto configurado para:
+// - clk: oscilador onboard de 27 MHz
+// - btn_inc_n: botao onboard, ativo em nivel baixo
+// - led0/led1: LEDs onboard, ativos em nivel baixo
+
+IO_LOC "clk"   52;
+IO_PORT "clk"  IO_TYPE=LVCMOS33;
+
+IO_LOC "btn_inc_n"   3;
+IO_PORT "btn_inc_n"  PULL_MODE=UP;
+
+IO_LOC "led0"   10;
+
+IO_LOC "led1"   11;

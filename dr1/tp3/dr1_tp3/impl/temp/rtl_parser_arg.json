@@ -1,0 +1,33 @@
+{
+ "Device" : "GW1NR-9C",
+ "Files" : [
+  {
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/comb_logic.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/counter2bit.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/mux2to1.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/reg1.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/top.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/impl/temp/rtl_parser.result",
+ "Top" : "",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}

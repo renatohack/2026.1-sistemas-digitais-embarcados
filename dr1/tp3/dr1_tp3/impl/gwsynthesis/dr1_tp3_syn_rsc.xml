@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="top" Register="23" Alu="18" Lut="14" T_Register="25(23)" T_Alu="18(18)" T_Lut="15(14)">
+ <SubModule name="u_counter" Lut="1" T_Register="2(0)" T_Lut="1(1)">
+  <SubModule name="ff0" Register="1" T_Register="1(1)"/>
+  <SubModule name="ff1" Register="1" T_Register="1(1)"/>
+ </SubModule>
+</Module>

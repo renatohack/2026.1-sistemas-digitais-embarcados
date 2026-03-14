@@ -4,7 +4,7 @@
 - Nome completo: Renato Noronha Hack
 - Disciplina: Fundamentos de Verilog e FPGA
 - Professor: Vitor Amadeu
-- Data: 09/03/2026
+- Data: 14/03/2026
 
 ## 2. Etapa 1 - Funcao booleana e fundamentos
 
@@ -82,7 +82,6 @@ Comparacao de complexidade (antes/depois):
 ## 6. Etapa 4 - Implementacao combinacional em Verilog
 
 ### Item 7 - Arquivo comb_logic.v
-Cole aqui o codigo final usado:
 
 ```verilog
 module Comb_Logic (
@@ -114,29 +113,43 @@ Conclusao da verificacao:
 
 ## 7. Etapa 5 - Mux2to1
 - Codigo fonte: `src/mux2to1.v`
-- Resultado da simulacao: [PREENCHER resumo]
 
 ## 8. Etapa 6 - Reg1 e Counter2bit
 
 ### Item 10 - Reg1
 Papel do flip-flop no armazenamento de estado:
-- [PREENCHER em 3 a 6 linhas]
+- O flip-flop D e o elemento sequencial responsavel por armazenar 1 bit de informacao.
+- A cada borda de subida do clock, ele copia o valor presente em `D` para a saida `Q`.
+- Dessa forma, o circuito passa a ter memoria, pois o valor de `Q` permanece armazenado ate a proxima borda de clock.
+- No modulo `Reg1`, o reset sincrono ativo em nivel alto permite forcar `Q=0` em uma borda de subida, reinicializando o estado do circuito de forma controlada.
 
 ### Item 11 - Counter2bit
 Sequencia observada do contador:
-- [PREENCHER ex: 00 -> 01 -> 10 -> 11 -> 00]
+- 00 -> 01 -> 10 -> 11 -> 00
 
 ## 9. Etapa 7 - Integracao no top e validacao fisica
 
 ### Item 12
-- Mapeamento de pinos (resumo): [PREENCHER]
-- Resultado na placa Tang Nano 9K: [PREENCHER]
-- Evidencia (foto/video): [PREENCHER caminho/link]
+- Mapeamento de pinos: clk=52, btn_inc_n=3, led0=10, led1=11
+- Montagem fisica: uso apenas da Tang Nano 9K, sem protoboard, com botao e LEDs onboard
+- Resultado na placa Tang Nano 9K: contador iniciou em 00 e incrementou para 01, 10, 11 e 00 a cada apertar e soltar do botao onboard
+- Evidencia (foto/video):
+
+![Estado 00](00.jpeg)
+
+![Estado 01](01.jpeg)
+
+![Estado 10](10.jpeg)
+
+![Estado 11](11.jpeg)
 
 ## 10. Conclusao
-- [PREENCHER conclusao final]
+- O desenvolvimento deste trabalho permitiu revisar todo o fluxo basico de projeto em FPGA, partindo da definicao de uma funcao booleana, passando pela minimizacao com mapa de Karnaugh e chegando a implementacao em Verilog.
+- Na parte combinacional, foi confirmado por simulacao que a expressao minimizada da funcao proposta e simplesmente `F = C`.
+- Na parte sequencial, o uso do flip-flop D mostrou como o FPGA pode armazenar estado e, a partir disso, implementar um contador binario de 2 bits.
+- A validacao final na Tang Nano 9K confirmou o funcionamento pratico do sistema, com o contador avancando corretamente e os LEDs representando visualmente os estados `00`, `01`, `10` e `11`.
 
 ## 11. Anexos
 - Capturas de simulacao
 - Captura do mapa de Karnaugh
-- Foto/video da placa em funcionamento
+- Fotos da placa em funcionamento: `00.png`, `01.png`, `10.png`, `11.png`

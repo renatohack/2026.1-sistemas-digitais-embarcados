@@ -1,0 +1,54 @@
+[
+ {
+  "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/comb_logic.v",
+  "InstLine" : 5,
+  "InstName" : "Comb_Logic",
+  "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/comb_logic.v",
+  "ModuleLine" : 5,
+  "ModuleName" : "Comb_Logic"
+ },
+ {
+  "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/mux2to1.v",
+  "InstLine" : 5,
+  "InstName" : "Mux2to1",
+  "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/mux2to1.v",
+  "ModuleLine" : 5,
+  "ModuleName" : "Mux2to1"
+ },
+ {
+  "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/top.v",
+  "InstLine" : 8,
+  "InstName" : "top",
+  "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/top.v",
+  "ModuleLine" : 8,
+  "ModuleName" : "top",
+  "SubInsts" : [
+   {
+    "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/top.v",
+    "InstLine" : 44,
+    "InstName" : "u_counter",
+    "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/counter2bit.v",
+    "ModuleLine" : 5,
+    "ModuleName" : "Counter2bit",
+    "SubInsts" : [
+     {
+      "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/counter2bit.v",
+      "InstLine" : 18,
+      "InstName" : "ff0",
+      "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/reg1.v",
+      "ModuleLine" : 5,
+      "ModuleName" : "Reg1"
+     },
+     {
+      "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/counter2bit.v",
+      "InstLine" : 25,
+      "InstName" : "ff1",
+      "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr1/tp3/dr1_tp3/src/reg1.v",
+      "ModuleLine" : 5,
+      "ModuleName" : "Reg1"
+     }
+    ]
+   }
+  ]
+ }
+]
