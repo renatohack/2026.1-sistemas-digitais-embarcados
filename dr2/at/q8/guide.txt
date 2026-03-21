@@ -1,0 +1,42 @@
+GUIA DE VALIDACAO - q8
+
+Objetivo:
+Validar a integracao pelo trapezio para um caso simples e os tratamentos de erro.
+
+Comandos:
+
+cd q8
+rm -f main.o lib.o q8
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q8
+ls -l
+qemu-aarch64 ./q8
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q8 &
+gdb-multiarch -q ./q8
+
+Dentro do GDB:
+
+target remote :2401
+break after_primary_case
+continue
+print/u $w0
+print (double)$d0
+continue
+quit
+
+Esperado no GDB:
+- w0 = 0
+- d0 = 2
+
+Prints recomendados:
+- compilacao
+- execucao
+- valor da integral no GDB

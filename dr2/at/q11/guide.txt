@@ -1,0 +1,49 @@
+GUIA DE VALIDACAO - q11
+
+Objetivo:
+Validar Horner em Q16.16 e a saturacao do acumulador.
+
+Comandos:
+
+cd q11
+rm -f main.o lib.o q11
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q11
+ls -l
+qemu-aarch64 ./q11
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q11 &
+gdb-multiarch -q ./q11
+
+Dentro do GDB:
+
+target remote :2401
+break after_simple_case
+break after_saturation_case
+continue
+print/u $w1
+print/d $w0
+continue
+print/u $w1
+print/d $w0
+continue
+quit
+
+Esperado no GDB:
+- primeiro breakpoint: w1 = 0 e w0 = 2949120
+- segundo breakpoint: w1 = 3 e w0 = 2147483647
+
+Observacao:
+2949120 equivale a 45.0 em Q16.16.
+
+Prints recomendados:
+- compilacao
+- execucao
+- caso simples e caso saturado no GDB

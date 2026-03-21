@@ -1,0 +1,44 @@
+GUIA DE VALIDACAO - q6
+
+Objetivo:
+Validar a conversao ASCII in-place para lowercase e o contador de alteracoes.
+
+Comandos:
+
+cd q6
+rm -f main.o lib.o q6
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q6
+ls -l
+qemu-aarch64 ./q6
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q6 &
+gdb-multiarch -q ./q6
+
+Dentro do GDB:
+
+target remote :2401
+break after_string_case
+continue
+print/u $w0
+print/u $w1
+x/s &test_string
+continue
+quit
+
+Esperado no GDB:
+- w0 = 3
+- w1 = 0
+- test_string = "hello!"
+
+Prints recomendados:
+- compilacao
+- execucao
+- string final no GDB

@@ -1,0 +1,46 @@
+GUIA DE VALIDACAO - q4
+
+Objetivo:
+Validar safe_div_s64 para divisor zero e para INT64_MIN / -1.
+
+Comandos:
+
+cd q4
+rm -f main.o lib.o q4
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q4
+ls -l
+qemu-aarch64 ./q4
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q4 &
+gdb-multiarch -q ./q4
+
+Dentro do GDB:
+
+target remote :2401
+break after_div_zero
+break after_overflow_guard
+continue
+print/u $w1
+print/d $x0
+continue
+print/u $w1
+print/d $x0
+continue
+quit
+
+Esperado no GDB:
+- primeiro breakpoint: w1 = 1 e x0 = 9223372036854775807
+- segundo breakpoint: w1 = 2 e x0 = 9223372036854775807
+
+Prints recomendados:
+- compilacao
+- execucao com echo $?
+- dois breakpoints do GDB

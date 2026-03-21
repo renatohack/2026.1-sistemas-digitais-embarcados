@@ -1,0 +1,56 @@
+GUIA DE VALIDACAO - q5
+
+Objetivo:
+Validar os tres modos de conversao em Q16.16 e o modo invalido.
+
+Comandos:
+
+cd q5
+rm -f main.o lib.o q5
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q5
+ls -l
+qemu-aarch64 ./q5
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q5 &
+gdb-multiarch -q ./q5
+
+Dentro do GDB:
+
+target remote :2401
+break after_mode0
+break after_mode1
+break after_mode2
+break after_invalid_mode
+continue
+print/u $w0
+print/u $w2
+continue
+print/u $w0
+print/u $w2
+continue
+print/u $w0
+print/u $w2
+continue
+print/u $w0
+print/u $w2
+continue
+quit
+
+Esperado no GDB:
+- mode0: w0 = 655360, w2 = 0
+- mode1: w0 = 2359296, w2 = 0
+- mode2: w0 = 121372672, w2 = 0
+- invalido: w0 = 0, w2 = 1
+
+Prints recomendados:
+- compilacao
+- execucao com echo $?
+- os quatro breakpoints

@@ -1,0 +1,46 @@
+GUIA DE VALIDACAO - q2
+
+Objetivo:
+Validar a funcao sin_taylor para x=0, x=1.0 e os erros de parametro.
+
+Comandos:
+
+cd q2
+rm -f main.o lib.o q2
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q2
+ls -l
+qemu-aarch64 ./q2
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q2 &
+gdb-multiarch -q ./q2
+
+Dentro do GDB:
+
+target remote :2401
+break after_zero_case
+break after_unit_case
+continue
+print/u $w1
+print (double)$d0
+continue
+print/u $w1
+print (double)$d0
+continue
+quit
+
+Esperado no GDB:
+- no primeiro breakpoint: w1 = 0 e d0 = 0
+- no segundo breakpoint: w1 = 0 e d0 ~= 0.8414709848
+
+Prints recomendados:
+- compilacao
+- execucao com echo $?
+- dois breakpoints do GDB

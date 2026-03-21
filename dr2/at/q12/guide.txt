@@ -1,0 +1,58 @@
+GUIA DE VALIDACAO - q12
+
+Objetivo:
+Validar o pipeline completo de diagnostico IMU e o codigo final de saida.
+
+Importante:
+Nesta questao o programa foi preparado para terminar com codigo 2, que representa FAULT. Isso nao e erro da implementacao; e o resultado esperado do caso de teste montado no main.
+
+Comandos:
+
+cd q12
+rm -f main.o lib.o q12
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q12
+ls -l
+qemu-aarch64 ./q12
+echo $?
+
+Esperado apos o echo:
+2
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q12 &
+gdb-multiarch -q ./q12
+
+Dentro do GDB:
+
+target remote :2401
+break after_normalize
+break after_dot
+break after_sqrt
+break after_classify
+continue
+print/u $w0
+x/4wd &normalized_i32
+continue
+print/u $w1
+print/d $x0
+continue
+print/u $w1
+print (double)$d0
+continue
+print/u $w0
+continue
+quit
+
+Esperado no GDB:
+- after_normalize: w0 = 0 e normalized_i32 = 8388607, -8388608, 500000, -500000
+- after_dot: w1 = 0 e x0 = 141237471578113
+- after_sqrt: w1 = 0 e d0 ~= 5942168.6188232657
+- after_classify: w0 = 2
+
+Prints recomendados:
+- compilacao
+- execucao com echo $?
+- os quatro checkpoints do GDB

@@ -1,0 +1,46 @@
+GUIA DE VALIDACAO - q7
+
+Objetivo:
+Validar sqrt_nr para entrada valida, entrada negativa e erro de iteracao zero.
+
+Comandos:
+
+cd q7
+rm -f main.o lib.o q7
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q7
+ls -l
+qemu-aarch64 ./q7
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q7 &
+gdb-multiarch -q ./q7
+
+Dentro do GDB:
+
+target remote :2401
+break after_positive_case
+break after_negative_case
+continue
+print/u $w1
+print (double)$d0
+continue
+print/u $w1
+print (double)$d0
+continue
+quit
+
+Esperado no GDB:
+- primeiro breakpoint: w1 = 0 e d0 = 2
+- segundo breakpoint: w1 = 1 e d0 = 0
+
+Prints recomendados:
+- compilacao
+- execucao
+- dois breakpoints do GDB

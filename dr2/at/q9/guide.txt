@@ -1,0 +1,45 @@
+GUIA DE VALIDACAO - q9
+
+Objetivo:
+Validar a transformacao afim 2D em Q16.16.
+
+Comandos:
+
+cd q9
+rm -f main.o lib.o q9
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q9
+ls -l
+qemu-aarch64 ./q9
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q9 &
+gdb-multiarch -q ./q9
+
+Dentro do GDB:
+
+target remote :2401
+break after_mode1_case
+continue
+print/u $w0
+x/2wd &out_mode1
+continue
+quit
+
+Esperado no GDB:
+- w0 = 0
+- out_mode1 = 196608, 262144
+
+Observacao:
+196608 equivale a 3.0 em Q16.16 e 262144 equivale a 4.0 em Q16.16.
+
+Prints recomendados:
+- compilacao
+- execucao
+- vetor de saida no GDB

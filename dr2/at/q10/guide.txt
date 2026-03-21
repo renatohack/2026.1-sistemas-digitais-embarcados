@@ -1,0 +1,42 @@
+GUIA DE VALIDACAO - q10
+
+Objetivo:
+Validar a media movel com politica de borda zerada.
+
+Comandos:
+
+cd q10
+rm -f main.o lib.o q10
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q10
+ls -l
+qemu-aarch64 ./q10
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q10 &
+gdb-multiarch -q ./q10
+
+Dentro do GDB:
+
+target remote :2401
+break after_primary_case
+continue
+print/u $w0
+x/4wd &output_vec
+continue
+quit
+
+Esperado no GDB:
+- w0 = 0
+- output_vec = 0, 1, 2, 3
+
+Prints recomendados:
+- compilacao
+- execucao
+- vetor final no GDB

@@ -1,0 +1,48 @@
+GUIA DE VALIDACAO - q1
+
+Objetivo:
+Validar a rotina normalize_saturate_i16_to_i32, incluindo saturacao e status.
+
+Antes de comecar:
+1. Abra o terminal na pasta raiz do trabalho.
+2. Execute exatamente os comandos abaixo.
+3. Este guia esta preparado para WSL com `aarch64-linux-gnu-gcc`, `qemu-aarch64` e `gdb-multiarch`.
+4. Tire print da compilacao, da execucao e da tela do GDB.
+
+Comandos:
+
+cd q1
+rm -f main.o lib.o q1
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q1
+ls -l
+qemu-aarch64 ./q1
+echo $?
+
+Esperado apos o echo:
+0
+
+Agora inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q1 &
+gdb-multiarch -q ./q1
+
+Dentro do GDB, digite:
+
+target remote :2401
+break after_extreme_case
+continue
+print/u $w0
+x/5wd &output_samples
+continue
+quit
+
+Esperado no GDB:
+- w0 = 0
+- output_samples = 8388607, -8388608, 617000, -8388608, 0
+
+Prints recomendados:
+- terminal mostrando a compilacao
+- terminal mostrando `qemu-aarch64 ./q1` e `echo $?`
+- terminal mostrando o vetor no GDB

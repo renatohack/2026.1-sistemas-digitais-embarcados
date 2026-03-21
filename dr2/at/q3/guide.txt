@@ -1,0 +1,42 @@
+GUIA DE VALIDACAO - q3
+
+Objetivo:
+Validar o dot product com early-exit por overflow.
+
+Comandos:
+
+cd q3
+rm -f main.o lib.o q3
+aarch64-linux-gnu-gcc -g -c main.S -o main.o
+aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
+aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o q3
+ls -l
+qemu-aarch64 ./q3
+echo $?
+
+Esperado apos o echo:
+0
+
+Inicie o qemu em modo de depuracao e abra o GDB:
+
+qemu-aarch64 -g 2401 ./q3 &
+gdb-multiarch -q ./q3
+
+Dentro do GDB:
+
+target remote :2401
+break after_overflow_case
+continue
+print/u $w1
+print/d $x0
+continue
+quit
+
+Esperado no GDB:
+- w1 = 3
+- x0 = 9223372028264841218
+
+Prints recomendados:
+- compilacao
+- execucao com sucesso
+- breakpoint de overflow
