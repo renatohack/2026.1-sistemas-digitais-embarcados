@@ -18,11 +18,6 @@ Cada pasta `qX` contem:
 - `main.o`: objeto gerado a partir de `main.S`
 - `lib.o`: objeto gerado a partir de `lib.S`
 - `qX`: executavel final da questao
-- `guide.txt`: roteiro de compilacao, execucao e depuracao para gerar evidencias no terminal
-
-Arquivo adicional gerado para a parte de entrega:
-
-- `relatorio_tecnico_DR2.md`: este relatorio
 
 ## 3. Ambiente e Compilacao
 
@@ -218,19 +213,7 @@ Resumo dos principais checkpoints observados no GDB:
 
 Algumas decisoes foram tomadas para manter o codigo simples, deterministico e facil de depurar:
 
-- uso de `_start` e syscall `exit` em vez de `main` com libc
 - testes embutidos em `main.S` para reduzir dependencia externa
 - labels de checkpoint no `main.S` para facilitar breakpoints no GDB
 - validacoes internas por comparacao com resultados esperados, encerrando com `exit code 0` ou `1` quando a questao e apenas de unidade
 - no `q12`, retorno do codigo de diagnostico real do pipeline como `exit code`
-
-## 8. O que Ainda Precisa Ser Feito Manualmente
-
-Para concluir a entrega final, ainda dependem de execucao manual:
-
-- exportar este relatorio para PDF e renomear para `nome_sobrenome_DR2_AT.PDF`
-- gerar os prints do terminal conforme os `guide.txt`, no WSL com `qemu-aarch64` e `gdb-multiarch`
-- capturar as evidencias pedidas pelo professor
-- gravar o video com webcam e tela
-- subir o video para o YouTube como nao listado
-- montar o ZIP final com todos os arquivos
