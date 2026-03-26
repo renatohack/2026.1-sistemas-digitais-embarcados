@@ -1,162 +1,226 @@
-# Relatorio Tecnico - DR2 Assessment
+---
+title: "Relatório Técnico - DR2 Assessment"
+author: "Renato Hack"
+lang: "pt-BR"
+toc: true
+toc-depth: 2
+---
 
-## 1. Escopo
+# 1. Escopo
 
-Este material documenta a resolucao dos exercicios `q1` a `q12` do assessment de DR2 - Programacao Assembly ARM 64-bits. A entrega foi organizada conforme o enunciado:
+Este relatório documenta a resolução dos exercícios `q1` a `q12` do assessment de DR2, voltado à programação em Assembly AArch64. A organização do material seguiu as exigências do enunciado até a seção anterior a "Formato da Entrega".
 
-- uma pasta por exercicio: `q1`, `q2`, ..., `q12`
-- separacao entre `main.S` e `lib.S`
-- geracao de `main.o`, `lib.o` e do executavel de cada questao
-- validacao por execucao e por depuracao com GDB nos pontos pedidos pelo enunciado
+Cada exercício foi separado em sua própria pasta, com estrutura de arquivos, compilação, geração de objetos, executáveis e validação prática por execução e depuração.
 
-## 2. Organizacao dos Arquivos
+# 2. Organização dos Arquivos
 
-Cada pasta `qX` contem:
+Cada pasta `qX` contém os seguintes artefatos:
 
-- `main.S`: chamador, casos de teste e pontos de parada para validacao
-- `lib.S`: implementacao das funcoes exigidas pelo exercicio
-- `main.o`: objeto gerado a partir de `main.S`
-- `lib.o`: objeto gerado a partir de `lib.S`
-- `qX`: executavel final da questao
+- `main.S`: código principal, casos de teste e pontos de parada para depuração.
+- `lib.S`: implementação da rotina solicitada no exercício.
+- `main.o`: arquivo objeto gerado a partir de `main.S`.
+- `lib.o`: arquivo objeto gerado a partir de `lib.S`.
+- `qX`: executável final da questão.
 
-## 3. Ambiente e Compilacao
+A estrutura final do trabalho ficou organizada como:
 
-As evidencias e validacoes deste material foram preparadas para execucao no WSL, usando toolchain cruzada AArch64, `qemu-aarch64` para execucao e `gdb-multiarch` para depuracao remota. Os programas foram escritos como binarios stand-alone em AArch64, com `_start` como ponto de entrada e syscall `exit` no encerramento.
+- `q1`, `q2`, ..., `q12`
+- relatório técnico em PDF
 
-O fluxo padrao de compilacao e execucao documentado nos guias foi:
+# 3. Ambiente Utilizado
+
+Todas as implementações e validações foram preparadas para execução em ambiente `WSL`, utilizando emulação AArch64 por meio do `qemu-aarch64`.
+
+Ferramentas utilizadas:
+
+- `aarch64-linux-gnu-gcc` para montagem e ligação dos binários AArch64.
+- `qemu-aarch64` para execução dos programas.
+- `gdb-multiarch` para depuração remota.
+- `pandoc` e `pdflatex` para geração deste relatório em PDF.
+
+Os programas foram escritos como binários stand-alone, com `_start` como ponto de entrada e uso direto de syscall `exit` para encerramento.
+
+# 4. Fluxo de Compilação e Execução
+
+O fluxo padrão adotado nos exercícios foi:
 
 ```bash
 aarch64-linux-gnu-gcc -g -c main.S -o main.o
 aarch64-linux-gnu-gcc -g -c lib.S -o lib.o
 aarch64-linux-gnu-gcc -g -nostdlib -static -no-pie main.o lib.o -o qX
 qemu-aarch64 ./qX
+echo $?
 ```
 
-Para depuracao no WSL, o fluxo documentado foi:
+Para depuração, foi utilizado o modo remoto do QEMU:
 
 ```bash
-qemu-aarch64 -g 2401 ./qX &
+qemu-aarch64 -g 2401 ./qX
+```
+
+Em outro terminal:
+
+```bash
 gdb-multiarch -q ./qX
 ```
 
-## 4. Atendimento a ABI e Requisitos Tecnicos
+E, dentro do GDB:
 
-As solucoes foram escritas seguindo a AAPCS64:
+```gdb
+target remote :2401
+```
 
-- parametros inteiros e ponteiros recebidos em `x0` a `x7` ou `w0` a `w7`
-- parametros `double` recebidos em `d0`, `d1`, etc.
-- valores de retorno devolvidos nos registradores definidos pelo enunciado
-- stack mantida alinhada em 16 bytes quando necessario
-- funcoes leaf mantidas sem uso desnecessario de stack
-- registradores callee-saved inteiros ou FP preservados quando seu uso seria necessario
+Esse fluxo substitui a execução nativa em Raspberry Pi, mantendo a mesma lógica de inspeção de registradores, memória e pontos de parada.
 
-Tambem foram atendidos os requisitos funcionais do enunciado:
+# 5. Critérios Técnicos Atendidos
 
-- uso explicito de comparacoes e branches
-- lacos implementados diretamente em Assembly
-- acesso explicito a memoria via `ldr`, `str`, `ldrb`, `strb`, `ldrsh`
-- uso de aritmetica inteira, ponto fixo e ponto flutuante conforme cada exercicio
-- validacoes de erro retornando status coerente
+As soluções foram escritas respeitando a convenção `AAPCS64`, incluindo:
 
-## 5. Descricao Tecnica por Exercicio
+- passagem de parâmetros inteiros e ponteiros por `x0` a `x7` ou `w0` a `w7`;
+- passagem de parâmetros `double` por registradores `d0`, `d1` e seguintes;
+- retorno de valores nos registradores esperados;
+- alinhamento de pilha em 16 bytes quando necessário;
+- preservação de registradores callee-saved quando aplicável.
 
-### q1 - `normalize_saturate_i16_to_i32`
+Além disso, os exercícios atenderam aos requisitos funcionais do enunciado:
 
-Foi implementada a normalizacao de amostras PCM `int16_t` para `int32_t`, com extensao de sinal, multiplicacao por ganho inteiro e saturacao no intervalo `[-2^23, 2^23-1]`. A funcao trata `ponteiro nulo` e `N == 0` antes do loop principal.
+- uso explícito de instruções de comparação e desvio;
+- implementação direta de laços em Assembly;
+- acesso explícito à memória por meio de `ldr`, `str`, `ldrb`, `strb`, `ldrsh` e variantes;
+- uso de aritmética inteira, ponto fixo e ponto flutuante conforme o contexto;
+- tratamento de erros por códigos de status.
 
-No `main.S`, foram preparados casos com valores extremos, inclusive `32767` e `-32768`, alem de chamadas extras para validar os status `1` e `2`. A memoria do vetor de saida foi preparada para inspecao no GDB.
+# 6. Descrição Técnica por Exercício
 
-### q2 - `sin_taylor`
+## 6.1. q1 - `normalize_saturate_i16_to_i32`
 
-A funcao foi implementada em `double`, acumulando a serie de Taylor do seno enquanto `fabs(termo) >= eps` e enquanto o numero maximo de iteracoes nao foi atingido. Foram tratados os casos `eps <= 0` e `max_iter == 0`.
+Foi implementada a normalização de amostras PCM `int16_t` para `int32_t`, com extensão de sinal, multiplicação por ganho inteiro e saturação no intervalo `[-2^23, 2^23 - 1]`.
 
-O `main.S` valida `x = 0`, `x = 1.0`, `eps invalido` e `max_iter = 0`, registrando resultados para comparacao posterior e inspecao em GDB.
+A rotina valida:
 
-### q3 - `dot_i32_checked`
+- ponteiro de entrada nulo;
+- ponteiro de saída nulo;
+- quantidade de amostras igual a zero.
 
-O produto escalar foi implementado com leitura de dois vetores `int32_t`, multiplicacao com extensao para 64 bits via `smull` e acumulacao em `int64_t`. O overflow do acumulador e detectado via `adds` e flag de overflow, com early-exit imediato.
+O `main.S` prepara valores extremos para validar saturação e também casos adicionais para verificação dos códigos de status.
 
-O `main.S` contem um caso simples com resultado conhecido e um caso proposital para overflow, permitindo confirmar no GDB o ponto de parada e o valor do acumulador retornado.
+## 6.2. q2 - `sin_taylor`
 
-### q4 - `safe_div_s64`
+A função calcula o seno por série de Taylor em `double`, acumulando termos enquanto:
 
-A divisao assinada segura trata explicitamente:
+- `fabs(termo) >= eps`; e
+- o número máximo de iterações ainda não foi atingido.
 
-- divisor igual a zero, retornando saturacao positiva e status `1`
-- caso `INT64_MIN / -1`, retornando saturacao positiva e status `2`
-- divisao normal com `sdiv` e status `0`
+Também foram tratados:
 
-O `main.S` cobre os tres caminhos.
+- `eps <= 0`;
+- `max_iter == 0`.
 
-### q5 - `convert_speed_q16`
+O `main.S` valida os casos `x = 0`, `x = 1.0`, epsilon inválido e zero iterações.
 
-Foi implementada uma selecao por modo equivalente a um `switch`, com tres conversoes em Q16.16:
+## 6.3. q3 - `dot_i32_checked`
 
-- `0`: km/h para m/s
-- `1`: m/s para km/h
-- `2`: knots para m/s
+Foi implementado o produto escalar entre dois vetores `int32_t`, com:
 
-As contas intermediarias usam 64 bits e `udiv`. O caso default retorna valor zero e status `1`.
+- extensão para 64 bits na multiplicação;
+- acumulação em `int64_t`;
+- detecção de overflow no acumulador por flag de overflow.
 
-### q6 - `to_lower_ascii_inplace`
+O programa principal inclui um caso simples e outro propositalmente preparado para provocar overflow e permitir inspeção em GDB.
 
-A funcao percorre a string byte a byte ate `0x00`, converte apenas caracteres ASCII `A` a `Z` para minusculas e contabiliza quantas substituicoes foram feitas. O caso de ponteiro nulo retorna contador zero e status `1`.
+## 6.4. q4 - `safe_div_s64`
 
-O `main.S` usa a string `"HeLLo!"`, valida o contador `3` e permite inspecionar a string final `"hello!"` no GDB.
+A divisão assinada segura trata explicitamente:
 
-### q7 - `sqrt_nr`
+- divisor igual a zero, retornando saturação positiva e status `1`;
+- caso `INT64_MIN / -1`, retornando saturação positiva e status `2`;
+- divisão normal, retornando status `0`.
 
-Foi implementada a aproximacao de raiz quadrada via Newton-Raphson em `double`, com:
+O `main.S` cobre os três caminhos de execução.
 
-- erro para `a < 0`
-- erro para `max_iter == 0`
-- chute inicial `a` para `a >= 1`
-- chute inicial `1.0` para `a < 1`
+## 6.5. q5 - `convert_speed_q16`
 
-O laco roda exatamente `max_iter` vezes.
+Foi implementada uma conversão de velocidades em formato `Q16.16`, com seleção por modo:
 
-### q8 - `trapz_energy_f64`
+- `0`: km/h para m/s;
+- `1`: m/s para km/h;
+- `2`: knots para m/s.
 
-A integracao numerica pela regra do trapezio foi implementada em `double`, com validacao de:
+As contas intermediárias utilizam 64 bits e divisão inteira. O modo inválido retorna valor zero e status `1`.
 
-- ponteiro nulo
-- `N < 2`
-- `dt <= 0`
+## 6.6. q6 - `to_lower_ascii_inplace`
 
-O laco acessa explicitamente `f[i]` e `f[i+1]`, acumulando `(f[i] + f[i+1]) * dt * 0.5`.
+A função percorre uma string ASCII até o terminador `0x00`, convertendo apenas caracteres entre `A` e `Z` para minúsculas.
 
-### q9 - `affine2d_q16`
+Também realiza:
 
-Foi implementada a transformacao afim 2D em Q16.16 com `switch` de dois modos:
+- contagem de quantas substituições foram feitas;
+- retorno de erro para ponteiro nulo.
 
-- `mode 0`: `out = A * p`
-- `mode 1`: `out = A * p + b`
+O caso de teste principal usa a string `"HeLLo!"`, permitindo validar o contador e o resultado final.
 
-As multiplicacoes usam 64 bits intermediarios, seguidas de normalizacao por shift de 16 bits. Todos os ponteiros sao validados antes do processamento.
+## 6.7. q7 - `sqrt_nr`
 
-### q10 - `moving_avg_i32`
+Foi implementada uma aproximação da raiz quadrada em `double` usando Newton-Raphson.
 
-A media movel foi implementada com acumulador deslizante em 64 bits. Para `i < W - 1`, a saida recebe zero. A partir da janela completa, a rotina faz:
+A rotina trata:
 
-- soma do novo elemento `in[i]`
-- subtracao explicita de `in[i-W]` quando aplicavel
-- divisao inteira pelo tamanho da janela
+- erro para `a < 0`;
+- erro para `max_iter == 0`;
+- chute inicial `a`, quando `a >= 1`;
+- chute inicial `1.0`, quando `a < 1`.
 
-Sao tratados os casos de ponteiro nulo, `N == 0` e `W` invalido.
+O laço executa exatamente o número de iterações solicitado.
 
-### q11 - `poly_horner_q16_sat`
+## 6.8. q8 - `trapz_energy_f64`
 
-A avaliacao polinomial em Q16.16 foi feita pelo metodo de Horner:
+A integração numérica pela regra do trapézio foi implementada em `double`, com validação de:
+
+- ponteiro nulo;
+- `N < 2`;
+- `dt <= 0`.
+
+O cálculo percorre os pares consecutivos do vetor, acumulando:
+
+`(f[i] + f[i + 1]) * dt * 0.5`
+
+## 6.9. q9 - `affine2d_q16`
+
+Foi implementada uma transformação afim 2D em `Q16.16` com dois modos:
+
+- `mode 0`: `out = A * p`;
+- `mode 1`: `out = A * p + b`.
+
+As multiplicações usam intermediários de 64 bits e normalização posterior por deslocamento de 16 bits. Os ponteiros são validados antes do processamento.
+
+## 6.10. q10 - `moving_avg_i32`
+
+A média móvel foi implementada com acumulador deslizante em 64 bits.
+
+Comportamento adotado:
+
+- para `i < W - 1`, a saída recebe zero;
+- a partir da janela completa, soma-se o novo elemento;
+- quando aplicável, subtrai-se explicitamente `in[i - W]`;
+- o resultado é obtido por divisão inteira pela largura da janela.
+
+Foram tratados casos de ponteiro nulo, `N == 0` e janela inválida.
+
+## 6.11. q11 - `poly_horner_q16_sat`
+
+A avaliação polinomial em `Q16.16` foi implementada pelo método de Horner:
 
 `acc = coef[0]`
 
 `acc = ((acc * x) >> 16) + coef[i]`
 
-O acumulador e saturado em `[-2^31, 2^31-1]`, com status `3` quando a saturacao ocorre. O `main.S` testa tanto um caso simples quanto um caso que satura.
+O acumulador é saturado no intervalo `[-2^31, 2^31 - 1]`. Quando a saturação ocorre, a função retorna status `3`.
 
-### q12 - Mini-projeto do pipeline IMU
+O `main.S` inclui um caso simples e outro propositalmente preparado para saturar.
 
-O `main.S` integra as funcoes:
+## 6.12. q12 - Mini Projeto do Pipeline IMU
+
+O exercício final integra múltiplas rotinas em um pipeline de diagnóstico:
 
 - `normalize_saturate_i16_to_i32`
 - `dot_i32_checked`
@@ -164,56 +228,57 @@ O `main.S` integra as funcoes:
 - `sqrt_nr`
 - `classify_health`
 
-O pipeline faz:
+Fluxo implementado:
 
-1. normalizacao das amostras `int16_t`
-2. calculo da energia via produto escalar do vetor normalizado com ele mesmo
-3. calculo da media via divisao segura por `N`
-4. conversao explicita para `double`
-5. calculo da magnitude via `sqrt_nr`
-6. classificacao final por `switch`
+1. normalização das amostras `int16_t`;
+2. cálculo da energia por produto escalar do vetor consigo mesmo;
+3. cálculo da média por divisão segura por `N`;
+4. conversão explícita do resultado para `double`;
+5. cálculo da magnitude por `sqrt_nr`;
+6. classificação final por faixas.
 
-Foi adotada uma bitmask de flags para propagacao de erros:
+Foi adotada uma bitmask de flags para propagação de falhas:
 
-- bit 0: ponteiro nulo
-- bit 1: `N` invalido
-- bit 2: erro de divisao ou erro numerico equivalente
-- bit 3: overflow ou saturacao relevante para diagnostico
+- bit 0: ponteiro nulo;
+- bit 1: `N` inválido;
+- bit 2: erro de divisão ou erro numérico equivalente;
+- bit 3: overflow ou saturação relevante ao diagnóstico.
 
-No caso de teste preparado, o vetor gera saturacao ja na normalizacao. Por isso a classificacao final retorna `FAULT`, e o executavel encerra com `exit code 2`, que e exatamente o comportamento esperado para o caso configurado.
+No caso de teste montado, ocorre saturação ainda na normalização. Por isso, a classificação final do pipeline é `FAULT`, e o executável encerra com código `2`, o que corresponde exatamente ao comportamento esperado.
 
-## 6. Validacao Executada
+# 7. Validação Realizada
 
-As validacoes realizadas cobriram dois niveis:
+As validações foram conduzidas em dois níveis:
 
-- execucao dos binarios no WSL com `qemu-aarch64`, para checar `exit code`
-- depuracao com `gdb-multiarch` conectado ao stub remoto do `qemu-aarch64 -g`, para inspecionar registradores e memoria nos pontos pedidos
+- execução do binário no `qemu-aarch64`, para verificar o código final de saída;
+- depuração com `gdb-multiarch`, conectando-se ao stub remoto aberto pelo `qemu-aarch64 -g`.
 
-Resumo dos `exit codes` finais:
+Resumo dos códigos de saída finais:
 
 - `q1` a `q11`: `0`
 - `q12`: `2`
 
-Resumo dos principais checkpoints observados no GDB:
+Principais checkpoints observados durante a depuração:
 
-- `q1`: vetor de saida `8388607, -8388608, 617000, -8388608, 0`
+- `q1`: vetor de saída `8388607, -8388608, 617000, -8388608, 0`
 - `q2`: `sin(0) = 0` e `sin(1.0) ~= 0.8414709848078937`
 - `q3`: status `3` com acumulador `9223372028264841218`
-- `q4`: saturacao positiva para divisor zero e para `INT64_MIN / -1`
-- `q5`: tres modos validos e um modo invalido com status `1`
+- `q4`: saturação positiva para divisor zero e para `INT64_MIN / -1`
+- `q5`: três modos válidos e um modo inválido com status `1`
 - `q6`: string final `"hello!"` e contador `3`
-- `q7`: `sqrt(4.0) = 2.0`, erro para `a < 0`
+- `q7`: `sqrt(4.0) = 2.0`, com erro para entrada negativa
 - `q8`: integral `2.0` para `[0, 1, 2]` com `dt = 1`
-- `q9`: saida `(3, 4)` em Q16.16 para `A = I`, `b = (1,1)`, `p = (2,3)`
-- `q10`: saida `[0, 1, 2, 3]` com `W = 2`
-- `q11`: valor `45 << 16 = 2949120` e saturacao em `2147483647`
-- `q12`: vetor normalizado, energia, magnitude e codigo final `2` confirmados em GDB
+- `q9`: saída `(3, 4)` em `Q16.16` para `A = I`, `b = (1,1)` e `p = (2,3)`
+- `q10`: saída `[0, 1, 2, 3]` com `W = 2`
+- `q11`: valor `45 << 16 = 2949120` e saturação em `2147483647`
+- `q12`: vetor normalizado, energia, magnitude e código final `2` confirmados em GDB
 
-## 7. Decisoes de Engenharia
+# 8. Decisões de Engenharia
 
-Algumas decisoes foram tomadas para manter o codigo simples, deterministico e facil de depurar:
+Algumas decisões foram tomadas para manter o código simples, determinístico e fácil de depurar:
 
-- testes embutidos em `main.S` para reduzir dependencia externa
-- labels de checkpoint no `main.S` para facilitar breakpoints no GDB
-- validacoes internas por comparacao com resultados esperados, encerrando com `exit code 0` ou `1` quando a questao e apenas de unidade
-- no `q12`, retorno do codigo de diagnostico real do pipeline como `exit code`
+- testes embutidos em `main.S`, reduzindo dependências externas;
+- labels de checkpoint no `main.S`, facilitando breakpoints no GDB;
+- validações internas por comparação com resultados esperados;
+- uso de códigos de saída simples para indicar sucesso ou erro;
+- no `q12`, retorno do próprio diagnóstico final como `exit code`.
