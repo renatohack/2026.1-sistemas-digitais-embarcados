@@ -1,0 +1,26 @@
+[*]
+[*] GTKWave Analyzer v3.3.51 (w)1999-2013 BSI
+[*]
+[dumpfile] "/home/renato/faculdade/26.1-sistemas-embarcados/drs/dr1/at/sim/fst/access_control_tang_nano_9k_top.fst"
+[savefile] "/home/renato/faculdade/26.1-sistemas-embarcados/drs/dr1/at/sim/gtkwave/access_control_tang_nano_9k_top.gtkw"
+[timestart] 0
+[size] 1200 800
+[pos] -1 -1
+*-11.000000 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 260
+[signals_width] 220
+[sst_expanded] 1
+[sst_vpaned_height] 240
+@28
+tb_access_control_tang_nano_9k_top.sys_clk
+tb_access_control_tang_nano_9k_top.btn_reset_n
+tb_access_control_tang_nano_9k_top.btn_confirm_n
+tb_access_control_tang_nano_9k_top.code_btn[3:0]
+tb_access_control_tang_nano_9k_top.dut.btn_reset_db
+tb_access_control_tang_nano_9k_top.dut.btn_confirm_db
+tb_access_control_tang_nano_9k_top.dut.access_control_inst.code_sync[3:0]
+tb_access_control_tang_nano_9k_top.dut.access_control_inst.code_valid
+tb_access_control_tang_nano_9k_top.led[5:0]
+tb_access_control_tang_nano_9k_top.dut.access_control_inst.led_count[2:0]
+[pattern_trace] 1
+[pattern_trace] 0

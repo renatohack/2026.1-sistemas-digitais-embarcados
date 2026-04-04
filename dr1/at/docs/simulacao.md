@@ -1,0 +1,49 @@
+# Simulacao e Validacao
+
+## Organizacao da implementacao
+
+- `rtl/code_validator.v`: logica combinacional de verificacao do codigo `1011`
+- `rtl/access_control.v`: sincronizacao dos botoes, contador sincrono de 3 bits e registro das saidas
+- `tb/access_control_tb.v`: testbench autoavaliavel
+
+## Cenarios cobertos no testbench
+
+1. `reset_inicial`: limpa contador e LEDs de status
+2. `codigo_correto`: valida `1011` e acende `LED0`
+3. `codigo_incorreto`: valida um codigo invalido e acende `LED1`
+4. `multiplas_1` e `multiplas_2`: verificam incremento do contador em tentativas sucessivas
+5. `reset_final`: volta o sistema ao estado inicial
+
+O testbench tambem verifica que:
+
+- `LED2` responde durante o acionamento de `BTN_CONFIRM`
+- o contador e incrementado apenas uma vez por pressionamento, mesmo com o botao mantido pressionado por varios ciclos
+- `LED0` e `LED1` refletem o resultado da ultima tentativa
+
+## Arquivos de waveform
+
+Depois de executar `make sim`, ficam disponiveis:
+
+- `sim/vcd/access_control.vcd`
+- `sim/fst/access_control.fst`
+- `sim/gtkwave/access_control.gtkw`
+
+## Abrindo no GTKWave
+
+```bash
+make wave
+```
+
+Ou diretamente:
+
+```bash
+gtkwave sim/fst/access_control.fst sim/gtkwave/access_control.gtkw
+```
+
+## Sinais principais para analise
+
+As formas de onda foram organizadas para evidenciar:
+
+- verificacao do codigo: `tb_access_control.dut.code_sync[3:0]` e `tb_access_control.dut.code_valid`
+- funcionamento do contador: `tb_access_control.led_count[2:0]`
+- comportamento das saidas: `tb_access_control.led_authorized`, `tb_access_control.led_denied` e `tb_access_control.led_attempt`

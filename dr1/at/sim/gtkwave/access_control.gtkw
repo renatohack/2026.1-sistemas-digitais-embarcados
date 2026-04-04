@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.3.51 (w)1999-2013 BSI
+[*]
+[dumpfile] "/home/renato/faculdade/26.1-sistemas-embarcados/drs/dr1/at/sim/fst/access_control.fst"
+[savefile] "/home/renato/faculdade/26.1-sistemas-embarcados/drs/dr1/at/sim/gtkwave/access_control.gtkw"
+[timestart] 0
+[size] 1200 800
+[pos] -1 -1
+*-11.000000 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 260
+[signals_width] 220
+[sst_expanded] 1
+[sst_vpaned_height] 240
+@28
+tb_access_control.clk
+tb_access_control.btn_reset
+tb_access_control.btn_confirm
+tb_access_control.code_btn[3:0]
+tb_access_control.dut.code_sync[3:0]
+tb_access_control.dut.code_valid
+tb_access_control.led_attempt
+tb_access_control.led_authorized
+tb_access_control.led_denied
+tb_access_control.led_count[2:0]
+tb_access_control.dut.confirm_pulse
+tb_access_control.dut.attempt_count[2:0]
+[pattern_trace] 1
+[pattern_trace] 0

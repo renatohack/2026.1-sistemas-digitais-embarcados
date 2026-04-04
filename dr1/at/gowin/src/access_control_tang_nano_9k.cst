@@ -1,0 +1,53 @@
+// Tang Nano 9K
+// GW1NR-LV9QN88PC6/I5
+// Projeto: Controle de acesso para porta eletronica
+//
+// Mapeamento adotado:
+// - S1 onboard (ativo em 0) -> confirmacao
+// - S2 onboard (ativo em 0) -> reset
+// - LED1..LED6 onboard (ativos em 0)
+// - code_btn[3:0] -> botoes externos no protoboard, ativos em 1
+
+// Clock onboard de 27 MHz
+IO_LOC "sys_clk" 52;
+IO_PORT "sys_clk" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+
+// Botoes onboard, banco de 1.8V, ativos em nivel baixo
+IO_LOC "btn_confirm_n" 3;
+IO_PORT "btn_confirm_n" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+
+IO_LOC "btn_reset_n" 4;
+IO_PORT "btn_reset_n" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+
+// LEDs onboard, ativos em nivel baixo
+IO_LOC "led[0]" 10;
+IO_PORT "led[0]" IO_TYPE=LVCMOS18 PULL_MODE=UP DRIVE=8;
+
+IO_LOC "led[1]" 11;
+IO_PORT "led[1]" IO_TYPE=LVCMOS18 PULL_MODE=UP DRIVE=8;
+
+IO_LOC "led[2]" 13;
+IO_PORT "led[2]" IO_TYPE=LVCMOS18 PULL_MODE=UP DRIVE=8;
+
+IO_LOC "led[3]" 14;
+IO_PORT "led[3]" IO_TYPE=LVCMOS18 PULL_MODE=UP DRIVE=8;
+
+IO_LOC "led[4]" 15;
+IO_PORT "led[4]" IO_TYPE=LVCMOS18 PULL_MODE=UP DRIVE=8;
+
+IO_LOC "led[5]" 16;
+IO_PORT "led[5]" IO_TYPE=LVCMOS18 PULL_MODE=UP DRIVE=8;
+
+// Botoes externos que substituem os switches
+// Pinos escolhidos como GPIO livres de 3.3V no conector de expansao
+IO_LOC "code_btn[0]" 25;
+IO_PORT "code_btn[0]" IO_TYPE=LVCMOS33 PULL_MODE=DOWN;
+
+IO_LOC "code_btn[1]" 26;
+IO_PORT "code_btn[1]" IO_TYPE=LVCMOS33 PULL_MODE=DOWN;
+
+IO_LOC "code_btn[2]" 27;
+IO_PORT "code_btn[2]" IO_TYPE=LVCMOS33 PULL_MODE=DOWN;
+
+IO_LOC "code_btn[3]" 28;
+IO_PORT "code_btn[3]" IO_TYPE=LVCMOS33 PULL_MODE=DOWN;

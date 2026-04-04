@@ -1,0 +1,563 @@
+$date
+	Sat Apr  4 13:23:00 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_access_control_tang_nano_9k_top $end
+$var wire 6 ! led [5:0] $end
+$var reg 1 " btn_confirm_n $end
+$var reg 1 # btn_reset_n $end
+$var reg 4 $ code_btn [3:0] $end
+$var reg 1 % sys_clk $end
+$scope module dut $end
+$var wire 1 & btn_confirm $end
+$var wire 1 " btn_confirm_n $end
+$var wire 1 ' btn_reset $end
+$var wire 1 # btn_reset_n $end
+$var wire 4 ( code_btn [3:0] $end
+$var wire 1 % sys_clk $end
+$var wire 1 ) led_denied $end
+$var wire 3 * led_count [2:0] $end
+$var wire 1 + led_authorized $end
+$var wire 1 , led_attempt $end
+$var wire 6 - led [5:0] $end
+$var wire 1 . btn_reset_db $end
+$var wire 1 / btn_confirm_db $end
+$scope module access_control_inst $end
+$var wire 1 % clk $end
+$var wire 4 0 code_btn [3:0] $end
+$var wire 1 1 confirm_pulse $end
+$var wire 1 , led_attempt $end
+$var wire 3 2 led_count [2:0] $end
+$var wire 1 3 code_valid $end
+$var wire 1 . btn_reset $end
+$var wire 1 / btn_confirm $end
+$var reg 3 4 attempt_count [2:0] $end
+$var reg 4 5 code_meta [3:0] $end
+$var reg 4 6 code_sync [3:0] $end
+$var reg 1 7 confirm_meta $end
+$var reg 1 8 confirm_sync $end
+$var reg 1 9 confirm_sync_d $end
+$var reg 1 + led_authorized $end
+$var reg 1 ) led_denied $end
+$var reg 1 : reset_meta $end
+$var reg 1 ; reset_sync $end
+$scope module validator $end
+$var wire 4 < code_in [3:0] $end
+$var wire 1 3 code_valid $end
+$upscope $end
+$upscope $end
+$scope module confirm_debouncer $end
+$var wire 1 % clk $end
+$var wire 1 & noisy_in $end
+$var reg 1 / debounced_out $end
+$var reg 1 = sampled_state $end
+$var reg 1 > stable_counter $end
+$upscope $end
+$scope module reset_debouncer $end
+$var wire 1 % clk $end
+$var wire 1 ' noisy_in $end
+$var reg 1 . debounced_out $end
+$var reg 1 ? sampled_state $end
+$var reg 1 @ stable_counter $end
+$upscope $end
+$upscope $end
+$scope task apply_reset $end
+$upscope $end
+$scope task attempt_code $end
+$upscope $end
+$scope task expect_leds $end
+$upscope $end
+$scope task wait_cycles $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0@
+0?
+0>
+0=
+bx <
+x;
+x:
+x9
+x8
+x7
+bx 6
+bx 5
+bx 4
+x3
+bx 2
+x1
+b0 0
+0/
+0.
+bx -
+x,
+x+
+bx *
+x)
+b0 (
+0'
+0&
+0%
+b0 $
+1#
+1"
+bx !
+$end
+#5000
+0:
+07
+b0 5
+1%
+#10000
+0%
+#15000
+bx1xx !
+bx1xx -
+03
+0,
+01
+0;
+08
+b0 6
+b0 <
+1%
+#20000
+0%
+#25000
+09
+1%
+#30000
+0%
+#35000
+1%
+#40000
+0%
+#45000
+1%
+#50000
+0%
+#55000
+1%
+#56000
+1'
+0#
+#60000
+0%
+#65000
+1@
+1%
+#70000
+0%
+#75000
+0@
+1.
+1?
+1%
+#80000
+0%
+#85000
+1:
+1%
+#90000
+0%
+#95000
+1;
+1%
+#100000
+0%
+#105000
+b111111 !
+b111111 -
+0)
+0+
+b0 *
+b0 2
+b0 4
+1%
+#110000
+0%
+#115000
+1%
+#120000
+0%
+#125000
+1%
+#130000
+0%
+#135000
+1%
+#136000
+0'
+1#
+#140000
+0%
+#145000
+1@
+1%
+#150000
+0%
+#155000
+0@
+0.
+0?
+1%
+#160000
+0%
+#165000
+0:
+1%
+#170000
+0%
+#175000
+0;
+1%
+#180000
+0%
+#185000
+1%
+#190000
+0%
+#195000
+1%
+#200000
+0%
+#205000
+1%
+#210000
+0%
+#215000
+1%
+#216000
+b1011 $
+b1011 (
+b1011 0
+#220000
+0%
+#225000
+b1011 5
+1%
+#230000
+0%
+#235000
+13
+b1011 6
+b1011 <
+1%
+#240000
+0%
+#245000
+1%
+#246000
+1&
+0"
+#250000
+0%
+#255000
+1>
+1%
+#260000
+0%
+#265000
+0>
+1/
+1=
+1%
+#270000
+0%
+#275000
+17
+1%
+#280000
+0%
+#285000
+b111011 !
+b111011 -
+1,
+11
+18
+1%
+#290000
+0%
+#295000
+01
+b110010 !
+b110010 -
+1+
+b1 *
+b1 2
+b1 4
+19
+1%
+#300000
+0%
+#305000
+1%
+#310000
+0%
+#315000
+1%
+#320000
+0%
+#325000
+1%
+#326000
+0&
+1"
+#330000
+0%
+#335000
+1>
+1%
+#340000
+0%
+#345000
+0>
+0/
+0=
+1%
+#350000
+0%
+#355000
+07
+1%
+#360000
+0%
+#365000
+b110110 !
+b110110 -
+0,
+08
+1%
+#370000
+0%
+#375000
+09
+1%
+#380000
+0%
+#385000
+1%
+#390000
+0%
+#395000
+1%
+#400000
+0%
+#405000
+1%
+#406000
+b101 $
+b101 (
+b101 0
+#410000
+0%
+#415000
+b101 5
+1%
+#420000
+0%
+#425000
+03
+b101 6
+b101 <
+1%
+#430000
+0%
+#435000
+1%
+#436000
+1&
+0"
+#440000
+0%
+#445000
+1>
+1%
+#450000
+0%
+#455000
+0>
+1/
+1=
+1%
+#460000
+0%
+#465000
+17
+1%
+#470000
+0%
+#475000
+b110010 !
+b110010 -
+1,
+11
+18
+1%
+#480000
+0%
+#485000
+01
+b101001 !
+b101001 -
+19
+1)
+0+
+b10 *
+b10 2
+b10 4
+1%
+#490000
+0%
+#495000
+1%
+#500000
+0%
+#505000
+1%
+#510000
+0%
+#515000
+1%
+#516000
+0&
+1"
+#520000
+0%
+#525000
+1>
+1%
+#530000
+0%
+#535000
+0>
+0/
+0=
+1%
+#540000
+0%
+#545000
+07
+1%
+#550000
+0%
+#555000
+b101101 !
+b101101 -
+0,
+08
+1%
+#560000
+0%
+#565000
+09
+1%
+#570000
+0%
+#575000
+1%
+#580000
+0%
+#585000
+1%
+#590000
+0%
+#595000
+1%
+#596000
+1'
+0#
+#600000
+0%
+#605000
+1@
+1%
+#610000
+0%
+#615000
+0@
+1.
+1?
+1%
+#620000
+0%
+#625000
+1:
+1%
+#630000
+0%
+#635000
+1;
+1%
+#640000
+0%
+#645000
+b111111 !
+b111111 -
+0)
+b0 *
+b0 2
+b0 4
+1%
+#650000
+0%
+#655000
+1%
+#660000
+0%
+#665000
+1%
+#670000
+0%
+#675000
+1%
+#676000
+0'
+1#
+#680000
+0%
+#685000
+1@
+1%
+#690000
+0%
+#695000
+0@
+0.
+0?
+1%
+#700000
+0%
+#705000
+0:
+1%
+#710000
+0%
+#715000
+0;
+1%
+#720000
+0%
+#725000
+1%
+#730000
+0%
+#735000
+1%
+#740000
+0%
+#745000
+1%
+#750000
+0%
+#755000
+1%
+#756000
