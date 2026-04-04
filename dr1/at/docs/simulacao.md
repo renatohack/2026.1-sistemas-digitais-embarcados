@@ -22,6 +22,11 @@ O testbench tambem verifica que:
 - `LED2` responde durante o acionamento de `BTN_CONFIRM`
 - o contador e incrementado apenas uma vez por pressionamento, mesmo com o botao mantido pressionado por varios ciclos
 - `LED0` e `LED1` refletem o resultado da ultima tentativa
+- o contador exibido em `led_count[2:0]` e binario, conforme o enunciado:
+  - 1 tentativa = `001`
+  - 2 tentativas = `010`
+  - 3 tentativas = `011`
+  - 4 tentativas = `100`
 
 ## Arquivos de waveform
 
@@ -50,3 +55,18 @@ As formas de onda foram organizadas para evidenciar:
 - verificacao do codigo: `tb_access_control.dut.code_sync[3:0]` e `tb_access_control.dut.code_valid`
 - funcionamento do contador: `tb_access_control.led_count[2:0]`
 - comportamento das saidas: `tb_access_control.led_authorized`, `tb_access_control.led_denied` e `tb_access_control.led_attempt`
+
+## Observacao sobre o GTKWave
+
+O GTKWave nao gera estimulos novos por conta propria.
+
+Ele apenas visualiza os sinais que foram gravados na simulacao.
+
+Entao os cenarios de:
+
+- codigo correto
+- codigo incorreto
+- multiplas tentativas
+- reset
+
+ja estao prontos dentro da waveform gerada pelo testbench.

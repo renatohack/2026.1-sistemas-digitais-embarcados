@@ -18,6 +18,8 @@ tb_access_control_tang_nano_9k_top.btn_confirm_n
 tb_access_control_tang_nano_9k_top.code_btn[3:0]
 tb_access_control_tang_nano_9k_top.dut.btn_reset_db
 tb_access_control_tang_nano_9k_top.dut.btn_confirm_db
+tb_access_control_tang_nano_9k_top.dut.code_state[3:0]
+tb_access_control_tang_nano_9k_top.code_led[3:0]
 tb_access_control_tang_nano_9k_top.dut.access_control_inst.code_sync[3:0]
 tb_access_control_tang_nano_9k_top.dut.access_control_inst.code_valid
 tb_access_control_tang_nano_9k_top.led[5:0]

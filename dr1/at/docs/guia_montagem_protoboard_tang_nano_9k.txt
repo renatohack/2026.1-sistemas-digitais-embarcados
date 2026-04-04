@@ -1,19 +1,11 @@
 GUIA RAPIDO DE LIGACAO - TANG NANO 9K
 =====================================
 
-USE ESTE GUIA PARA BOTAO DE 4 PERNAS
-------------------------------------
-Em cada botao, use pontos diagonais:
+Este guia reflete a montagem que funcionou no protoboard.
 
-- lado do sinal: ponto da esquerda
-- lado do 3V3: ponto da direita na outra linha
 
-TANG NANO 9K - PINOS USADOS
----------------------------
-Use exatamente estes pinos escritos na placa:
-
-- GND
-- 3V3
+PINOS DA TANG USADOS
+--------------------
 - 25
 - 26
 - 27
@@ -22,148 +14,124 @@ Use exatamente estes pinos escritos na placa:
 - 30
 - 41
 - 42
+- 3V3
+- GND
 
 
-BOTOES NO PROTOBOARD
---------------------
-Considerando o padrao que voce descreveu:
-
-- botao do bit 0: d1, d3, g1, g3
-- botao do bit 1: d7, d9, g7, g9
-- botao do bit 2: d13, d15, g13, g15
-- botao do bit 3: d19, d21, g19, g21
-
-
-JUMPERS
--------
-Ligue assim:
-
-1. Tang 25   -> a1
-2. Tang 26   -> a7
-3. Tang 27   -> a13
-4. Tang 28   -> a19
-
-5. Tang 3V3  -> trilha positiva
-6. trilha positiva -> j3
-7. trilha positiva -> j9
-8. trilha positiva -> j15
-9. trilha positiva -> j21
-
-
-JUMPERS DO 3V3
---------------
-Para o 3V3, use exatamente assim:
-
-1. um lado no pino 3V3 da Tang, outro lado na trilha positiva
-2. um lado na trilha positiva, outro lado em j3
-3. um lado na trilha positiva, outro lado em j9
-4. um lado na trilha positiva, outro lado em j15
-5. um lado na trilha positiva, outro lado em j21
-
-No fim, o 3V3 fica presente em:
-
-- j3
-- j9
-- j15
-- j21
-
-
-RESUMO DIRETO
--------------
-- pino 25 da Tang = botao do bit 0
-- pino 26 da Tang = botao do bit 1
-- pino 27 da Tang = botao do bit 2
-- pino 28 da Tang = botao do bit 3
-
-- bit 0 usa o botao em d1/d3/g1/g3
-- bit 1 usa o botao em d7/d9/g7/g9
-- bit 2 usa o botao em d13/d15/g13/g15
-- bit 3 usa o botao em d19/d21/g19/g21
-
-- o lado esquerdo dos botoes recebe os sinais em:
-  a1, a7, a13, a19
-
-- o lado direito dos botoes recebe 3V3 em:
-  j3, j9, j15, j21
-
-
-LEDS DE INDICACAO DOS BITS
---------------------------
-Adicione 4 LEDs e 4 resistores de 220R a 1k.
-
-Cada LED deve ser ligado assim:
-
-- perna maior do LED = lado do sinal
-- perna menor do LED = lado do GND
-- resistor em serie entre o pino da Tang e a perna maior do LED
-- perna menor do LED indo para GND
-
-Use estas coordenadas:
-
-LED do bit 0
-- resistor: e23 -> f23
-- LED: perna maior em j23, perna menor em j24
-- jumper: Tang 29 -> a23
-- jumper: trilha negativa -> a24
-
-LED do bit 1
-- resistor: e25 -> f25
-- LED: perna maior em j25, perna menor em j26
-- jumper: Tang 30 -> a25
-- jumper: trilha negativa -> a26
-
-LED do bit 2
-- resistor: e27 -> f27
-- LED: perna maior em j27, perna menor em j28
-- jumper: Tang 41 -> a27
-- jumper: trilha negativa -> a28
-
-LED do bit 3
-- resistor: e29 -> f29
-- LED: perna maior em j29, perna menor em j30
-- jumper: Tang 42 -> a29
-- jumper: trilha negativa -> a30
-
-Significado:
-
-- LED bit 0 aceso = bit 0 ligado
-- LED bit 1 aceso = bit 1 ligado
-- LED bit 2 aceso = bit 2 ligado
-- LED bit 3 aceso = bit 3 ligado
-
-
-CODIGO 1011
+ALIMENTACAO
 -----------
-Para testar o codigo correto:
+- Tang 3V3 -> trilha positiva
+- Tang GND -> trilha negativa
 
-- aperte uma vez o botao do bit 3
-- aperte uma vez o botao do bit 1
-- aperte uma vez o botao do bit 0
-- nao aperte o botao do bit 2
-- depois aperte o botao onboard de confirmacao
 
-Agora os botoes do protoboard funcionam como TOGGLE:
+BOTOES DO CODIGO
+----------------
+- Tang 25 -> proto a1
+- Tang 26 -> proto a6
+- Tang 27 -> proto a11
+- Tang 28 -> proto a16
 
-- um toque muda de 0 para 1
-- outro toque no mesmo botao muda de 1 para 0
-- o estado fica guardado ate voce mudar de novo ou apertar reset
+- trilha positiva -> proto j3
+- trilha positiva -> proto j8
+- trilha positiva -> proto j13
+- trilha positiva -> proto j18
 
-Fluxo pratico:
+Observacao:
+- os 4 botoes do codigo usam apenas sinal de um lado e 3V3 do outro
+- nao precisa resistor nos botoes
+- o GND dos botoes nao e usado, porque os pinos do FPGA estao com pull-down interno
+
+
+LEDS DE VISUALIZACAO DOS BITS
+-----------------------------
+LED 1
+- Tang 29 -> proto a23
+- resistor 1 -> b23, i23
+- LED 1 -> perna maior j23, perna menor j24
+- trilha negativa -> proto i24
+
+LED 2
+- Tang 30 -> proto a25
+- resistor 2 -> b25, i25
+- LED 2 -> perna maior j25, perna menor j26
+- trilha negativa -> proto i26
+
+LED 3
+- Tang 41 -> proto a27
+- resistor 3 -> b27, i27
+- LED 3 -> perna maior j27, perna menor j28
+- trilha negativa -> proto i28
+
+LED 4
+- Tang 42 -> proto a29
+- resistor 4 -> b29, i29
+- LED 4 -> perna maior j29, perna menor j30
+- trilha negativa -> proto i30
+
+
+RESUMO DOS FIOS
+---------------
+- Tang 25 -> a1
+- Tang 26 -> a6
+- Tang 27 -> a11
+- Tang 28 -> a16
+
+- Tang 29 -> a23
+- Tang 30 -> a25
+- Tang 41 -> a27
+- Tang 42 -> a29
+
+- Tang 3V3 -> trilha positiva
+- Tang GND -> trilha negativa
+
+- trilha positiva -> j3
+- trilha positiva -> j8
+- trilha positiva -> j13
+- trilha positiva -> j18
+
+- trilha negativa -> i24
+- trilha negativa -> i26
+- trilha negativa -> i28
+- trilha negativa -> i30
+
+
+TESTE DO CODIGO CORRETO
+-----------------------
+Com os botoes em modo toggle:
 
 1. aperte S2 para limpar tudo
 2. toque no botao do bit 3
 3. toque no botao do bit 1
 4. toque no botao do bit 0
-5. aperte S1 para confirmar
+5. nao toque no botao do bit 2
+6. aperte S1 para confirmar
+
+Codigo correto: 1011
 
 
-OBSERVACAO
-----------
-Este guia assume que os 4 botoes seguem o mesmo formato e a mesma distribuicao
-que voce descreveu para os dois primeiros.
+CONTADOR DE TENTATIVAS
+----------------------
+O contador usa representacao binaria de 3 bits, conforme o enunciado.
 
-O motivo de usar a1, a7, a13 e a19 e j3, j9, j15 e j21 e que esses pontos
-correspondem a cantos diagonais livres dos botoes de 4 pernas.
+Leitura:
 
-Os LEDs extras usam os pinos 29, 30, 41 e 42 da Tang Nano 9K e mostram o
-estado toggle armazenado de cada bit.
+- bit 0 = primeiro LED do contador
+- bit 1 = segundo LED do contador
+- bit 2 = terceiro LED do contador
+
+Exemplos:
+
+- 1 tentativa = 001
+- 2 tentativas = 010
+- 3 tentativas = 011
+- 4 tentativas = 100
+- 5 tentativas = 101
+
+
+OBSERVACAO IMPORTANTE
+---------------------
+As conexoes acima fecham completamente a parte eletrica que voce descreveu.
+
+O unico ponto que nao foi listado aqui e a coordenada exata das 4 pernas fisicas
+de cada botao. Se voce quiser, eu posso fazer uma ultima versao do guia incluindo
+tambem as posicoes exatas dos botoes no protoboard.
