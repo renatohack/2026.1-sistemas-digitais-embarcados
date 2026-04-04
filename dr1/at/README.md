@@ -8,7 +8,11 @@ Entrega desenvolvida ate a etapa de simulacao, sem incluir sintese, mapeamento d
 - Entradas do codigo: 4 botoes externos no protoboard, equivalentes aos 4 bits que no enunciado original seriam definidos por switches
 - Entradas de controle: 1 botao para confirmacao e 1 botao para reset
 
-Para validar um codigo, os botoes correspondentes aos bits em nivel `1` devem permanecer pressionados durante o acionamento do botao de confirmacao.
+Na versao para hardware, os 4 botoes do codigo funcionam como `toggle`:
+
+- um toque alterna o bit entre `0` e `1`
+- o estado fica armazenado ate nova alteracao ou reset
+- o botao de confirmacao continua separado
 
 ## Estrutura
 

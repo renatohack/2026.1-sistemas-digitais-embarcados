@@ -11,7 +11,7 @@ Para a continuidade do projeto na Tang Nano 9K, os 4 bits do codigo foram mantid
 - `BTN_CONFIRM`: confirma a tentativa de acesso
 - `BTN_RESET`: reinicia o sistema
 
-Durante o uso, os botoes `B3..B0` equivalem logicamente aos antigos switches: os bits desejados devem ficar mantidos no estado ativo enquanto `BTN_CONFIRM` e pressionado.
+Durante o uso em hardware, os botoes `B3..B0` foram adaptados para modo toggle no wrapper da Tang Nano 9K. Ainda assim, logicamente, o sistema continua verificando um vetor de 4 bits equivalente ao conjunto de antigos switches.
 
 Saidas:
 

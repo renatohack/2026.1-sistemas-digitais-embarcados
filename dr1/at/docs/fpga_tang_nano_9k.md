@@ -38,16 +38,16 @@ Os 4 botoes que substituem os switches foram mapeados para GPIOs livres de 3.3 V
 
 | Bit do codigo | Sinal | FPGA pin | Comportamento |
 |---|---|---:|---|
-| bit 0 | `code_btn[0]` | 25 | ativo em `1` |
-| bit 1 | `code_btn[1]` | 26 | ativo em `1` |
-| bit 2 | `code_btn[2]` | 27 | ativo em `1` |
-| bit 3 | `code_btn[3]` | 28 | ativo em `1` |
+| bit 0 | `code_btn[0]` | 25 | toque alterna o bit 0 |
+| bit 1 | `code_btn[1]` | 26 | toque alterna o bit 1 |
+| bit 2 | `code_btn[2]` | 27 | toque alterna o bit 2 |
+| bit 3 | `code_btn[3]` | 28 | toque alterna o bit 3 |
 
 ## Como montar os 4 botoes no protoboard
 
 Cada botao externo deve ser ligado:
 
-1. um terminal ao GPIO correspondente (`19`, `20`, `25` ou `26`)
+1. um terminal ao GPIO correspondente (`25`, `26`, `27` ou `28`)
 2. o outro terminal a `3.3 V`
 
 Os GPIOs do codigo foram configurados com `PULL_MODE=DOWN`, entao:
@@ -55,7 +55,15 @@ Os GPIOs do codigo foram configurados com `PULL_MODE=DOWN`, entao:
 - botao solto = `0`
 - botao pressionado = `1`
 
-Assim, para digitar o codigo `1011`, os botoes dos bits `3`, `1` e `0` devem ficar pressionados no momento em que o botao onboard de confirmacao for acionado.
+Na camada fisica, cada clique gera um pulso. O wrapper da Tang Nano 9K faz debounce, detecta a borda e alterna o bit correspondente.
+
+Assim, para digitar o codigo `1011`:
+
+1. toque no botao do bit `3`
+2. toque no botao do bit `1`
+3. toque no botao do bit `0`
+4. nao toque no botao do bit `2`
+5. aperte o botao onboard de confirmacao
 
 ## Relacao entre LEDs fisicos e LEDs do enunciado
 
@@ -72,6 +80,7 @@ Assim, para digitar o codigo `1011`, os botoes dos bits `3`, `1` e `0` devem fic
 
 - O wrapper `access_control_tang_nano_9k_top.v` faz a inversao dos botoes e LEDs onboard, porque esses recursos da placa sao ativos em nivel baixo.
 - Os botoes onboard de confirmacao e reset passam por debounce antes de chegar ao modulo principal.
+- Os 4 botoes externos do codigo tambem passam por debounce e sao convertidos para modo toggle no wrapper da placa.
 - O modulo principal `rtl/access_control.v` foi mantido generico; a dependencia da placa ficou isolada no wrapper do Gowin.
 
 ## Fontes usadas para a pinagem

@@ -12,6 +12,10 @@ module access_control_tang_nano_9k_top #(
     wire btn_confirm;
     wire btn_reset;
 
+    wire [3:0] code_btn_db;
+    reg  [3:0] code_btn_db_d = 4'b0000;
+    reg  [3:0] code_state = 4'b0000;
+
     wire btn_confirm_db;
     wire btn_reset_db;
 
@@ -22,6 +26,38 @@ module access_control_tang_nano_9k_top #(
 
     assign btn_confirm = ~btn_confirm_n;
     assign btn_reset = ~btn_reset_n;
+
+    button_debouncer #(
+        .STABLE_CYCLES(DEBOUNCE_CYCLES)
+    ) code_btn_0_debouncer (
+        .clk(sys_clk),
+        .noisy_in(code_btn[0]),
+        .debounced_out(code_btn_db[0])
+    );
+
+    button_debouncer #(
+        .STABLE_CYCLES(DEBOUNCE_CYCLES)
+    ) code_btn_1_debouncer (
+        .clk(sys_clk),
+        .noisy_in(code_btn[1]),
+        .debounced_out(code_btn_db[1])
+    );
+
+    button_debouncer #(
+        .STABLE_CYCLES(DEBOUNCE_CYCLES)
+    ) code_btn_2_debouncer (
+        .clk(sys_clk),
+        .noisy_in(code_btn[2]),
+        .debounced_out(code_btn_db[2])
+    );
+
+    button_debouncer #(
+        .STABLE_CYCLES(DEBOUNCE_CYCLES)
+    ) code_btn_3_debouncer (
+        .clk(sys_clk),
+        .noisy_in(code_btn[3]),
+        .debounced_out(code_btn_db[3])
+    );
 
     button_debouncer #(
         .STABLE_CYCLES(DEBOUNCE_CYCLES)
@@ -39,9 +75,33 @@ module access_control_tang_nano_9k_top #(
         .debounced_out(btn_reset_db)
     );
 
+    always @(posedge sys_clk) begin
+        code_btn_db_d <= code_btn_db;
+
+        if (btn_reset_db) begin
+            code_state <= 4'b0000;
+        end else begin
+            if (code_btn_db[0] & ~code_btn_db_d[0]) begin
+                code_state[0] <= ~code_state[0];
+            end
+
+            if (code_btn_db[1] & ~code_btn_db_d[1]) begin
+                code_state[1] <= ~code_state[1];
+            end
+
+            if (code_btn_db[2] & ~code_btn_db_d[2]) begin
+                code_state[2] <= ~code_state[2];
+            end
+
+            if (code_btn_db[3] & ~code_btn_db_d[3]) begin
+                code_state[3] <= ~code_state[3];
+            end
+        end
+    end
+
     access_control access_control_inst (
         .clk(sys_clk),
-        .code_btn(code_btn),
+        .code_btn(code_state),
         .btn_confirm(btn_confirm_db),
         .btn_reset(btn_reset_db),
         .led_authorized(led_authorized),

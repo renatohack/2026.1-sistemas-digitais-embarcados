@@ -1,269 +1,114 @@
-GUIA DE MONTAGEM - TANG NANO 9K + PROTOBOARD
-============================================
+GUIA RAPIDO DE LIGACAO - TANG NANO 9K
+=====================================
 
-IMPORTANTE
-----------
-Este guia assume:
-1. protoboard padrao com letras a-j e linhas numeradas
-2. um vao central separando os lados esquerdo (a-e) e direito (f-j)
-3. botoes taticos comuns de 4 terminais
-4. a Tang Nano 9K com pinos/header ja soldados, para voce poder ligar jumpers
-
-Se o seu protoboard for diferente, use a mesma logica eletrica do guia.
-
-
-1. COMO O GOWIN VAI ENXERGAR OS ARQUIVOS
----------------------------------------
-Abra este arquivo:
-
-gowin/access_control_tang_nano_9k.gprj
-
-O Gowin vai carregar os outros arquivos sozinho porque o .gprj contem caminhos
-relativos para:
-
-- ../rtl/code_validator.v
-- ../rtl/access_control.v
-- ../rtl/button_debouncer.v
-- src/access_control_tang_nano_9k_top.v
-- src/access_control_tang_nano_9k.cst
-- src/access_control_tang_nano_9k.sdc
-
-Entao:
-- funciona se voce abrir o .gprj dentro desta estrutura de pastas
-- nao funciona se voce copiar so o .gprj sozinho para outro lugar
-
-
-2. O QUE E O ARQUIVO .SDC
--------------------------
-O arquivo .sdc e o arquivo de restricoes de temporizacao.
-
-No nosso caso ele diz ao Gowin:
-- que o clock de entrada se chama sys_clk
-- que esse clock e de 27 MHz
-
-Arquivo:
-- gowin/src/access_control_tang_nano_9k.sdc
-
-Ele e muito importante porque:
-- permite analise correta de timing
-- evita que o projeto fique "sem clock definido" na etapa de timing
-- e a forma correta de sintetizar um projeto real
-
-Em resumo:
-- para projeto serio: sim, ele e necessario
-- para "sair compilando de qualquer jeito": as vezes o projeto ate roda sem ele, mas nao e o certo
-
-
-3. RECURSOS ONBOARD QUE JA SAO DA PLACA
----------------------------------------
-Voce NAO precisa ligar nada no protoboard para estes sinais:
-
-- S1 onboard = botao de CONFIRMACAO
-- S2 onboard = botao de RESET
-- LED1 onboard = acesso autorizado
-- LED2 onboard = acesso negado
-- LED3 onboard = tentativa registrada
-- LED4 onboard = contador bit 0
-- LED5 onboard = contador bit 1
-- LED6 onboard = contador bit 2
-
-
-4. PINOS DA TANG NANO 9K QUE VOCE VAI USAR
-------------------------------------------
-Pinos externos que vao para o protoboard:
-
-J5:
-- pino 5  -> FPGA pin 25 -> code_btn[0] -> bit 0 do codigo
-- pino 6  -> FPGA pin 26 -> code_btn[1] -> bit 1 do codigo
-- pino 7  -> FPGA pin 27 -> code_btn[2] -> bit 2 do codigo
-- pino 8  -> FPGA pin 28 -> code_btn[3] -> bit 3 do codigo
-
-J6:
-- pino 23 -> GND
-- pino 24 -> +3V3
-
-Resumo funcional:
-- J5 pino 5 = B0
-- J5 pino 6 = B1
-- J5 pino 7 = B2
-- J5 pino 8 = B3
-- J6 pino 24 = alimentacao +3.3V dos botoes
-- J6 pino 23 = terra da montagem
-
-
-5. ESQUEMA TEXTUAL DA PINAGEM USADA
------------------------------------
-Use isto como referencia rapida:
-
-TANG NANO 9K
-
-J5
-  p5  -> B0 -> bit 0
-  p6  -> B1 -> bit 1
-  p7  -> B2 -> bit 2
-  p8  -> B3 -> bit 3
-
-J6
-  p23 -> GND
-  p24 -> +3V3
-
-ONBOARD
-  S1   -> confirmar tentativa
-  S2   -> reset
-  LED1 -> acesso autorizado
-  LED2 -> acesso negado
-  LED3 -> tentativa registrada
-  LED4 -> contador[0]
-  LED5 -> contador[1]
-  LED6 -> contador[2]
-
-
-6. COMO FUNCIONA O PROTOBOARD NESTE GUIA
-----------------------------------------
-Neste guia vou usar estas coordenadas:
-
-- lado esquerdo: a b c d e
-- vao central
-- lado direito: f g h i j
-
-As 5 casas da mesma linha no mesmo lado sao conectadas entre si.
-
-Exemplo:
-- a10, b10, c10, d10, e10 sao o mesmo ponto eletrico
-- f10, g10, h10, i10, j10 sao o mesmo ponto eletrico
-- o lado esquerdo NAO esta ligado ao lado direito por causa do vao central
-
-
-7. POSICAO DOS 4 BOTOES NO PROTOBOARD
--------------------------------------
-Coloque os botoes atravessando o vao central.
-
-BOTAO B0
-- terminais em: e10, e11, f10, f11
-
-BOTAO B1
-- terminais em: e16, e17, f16, f17
-
-BOTAO B2
-- terminais em: e22, e23, f22, f23
-
-BOTAO B3
-- terminais em: e28, e29, f28, f29
-
-Se o seu botao nao encaixar exatamente nesses 4 furos por causa do modelo,
-mantenha a mesma ideia:
-- metade do botao no lado esquerdo
-- metade do botao no lado direito
-- sempre atravessando o vao central
-
-
-8. JUMPERS DA TANG PARA O PROTOBOARD
+USE ESTE GUIA PARA BOTAO DE 4 PERNAS
 ------------------------------------
-Faça estas ligacoes:
+Em cada botao, use pontos diagonais:
 
-ALIMENTACAO
-- jumper 1: J6 pino 24 (+3V3) -> trilha vermelha do protoboard
-- jumper 2: J6 pino 23 (GND)  -> trilha azul do protoboard
+- lado do sinal: ponto da esquerda
+- lado do 3V3: ponto da direita na outra linha
 
-SINAL DOS BOTOES
-- jumper 3: J5 pino 5 -> a10
-- jumper 4: J5 pino 6 -> a16
-- jumper 5: J5 pino 7 -> a22
-- jumper 6: J5 pino 8 -> a28
+TANG NANO 9K - PINOS USADOS
+---------------------------
+Use exatamente estes pinos escritos na placa:
 
-ALIMENTACAO DE CADA BOTAO
-- jumper 7: trilha vermelha (+3V3) -> j10
-- jumper 8: trilha vermelha (+3V3) -> j16
-- jumper 9: trilha vermelha (+3V3) -> j22
-- jumper 10: trilha vermelha (+3V3) -> j28
-
-O jumper para GND na trilha azul e recomendado para deixar a montagem referenciada,
-mas os 4 botoes do codigo usam +3V3 no acionamento porque o FPGA foi configurado com
-pull-down interno nesses sinais.
+- 3V3
+- 25
+- 26
+- 27
+- 28
 
 
-9. VISUALIZACAO SIMPLES DA MONTAGEM
------------------------------------
-Exemplo do primeiro botao:
+BOTOES NO PROTOBOARD
+--------------------
+Considerando o padrao que voce descreveu:
 
-lado esquerdo          vao          lado direito
-a10 b10 c10 d10 e10   |||   f10 g10 h10 i10 j10
-a11 b11 c11 d11 e11   |||   f11 g11 h11 i11 j11
-
-Botao B0:
-- ocupa e10, e11, f10, f11
-- sinal vindo da Tang entra em a10
-- +3.3V entra em j10
-
-Repita o mesmo padrao para os outros botoes:
-- B1 nas linhas 16 e 17
-- B2 nas linhas 22 e 23
-- B3 nas linhas 28 e 29
+- botao do bit 0: d1, d4, g1, g4
+- botao do bit 1: d7, d9, g7, g9
+- botao do bit 2: d13, d15, g13, g15
+- botao do bit 3: d19, d21, g19, g21
 
 
-10. O QUE ACONTECE QUANDO VOCE APERTA
--------------------------------------
-Os sinais do codigo estao com pull-down no FPGA.
+JUMPERS
+-------
+Ligue assim:
 
-Isso significa:
-- botao solto  -> leitura 0
-- botao apertado -> leitura 1
+1. Tang 25   -> a1
+2. Tang 26   -> a7
+3. Tang 27   -> a13
+4. Tang 28   -> a19
 
-Entao, para digitar o codigo 1011:
-- aperte B3
-- solte B2
-- aperte B1
-- aperte B0
-- mantendo esse estado, aperte o botao onboard S1 para confirmar
-
-
-11. TESTE RAPIDO DE FUNCIONAMENTO
----------------------------------
-Depois de gravar o bitstream:
-
-TESTE 1
-- aperte S2
-- todos os LEDs de status devem apagar
-- contador deve zerar
-
-TESTE 2
-- deixe B3=1, B2=0, B1=1, B0=1
-- aperte S1
-- LED1 onboard deve indicar acesso autorizado
-
-TESTE 3
-- coloque um codigo errado
-- aperte S1
-- LED2 onboard deve indicar acesso negado
-
-TESTE 4
-- a cada confirmacao em S1, os LEDs 4, 5 e 6 devem contar as tentativas
+5. Tang 3V3  -> j4
+6. i4        -> j9
+7. i9        -> j15
+8. i15       -> j21
 
 
-12. CONFERENCIA FINAL DOS FIOS
-------------------------------
-Antes de ligar a placa, confira:
+JUMPERS DO 3V3
+--------------
+Para o 3V3, use exatamente assim:
 
-- J5 p5  vai para a10
-- J5 p6  vai para a16
-- J5 p7  vai para a22
-- J5 p8  vai para a28
-- J6 p24 vai para trilha vermelha
-- J6 p23 vai para trilha azul
-- trilha vermelha vai para j10, j16, j22, j28
-- botoes cruzam o vao central
-- nenhum jumper encosta acidentalmente em pinos vizinhos
+1. um lado no pino 3V3 da Tang, outro lado em j4
+2. um lado em i4, outro lado em j9
+3. um lado em i9, outro lado em j15
+4. um lado em i15, outro lado em j21
+
+No fim, o 3V3 fica presente em:
+
+- j4
+- j9
+- j15
+- j21
 
 
-13. OBSERVACAO IMPORTANTE
--------------------------
-Este guia assume a numeracao oficial dos conectores J5/J6 conforme a documentacao
-da Tang Nano 9K e o uso dos GPIOs expostos:
+RESUMO DIRETO
+-------------
+- pino 25 da Tang = botao do bit 0
+- pino 26 da Tang = botao do bit 1
+- pino 27 da Tang = botao do bit 2
+- pino 28 da Tang = botao do bit 3
 
-- J5 p5 = FPGA pin 25
-- J5 p6 = FPGA pin 26
-- J5 p7 = FPGA pin 27
-- J5 p8 = FPGA pin 28
+- bit 0 usa o botao em d1/d4/g1/g4
+- bit 1 usa o botao em d7/d9/g7/g9
+- bit 2 usa o botao em d13/d15/g13/g15
+- bit 3 usa o botao em d19/d21/g19/g21
 
-Se sua placa estiver sem header soldado, primeiro sera necessario soldar os pinos
-ou usar algum adaptador apropriado. Sem isso, nao da para encaixar jumpers Dupont.
+- o lado esquerdo dos botoes recebe os sinais em:
+  a1, a7, a13, a19
+
+- o lado direito dos botoes recebe 3V3 em:
+  j4, j9, j15, j21
+
+
+CODIGO 1011
+-----------
+Para testar o codigo correto:
+
+- aperte uma vez o botao do bit 3
+- aperte uma vez o botao do bit 1
+- aperte uma vez o botao do bit 0
+- nao aperte o botao do bit 2
+- depois aperte o botao onboard de confirmacao
+
+Agora os botoes do protoboard funcionam como TOGGLE:
+
+- um toque muda de 0 para 1
+- outro toque no mesmo botao muda de 1 para 0
+- o estado fica guardado ate voce mudar de novo ou apertar reset
+
+Fluxo pratico:
+
+1. aperte S2 para limpar tudo
+2. toque no botao do bit 3
+3. toque no botao do bit 1
+4. toque no botao do bit 0
+5. aperte S1 para confirmar
+
+
+OBSERVACAO
+----------
+Este guia assume que os 4 botoes seguem o mesmo formato e a mesma distribuicao
+que voce descreveu para os dois primeiros.
+
+O motivo de usar a1, a7, a13 e a19 e j4, j9, j15 e j21 e que esses pontos
+correspondem a cantos diagonais livres dos botoes de 4 pernas.

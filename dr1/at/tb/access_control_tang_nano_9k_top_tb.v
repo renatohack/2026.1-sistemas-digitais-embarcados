@@ -80,15 +80,30 @@ module tb_access_control_tang_nano_9k_top;
         end
     endtask
 
-    task automatic attempt_code;
+    task automatic press_code_button;
+        input integer index;
         input [8*40-1:0] label;
-        input [3:0] value;
+        input [3:0] expected_code_state;
+        begin
+            code_btn[index] = 1'b1;
+            wait_cycles(6);
+            code_btn[index] = 1'b0;
+            wait_cycles(6);
+
+            if (dut.code_state !== expected_code_state) begin
+                $fatal(1, "FALHA (%0s): code_state = %b, esperado = %b, tempo = %0t",
+                    label, dut.code_state, expected_code_state, $time);
+            end
+        end
+    endtask
+
+    task automatic confirm_attempt;
+        input [8*40-1:0] label;
         input expected_authorized;
         input expected_denied;
         input [2:0] expected_count;
         begin
-            code_btn = value;
-            wait_cycles(3);
+            wait_cycles(4);
 
             btn_confirm_n = 1'b0;
             wait_cycles(8);
@@ -97,6 +112,16 @@ module tb_access_control_tang_nano_9k_top;
             btn_confirm_n = 1'b1;
             wait_cycles(8);
             expect_leds(label, expected_authorized, expected_denied, 1'b0, expected_count);
+        end
+    endtask
+
+    task automatic attempt_code;
+        input [8*40-1:0] label;
+        input expected_authorized;
+        input expected_denied;
+        input [2:0] expected_count;
+        begin
+            confirm_attempt(label, expected_authorized, expected_denied, expected_count);
         end
     endtask
 
@@ -112,9 +137,23 @@ module tb_access_control_tang_nano_9k_top;
         wait_cycles(6);
         apply_reset("reset_inicial_fpga");
 
-        attempt_code("codigo_correto_fpga", 4'b1011, 1'b1, 1'b0, 3'b001);
-        attempt_code("codigo_incorreto_fpga", 4'b0101, 1'b0, 1'b1, 3'b010);
+        press_code_button(3, "toggle_bit3_on", 4'b1000);
+        press_code_button(1, "toggle_bit1_on", 4'b1010);
+        press_code_button(0, "toggle_bit0_on", 4'b1011);
+        attempt_code("codigo_correto_fpga", 1'b1, 1'b0, 3'b001);
+
+        press_code_button(0, "toggle_bit0_off", 4'b1010);
+        attempt_code("codigo_incorreto_fpga", 1'b0, 1'b1, 3'b010);
+
+        press_code_button(0, "toggle_bit0_on_again", 4'b1011);
+        press_code_button(2, "toggle_bit2_on", 4'b1111);
+        attempt_code("codigo_incorreto_fpga_2", 1'b0, 1'b1, 3'b011);
         apply_reset("reset_final_fpga");
+
+        if (dut.code_state !== 4'b0000) begin
+            $fatal(1, "FALHA (reset_final_fpga): code_state deveria zerar junto com reset, tempo = %0t",
+                $time);
+        end
 
         $display("SIMULACAO_FPGA_OK");
         $finish;
