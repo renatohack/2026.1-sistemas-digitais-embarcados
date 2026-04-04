@@ -20,8 +20,8 @@ Use exatamente estes pinos escritos na placa:
 - 28
 - 29
 - 30
-- 33
-- 24
+- 41
+- 42
 
 
 BOTOES NO PROTOBOARD
@@ -93,35 +93,35 @@ Adicione 4 LEDs e 4 resistores de 220R a 1k.
 
 Cada LED deve ser ligado assim:
 
-- perna longa do LED = anodo
-- perna curta do LED = catodo
-- resistor em serie entre o pino da Tang e o anodo do LED
-- catodo do LED indo para GND
+- perna maior do LED = lado do sinal
+- perna menor do LED = lado do GND
+- resistor em serie entre o pino da Tang e a perna maior do LED
+- perna menor do LED indo para GND
 
 Use estas coordenadas:
 
 LED do bit 0
 - resistor: e23 -> f23
-- LED: anodo em j23, catodo em j24
+- LED: perna maior em j23, perna menor em j24
 - jumper: Tang 29 -> a23
 - jumper: trilha negativa -> a24
 
 LED do bit 1
 - resistor: e25 -> f25
-- LED: anodo em j25, catodo em j26
+- LED: perna maior em j25, perna menor em j26
 - jumper: Tang 30 -> a25
 - jumper: trilha negativa -> a26
 
 LED do bit 2
 - resistor: e27 -> f27
-- LED: anodo em j27, catodo em j28
-- jumper: Tang 33 -> a27
+- LED: perna maior em j27, perna menor em j28
+- jumper: Tang 41 -> a27
 - jumper: trilha negativa -> a28
 
 LED do bit 3
 - resistor: e29 -> f29
-- LED: anodo em j29, catodo em j30
-- jumper: Tang 24 -> a29
+- LED: perna maior em j29, perna menor em j30
+- jumper: Tang 42 -> a29
 - jumper: trilha negativa -> a30
 
 Significado:
@@ -165,5 +165,5 @@ que voce descreveu para os dois primeiros.
 O motivo de usar a1, a7, a13 e a19 e j3, j9, j15 e j21 e que esses pontos
 correspondem a cantos diagonais livres dos botoes de 4 pernas.
 
-Os LEDs extras usam os pinos 29, 30, 33 e 24 da Tang Nano 9K e mostram o
+Os LEDs extras usam os pinos 29, 30, 41 e 42 da Tang Nano 9K e mostram o
 estado toggle armazenado de cada bit.

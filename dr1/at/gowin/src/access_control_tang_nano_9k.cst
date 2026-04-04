@@ -53,14 +53,16 @@ IO_LOC "code_btn[3]" 28;
 IO_PORT "code_btn[3]" IO_TYPE=LVCMOS33 PULL_MODE=DOWN;
 
 // LEDs externos no protoboard para indicar o estado toggle dos 4 bits
+// Pinos escolhidos em bancos de 3.3 V expostos no header e sem a ressalva
+// da wiki para os IOs multiplexados com HDMI.
 IO_LOC "code_led[0]" 29;
 IO_PORT "code_led[0]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
 
 IO_LOC "code_led[1]" 30;
 IO_PORT "code_led[1]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
 
-IO_LOC "code_led[2]" 33;
+IO_LOC "code_led[2]" 41;
 IO_PORT "code_led[2]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
 
-IO_LOC "code_led[3]" 34;
+IO_LOC "code_led[3]" 42;
 IO_PORT "code_led[3]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;

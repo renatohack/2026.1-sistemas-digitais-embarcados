@@ -50,8 +50,8 @@ Os 4 botoes que substituem os switches foram mapeados para GPIOs livres de 3.3 V
 |---|---|---:|---|
 | bit 0 | `code_led[0]` | 29 | LED externo ativo em `1` |
 | bit 1 | `code_led[1]` | 30 | LED externo ativo em `1` |
-| bit 2 | `code_led[2]` | 33 | LED externo ativo em `1` |
-| bit 3 | `code_led[3]` | 24 | LED externo ativo em `1` |
+| bit 2 | `code_led[2]` | 41 | LED externo ativo em `1` |
+| bit 3 | `code_led[3]` | 42 | LED externo ativo em `1` |
 
 ## Como montar os 4 botoes no protoboard
 
@@ -100,7 +100,8 @@ Os LEDs externos do protoboard nao fazem parte do enunciado original. Eles foram
 - O wrapper `access_control_tang_nano_9k_top.v` faz a inversao dos botoes e LEDs onboard, porque esses recursos da placa sao ativos em nivel baixo.
 - Os botoes onboard de confirmacao e reset passam por debounce antes de chegar ao modulo principal.
 - Os 4 botoes externos do codigo tambem passam por debounce e sao convertidos para modo toggle no wrapper da placa.
-- As saidas `code_led[3:0]` espelham diretamente o estado armazenado dos 4 bits e foram mapeadas para GPIOs livres da placa.
+- As saidas `code_led[3:0]` espelham diretamente o estado armazenado dos 4 bits e foram mapeadas para GPIOs de 3.3 V expostos no header.
+- Os pinos `83` a `86` foram evitados para os LEDs externos porque pertencem ao banco de 1.8 V e ficam na regiao que a documentacao da Sipeed marca como multiplexada com HDMI.
 - O modulo principal `rtl/access_control.v` foi mantido generico; a dependencia da placa ficou isolada no wrapper do Gowin.
 
 ## Fontes usadas para a pinagem
