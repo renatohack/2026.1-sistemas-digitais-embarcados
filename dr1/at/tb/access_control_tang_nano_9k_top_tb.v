@@ -7,6 +7,7 @@ module tb_access_control_tang_nano_9k_top;
     reg [3:0] code_btn;
 
     wire [5:0] led;
+    wire [3:0] code_led;
 
     access_control_tang_nano_9k_top #(
         .DEBOUNCE_CYCLES(2)
@@ -15,7 +16,8 @@ module tb_access_control_tang_nano_9k_top;
         .btn_confirm_n(btn_confirm_n),
         .btn_reset_n(btn_reset_n),
         .code_btn(code_btn),
-        .led(led)
+        .led(led),
+        .code_led(code_led)
     );
 
     always #5 sys_clk = ~sys_clk;
@@ -94,6 +96,11 @@ module tb_access_control_tang_nano_9k_top;
                 $fatal(1, "FALHA (%0s): code_state = %b, esperado = %b, tempo = %0t",
                     label, dut.code_state, expected_code_state, $time);
             end
+
+            if (code_led !== expected_code_state) begin
+                $fatal(1, "FALHA (%0s): code_led = %b, esperado = %b, tempo = %0t",
+                    label, code_led, expected_code_state, $time);
+            end
         end
     endtask
 
@@ -152,6 +159,11 @@ module tb_access_control_tang_nano_9k_top;
 
         if (dut.code_state !== 4'b0000) begin
             $fatal(1, "FALHA (reset_final_fpga): code_state deveria zerar junto com reset, tempo = %0t",
+                $time);
+        end
+
+        if (code_led !== 4'b0000) begin
+            $fatal(1, "FALHA (reset_final_fpga): code_led deveria zerar junto com reset, tempo = %0t",
                 $time);
         end
 

@@ -7,7 +7,8 @@ module access_control_tang_nano_9k_top #(
     input  wire       btn_confirm_n,
     input  wire       btn_reset_n,
     input  wire [3:0] code_btn,
-    output wire [5:0] led
+    output wire [5:0] led,
+    output wire [3:0] code_led
 );
     wire btn_confirm;
     wire btn_reset;
@@ -109,6 +110,8 @@ module access_control_tang_nano_9k_top #(
         .led_attempt(led_attempt),
         .led_count(led_count)
     );
+
+    assign code_led = code_state;
 
     // Os LEDs onboard da Tang Nano 9K sao ativos em nivel baixo.
     assign led[0] = ~led_authorized;

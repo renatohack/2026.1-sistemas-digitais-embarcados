@@ -6,7 +6,8 @@ Esta etapa prepara o projeto para sintese, place-and-route e gravacao no Gowin, 
 
 - apenas os 4 botoes do codigo ficam no protoboard
 - confirmacao e reset ficam em botoes onboard
-- todas as saidas ficam nos LEDs onboard
+- os LEDs de status principais ficam onboard
+- 4 LEDs extras no protoboard mostram visualmente o estado dos bits do codigo
 
 ## Arquivos do Gowin
 
@@ -43,6 +44,15 @@ Os 4 botoes que substituem os switches foram mapeados para GPIOs livres de 3.3 V
 | bit 2 | `code_btn[2]` | 27 | toque alterna o bit 2 |
 | bit 3 | `code_btn[3]` | 28 | toque alterna o bit 3 |
 
+### LEDs externos de visualizacao dos bits
+
+| Bit exibido | Sinal | FPGA pin | Observacao |
+|---|---|---:|---|
+| bit 0 | `code_led[0]` | 29 | LED externo ativo em `1` |
+| bit 1 | `code_led[1]` | 30 | LED externo ativo em `1` |
+| bit 2 | `code_led[2]` | 33 | LED externo ativo em `1` |
+| bit 3 | `code_led[3]` | 24 | LED externo ativo em `1` |
+
 ## Como montar os 4 botoes no protoboard
 
 Cada botao externo deve ser ligado:
@@ -76,11 +86,21 @@ Assim, para digitar o codigo `1011`:
 | `LED4` contador bit 1 | LED5 onboard |
 | `LED5` contador bit 2 | LED6 onboard |
 
+## LEDs externos de apoio visual
+
+Os LEDs externos do protoboard nao fazem parte do enunciado original. Eles foram adicionados apenas para mostrar o estado atual dos 4 bits armazenados em modo toggle:
+
+- `code_led[0]`: bit 0
+- `code_led[1]`: bit 1
+- `code_led[2]`: bit 2
+- `code_led[3]`: bit 3
+
 ## Observacoes de implementacao
 
 - O wrapper `access_control_tang_nano_9k_top.v` faz a inversao dos botoes e LEDs onboard, porque esses recursos da placa sao ativos em nivel baixo.
 - Os botoes onboard de confirmacao e reset passam por debounce antes de chegar ao modulo principal.
 - Os 4 botoes externos do codigo tambem passam por debounce e sao convertidos para modo toggle no wrapper da placa.
+- As saidas `code_led[3:0]` espelham diretamente o estado armazenado dos 4 bits e foram mapeadas para GPIOs livres da placa.
 - O modulo principal `rtl/access_control.v` foi mantido generico; a dependencia da placa ficou isolada no wrapper do Gowin.
 
 ## Fontes usadas para a pinagem
