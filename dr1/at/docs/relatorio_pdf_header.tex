@@ -1,0 +1,52 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\definecolor{TitleBlue}{HTML}{0F4C81}
+\definecolor{AccentBlue}{HTML}{1E6FA8}
+\definecolor{SoftGray}{HTML}{F4F6F8}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=TitleBlue,
+  urlcolor=AccentBlue,
+  citecolor=TitleBlue
+}
+
+\setlength{\emergencystretch}{3em}
+\setlist{leftmargin=*, itemsep=0.3em}
+\captionsetup{font=small, labelfont=bf}
+\floatplacement{figure}{H}
+\renewcommand{\contentsname}{Sumário}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Assessment Final - DR1}
+\fancyhead[R]{Sistema Digital de Controle de Acesso}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\titleformat{\section}
+  {\Large\bfseries\color{TitleBlue}}
+  {\thesection}
+  {0.6em}
+  {}
+
+\titleformat{\subsection}
+  {\large\bfseries\color{AccentBlue}}
+  {\thesubsection}
+  {0.6em}
+  {}
