@@ -1,0 +1,28 @@
+Ex11 - Parsing com faixa [-1000, 1000]
+case=inside-range
+  input="500"
+  status=OK expected=OK
+  value=500 expected=500
+  result=PASS
+case=below-min
+  input="-1001"
+  status=OUT_OF_RANGE expected=OUT_OF_RANGE
+  result=PASS
+case=above-max
+  input="1001"
+  status=OUT_OF_RANGE expected=OUT_OF_RANGE
+  result=PASS
+case=invalid
+  input="9x"
+  status=INVALID expected=INVALID
+  result=PASS
+case=empty
+  input=""
+  status=INVALID expected=INVALID
+  result=PASS
+case=signed-valid
+  input="-10"
+  status=OK expected=OK
+  value=-10 expected=-10
+  result=PASS
+STATUS FINAL: PASS

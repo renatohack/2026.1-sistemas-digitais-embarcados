@@ -1,0 +1,14 @@
+Ex7 - Subtracao unsigned de 128 bits
+case=no-borrow
+  y      = 0x0000000000000001_000000000000000a
+  z      = 0x0000000000000000_0000000000000003
+  result = 0x0000000000000001_0000000000000007
+  expect = 0x0000000000000001_0000000000000007
+  borrow=0 expected=0 => PASS
+case=borrow
+  y      = 0x0000000000000000_0000000000000000
+  z      = 0x0000000000000000_0000000000000001
+  result = 0xffffffffffffffff_ffffffffffffffff
+  expect = 0xffffffffffffffff_ffffffffffffffff
+  borrow=1 expected=1 => PASS
+STATUS FINAL: PASS

@@ -1,0 +1,31 @@
+Breakpoint 1 at 0x400d7c: file src/asm/mp_sub_128.s, line 9.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, mp_sub_128 () at src/asm/mp_sub_128.s:9
+9	    ldr x3, [x0]
+=== Break em mp_sub_128 ===
+=> 0x400d7c <mp_sub_128>:	ldr	x3, [x0]
+x0             0x400e28            4197928
+x1             0x400e38            4197944
+x2             0x7ffffff170        549755810160
+16	    sbcs x8, x4, x6
+
+=== Apos a subtracao da low word ===
+=> 0x400d90 <mp_sub_128+20>:	sbcs	x8, x4, x6
+x3             0x0                 0
+x4             0x0                 0
+x5             0x1                 1
+x6             0x0                 0
+x7             0xffffffffffffffff  -1
+cpsr           0x80200000          [ EL=0 BTYPE=0 SS N ]
+18	    str x7, [x2]
+
+=== Apos a subtracao da high word ===
+=> 0x400d94 <mp_sub_128+24>:	str	x7, [x2]
+x4             0x0                 0
+x6             0x0                 0
+x7             0xffffffffffffffff  -1
+x8             0xffffffffffffffff  -1
+cpsr           0x80200000          [ EL=0 BTYPE=0 SS N ]
+[Inferior 1 (process 1780) exited normally]

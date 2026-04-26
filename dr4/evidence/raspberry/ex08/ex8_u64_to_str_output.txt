@@ -1,0 +1,22 @@
+Ex8 - Conversao unsigned 64-bit para string decimal
+case=zero
+  value=0
+  text="0"
+  len=1 expected_len=1 => PASS
+case=one-digit
+  value=7
+  text="7"
+  len=1 expected_len=1 => PASS
+case=many-digits
+  value=1234567890123456789
+  text="1234567890123456789"
+  len=19 expected_len=19 => PASS
+case=uint64-max
+  value=18446744073709551615
+  text="18446744073709551615"
+  len=20 expected_len=20 => PASS
+case=small-buffer
+  value=12345
+  text=""
+  len=0 expected_len=0 => PASS
+STATUS FINAL: PASS

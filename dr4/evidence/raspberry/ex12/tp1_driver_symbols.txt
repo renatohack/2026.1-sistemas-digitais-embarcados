@@ -1,0 +1,137 @@
+
+/home/renato/drs/dr4/build/bin/tp1_driver:     file format elf64-littleaarch64
+
+SYMBOL TABLE:
+0000000000400270 l    d  .note.gnu.build-id	0000000000000000              .note.gnu.build-id
+0000000000400294 l    d  .interp	0000000000000000              .interp
+00000000004002b0 l    d  .gnu.hash	0000000000000000              .gnu.hash
+00000000004002d8 l    d  .dynsym	0000000000000000              .dynsym
+0000000000400410 l    d  .dynstr	0000000000000000              .dynstr
+00000000004004be l    d  .gnu.version	0000000000000000              .gnu.version
+00000000004004d8 l    d  .gnu.version_r	0000000000000000              .gnu.version_r
+0000000000400508 l    d  .rela.dyn	0000000000000000              .rela.dyn
+0000000000400568 l    d  .rela.plt	0000000000000000              .rela.plt
+0000000000400640 l    d  .init	0000000000000000              .init
+0000000000400660 l    d  .plt	0000000000000000              .plt
+0000000000400740 l    d  .text	0000000000000000              .text
+00000000004010e4 l    d  .fini	0000000000000000              .fini
+0000000000401100 l    d  .rodata	0000000000000000              .rodata
+0000000000401320 l    d  .eh_frame_hdr	0000000000000000              .eh_frame_hdr
+00000000004013a0 l    d  .eh_frame	0000000000000000              .eh_frame
+0000000000401544 l    d  .note.ABI-tag	0000000000000000              .note.ABI-tag
+000000000041fde8 l    d  .init_array	0000000000000000              .init_array
+000000000041fdf0 l    d  .fini_array	0000000000000000              .fini_array
+000000000041fdf8 l    d  .dynamic	0000000000000000              .dynamic
+000000000041ffc8 l    d  .got	0000000000000000              .got
+000000000041ffe8 l    d  .got.plt	0000000000000000              .got.plt
+0000000000420048 l    d  .data	0000000000000000              .data
+0000000000420058 l    d  .bss	0000000000000000              .bss
+0000000000000000 l    d  .comment	0000000000000000              .comment
+0000000000000000 l    d  .debug_aranges	0000000000000000              .debug_aranges
+0000000000000000 l    d  .debug_info	0000000000000000              .debug_info
+0000000000000000 l    d  .debug_abbrev	0000000000000000              .debug_abbrev
+0000000000000000 l    d  .debug_line	0000000000000000              .debug_line
+0000000000000000 l    d  .debug_str	0000000000000000              .debug_str
+0000000000000000 l    d  .debug_line_str	0000000000000000              .debug_line_str
+0000000000000000 l    df *ABS*	0000000000000000              crt1.o
+0000000000400774 l       .text	0000000000000000              __wrap_main
+0000000000401544 l     O .note.ABI-tag	0000000000000020              __abi_tag
+0000000000000000 l    df *ABS*	0000000000000000              crti.o
+0000000000400788 l     F .text	0000000000000014              call_weak_fn
+0000000000000000 l    df *ABS*	0000000000000000              crtn.o
+0000000000000000 l    df *ABS*	0000000000000000              crtstuff.c
+00000000004007a0 l     F .text	0000000000000000              deregister_tm_clones
+00000000004007d0 l     F .text	0000000000000000              register_tm_clones
+000000000040080c l     F .text	0000000000000000              __do_global_dtors_aux
+0000000000420060 l     O .bss	0000000000000001              completed.0
+000000000041fdf0 l     O .fini_array	0000000000000000              __do_global_dtors_aux_fini_array_entry
+0000000000400844 l     F .text	0000000000000000              frame_dummy
+000000000041fde8 l     O .init_array	0000000000000000              __frame_dummy_init_array_entry
+0000000000000000 l    df *ABS*	0000000000000000              tp1_driver.c
+000000000040084c l     F .text	0000000000000110              check_mp_add
+000000000040095c l     F .text	00000000000000ac              check_parse
+0000000000400a08 l     F .text	00000000000000ac              check_to_str
+0000000000400ab4 l     F .text	00000000000000c0              check_division
+0000000000400b74 l     F .text	000000000000008c              check_range
+0000000000000000 l    df *ABS*	0000000000000000              test_common.c
+0000000000000000 l    df *ABS*	0000000000000000              mp_add_192.o
+0000000000000000 l    df *ABS*	0000000000000000              u64_to_str.o
+0000000000400f78 l       .text	0000000000000000              .buffer_error
+0000000000400f0c l       .text	0000000000000000              .convert_loop
+0000000000400f28 l       .text	0000000000000000              .digits_ready
+0000000000400f68 l       .text	0000000000000000              .buffer_too_small
+0000000000400f38 l       .text	0000000000000000              .copy_loop
+0000000000400f58 l       .text	0000000000000000              .finish
+0000000000000000 l    df *ABS*	0000000000000000              parse_i64.o
+0000000000000000 l       *ABS*	0000000000000000              TP1_OK
+0000000000000001 l       *ABS*	0000000000000000              TP1_ERR_EMPTY
+0000000000000002 l       *ABS*	0000000000000000              TP1_ERR_INVALID
+0000000000000003 l       *ABS*	0000000000000000              TP1_ERR_OVERFLOW
+000000000040102c l       .text	0000000000000000              .empty
+0000000000401034 l       .text	0000000000000000              .invalid
+0000000000400fb4 l       .text	0000000000000000              .check_plus
+0000000000400fc0 l       .text	0000000000000000              .post_sign
+0000000000400fd8 l       .text	0000000000000000              .parse_loop
+0000000000401014 l       .text	0000000000000000              .done
+000000000040103c l       .text	0000000000000000              .overflow
+0000000000401000 l       .text	0000000000000000              .accumulate
+0000000000401020 l       .text	0000000000000000              .store_result
+0000000000000000 l    df *ABS*	0000000000000000              int_div_to_double.o
+0000000000000000 l       *ABS*	0000000000000000              TP1_OK
+0000000000000005 l       *ABS*	0000000000000000              TP1_ERR_DIV_BY_ZERO
+0000000000401074 l       .text	0000000000000000              .div_by_zero
+000000000040106c l       .text	0000000000000000              .success
+0000000000401080 l       .text	0000000000000000              .div_status
+0000000000000000 l    df *ABS*	0000000000000000              parse_i64_range.o
+0000000000000000 l       *ABS*	0000000000000000              TP1_OK
+0000000000000002 l       *ABS*	0000000000000000              TP1_ERR_INVALID
+0000000000000003 l       *ABS*	0000000000000000              TP1_ERR_OVERFLOW
+0000000000000004 l       *ABS*	0000000000000000              TP1_ERR_OUT_OF_RANGE
+00000000004010c4 l       .text	0000000000000000              .map_error
+00000000004010d8 l       .text	0000000000000000              .range_error
+0000000000000000 l    df *ABS*	0000000000000000              crtstuff.c
+0000000000401540 l     O .eh_frame	0000000000000000              __FRAME_END__
+0000000000000000 l    df *ABS*	0000000000000000              
+000000000041fdf8 l     O .dynamic	0000000000000000              _DYNAMIC
+0000000000401320 l       .eh_frame_hdr	0000000000000000              __GNU_EH_FRAME_HDR
+000000000041ffc8 l     O .got	0000000000000000              _GLOBAL_OFFSET_TABLE_
+0000000000000000       F *UND*	0000000000000000              __libc_start_main@GLIBC_2.34
+0000000000000000  w      *UND*	0000000000000000              _ITM_deregisterTMCloneTable
+0000000000420048  w      .data	0000000000000000              data_start
+0000000000420058 g       .bss	0000000000000000              __bss_start__
+0000000000420068 g       .bss	0000000000000000              _bss_end__
+0000000000420058 g       .data	0000000000000000              _edata
+00000000004010e4 g     F .fini	0000000000000000              .hidden _fini
+0000000000420068 g       .bss	0000000000000000              __bss_end__
+0000000000401050 g     F .text	0000000000000038              int_div_to_double
+0000000000400ebc g       .text	0000000000000000              mp_add_192_after_w0
+0000000000400cc4 g     F .text	0000000000000100              tp1_status_name
+0000000000420058 g     O .bss	0000000000000008              stdout@GLIBC_2.17
+0000000000400ec0 g       .text	0000000000000000              mp_add_192_after_w1
+0000000000420048 g       .data	0000000000000000              __data_start
+0000000000000000  w      *UND*	0000000000000000              __gmon_start__
+0000000000420050 g     O .data	0000000000000000              .hidden __dso_handle
+0000000000000000       F *UND*	0000000000000000              abort@GLIBC_2.17
+0000000000401100 g     O .rodata	0000000000000004              _IO_stdin_used
+0000000000000000       F *UND*	0000000000000000              puts@GLIBC_2.17
+0000000000000000       F *UND*	0000000000000000              memcmp@GLIBC_2.17
+0000000000401088 g     F .text	000000000000005c              parse_i64_range
+0000000000000000       F *UND*	0000000000000000              strcmp@GLIBC_2.17
+0000000000420068 g       .bss	0000000000000000              _end
+0000000000400780 g     F .text	0000000000000008              .hidden _dl_relocate_static_pie
+0000000000400740 g     F .text	000000000000003c              _start
+0000000000400ed8 g     F .text	00000000000000a8              u64_to_str
+0000000000420068 g       .bss	0000000000000000              __end__
+0000000000420058 g       .bss	0000000000000000              __bss_start
+0000000000400dc4 g     F .text	00000000000000dc              tp1_print_words_le_hex
+0000000000400c00 g     F .text	00000000000000c4              main
+0000000000000000       F *UND*	0000000000000000              fwrite@GLIBC_2.17
+0000000000400f80 g     F .text	00000000000000c4              parse_i64
+0000000000400ea0 g     F .text	0000000000000038              mp_add_192
+0000000000420058 g     O .data	0000000000000000              .hidden __TMC_END__
+0000000000000000  w      *UND*	0000000000000000              _ITM_registerTMCloneTable
+0000000000000000       F *UND*	0000000000000000              printf@GLIBC_2.17
+0000000000000000       F *UND*	0000000000000000              putchar@GLIBC_2.17
+0000000000400640 g     F .init	0000000000000000              .hidden _init
+
+

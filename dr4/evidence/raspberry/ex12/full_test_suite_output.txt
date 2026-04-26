@@ -1,0 +1,167 @@
+===== ex2_soc_addrs =====
+Ex2 - Enderecos base e offsets do SoC
+PERIPH_BASE   = 0x000000003f000000 | esperado = 0x000000003f000000 | PASS
+GPIO_BASE     = 0x000000003f200000 | esperado = 0x000000003f200000 | PASS
+UART0_BASE    = 0x000000003f201000 | esperado = 0x000000003f201000 | PASS
+SYS_TIMER_BASE = 0x000000003f003000 | esperado = 0x000000003f003000 | PASS
+GPIO_GPFSEL1  = 0x000000003f200004 | esperado = 0x000000003f200004 | PASS
+STATUS FINAL: PASS
+
+===== ex6_mp_add_192 =====
+Ex6 - Soma unsigned de 192 bits
+case=no-carry
+  a   = 0x0000000000000030_0000000000000020_0000000000000010
+  b   = 0x0000000000000003_0000000000000002_0000000000000001
+  out = 0x0000000000000033_0000000000000022_0000000000000011
+  exp = 0x0000000000000033_0000000000000022_0000000000000011
+  carry=0 expected=0 => PASS
+case=carry-low-mid
+  a   = 0x0000000000000000_0000000000001234_ffffffffffffffff
+  b   = 0x0000000000000000_0000000000000002_0000000000000001
+  out = 0x0000000000000000_0000000000001237_0000000000000000
+  exp = 0x0000000000000000_0000000000001237_0000000000000000
+  carry=0 expected=0 => PASS
+case=carry-through-high
+  a   = 0x0000000000000000_ffffffffffffffff_ffffffffffffffff
+  b   = 0x0000000000000000_0000000000000000_0000000000000001
+  out = 0x0000000000000001_0000000000000000_0000000000000000
+  exp = 0x0000000000000001_0000000000000000_0000000000000000
+  carry=0 expected=0 => PASS
+case=final-overflow
+  a   = 0xffffffffffffffff_ffffffffffffffff_ffffffffffffffff
+  b   = 0x0000000000000000_0000000000000000_0000000000000001
+  out = 0x0000000000000000_0000000000000000_0000000000000000
+  exp = 0x0000000000000000_0000000000000000_0000000000000000
+  carry=1 expected=1 => PASS
+STATUS FINAL: PASS
+
+===== ex7_mp_sub_128 =====
+Ex7 - Subtracao unsigned de 128 bits
+case=no-borrow
+  y      = 0x0000000000000001_000000000000000a
+  z      = 0x0000000000000000_0000000000000003
+  result = 0x0000000000000001_0000000000000007
+  expect = 0x0000000000000001_0000000000000007
+  borrow=0 expected=0 => PASS
+case=borrow
+  y      = 0x0000000000000000_0000000000000000
+  z      = 0x0000000000000000_0000000000000001
+  result = 0xffffffffffffffff_ffffffffffffffff
+  expect = 0xffffffffffffffff_ffffffffffffffff
+  borrow=1 expected=1 => PASS
+STATUS FINAL: PASS
+
+===== ex8_u64_to_str =====
+Ex8 - Conversao unsigned 64-bit para string decimal
+case=zero
+  value=0
+  text="0"
+  len=1 expected_len=1 => PASS
+case=one-digit
+  value=7
+  text="7"
+  len=1 expected_len=1 => PASS
+case=many-digits
+  value=1234567890123456789
+  text="1234567890123456789"
+  len=19 expected_len=19 => PASS
+case=uint64-max
+  value=18446744073709551615
+  text="18446744073709551615"
+  len=20 expected_len=20 => PASS
+case=small-buffer
+  value=12345
+  text=""
+  len=0 expected_len=0 => PASS
+STATUS FINAL: PASS
+
+===== ex9_parse_i64 =====
+Ex9 - Parsing decimal signed 64-bit
+case=zero
+  input="0"
+  status=OK expected=OK
+  value=0 expected=0
+  result=PASS
+case=positive
+  input="42"
+  status=OK expected=OK
+  value=42 expected=42
+  result=PASS
+case=negative
+  input="-7"
+  status=OK expected=OK
+  value=-7 expected=-7
+  result=PASS
+case=positive-sign
+  input="+15"
+  status=OK expected=OK
+  value=15 expected=15
+  result=PASS
+case=invalid
+  input="12abc"
+  status=INVALID expected=INVALID
+  result=PASS
+case=empty
+  input=""
+  status=EMPTY expected=EMPTY
+  result=PASS
+STATUS FINAL: PASS
+
+===== ex10_int_div_to_double =====
+Ex10 - Conversao para double e divisao
+case=seven-over-two
+  a=7 b=2
+  status=OK expected=OK
+  result=3.500000000000 expected=3.500000000000
+  check=PASS
+case=negative
+  a=-9 b=4
+  status=OK expected=OK
+  result=-2.250000000000 expected=-2.250000000000
+  check=PASS
+case=div-zero
+  a=5 b=0
+  status=DIV_BY_ZERO expected=DIV_BY_ZERO
+  result=0.000000000000 expected=0.000000000000
+  check=PASS
+STATUS FINAL: PASS
+
+===== ex11_parse_i64_range =====
+Ex11 - Parsing com faixa [-1000, 1000]
+case=inside-range
+  input="500"
+  status=OK expected=OK
+  value=500 expected=500
+  result=PASS
+case=below-min
+  input="-1001"
+  status=OUT_OF_RANGE expected=OUT_OF_RANGE
+  result=PASS
+case=above-max
+  input="1001"
+  status=OUT_OF_RANGE expected=OUT_OF_RANGE
+  result=PASS
+case=invalid
+  input="9x"
+  status=INVALID expected=INVALID
+  result=PASS
+case=empty
+  input=""
+  status=INVALID expected=INVALID
+  result=PASS
+case=signed-valid
+  input="-10"
+  status=OK expected=OK
+  value=-10 expected=-10
+  result=PASS
+STATUS FINAL: PASS
+
+===== tp1_driver =====
+Ex12 - Driver final de integracao
+[driver] mp_add_192  => 0x0000000000000001_0000000000000000_0000000000000000 carry=0 [PASS]
+[driver] parse_i64   => status=OK value=-128 [PASS]
+[driver] u64_to_str  => text="20260426" len=8 [PASS]
+[driver] int_div     => status=OK result=3.500000 [PASS]
+[driver] parse_range => status=OUT_OF_RANGE [PASS]
+STATUS FINAL DRIVER: PASS
+
