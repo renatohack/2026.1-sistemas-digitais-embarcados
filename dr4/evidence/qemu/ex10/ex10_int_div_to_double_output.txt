@@ -1,0 +1,17 @@
+Ex10 - Conversao para double e divisao
+case=seven-over-two
+  a=7 b=2
+  status=OK expected=OK
+  result=3.500000000000 expected=3.500000000000
+  check=PASS
+case=negative
+  a=-9 b=4
+  status=OK expected=OK
+  result=-2.250000000000 expected=-2.250000000000
+  check=PASS
+case=div-zero
+  a=5 b=0
+  status=DIV_BY_ZERO expected=DIV_BY_ZERO
+  result=0.000000000000 expected=0.000000000000
+  check=PASS
+STATUS FINAL: PASS

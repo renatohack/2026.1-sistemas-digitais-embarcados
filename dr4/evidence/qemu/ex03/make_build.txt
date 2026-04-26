@@ -1,0 +1,26 @@
+make: Entering directory '/home/renato/faculdade/26.1-sistemas-embarcados/drs/dr4'
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/test_soc_addrs.c -o build/obj/c/test_soc_addrs.o
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/test_common.c -o build/obj/c/test_common.o
+aarch64-linux-gnu-gcc -g -fno-pie -c src/asm/soc_addrs.s -o build/obj/asm/soc_addrs.o
+aarch64-linux-gnu-gcc -no-pie build/obj/c/test_soc_addrs.o build/obj/c/test_common.o build/obj/asm/soc_addrs.o -lm -o build/bin/ex2_soc_addrs
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/test_mp_add_192.c -o build/obj/c/test_mp_add_192.o
+aarch64-linux-gnu-gcc -g -fno-pie -c src/asm/mp_add_192.s -o build/obj/asm/mp_add_192.o
+aarch64-linux-gnu-gcc -no-pie build/obj/c/test_mp_add_192.o build/obj/c/test_common.o build/obj/asm/mp_add_192.o -lm -o build/bin/ex6_mp_add_192
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/test_mp_sub_128.c -o build/obj/c/test_mp_sub_128.o
+aarch64-linux-gnu-gcc -g -fno-pie -c src/asm/mp_sub_128.s -o build/obj/asm/mp_sub_128.o
+aarch64-linux-gnu-gcc -no-pie build/obj/c/test_mp_sub_128.o build/obj/c/test_common.o build/obj/asm/mp_sub_128.o -lm -o build/bin/ex7_mp_sub_128
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/test_u64_to_str.c -o build/obj/c/test_u64_to_str.o
+aarch64-linux-gnu-gcc -g -fno-pie -c src/asm/u64_to_str.s -o build/obj/asm/u64_to_str.o
+aarch64-linux-gnu-gcc -no-pie build/obj/c/test_u64_to_str.o build/obj/c/test_common.o build/obj/asm/u64_to_str.o -lm -o build/bin/ex8_u64_to_str
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/test_parse_i64.c -o build/obj/c/test_parse_i64.o
+aarch64-linux-gnu-gcc -g -fno-pie -c src/asm/parse_i64.s -o build/obj/asm/parse_i64.o
+aarch64-linux-gnu-gcc -no-pie build/obj/c/test_parse_i64.o build/obj/c/test_common.o build/obj/asm/parse_i64.o -lm -o build/bin/ex9_parse_i64
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/test_int_div_to_double.c -o build/obj/c/test_int_div_to_double.o
+aarch64-linux-gnu-gcc -g -fno-pie -c src/asm/int_div_to_double.s -o build/obj/asm/int_div_to_double.o
+aarch64-linux-gnu-gcc -no-pie build/obj/c/test_int_div_to_double.o build/obj/c/test_common.o build/obj/asm/int_div_to_double.o -lm -o build/bin/ex10_int_div_to_double
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/test_parse_i64_range.c -o build/obj/c/test_parse_i64_range.o
+aarch64-linux-gnu-gcc -g -fno-pie -c src/asm/parse_i64_range.s -o build/obj/asm/parse_i64_range.o
+aarch64-linux-gnu-gcc -no-pie build/obj/c/test_parse_i64_range.o build/obj/c/test_common.o build/obj/asm/parse_i64_range.o build/obj/asm/parse_i64.o -lm -o build/bin/ex11_parse_i64_range
+aarch64-linux-gnu-gcc -Wall -Wextra -Werror -std=c11 -O0 -g -fno-omit-frame-pointer -fno-pie -Iinclude -c src/c/tp1_driver.c -o build/obj/c/tp1_driver.o
+aarch64-linux-gnu-gcc -no-pie build/obj/c/tp1_driver.o build/obj/c/test_common.o build/obj/asm/mp_add_192.o build/obj/asm/u64_to_str.o build/obj/asm/parse_i64.o build/obj/asm/int_div_to_double.o build/obj/asm/parse_i64_range.o -lm -o build/bin/tp1_driver
+make: Leaving directory '/home/renato/faculdade/26.1-sistemas-embarcados/drs/dr4'

@@ -1,0 +1,37 @@
+warning: remote target does not support file transfer, attempting to access files from local filesystem.
+warning: Unable to find dynamic linker breakpoint function.
+GDB will be unable to debug shared library initializers
+and track explicitly loaded dynamic code.
+0x0000005500818b90 in ?? ()
+Breakpoint 1 at 0x400db8: file src/asm/mp_sub_128.s, line 9.
+warning: Could not load shared library symbols for 2 libraries, e.g. /lib/libc.so.6.
+Use the "info sharedlibrary" command to see the complete listing.
+Do you need "set solib-search-path" or "set sysroot"?
+
+Breakpoint 1, mp_sub_128 () at src/asm/mp_sub_128.s:9
+9	    ldr x3, [x0]
+=== Break em mp_sub_128 ===
+=> 0x400db8 <mp_sub_128>:	ldr	x3, [x0]
+x0             0x400e70            4198000
+x1             0x400e80            4198016
+x2             0x55007ff7a8        365080606632
+16	    sbcs x8, x4, x6
+
+=== Apos a subtracao da low word ===
+=> 0x400dcc <mp_sub_128+20>:	sbcs	x8, x4, x6
+x3             0x0                 0
+x4             0x0                 0
+x5             0x1                 1
+x6             0x0                 0
+x7             0xffffffffffffffff  -1
+cpsr           0x80000000          -2147483648
+18	    str x7, [x2]
+
+=== Apos a subtracao da high word ===
+=> 0x400dd0 <mp_sub_128+24>:	str	x7, [x2]
+x4             0x0                 0
+x6             0x0                 0
+x7             0xffffffffffffffff  -1
+x8             0xffffffffffffffff  -1
+cpsr           0x80000000          -2147483648
+[Inferior 1 (process 1) exited normally]

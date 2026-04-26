@@ -1,0 +1,30 @@
+Ex9 - Parsing decimal signed 64-bit
+case=zero
+  input="0"
+  status=OK expected=OK
+  value=0 expected=0
+  result=PASS
+case=positive
+  input="42"
+  status=OK expected=OK
+  value=42 expected=42
+  result=PASS
+case=negative
+  input="-7"
+  status=OK expected=OK
+  value=-7 expected=-7
+  result=PASS
+case=positive-sign
+  input="+15"
+  status=OK expected=OK
+  value=15 expected=15
+  result=PASS
+case=invalid
+  input="12abc"
+  status=INVALID expected=INVALID
+  result=PASS
+case=empty
+  input=""
+  status=EMPTY expected=EMPTY
+  result=PASS
+STATUS FINAL: PASS

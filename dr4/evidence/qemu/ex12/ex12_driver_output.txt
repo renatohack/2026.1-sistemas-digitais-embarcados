@@ -1,0 +1,7 @@
+Ex12 - Driver final de integracao
+[driver] mp_add_192  => 0x0000000000000001_0000000000000000_0000000000000000 carry=0 [PASS]
+[driver] parse_i64   => status=OK value=-128 [PASS]
+[driver] u64_to_str  => text="20260426" len=8 [PASS]
+[driver] int_div     => status=OK result=3.500000 [PASS]
+[driver] parse_range => status=OUT_OF_RANGE [PASS]
+STATUS FINAL DRIVER: PASS
