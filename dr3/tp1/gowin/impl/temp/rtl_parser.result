@@ -1,0 +1,60 @@
+[
+ {
+  "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_validator_top.v",
+  "InstLine" : 3,
+  "InstName" : "sequence_validator_top",
+  "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_validator_top.v",
+  "ModuleLine" : 3,
+  "ModuleName" : "sequence_validator_top",
+  "SubInsts" : [
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_validator_top.v",
+    "InstLine" : 37,
+    "InstName" : "button_inputs[0].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/button_conditioner.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_validator_top.v",
+    "InstLine" : 37,
+    "InstName" : "button_inputs[1].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/button_conditioner.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_validator_top.v",
+    "InstLine" : 37,
+    "InstName" : "button_inputs[2].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/button_conditioner.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_validator_top.v",
+    "InstLine" : 37,
+    "InstName" : "button_inputs[3].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/button_conditioner.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_validator_top.v",
+    "InstLine" : 50,
+    "InstName" : "sequence_fsm_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_fsm.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "sequence_fsm"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/sequence_validator_top.v",
+    "InstLine" : 62,
+    "InstName" : "seven_segment_decoder_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp1/gowin/src/seven_segment_decoder.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "seven_segment_decoder"
+   }
+  ]
+ }
+]

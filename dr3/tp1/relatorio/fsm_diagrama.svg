@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/>
+    </marker>
+    <style>
+      .state { fill: #f8f9fb; stroke: #222; stroke-width: 2; rx: 8; }
+      .terminal { fill: #eef7ee; stroke: #222; stroke-width: 2; rx: 8; }
+      .error { fill: #fff0f0; stroke: #222; stroke-width: 2; rx: 8; }
+      .label { font-family: Arial, sans-serif; font-size: 17px; text-anchor: middle; fill: #111; }
+      .small { font-family: Arial, sans-serif; font-size: 13px; text-anchor: middle; fill: #111; }
+      .line { fill: none; stroke: #222; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="55" y="205" width="140" height="70" class="state"/>
+  <text x="125" y="235" class="label">IDLE</text>
+  <text x="125" y="258" class="small">reset/partida</text>
+
+  <rect x="260" y="205" width="185" height="70" class="state"/>
+  <text x="352" y="235" class="label">EXIBIR_SEQUENCIA</text>
+  <text x="352" y="258" class="small">LED0, LED2, LED1, LED3</text>
+
+  <rect x="520" y="205" width="185" height="70" class="state"/>
+  <text x="612" y="235" class="label">AGUARDAR_ENTRADA</text>
+  <text x="612" y="258" class="small">valida botoes</text>
+
+  <rect x="790" y="100" width="120" height="70" class="error"/>
+  <text x="850" y="130" class="label">ERRO</text>
+  <text x="850" y="153" class="small">display E</text>
+
+  <rect x="790" y="310" width="120" height="70" class="terminal"/>
+  <text x="850" y="340" class="label">SUCESSO</text>
+  <text x="850" y="363" class="small">display S</text>
+
+  <path d="M 195 240 L 250 240" class="line"/>
+  <text x="222" y="225" class="small">reset solto</text>
+
+  <path d="M 445 240 L 510 240" class="line"/>
+  <text x="477" y="225" class="small">fim da exibicao</text>
+
+  <path d="M 705 226 C 745 205, 770 170, 788 145" class="line"/>
+  <text x="746" y="190" class="small">erro</text>
+
+  <path d="M 705 254 C 745 275, 770 310, 788 335" class="line"/>
+  <text x="746" y="304" class="small">4 acertos</text>
+
+  <path d="M 610 205 C 610 155, 705 155, 705 205" class="line"/>
+  <text x="660" y="143" class="small">acerto parcial</text>
+
+  <path d="M 352 205 C 352 155, 445 155, 445 205" class="line"/>
+  <text x="408" y="143" class="small">proximo LED</text>
+
+  <path d="M 850 100 C 910 55, 940 105, 910 135" class="line"/>
+  <text x="920" y="74" class="small">ate reset</text>
+
+  <path d="M 850 380 C 910 425, 940 375, 910 345" class="line"/>
+  <text x="920" y="438" class="small">ate reset</text>
+</svg>

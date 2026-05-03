@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Relatório Técnico - DR3 TP1</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #18202b;
+      background: #ffffff;
+      font-family: "Arial", "Helvetica", sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.45;
+    }
+
+    .page {
+      width: 100%;
+      padding: 0;
+    }
+
+    .cover {
+      min-height: 260mm;
+      padding: 28mm 18mm 18mm 18mm;
+      background: linear-gradient(180deg, #eef4fb 0%, #ffffff 42%);
+      page-break-after: always;
+    }
+
+    .eyebrow {
+      color: #45617f;
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12mm 0 6mm;
+      color: #102033;
+      font-size: 30pt;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 150mm;
+      color: #38495c;
+      font-size: 14pt;
+      line-height: 1.45;
+    }
+
+    .cover-grid {
+      display: table;
+      width: 100%;
+      margin-top: 18mm;
+      border-spacing: 0;
+    }
+
+    .cover-card {
+      display: table-cell;
+      width: 50%;
+      padding: 5mm;
+      border: 1px solid #d6e0ea;
+      background: #ffffff;
+      vertical-align: top;
+    }
+
+    .cover-card:first-child {
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .cover-card:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .meta-label {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #617187;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-bottom: 4mm;
+      color: #172334;
+      font-size: 11pt;
+    }
+
+    .section {
+      padding: 8mm 14mm 3mm;
+      page-break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 4mm;
+      padding-bottom: 2mm;
+      color: #12304d;
+      border-bottom: 2px solid #d8e3ee;
+      font-size: 17pt;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 6mm 0 2.5mm;
+      color: #26384c;
+      font-size: 12.5pt;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 3.2mm;
+    }
+
+    .lead {
+      color: #33465b;
+      font-size: 11.3pt;
+    }
+
+    .callout {
+      margin: 4mm 0;
+      padding: 4mm;
+      border-left: 4px solid #2d6da3;
+      background: #f3f7fb;
+      border-radius: 4px;
+    }
+
+    .note {
+      color: #536276;
+      font-size: 9.5pt;
+    }
+
+    .grid-2 {
+      display: table;
+      width: 100%;
+      border-spacing: 4mm 0;
+      margin: 3mm -4mm 0;
+    }
+
+    .grid-2 > .cell {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+    }
+
+    table {
+      width: 100%;
+      margin: 2mm 0 5mm;
+      border-collapse: collapse;
+      table-layout: fixed;
+      page-break-inside: avoid;
+    }
+
+    th,
+    td {
+      padding: 2.1mm 2.4mm;
+      border: 1px solid #dce4ed;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    th {
+      color: #203346;
+      background: #edf3f8;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    td {
+      background: #ffffff;
+    }
+
+    .compact td,
+    .compact th {
+      padding: 1.6mm 2mm;
+      font-size: 9.2pt;
+    }
+
+    .num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code,
+    .mono {
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 9pt;
+      color: #142238;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    pre {
+      margin: 2mm 0 4mm;
+      padding: 3mm;
+      color: #142238;
+      background: #f6f8fb;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8.3pt;
+      line-height: 1.35;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    ul {
+      margin: 1mm 0 4mm 5mm;
+      padding: 0 0 0 4mm;
+    }
+
+    li {
+      margin-bottom: 1.4mm;
+    }
+
+    .diagram {
+      display: block;
+      width: 100%;
+      max-height: 132mm;
+      margin: 3mm auto 2mm;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      background: #ffffff;
+    }
+
+    .evidence-grid {
+      display: table;
+      width: 100%;
+      border-spacing: 4mm;
+      margin: 0 -4mm;
+    }
+
+    .evidence-row {
+      display: table-row;
+    }
+
+    .evidence-card {
+      display: table-cell;
+      width: 50%;
+      padding: 3mm;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      background: #fbfcfe;
+      vertical-align: top;
+      page-break-inside: avoid;
+    }
+
+    .evidence-card.full {
+      display: block;
+      width: auto;
+      margin: 3mm 0;
+    }
+
+    .evidence-card img {
+      display: block;
+      width: 100%;
+      max-height: 76mm;
+      object-fit: contain;
+      margin: 0 auto 2.4mm;
+      background: #ffffff;
+      border: 1px solid #e5ebf1;
+      border-radius: 3px;
+    }
+
+    .evidence-card.full img {
+      max-height: 105mm;
+    }
+
+    .caption {
+      color: #536276;
+      font-size: 9pt;
+      line-height: 1.35;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 1mm 2.2mm;
+      border-radius: 999px;
+      color: #0b4b2a;
+      background: #dff4e8;
+      font-size: 8.5pt;
+      font-weight: 700;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .link {
+      color: #164f86;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .footer-note {
+      margin-top: 5mm;
+      padding-top: 3mm;
+      border-top: 1px solid #dce4ed;
+      color: #607083;
+      font-size: 8.8pt;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="cover">
+      <div class="eyebrow">Teste de Performance - DR3 TP1</div>
+      <h1>Sistema de Validação de Sequência Operacional</h1>
+      <p class="subtitle">Implementação em Verilog HDL para FPGA Tang Nano 9K, com validação por FSM, LEDs onboard, botões externos e display de sete segmentos.</p>
+
+      <div class="cover-grid">
+        <div class="cover-card">
+          <span class="meta-label">Aluno</span>
+          <span class="meta-value">Renato Noronha Hack</span>
+          <span class="meta-label">Disciplina</span>
+          <span class="meta-value">Verilog Avançado e Arquiteturas FPGA</span>
+          <span class="meta-label">Placa</span>
+          <span class="meta-value">Tang Nano 9K</span>
+        </div>
+        <div class="cover-card">
+          <span class="meta-label">Dispositivo</span>
+          <span class="meta-value">GW1NR-LV9QN88PC6/I5</span>
+          <span class="meta-label">Ferramentas</span>
+          <span class="meta-value">Gowin IDE, Icarus Verilog e simulação VCD</span>
+          <span class="meta-label">Situação</span>
+          <span class="meta-value"><span class="status">Validado em simulação e hardware</span></span>
+        </div>
+      </div>
+
+      <div class="callout">
+        Este relatório consolida a especificação funcional, a arquitetura em módulos, o diagrama da FSM, o mapeamento físico final e as evidências de simulação, síntese e funcionamento real na Tang Nano 9K.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>1. Visão Geral</h2>
+      <p class="lead">O projeto implementa um sistema de validação de sequência operacional. A FPGA apresenta uma sequência fixa nos LEDs onboard, aguarda a reprodução correta por meio de quatro botões externos e sinaliza progresso, erro ou sucesso no display de sete segmentos.</p>
+
+      <div class="grid-2">
+        <div class="cell">
+          <h3>Sequência Validada</h3>
+          <table class="compact">
+            <thead>
+              <tr>
+                <th style="width: 22%;">Etapa</th>
+                <th>LED ativo</th>
+                <th>Entrada esperada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">1</td><td>LED0</td><td>Botão 0</td></tr>
+              <tr><td class="num">2</td><td>LED2</td><td>Botão 2</td></tr>
+              <tr><td class="num">3</td><td>LED1</td><td>Botão 1</td></tr>
+              <tr><td class="num">4</td><td>LED3</td><td>Botão 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cell">
+          <h3>Indicações no Display</h3>
+          <table class="compact">
+            <thead>
+              <tr>
+                <th>Momento</th>
+                <th>Indicação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Exibição dos LEDs</td><td>1, 2, 3 e 4</td></tr>
+              <tr><td>Aguardando entrada</td><td>0 e progresso</td></tr>
+              <tr><td>Sequência correta</td><td>S, visualmente parecido com 5</td></tr>
+              <tr><td>Entrada incorreta</td><td>E</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p>Após os estados de erro ou sucesso, o sistema permanece travado até novo reset. Essa escolha torna o comportamento observável e evita reinicializações automáticas que poderiam dificultar a validação em hardware.</p>
+    </section>
+
+    <section class="section">
+      <h2>2. Máquina de Estados Finitos</h2>
+      <p>A FSM foi implementada com estados explícitos e lógica separada para atualização sequencial, cálculo de próximo estado e geração das saídas. O diagrama abaixo resume as transições principais.</p>
+      <img class="diagram" src="fsm_diagrama.svg" alt="Diagrama da FSM">
+
+      <table class="compact">
+        <thead>
+          <tr>
+            <th style="width: 28%;">Estado</th>
+            <th>Responsabilidade</th>
+            <th style="width: 30%;">Saídas principais</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>IDLE</code></td><td>Estado inicial após reset.</td><td>Display em 0, LEDs apagados.</td></tr>
+          <tr><td><code>EXIBIR_SEQUENCIA</code></td><td>Mostra LED0, LED2, LED1 e LED3 por intervalo fixo.</td><td>Um LED onboard ativo por vez.</td></tr>
+          <tr><td><code>AGUARDAR_ENTRADA</code></td><td>Valida os botões na ordem correta.</td><td>Display mostra progresso.</td></tr>
+          <tr><td><code>ERRO</code></td><td>Captura entrada incorreta ou múltiplos botões.</td><td>Display mostra E.</td></tr>
+          <tr><td><code>SUCESSO</code></td><td>Indica conclusão correta da sequência.</td><td>Display mostra S.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>3. Arquitetura do Projeto</h2>
+      <p>O projeto foi dividido em módulos com responsabilidades bem definidas, mantendo a FSM isolada da filtragem dos botões e da codificação do display.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">Módulo</th>
+            <th>Função</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>sequence_validator_top</code></td><td>Integra clock, reset, botões, FSM, LEDs e display de sete segmentos.</td></tr>
+          <tr><td><code>sequence_fsm</code></td><td>Controla estados, temporização da apresentação dos LEDs, validação da sequência e sinais de erro/sucesso.</td></tr>
+          <tr><td><code>button_conditioner</code></td><td>Sincroniza cada botão externo, aplica debounce parametrizável e gera pulso único de pressão.</td></tr>
+          <tr><td><code>seven_segment_decoder</code></td><td>Converte progresso, erro e sucesso para segmentos A-G em display cátodo comum.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        Os LEDs onboard da Tang Nano 9K são ativos em nível baixo. Os botões externos também foram tratados como ativos em nível baixo, com pull-up interno habilitado no arquivo de constraints.
+      </div>
+    </section>
+
+    <section class="section page-break">
+      <h2>4. Mapeamento de Hardware</h2>
+      <h3>Pinos da Tang Nano 9K</h3>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>Sinal</th>
+            <th style="width: 20%;">Pino</th>
+            <th>Uso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>sys_clk</code></td><td class="num">52</td><td>Clock onboard de 27 MHz.</td></tr>
+          <tr><td><code>sys_rst_n</code></td><td class="num">4</td><td>Reset pelo botão onboard S1, ativo em baixo.</td></tr>
+          <tr><td><code>led_n[0]</code></td><td class="num">10</td><td>LED0 onboard, ativo em baixo.</td></tr>
+          <tr><td><code>led_n[1]</code></td><td class="num">11</td><td>LED1 onboard, ativo em baixo.</td></tr>
+          <tr><td><code>led_n[2]</code></td><td class="num">13</td><td>LED2 onboard, ativo em baixo.</td></tr>
+          <tr><td><code>led_n[3]</code></td><td class="num">14</td><td>LED3 onboard, ativo em baixo.</td></tr>
+          <tr><td><code>btn_n[0]</code></td><td class="num">25</td><td>Botão externo 0.</td></tr>
+          <tr><td><code>btn_n[1]</code></td><td class="num">26</td><td>Botão externo 1.</td></tr>
+          <tr><td><code>btn_n[2]</code></td><td class="num">27</td><td>Botão externo 2.</td></tr>
+          <tr><td><code>btn_n[3]</code></td><td class="num">28</td><td>Botão externo 3.</td></tr>
+          <tr><td><code>seg_a</code></td><td class="num">29</td><td>Segmento A do display, com resistor em série.</td></tr>
+          <tr><td><code>seg_b</code></td><td class="num">30</td><td>Segmento B do display, com resistor em série.</td></tr>
+          <tr><td><code>seg_c</code></td><td class="num">33</td><td>Segmento C do display, com resistor em série.</td></tr>
+          <tr><td><code>seg_d</code></td><td class="num">34</td><td>Segmento D do display, com resistor em série.</td></tr>
+          <tr><td><code>seg_e</code></td><td class="num">40</td><td>Segmento E do display, com resistor em série.</td></tr>
+          <tr><td><code>seg_f</code></td><td class="num">41</td><td>Segmento F do display, com resistor em série.</td></tr>
+          <tr><td><code>seg_g</code></td><td class="num">37</td><td>Segmento G do display, com resistor em série.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Display de Sete Segmentos</h3>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>Função</th>
+            <th style="width: 22%;">Protoboard</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>DP</td><td><code>g1</code></td><td>Sem conexão.</td></tr>
+          <tr><td>C</td><td><code>g2</code></td><td>Ligado ao segmento C.</td></tr>
+          <tr><td>COM</td><td><code>g3</code></td><td>Ligado ao GND.</td></tr>
+          <tr><td>D</td><td><code>g4</code></td><td>Ligado ao segmento D.</td></tr>
+          <tr><td>E</td><td><code>g5</code></td><td>Ligado ao segmento E.</td></tr>
+          <tr><td>B</td><td><code>c1</code></td><td>Ligado ao segmento B.</td></tr>
+          <tr><td>A</td><td><code>c2</code></td><td>Ligado ao segmento A.</td></tr>
+          <tr><td>COM</td><td><code>c3</code></td><td>Ligado ao GND.</td></tr>
+          <tr><td>F</td><td><code>c4</code></td><td>Ligado ao segmento F.</td></tr>
+          <tr><td>G</td><td><code>c5</code></td><td>Ligado ao segmento G.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>5. Ligações no Protoboard</h2>
+      <p>Os resistores de 330 ohms foram usados em série com cada segmento do display. A trilha negativa do protoboard foi usada como barramento de GND; a trilha positiva não foi utilizada.</p>
+
+      <div class="grid-2">
+        <div class="cell">
+          <h3>Jumpers Tang Nano 9K</h3>
+          <table class="compact">
+            <thead><tr><th>Sinal</th><th>Pino Tang</th><th>Protoboard</th></tr></thead>
+            <tbody>
+              <tr><td>Botão 0</td><td class="num">25</td><td><code>a30</code></td></tr>
+              <tr><td>Botão 1</td><td class="num">26</td><td><code>a25</code></td></tr>
+              <tr><td>Botão 2</td><td class="num">27</td><td><code>a20</code></td></tr>
+              <tr><td>Botão 3</td><td class="num">28</td><td><code>a15</code></td></tr>
+              <tr><td>Segmento A</td><td class="num">29</td><td><code>e8</code></td></tr>
+              <tr><td>Segmento B</td><td class="num">30</td><td><code>e9</code></td></tr>
+              <tr><td>Segmento C</td><td class="num">33</td><td><code>g8</code></td></tr>
+              <tr><td>Segmento D</td><td class="num">34</td><td><code>g7</code></td></tr>
+              <tr><td>Segmento E</td><td class="num">40</td><td><code>g6</code></td></tr>
+              <tr><td>Segmento F</td><td class="num">41</td><td><code>e7</code></td></tr>
+              <tr><td>Segmento G</td><td class="num">37</td><td><code>e6</code></td></tr>
+              <tr><td>GND</td><td>GND</td><td>Trilha <code>-</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cell">
+          <h3>Resistores e GND</h3>
+          <table class="compact">
+            <thead><tr><th>Item</th><th>Par no protoboard</th><th>Função</th></tr></thead>
+            <tbody>
+              <tr><td>R_A</td><td><code>a2 - a8</code></td><td>Segmento A</td></tr>
+              <tr><td>R_B</td><td><code>a1 - a9</code></td><td>Segmento B</td></tr>
+              <tr><td>R_C</td><td><code>j2 - j8</code></td><td>Segmento C</td></tr>
+              <tr><td>R_D</td><td><code>j4 - j7</code></td><td>Segmento D</td></tr>
+              <tr><td>R_E</td><td><code>j5 - j6</code></td><td>Segmento E</td></tr>
+              <tr><td>R_F</td><td><code>a4 - a7</code></td><td>Segmento F</td></tr>
+              <tr><td>R_G</td><td><code>a5 - a6</code></td><td>Segmento G</td></tr>
+              <tr><td>GND botão 0</td><td><code>j28 - -28</code></td><td>Diagonal do botão físico 1</td></tr>
+              <tr><td>GND botão 1</td><td><code>j23 - -23</code></td><td>Diagonal do botão físico 2</td></tr>
+              <tr><td>GND botão 2</td><td><code>j18 - -18</code></td><td>Diagonal do botão físico 3</td></tr>
+              <tr><td>GND botão 3</td><td><code>j13 - -13</code></td><td>Diagonal do botão físico 4</td></tr>
+              <tr><td>COM display</td><td><code>j3 - -3</code></td><td>Comum em g3</td></tr>
+              <tr><td>COM display</td><td><code>a3 - -3</code></td><td>Comum em c3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section page-break">
+      <h2>6. Simulação e Verificação</h2>
+      <p>O testbench executa cenários de sucesso, erro e reset. Para acelerar a validação, o módulo top é instanciado com temporizações reduzidas, mantendo a mesma lógica da implementação para hardware.</p>
+
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>Cenário</th>
+            <th>Critério verificado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Exibição da sequência</td><td>LED0, LED2, LED1 e LED3 na ordem especificada.</td></tr>
+          <tr><td>Caminho de sucesso</td><td>Entradas 0, 2, 1 e 3 levam ao estado <code>SUCESSO</code>.</td></tr>
+          <tr><td>Erro no início</td><td>Primeiro botão incorreto leva ao estado <code>ERRO</code>.</td></tr>
+          <tr><td>Erro no meio</td><td>Sequência parcialmente correta seguida de entrada errada leva a <code>ERRO</code>.</td></tr>
+          <tr><td>Botões simultâneos</td><td>Múltiplas entradas simultâneas levam a <code>ERRO</code>.</td></tr>
+          <tr><td>Reset</td><td>Estados finais permanecem travados até novo reset.</td></tr>
+        </tbody>
+      </table>
+
+      <pre>mkdir -p sim/build
+iverilog -g2005-sv -o sim/build/tb_sequence_validator.vvp \
+  sim/tb_sequence_validator.v \
+  gowin/src/button_conditioner.v \
+  gowin/src/seven_segment_decoder.v \
+  gowin/src/sequence_fsm.v \
+  gowin/src/sequence_validator_top.v
+vvp sim/build/tb_sequence_validator.vvp</pre>
+
+      <div class="callout">
+        Resultado da execução local: <strong>ALL TESTS PASSED</strong>.
+      </div>
+
+      <div class="evidence-card full">
+        <img src="../evidencias/simulacao_waveform.png" alt="Waveform da simulação">
+        <div class="caption">Forma de onda da simulação, com destaque para estados, botões, LEDs e sinais do display.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>7. Síntese, Place&amp;Route e Validação Física</h2>
+      <p>O projeto foi sintetizado no Gowin para a Tang Nano 9K e validado fisicamente com a montagem final no protoboard.</p>
+
+      <div class="evidence-card full">
+        <img src="../evidencias/synth_pnr_ok.png" alt="Síntese e Place and Route no Gowin">
+        <div class="caption">Evidência de síntese e Place&amp;Route concluídos no Gowin.</div>
+      </div>
+
+      <div class="evidence-grid">
+        <div class="evidence-row">
+          <div class="evidence-card">
+            <img src="../evidencias/tang_reset_idle.jpg" alt="Placa após reset">
+            <div class="caption">Tang Nano 9K energizada após reset, com o sistema pronto para iniciar o ciclo.</div>
+          </div>
+          <div class="evidence-card">
+            <img src="../evidencias/tang_exibindo_sequencia.jpg" alt="Sequência de LEDs">
+            <div class="caption">Exibição automática da sequência nos LEDs onboard.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="evidence-grid">
+        <div class="evidence-row">
+          <div class="evidence-card">
+            <img src="../evidencias/tang_sucesso.jpg" alt="Resultado de sucesso">
+            <div class="caption">Estado de sucesso após a reprodução correta da sequência.</div>
+          </div>
+          <div class="evidence-card">
+            <img src="../evidencias/tang_erro.jpg" alt="Resultado de erro">
+            <div class="caption">Estado de erro após entrada incorreta.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Vídeo demonstrativo</h3>
+      <p>O vídeo de demonstração foi salvo no Google Drive e está disponível no link abaixo:</p>
+      <p><a class="link" href="https://drive.google.com/file/d/1luIPP85dv7LsXDyn4a8KNa89JMeU_e3M/view?usp=drive_link">Link do vídeo no Google Drive</a></p>
+    </section>
+
+    <section class="section">
+      <h2>8. Conclusão</h2>
+      <p>O sistema implementado atende à especificação do TP1. A FSM apresenta a sequência fixa nos LEDs, valida a entrada do operador, detecta erros imediatamente e sinaliza sucesso ou erro no display de sete segmentos. A implementação foi validada por testbench funcional, por síntese/Place&amp;Route no Gowin e por execução física na Tang Nano 9K.</p>
+
+      <div class="footer-note">
+        Referências: documentação da Tang Nano 9K da Sipeed, exemplo oficial TangNano-9K LED e especificação do display HS-5101AG cátodo comum.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
