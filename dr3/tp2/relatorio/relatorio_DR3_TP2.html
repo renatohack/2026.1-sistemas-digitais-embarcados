@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Relatório Técnico - DR3 TP2</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #18202b;
+      background: #ffffff;
+      font-family: "Arial", "Helvetica", sans-serif;
+      font-size: 10.4pt;
+      line-height: 1.45;
+    }
+
+    .cover {
+      min-height: 260mm;
+      padding: 28mm 18mm 18mm;
+      background: linear-gradient(180deg, #eef4fb 0%, #ffffff 42%);
+      page-break-after: always;
+    }
+
+    .eyebrow {
+      color: #45617f;
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12mm 0 6mm;
+      color: #102033;
+      font-size: 30pt;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 158mm;
+      color: #38495c;
+      font-size: 13.5pt;
+      line-height: 1.45;
+    }
+
+    .cover-grid,
+    .grid-2,
+    .flow-grid {
+      display: table;
+      width: 100%;
+      border-spacing: 0;
+    }
+
+    .cover-grid {
+      margin-top: 18mm;
+    }
+
+    .cover-card {
+      display: table-cell;
+      width: 50%;
+      padding: 5mm;
+      border: 1px solid #d6e0ea;
+      background: #ffffff;
+      vertical-align: top;
+    }
+
+    .cover-card:first-child {
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .cover-card:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .meta-label {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #617187;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-bottom: 4mm;
+      color: #172334;
+      font-size: 11pt;
+    }
+
+    .section {
+      padding: 8mm 14mm 3mm;
+      page-break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 4mm;
+      padding-bottom: 2mm;
+      color: #12304d;
+      border-bottom: 2px solid #d8e3ee;
+      font-size: 17pt;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 6mm 0 2.5mm;
+      color: #26384c;
+      font-size: 12.2pt;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 3.2mm;
+    }
+
+    .lead {
+      color: #33465b;
+      font-size: 11.2pt;
+    }
+
+    .callout {
+      margin: 4mm 0;
+      padding: 4mm;
+      border-left: 4px solid #2d6da3;
+      background: #f3f7fb;
+      border-radius: 4px;
+    }
+
+    .note {
+      color: #536276;
+      font-size: 9.4pt;
+    }
+
+    .grid-2 {
+      border-spacing: 4mm 0;
+      margin: 3mm -4mm 0;
+    }
+
+    .grid-2 > .cell {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+    }
+
+    table {
+      width: 100%;
+      margin: 2mm 0 5mm;
+      border-collapse: collapse;
+      table-layout: fixed;
+      page-break-inside: avoid;
+    }
+
+    th,
+    td {
+      padding: 2.1mm 2.4mm;
+      border: 1px solid #dce4ed;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    th {
+      color: #203346;
+      background: #edf3f8;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    td {
+      background: #ffffff;
+    }
+
+    .compact td,
+    .compact th {
+      padding: 1.55mm 2mm;
+      font-size: 9.1pt;
+    }
+
+    .num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code,
+    .mono {
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8.8pt;
+      color: #142238;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    pre {
+      margin: 2mm 0 4mm;
+      padding: 3mm;
+      color: #142238;
+      background: #f6f8fb;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8pt;
+      line-height: 1.35;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    ul {
+      margin: 1mm 0 4mm 5mm;
+      padding: 0 0 0 4mm;
+    }
+
+    li {
+      margin-bottom: 1.4mm;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 1.2mm 1.2mm 0;
+      padding: 1mm 2mm;
+      border: 1px solid #cdd9e6;
+      border-radius: 12px;
+      background: #f7fafc;
+      color: #27394e;
+      font-size: 8.8pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .flow-grid {
+      border-spacing: 2.5mm;
+      margin: 2mm -2.5mm 4mm;
+    }
+
+    .flow-cell {
+      display: table-cell;
+      width: 25%;
+      padding: 3mm;
+      border: 1px solid #d6e0ea;
+      border-radius: 4px;
+      background: #f8fbfe;
+      vertical-align: top;
+      page-break-inside: avoid;
+    }
+
+    .flow-title {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #12304d;
+      font-weight: 700;
+    }
+
+    .figure {
+      margin: 4mm 0 7mm;
+      page-break-inside: avoid;
+    }
+
+    .figure img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      background: #ffffff;
+    }
+
+    .caption {
+      margin-top: 1.5mm;
+      color: #536276;
+      font-size: 9pt;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .tight {
+      margin-bottom: 1.2mm;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="eyebrow">DR3 - Teste de Performance 2</div>
+    <h1>Relatório Técnico<br>BRAM, DSP e PLL na Tang Nano 9K</h1>
+    <p class="subtitle">
+      Evolução do validador de sequência do TP1 para uma arquitetura controlada por FSM,
+      com armazenamento síncrono em BRAM, operação aritmética em DSP e clock interno
+      derivado por PLL.
+    </p>
+
+    <div class="cover-grid">
+      <div class="cover-card">
+        <span class="meta-label">Aluno</span>
+        <span class="meta-value">Renato</span>
+        <span class="meta-label">Disciplina</span>
+        <span class="meta-value">Sistemas Embarcados</span>
+        <span class="meta-label">Entrega</span>
+        <span class="meta-value">DR3 TP2</span>
+      </div>
+      <div class="cover-card">
+        <span class="meta-label">Placa</span>
+        <span class="meta-value">Tang Nano 9K - GW1NR-LV9QN88PC6/I5</span>
+        <span class="meta-label">Ferramenta</span>
+        <span class="meta-value">Gowin IDE</span>
+        <span class="meta-label">Validação</span>
+        <span class="meta-value">Simulação, síntese, Place &amp; Route e teste físico</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Descrição Do Sistema</h2>
+    <p class="lead">
+      O projeto do TP2 continua diretamente o sistema construído no TP1: uma FSM exibe
+      uma sequência fixa nos LEDs onboard da Tang Nano 9K e valida a resposta digitada
+      em quatro botões externos. A montagem física foi mantida, preservando os mesmos
+      botões, LEDs, display de sete segmentos, reset e mapeamento de pinos.
+    </p>
+    <p>
+      A evolução técnica do TP2 está na forma como o sistema passa a usar recursos
+      internos especializados da FPGA. A sequência esperada e o histórico de entradas
+      passam pela BRAM, o checksum final é calculado por um módulo aritmético inferido
+      em DSP, e todo o núcleo sequencial roda em um clock derivado da PLL.
+    </p>
+
+    <div class="callout">
+      <strong>Comportamento observado:</strong> após o reset, os LEDs exibem a sequência
+      <span class="mono">0, 2, 1, 3</span>. Com a entrada correta, o display cicla
+      <span class="mono">S -> 2 -> 9</span>, representando sucesso e checksum decimal
+      <span class="mono">29</span>. Com entrada incorreta ou múltiplos botões, o display
+      mostra <span class="mono">E</span>.
+    </div>
+
+    <h3>Interface Externa Preservada</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Recurso externo</th>
+          <th>Uso no TP2</th>
+          <th>Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>LEDs onboard</td>
+          <td>Exibição da sequência esperada</td>
+          <td>Mesma polaridade ativa em baixo do TP1.</td>
+        </tr>
+        <tr>
+          <td>Botões externos</td>
+          <td>Entrada do usuário para validar a sequência</td>
+          <td>Entradas ativas em baixo, com pull-up configurado.</td>
+        </tr>
+        <tr>
+          <td>Display de sete segmentos</td>
+          <td>Progresso, erro e checksum final</td>
+          <td>Catodo comum, segmentos ativos em alto.</td>
+        </tr>
+        <tr>
+          <td>Reset onboard</td>
+          <td>Reinicialização da FSM, BRAM e DSP</td>
+          <td>O reset interno também depende do lock da PLL.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>2. Arquitetura</h2>
+    <p>
+      A FSM continua sendo o elemento central de controle. Ela inicializa a BRAM, lê a
+      sequência esperada, valida os botões, grava as entradas corretas, aciona o DSP e
+      registra o checksum calculado. O top-level apenas integra condicionamento de botões,
+      PLL, BRAM, DSP, FSM e decodificação do display.
+    </p>
+
+    <div>
+      <span class="tag">FSM central</span>
+      <span class="tag">BRAM síncrona</span>
+      <span class="tag">DSP MAC</span>
+      <span class="tag">PLL 27 MHz para 13,5 MHz</span>
+      <span class="tag">Mesma pinagem do TP1</span>
+    </div>
+
+    <h3>Fluxo Funcional</h3>
+    <div class="flow-grid">
+      <div class="flow-cell">
+        <span class="flow-title">1. Reset e PLL</span>
+        O clock da placa entra na PLL. A lógica principal só sai de reset após
+        <span class="mono">pll_lock</span>.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">2. Inicializacao</span>
+        A FSM grava <span class="mono">0,2,1,3</span> nos endereços
+        <span class="mono">0..3</span> da BRAM.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">3. Validacao</span>
+        A FSM lê a BRAM, exibe LEDs e compara cada botão com o valor esperado.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">4. Checksum</span>
+        O DSP acumula os produtos e a FSM grava o resultado no endereço
+        <span class="mono">8</span>.
+      </div>
+    </div>
+
+    <h3>Mapa Da BRAM</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Endereço</th>
+          <th>Conteúdo</th>
+          <th>Controle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">0..3</td>
+          <td>Sequência esperada: <span class="mono">0, 2, 1, 3</span></td>
+          <td>Escrita pela FSM logo após reset/PLL lock; leitura durante exibição e validação.</td>
+        </tr>
+        <tr>
+          <td class="mono">4..7</td>
+          <td>Histórico das entradas corretas do usuário</td>
+          <td>Escrita pela FSM durante a fase de entrada.</td>
+        </tr>
+        <tr>
+          <td class="mono">8</td>
+          <td>Checksum final calculado pelo DSP</td>
+          <td>Escrita pela FSM após a fase aritmética.</td>
+        </tr>
+        <tr>
+          <td class="mono">9..15</td>
+          <td>Reservado</td>
+          <td>Não usado nesta versão.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Fórmula Do DSP</h3>
+    <p class="tight">
+      O checksum inteiro é calculado por multiply-accumulate:
+    </p>
+    <pre>checksum = soma((entrada[i] + 1) * (i + 1)), para i = 0..3
+entrada correta = 0, 2, 1, 3
+checksum = (1*1) + (3*2) + (2*3) + (4*4) = 29</pre>
+  </div>
+
+  <div class="section page-break">
+    <h2>3. Recursos Internos Da FPGA</h2>
+    <p>
+      O TP2 exige demonstrar o uso consciente de BRAM, DSP blocks e PLL. A tabela abaixo
+      resume o papel de cada recurso dentro do sistema implementado.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th>Módulo</th>
+          <th>Papel no sistema</th>
+          <th>Justificativa tecnica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>BRAM</strong></td>
+          <td class="mono">sync_bram</td>
+          <td>Armazena sequência esperada, entradas digitadas e checksum.</td>
+          <td>Substitui armazenamento distribuído em registradores por memória síncrona controlada pela FSM.</td>
+        </tr>
+        <tr>
+          <td><strong>DSP</strong></td>
+          <td class="mono">dsp_mac</td>
+          <td>Executa a operação de soma de produtos para gerar o checksum.</td>
+          <td>Usa caminho aritmético dedicado para multiplicação e acumulação inteira.</td>
+        </tr>
+        <tr>
+          <td><strong>PLL</strong></td>
+          <td class="mono">pll_wrapper</td>
+          <td>Gera o clock interno derivado usado pela FSM e pelos módulos integrados.</td>
+          <td>Separa o clock externo da placa do dominio interno controlado e sincronizado por lock.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Evidencia De Utilizacao No Gowin</h3>
+    <p>
+      Os relatórios de Place &amp; Route e de recursos hierárquicos confirmam a inferência
+      dos blocos especializados:
+    </p>
+    <pre>BSRAM                       | 1/26                                | 4%
+DSP                         | 1/10                                | 10%
+  --MULTADDALU18X18         | 1
+rPLL                        | 1/2                                 | 50%</pre>
+    <p class="note">
+      Trechos completos preservados em
+      <span class="mono">evidencias/recursos_fpga_tp2.txt</span> e
+      <span class="mono">evidencias/hierarquia_recursos_tp2.txt</span>.
+    </p>
+
+    <pre>sequence_validator_top
+    |--pll_wrapper_inst
+        |--pll_inst
+    |--sync_bram_inst
+        BSRAM NUMBER = 1
+    |--dsp_mac_inst
+        DSP NUMBER = 1</pre>
+  </div>
+
+  <div class="section">
+    <h2>4. Módulos Implementados</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Arquivo</th>
+          <th>Responsabilidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">sequence_validator_top.v</td>
+          <td>Integra clock derivado, reset interno, botões, FSM, BRAM, DSP e display.</td>
+        </tr>
+        <tr>
+          <td class="mono">sequence_fsm.v</td>
+          <td>Controla os estados do sistema, ciclos de memória, validação da sequência e fase DSP.</td>
+        </tr>
+        <tr>
+          <td class="mono">sync_bram.v</td>
+          <td>Memória síncrona single-port, inferida como BSRAM pelo Gowin.</td>
+        </tr>
+        <tr>
+          <td class="mono">dsp_mac.v</td>
+          <td>Módulo aritmético registrado para multiplicação e acumulação, inferido como DSP.</td>
+        </tr>
+        <tr>
+          <td class="mono">pll_wrapper.v</td>
+          <td>Encapsula a PLL para hardware e fornece modelo comportamental em simulação.</td>
+        </tr>
+        <tr>
+          <td class="mono">gowin_rpll_27_to_13p5.v</td>
+          <td>Instancia a primitive/IP de PLL Gowin para gerar o clock interno.</td>
+        </tr>
+        <tr>
+          <td class="mono">result_display_mux.v</td>
+          <td>Alterna a exibição de sucesso entre <span class="mono">S</span>, dezena e unidade do checksum.</td>
+        </tr>
+        <tr>
+          <td class="mono">seven_segment_decoder.v</td>
+          <td>Decodifica dígitos <span class="mono">0..9</span>, erro <span class="mono">E</span> e sucesso <span class="mono">S</span>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Estados Principais Da FSM</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Grupo</th>
+          <th>Estados</th>
+          <th>Função</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Inicialização</td>
+          <td class="mono">IDLE, INIT_MEM_WRITE</td>
+          <td>Prepara registradores e grava a sequência esperada na BRAM.</td>
+        </tr>
+        <tr>
+          <td>Exibição</td>
+          <td class="mono">SHOW_READ, SHOW_DISPLAY</td>
+          <td>Lê a BRAM e acende os LEDs na ordem esperada.</td>
+        </tr>
+        <tr>
+          <td>Entrada</td>
+          <td class="mono">WAIT_INPUT, EXPECT_READ, CHECK_AND_LOG</td>
+          <td>Captura botões, lê valor esperado e grava a entrada correta.</td>
+        </tr>
+        <tr>
+          <td>Score</td>
+          <td class="mono">SCORE_CLEAR, SCORE_READ, SCORE_ACCUM, SCORE_STORE</td>
+          <td>Aciona o DSP, acumula o checksum e grava o resultado em memória.</td>
+        </tr>
+        <tr>
+          <td>Terminais</td>
+          <td class="mono">SUCCESS, ERROR</td>
+          <td>Trava sucesso até reset ou erro até reset.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section page-break">
+    <h2>5. Testbenches E Simulação</h2>
+    <p>
+      Foram desenvolvidos três testbenches. Os testes validam os blocos internos
+      isoladamente e depois validam o sistema integrado com a FSM controlando BRAM,
+      DSP e PLL. As simulações geram arquivos VCD usados como evidência visual.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Testbench</th>
+          <th>O que valida</th>
+          <th>Resultado esperado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">tb_sync_bram.v</td>
+          <td>Escrita e leitura síncrona da BRAM, incluindo o endereço do checksum.</td>
+          <td>Leituras retornam os valores gravados em <span class="mono">0</span>, <span class="mono">1</span> e <span class="mono">8</span>.</td>
+        </tr>
+        <tr>
+          <td class="mono">tb_dsp_mac.v</td>
+          <td>Clear do acumulador e quatro operações MAC.</td>
+          <td>Acumulador chega em <span class="mono">29</span> decimal.</td>
+        </tr>
+        <tr>
+          <td class="mono">tb_tp2_sequence_validator.v</td>
+          <td>PLL, inicialização da BRAM, sequência, entrada correta, erro e checksum final.</td>
+          <td>Sistema chega em sucesso com checksum <span class="mono">8'h1D</span>, equivalente a <span class="mono">29</span>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>BRAM Síncrona</h3>
+    <p>
+      A waveform mostra os sinais <span class="mono">en</span>, <span class="mono">we</span>,
+      <span class="mono">addr</span>, <span class="mono">din</span> e <span class="mono">dout</span>.
+      A leitura ocorre sincronizada ao clock, demonstrando o comportamento esperado da
+      memória inferida como BSRAM.
+    </p>
+    <div class="figure">
+      <img src="../evidencias/tb_sync_bram.png" alt="Waveform do testbench da BRAM">
+      <div class="caption">Figura 1 - Escrita e leitura síncronas da BRAM, incluindo endereço 8.</div>
+    </div>
+
+    <h3>DSP MAC</h3>
+    <p>
+      A waveform do DSP evidencia o clear inicial, os pulsos de
+      <span class="mono">valid</span>, os operandos <span class="mono">a</span> e
+      <span class="mono">b</span>, e o acumulador chegando ao checksum final.
+    </p>
+    <div class="figure">
+      <img src="../evidencias/tb_dsp_mac.png" alt="Waveform do testbench do DSP">
+      <div class="caption">Figura 2 - Operações MAC com acumulador chegando a 29.</div>
+    </div>
+  </div>
+
+  <div class="section page-break">
+    <h2>6. Simulação Integrada</h2>
+    <p>
+      A simulação integrada demonstra que os recursos internos não foram testados apenas
+      isoladamente: a FSM realmente coordena os acessos de memória, os pulsos do DSP e
+      a exibição final do resultado.
+    </p>
+
+    <h3>PLL, BRAM E Sequência</h3>
+    <p>
+      A primeira captura integrada mostra o lock da PLL, o uso do clock interno, as
+      transições da FSM, a atividade de BRAM e a sequência nos LEDs. Também aparecem
+      as escritas das entradas corretas no histórico da memória.
+    </p>
+    <div class="figure">
+      <img src="../evidencias/tb_tp2_sequence_validator_1.png" alt="Waveform integrada com PLL, BRAM e LEDs">
+      <div class="caption">Figura 3 - PLL, inicialização da BRAM e fluxo de validação.</div>
+    </div>
+
+    <h3>Checksum E Sucesso</h3>
+    <p>
+      A segunda captura integrada mostra a fase de score. O valor
+      <span class="mono">1D</span> está em hexadecimal e corresponde a
+      <span class="mono">29</span> decimal. O resultado é gravado no endereço
+      <span class="mono">8</span> da BRAM e o sistema entra na fase de sucesso.
+    </p>
+    <div class="figure">
+      <img src="../evidencias/tb_tp2_sequence_validator_2.png" alt="Waveform integrada com checksum e sucesso">
+      <div class="caption">Figura 4 - Checksum 8'h1D gravado em memória e entrada na fase de sucesso.</div>
+    </div>
+  </div>
+
+  <div class="section page-break">
+    <h2>7. Síntese, Place &amp; Route E Hardware</h2>
+    <p>
+      O projeto foi sintetizado e roteado no Gowin IDE para a Tang Nano 9K. A evidência
+      de síntese/PNR confirma que o fluxo concluiu sem erro, e os relatórios preservados
+      no diretório <span class="mono">gowin/impl</span> permitem conferir os recursos
+      internos utilizados.
+    </p>
+
+    <div class="figure">
+      <img src="../evidencias/synth_pnr_ok.png" alt="Evidência de síntese e Place and Route no Gowin">
+      <div class="caption">Figura 5 - Síntese e Place &amp; Route concluídos no Gowin.</div>
+    </div>
+
+    <h3>Validação Física</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Evidencia</th>
+          <th>Conteúdo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Video no Drive</td>
+          <td class="mono">https://drive.google.com/file/d/19e5MvCBofgBJx6aurAW7nXbIYrhSodmQ/view?usp=drive_link</td>
+        </tr>
+        <tr>
+          <td>Fluxo demonstrado</td>
+          <td>Reset, exibição da sequência, entrada correta, sucesso com <span class="mono">S/2/9</span>, novo reset, entrada errada e erro <span class="mono">E</span>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Resumo Das Evidências Entregues</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Arquivo</th>
+          <th>Finalidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">evidencias/recursos_fpga_tp2.txt</td>
+          <td>Extrato textual com BSRAM, DSP, MULTADDALU18X18 e rPLL.</td>
+        </tr>
+        <tr>
+          <td class="mono">evidencias/hierarquia_recursos_tp2.txt</td>
+          <td>Hierarquia com instâncias dos módulos de PLL, BRAM e DSP.</td>
+        </tr>
+        <tr>
+          <td class="mono">evidencias/tb_sync_bram.png</td>
+          <td>Waveform da BRAM síncrona.</td>
+        </tr>
+        <tr>
+          <td class="mono">evidencias/tb_dsp_mac.png</td>
+          <td>Waveform do DSP MAC com resultado 29.</td>
+        </tr>
+        <tr>
+          <td class="mono">evidencias/tb_tp2_sequence_validator_1.png</td>
+          <td>Waveform integrada com PLL, BRAM e sequência.</td>
+        </tr>
+        <tr>
+          <td class="mono">evidencias/tb_tp2_sequence_validator_2.png</td>
+          <td>Waveform integrada com checksum <span class="mono">8'h1D</span> e sucesso.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>8. Conclusao</h2>
+    <p>
+      O TP2 estende o validador do TP1 sem alterar a montagem física, mas troca uma
+      parte importante da arquitetura interna: a sequência e o histórico passam por uma
+      BRAM síncrona, o resultado final é calculado por uma unidade aritmética inferida
+      em DSP, e o controle principal roda sob clock derivado por PLL.
+    </p>
+    <p>
+      As simulações demonstram os blocos isolados e a integração completa. A síntese
+      e o Place &amp; Route no Gowin confirmam a utilização dos recursos especializados,
+      e o vídeo físico demonstra o comportamento esperado na Tang Nano 9K.
+    </p>
+  </div>
+</body>
+</html>

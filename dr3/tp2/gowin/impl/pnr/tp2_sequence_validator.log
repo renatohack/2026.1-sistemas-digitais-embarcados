@@ -1,0 +1,29 @@
+Reading netlist file: "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\gwsynthesis\tp2_sequence_validator.vg"
+Parsing netlist file "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\gwsynthesis\tp2_sequence_validator.vg" completed
+Processing netlist completed
+Reading constraint file: "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\tp2_sequence_validator.cst"
+Physical Constraint parsed completed
+Running placement......
+[10%] Placement Phase 0 completed
+[20%] Placement Phase 1 completed
+[30%] Placement Phase 2 completed
+[50%] Placement Phase 3 completed
+Running routing......
+[60%] Routing Phase 0 completed
+[70%] Routing Phase 1 completed
+[80%] Routing Phase 2 completed
+[90%] Routing Phase 3 completed
+Running timing analysis......
+[95%] Timing analysis completed
+Placement and routing completed
+Bitstream generation in progress......
+Bitstream generation completed
+Running power analysis......
+[100%] Power analysis completed
+Generate file "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\pnr\tp2_sequence_validator.power.html" completed
+Generate file "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\pnr\tp2_sequence_validator.pin.html" completed
+Generate file "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\pnr\tp2_sequence_validator.rpt.html" completed
+Generate file "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\pnr\tp2_sequence_validator.rpt.txt" completed
+Generate file "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\pnr\tp2_sequence_validator.tr.html" completed
+Sun May  3 22:47:54 2026
+

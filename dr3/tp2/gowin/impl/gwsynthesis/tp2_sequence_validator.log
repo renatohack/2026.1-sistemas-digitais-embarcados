@@ -1,0 +1,43 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\button_conditioner.v'
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\dsp_mac.v'
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\gowin_rpll_27_to_13p5.v'
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\pll_wrapper.v'
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\result_display_mux.v'
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\seven_segment_decoder.v'
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\sequence_fsm.v'
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\sequence_validator_top.v'
+Analyzing Verilog file '\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\sync_bram.v'
+Compiling module 'sequence_validator_top'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\sequence_validator_top.v":3)
+Compiling module 'pll_wrapper'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\pll_wrapper.v":3)
+Compiling module 'gowin_rpll_27_to_13p5'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\gowin_rpll_27_to_13p5.v":3)
+Compiling module 'rPLL(FCLKIN="27",IDIV_SEL=1,ODIV_SEL=32)'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\gowin_rpll_27_to_13p5.v":59)
+Compiling module 'button_conditioner(DEBOUNCE_TICKS=135000,COUNTER_WIDTH=18)'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\button_conditioner.v":3)
+Compiling module 'sync_bram'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\sync_bram.v":3)
+Extracting RAM for identifier 'mem'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\sync_bram.v":16)
+Compiling module 'dsp_mac'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\dsp_mac.v":3)
+Compiling module 'sequence_fsm'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\sequence_fsm.v":3)
+WARN  (EX3791) : Expression size 8 truncated to fit in target size 4("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\sequence_fsm.v":264)
+Compiling module 'result_display_mux'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\result_display_mux.v":3)
+Compiling module 'seven_segment_decoder'("\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\src\seven_segment_decoder.v":3)
+NOTE  (EX0101) : Current top module is "sequence_validator_top"
+[5%] Running netlist conversion ...
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\gwsynthesis\tp2_sequence_validator.vg" completed
+[100%] Generate report file "\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\tp2\gowin\impl\gwsynthesis\tp2_sequence_validator_syn.rpt.html" completed
+GowinSynthesis finish

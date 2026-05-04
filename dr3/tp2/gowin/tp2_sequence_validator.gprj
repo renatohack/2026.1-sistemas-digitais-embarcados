@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gowin-fpga-project>
+<Project>
+    <Template>FPGA</Template>
+    <Version>5</Version>
+    <Device name="GW1NR-9C" pn="GW1NR-LV9QN88PC6/I5">gw1nr9c-004</Device>
+    <FileList>
+        <File path="src/button_conditioner.v" type="file.verilog" enable="1"/>
+        <File path="src/dsp_mac.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_rpll_27_to_13p5.v" type="file.verilog" enable="1"/>
+        <File path="src/pll_wrapper.v" type="file.verilog" enable="1"/>
+        <File path="src/result_display_mux.v" type="file.verilog" enable="1"/>
+        <File path="src/seven_segment_decoder.v" type="file.verilog" enable="1"/>
+        <File path="src/sequence_fsm.v" type="file.verilog" enable="1"/>
+        <File path="src/sequence_validator_top.v" type="file.verilog" enable="1"/>
+        <File path="src/sync_bram.v" type="file.verilog" enable="1"/>
+        <File path="src/tp2_sequence_validator.cst" type="file.cst" enable="1"/>
+    </FileList>
+</Project>

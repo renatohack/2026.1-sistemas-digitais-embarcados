@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="sequence_validator_top" T_Register="124(0)" T_Lut="250(0)">
+ <SubModule name="button_inputs[0].button_conditioner_inst" Register="23" Lut="41" T_Register="23(23)" T_Lut="41(41)"/>
+ <SubModule name="button_inputs[1].button_conditioner_inst" Register="23" Lut="41" T_Register="23(23)" T_Lut="41(41)"/>
+ <SubModule name="button_inputs[2].button_conditioner_inst" Register="23" Lut="41" T_Register="23(23)" T_Lut="41(41)"/>
+ <SubModule name="button_inputs[3].button_conditioner_inst" Register="23" Lut="41" T_Register="23(23)" T_Lut="41(41)"/>
+ <SubModule name="sequence_fsm_inst" Register="32" Lut="78" T_Register="32(32)" T_Lut="78(78)"/>
+ <SubModule name="seven_segment_decoder_inst" Lut="8" T_Lut="8(8)"/>
+</Module>

@@ -1,0 +1,16 @@
+Trecho extraido de gowin/impl/pnr/tp2_sequence_validator.rpt.txt
+
+3. Resource Usage Summary
+
+  Resources                   | Usage                               | Utilization
+  -------------------------------------------------------------------------------
+  BSRAM                       | 1/26                                | 4%
+    --SP                      | 1
+  DSP                         | 1/10                                | 10%
+    --MULTADDALU18X18         | 1
+
+5. Clock Resource Usage Summary
+
+  Clock Resource| Usage         | Utilization
+  ------------------------------------------
+  rPLL          | 1/2           | 50%

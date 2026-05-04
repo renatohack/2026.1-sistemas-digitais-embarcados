@@ -1,0 +1,11 @@
+Trecho extraido de gowin/impl/gwsynthesis/tp2_sequence_validator_syn_resource.html
+
+Hierarchy Module Resource
+
+sequence_validator_top
+    |--pll_wrapper_inst
+        |--pll_inst
+    |--sync_bram_inst
+        BSRAM NUMBER = 1
+    |--dsp_mac_inst
+        DSP NUMBER = 1

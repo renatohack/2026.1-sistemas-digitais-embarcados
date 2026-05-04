@@ -1,0 +1,49 @@
+{
+ "Device" : "GW1NR-9C",
+ "Files" : [
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/button_conditioner.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/dsp_mac.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/gowin_rpll_27_to_13p5.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/pll_wrapper.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/result_display_mux.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/seven_segment_decoder.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_fsm.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sync_bram.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/impl/temp/rtl_parser.result",
+ "Top" : "",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}

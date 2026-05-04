@@ -1,0 +1,112 @@
+[
+ {
+  "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+  "InstLine" : 3,
+  "InstName" : "sequence_validator_top",
+  "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+  "ModuleLine" : 3,
+  "ModuleName" : "sequence_validator_top",
+  "SubInsts" : [
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 61,
+    "InstName" : "pll_wrapper_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/pll_wrapper.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "pll_wrapper",
+    "SubInsts" : [
+     {
+      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/pll_wrapper.v",
+      "InstLine" : 43,
+      "InstName" : "pll_inst",
+      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/gowin_rpll_27_to_13p5.v",
+      "ModuleLine" : 3,
+      "ModuleName" : "gowin_rpll_27_to_13p5",
+      "SubInsts" : [
+       {
+        "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/gowin_rpll_27_to_13p5.v",
+        "InstLine" : 16,
+        "InstName" : "rpll_inst",
+        "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/gowin_rpll_27_to_13p5.v",
+        "ModuleLine" : 59,
+        "ModuleName" : "rPLL"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 74,
+    "InstName" : "button_inputs[0].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/button_conditioner.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 74,
+    "InstName" : "button_inputs[1].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/button_conditioner.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 74,
+    "InstName" : "button_inputs[2].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/button_conditioner.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 74,
+    "InstName" : "button_inputs[3].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/button_conditioner.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 87,
+    "InstName" : "sync_bram_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sync_bram.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "sync_bram"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 99,
+    "InstName" : "dsp_mac_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/dsp_mac.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "dsp_mac"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 116,
+    "InstName" : "sequence_fsm_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_fsm.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "sequence_fsm"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 144,
+    "InstName" : "result_display_mux_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/result_display_mux.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "result_display_mux"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/sequence_validator_top.v",
+    "InstLine" : 158,
+    "InstName" : "seven_segment_decoder_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp2/gowin/src/seven_segment_decoder.v",
+    "ModuleLine" : 3,
+    "ModuleName" : "seven_segment_decoder"
+   }
+  ]
+ }
+]
