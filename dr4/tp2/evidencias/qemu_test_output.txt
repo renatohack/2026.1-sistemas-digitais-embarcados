@@ -1,0 +1,78 @@
+Validacao automatizada do TP2 - Assembly ARM64
+Execucao cruzada: binario AArch64 rodando em qemu-aarch64
+
+Exercicio 1 - Lookup table byte -> byte
+[ OK ] ex1[0]: 0x29
+[ OK ] ex1[1]: 0x72
+[ OK ] ex1[42]: 0x23
+[ OK ] ex1[128]: 0xa9
+[ OK ] ex1[255]: 0xe0
+
+Exercicio 2 - Lookup table byte -> halfword
+[ OK ] ex2[0]: 0x1200
+[ OK ] ex2[3]: 0x1503
+[ OK ] ex2[64]: 0x5240
+[ OK ] ex2[127]: 0x917f
+[ OK ] ex2[255]: 0x11ff
+
+Exercicio 3 - Lookup table word -> byte
+[ OK ] ex3[0x00000000]: 0xa5
+[ OK ] ex3[0x000000ff]: 0x5a
+[ OK ] ex3[0x12345678]: 0xdd
+[ OK ] ex3[0x89abcde0]: 0x45
+[ OK ] ex3[0xffffffff]: 0x5a
+
+Exercicio 4 - Lookup table word -> word
+[ OK ] ex4[0]: 0xa5000000
+[ OK ] ex4[1]: 0xa6010101
+[ OK ] ex4[4]: 0xa9040404
+[ OK ] ex4[85]: 0xfa555555
+[ OK ] ex4[255]: 0xa4ffffff
+
+Exercicio 5 - Limpeza de bits com BIC
+[ OK ] ex5_case1: 0xff00ff00ff00ff00
+[ OK ] ex5_case2: 0x123400009abc0000
+[ OK ] ex5_case3: 0xa0a0a0a050505050
+
+Exercicio 6 - Ativacao de bits com ORR
+[ OK ] ex6_case1: 0x00ff00ff00ff00ff
+[ OK ] ex6_case2: 0x1234ffff9abcffff
+[ OK ] ex6_case3: 0xafafafaf5f5f5f5f
+
+Exercicio 7 - Alternancia de bits com EOR
+[ OK ] ex7_case1: 0xff0000ffff0000ff
+[ OK ] ex7_case2: 0x1234a9879abc210f
+[ OK ] ex7_case3: 0xa5a5a5a55a5a5a5a
+
+Exercicio 8 - Teste de bits por mascaramento
+[ OK ] ex8_case1: 0x00000000
+[ OK ] ex8_case2: 0x00000001
+[ OK ] ex8_case3: 0x00000000
+[ OK ] ex8_case4: 0x00000001
+
+Exercicio 9 - Extracao de campo
+[ OK ] ex9_case1: 0x0000000000000021
+[ OK ] ex9_case2: 0x0000000000000abc
+[ OK ] ex9_case3: 0x0000000000000000
+[ OK ] ex9_case4: 0x0000000000000000
+
+Exercicio 10 - Insercao de campo
+[ OK ] ex10_case1: 0xffff0000ffff1200
+[ OK ] ex10_case2: 0x01234567955bcdef
+[ OK ] ex10_case3: 0x0000dead00000000
+[ OK ] ex10_case4: 0x123456789abcdef0
+
+Exercicio 11 - Rotacao manual a esquerda
+[ OK ] ex11_case1: 0x0123456789abcdef
+[ OK ] ex11_case2: 0x23456789abcdef01
+[ OK ] ex11_case3: 0x0000000000000003
+[ OK ] ex11_case4: 0xe1e01e1e1e1fe1e1
+[ OK ] ex11_case5: 0x23456789abcdef01
+
+Exercicio 12 - Pipeline completo
+[ OK ] ex12_case1: 0x123457789a1cdef0
+[ OK ] ex12_case2: 0x000001000370f123
+[ OK ] ex12_case3: 0xffffffffff7fffff
+[ OK ] ex12_case4: 0x13579bdf2408ace0
+
+Resultado final: todos os 12 exercicios passaram nos testes.

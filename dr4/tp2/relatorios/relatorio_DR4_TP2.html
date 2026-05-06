@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Relatório Técnico - DR4 TP2</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #18202b;
+      background: #ffffff;
+      font-family: "Arial", "Helvetica", sans-serif;
+      font-size: 10.4pt;
+      line-height: 1.45;
+    }
+
+    .cover {
+      min-height: 260mm;
+      padding: 28mm 18mm 18mm;
+      background: linear-gradient(180deg, #eef4fb 0%, #ffffff 42%);
+      page-break-after: always;
+    }
+
+    .eyebrow {
+      color: #45617f;
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12mm 0 6mm;
+      color: #102033;
+      font-size: 30pt;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 158mm;
+      color: #38495c;
+      font-size: 13.5pt;
+      line-height: 1.45;
+    }
+
+    .cover-grid,
+    .grid-2,
+    .flow-grid {
+      display: table;
+      width: 100%;
+      border-spacing: 0;
+    }
+
+    .cover-grid {
+      margin-top: 18mm;
+    }
+
+    .cover-card {
+      display: table-cell;
+      width: 50%;
+      padding: 5mm;
+      border: 1px solid #d6e0ea;
+      background: #ffffff;
+      vertical-align: top;
+    }
+
+    .cover-card:first-child {
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .cover-card:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .meta-label {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #617187;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-bottom: 4mm;
+      color: #172334;
+      font-size: 11pt;
+    }
+
+    .section {
+      padding: 8mm 14mm 3mm;
+      page-break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 4mm;
+      padding-bottom: 2mm;
+      color: #12304d;
+      border-bottom: 2px solid #d8e3ee;
+      font-size: 17pt;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 6mm 0 2.5mm;
+      color: #26384c;
+      font-size: 12.2pt;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 3.2mm;
+    }
+
+    .lead {
+      color: #33465b;
+      font-size: 11.2pt;
+    }
+
+    .callout {
+      margin: 4mm 0;
+      padding: 4mm;
+      border-left: 4px solid #2d6da3;
+      background: #f3f7fb;
+      border-radius: 4px;
+    }
+
+    .note {
+      color: #536276;
+      font-size: 9.4pt;
+    }
+
+    .grid-2 {
+      border-spacing: 4mm 0;
+      margin: 3mm -4mm 0;
+    }
+
+    .grid-2 > .cell {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+    }
+
+    table {
+      width: 100%;
+      margin: 2mm 0 5mm;
+      border-collapse: collapse;
+      table-layout: fixed;
+      page-break-inside: avoid;
+    }
+
+    th,
+    td {
+      padding: 2.1mm 2.4mm;
+      border: 1px solid #dce4ed;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    th {
+      color: #203346;
+      background: #edf3f8;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    td {
+      background: #ffffff;
+    }
+
+    .compact td,
+    .compact th {
+      padding: 1.55mm 2mm;
+      font-size: 9.1pt;
+    }
+
+    .num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code,
+    .mono {
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8.8pt;
+      color: #142238;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    pre {
+      margin: 2mm 0 4mm;
+      padding: 3mm;
+      color: #142238;
+      background: #f6f8fb;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8pt;
+      line-height: 1.35;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    ul {
+      margin: 1mm 0 4mm 5mm;
+      padding: 0 0 0 4mm;
+    }
+
+    li {
+      margin-bottom: 1.4mm;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 1.2mm 1.2mm 0;
+      padding: 1mm 2mm;
+      border: 1px solid #cdd9e6;
+      border-radius: 12px;
+      background: #f7fafc;
+      color: #27394e;
+      font-size: 8.8pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .flow-grid {
+      border-spacing: 2.5mm;
+      margin: 2mm -2.5mm 4mm;
+    }
+
+    .flow-cell {
+      display: table-cell;
+      width: 25%;
+      padding: 3mm;
+      border: 1px solid #d6e0ea;
+      border-radius: 4px;
+      background: #f8fbfe;
+      vertical-align: top;
+      page-break-inside: avoid;
+    }
+
+    .flow-title {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #12304d;
+      font-weight: 700;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .tight {
+      margin-bottom: 1.2mm;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="eyebrow">DR4 - Teste de Performance 2</div>
+    <h1>Relatório Técnico<br>Assembly ARM64, Bits e Lookup Tables</h1>
+    <p class="subtitle">
+      Implementação completa dos 12 exercícios práticos do TP2, cobrindo lookup tables,
+      mascaramento de bits, extração e inserção de campos, rotação manual e um pipeline
+      completo de transformação. A validação foi feita com binário AArch64 executado em
+      <span class="mono">qemu-aarch64</span>, conforme orientação do professor.
+    </p>
+
+    <div class="cover-grid">
+      <div class="cover-card">
+        <span class="meta-label">Aluno</span>
+        <span class="meta-value">Renato</span>
+        <span class="meta-label">Disciplina</span>
+        <span class="meta-value">DR4 - Processamento Otimizado em Assembly ARM 64-bits</span>
+        <span class="meta-label">Entrega</span>
+        <span class="meta-value">TP2</span>
+      </div>
+      <div class="cover-card">
+        <span class="meta-label">Ambiente de validação</span>
+        <span class="meta-value">aarch64-linux-gnu-gcc + qemu-aarch64</span>
+        <span class="meta-label">Alvo previsto</span>
+        <span class="meta-value">Raspberry Pi Zero 2W / Linux ARM64</span>
+        <span class="meta-label">Artefatos</span>
+        <span class="meta-value">Código Assembly, suíte de testes, evidências em texto e relatório</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Objetivo e escopo</h2>
+    <p class="lead">
+      O objetivo deste TP2 foi implementar doze exercícios em Assembly ARM64 com foco em
+      técnicas de otimização escalar baseadas em lookup tables, mascaramento explícito de
+      bits e composição manual de operações sobre palavras de 64 bits.
+    </p>
+    <p>
+      Todos os exercícios foram implementados dentro de um único módulo Assembly,
+      compilados como binário AArch64 estático e validados localmente com
+      <span class="mono">qemu-aarch64</span>. Essa estratégia preserva a compatibilidade
+      com o ambiente Linux ARM64 esperado para o Raspberry Pi Zero 2W, mas dispensa a
+      necessidade de usar o hardware físico durante a etapa de desenvolvimento.
+    </p>
+
+    <div class="callout">
+      <strong>Decisão de ambiente:</strong> o professor informou que a execução poderia ser
+      validada em QEMU. Assim, a entrega foi estruturada para gerar um executável
+      <span class="mono">ELF 64-bit ARM aarch64</span>, testado por cross-compilação e
+      execução em emulação de usuário.
+    </div>
+
+    <h3>Pontos relevantes da entrega</h3>
+    <ul>
+      <li>As 12 rotinas pedidas no enunciado foram implementadas em Assembly ARM64.</li>
+      <li>As tabelas de consulta foram alocadas em <span class="mono">.rodata</span>.</li>
+      <li>Foi criada uma suíte de testes automatizada para validar cada exercício.</li>
+      <li>As evidências pedidas foram registradas como texto de terminal, sem imagens.</li>
+      <li>O vídeo não foi produzido porque foi dispensado.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>2. Organização do projeto</h2>
+    <p>
+      O diretório do TP foi reorganizado para separar implementação, testes, evidências e
+      relatórios. Isso facilita tanto a reprodução da validação quanto a leitura pelo
+      professor.
+    </p>
+
+    <div>
+      <span class="tag">Assembly ARM64</span>
+      <span class="tag">Cross-compilação</span>
+      <span class="tag">QEMU user mode</span>
+      <span class="tag">Relatório HTML + PDF</span>
+      <span class="tag">Evidência textual</span>
+    </div>
+
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Arquivo / pasta</th>
+          <th>Função</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">src/tp2_exercises.S</td>
+          <td>Implementa as 12 rotinas e define todas as lookup tables usadas nos exercícios.</td>
+        </tr>
+        <tr>
+          <td class="mono">include/tp2.h</td>
+          <td>Declara as interfaces das funções exportadas pelo módulo Assembly.</td>
+        </tr>
+        <tr>
+          <td class="mono">tests/test_tp2.c</td>
+          <td>Executa a validação automatizada com casos de teste e comparação de saída esperada.</td>
+        </tr>
+        <tr>
+          <td class="mono">Makefile</td>
+          <td>Coordena compilação, execução em QEMU e geração de evidências.</td>
+        </tr>
+        <tr>
+          <td class="mono">evidencias/qemu_test_output.txt</td>
+          <td>Log integral da suíte de testes em emulação AArch64.</td>
+        </tr>
+        <tr>
+          <td class="mono">evidencias/binario_info.txt</td>
+          <td>Metadados do executável gerado, confirmando o formato AArch64.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Fluxo de validação</h3>
+    <div class="flow-grid">
+      <div class="flow-cell">
+        <span class="flow-title">1. Implementação</span>
+        As rotinas foram escritas em Assembly ARM64, com convenção AAPCS64 e retorno pelos
+        registradores <span class="mono">w0/x0</span>.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">2. Cross-build</span>
+        O projeto é compilado por <span class="mono">aarch64-linux-gnu-gcc</span> e
+        ligado estaticamente.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">3. Execução</span>
+        O binário AArch64 é executado com <span class="mono">qemu-aarch64</span>, sem
+        depender do Raspberry físico.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">4. Evidências</span>
+        O comando <span class="mono">make evidence</span> salva o texto completo da
+        validação em arquivo.
+      </div>
+    </div>
+
+    <pre>make
+make test
+make evidence</pre>
+  </div>
+
+  <div class="section page-break">
+    <h2>3. Implementação dos exercícios</h2>
+    <p>
+      Os exercícios foram organizados em quatro grupos: lookup tables, operações por
+      máscara, manipulação de campos e pipeline final. A tabela abaixo resume a solução
+      técnica adotada em cada um deles.
+    </p>
+
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Ex.</th>
+          <th>Implementação</th>
+          <th>Observação técnica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Lookup table de 256 bytes em <span class="mono">.rodata</span>, com leitura por <span class="mono">ldrb</span>.</td>
+          <td>Fórmula da tabela: <span class="mono">f[i] = (73*i + 41) mod 256</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Lookup table de 256 halfwords, acessada por <span class="mono">ldrh [base, index, LSL #1]</span>.</td>
+          <td>Offset por elemento de 2 bytes; fórmula: <span class="mono">f[i] = (0x1200 + 257*i) mod 65536</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Derivação explícita do índice com <span class="mono">uxtb</span> sobre a word de entrada.</td>
+          <td>Índice = 8 bits menos significativos; tabela: <span class="mono">f[i] = i XOR 0xA5</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Lookup table de words, lida por <span class="mono">ldr [base, index, LSL #2]</span>.</td>
+          <td>Indexação correta por elementos de 4 bytes.</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Rotina de limpeza com <span class="mono">BIC</span>.</td>
+          <td>Produz <span class="mono">base &amp; ~mask</span>, preservando os demais bits.</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Ativação de bits com <span class="mono">ORR</span>.</td>
+          <td>Implementa <span class="mono">base | mask</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Alternância seletiva com <span class="mono">EOR</span>.</td>
+          <td>Somente os bits cobertos pela máscara são invertidos.</td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td>Teste por mascaramento com <span class="mono">ANDS</span> e <span class="mono">CSET</span>.</td>
+          <td>Retorna <span class="mono">1</span> para grupo não nulo e <span class="mono">0</span> caso contrário.</td>
+        </tr>
+        <tr>
+          <td><strong>9</strong></td>
+          <td>Extração genérica por <span class="mono">shift right</span> e máscara dinâmica.</td>
+          <td>Recebe <span class="mono">valor, offset, largura</span> e alinha o campo no LSB.</td>
+        </tr>
+        <tr>
+          <td><strong>10</strong></td>
+          <td>Inserção genérica por limpar-região + posicionar + <span class="mono">ORR</span>.</td>
+          <td>Preserva todos os bits fora do campo atualizado.</td>
+        </tr>
+        <tr>
+          <td><strong>11</strong></td>
+          <td>Rotate-left manual com dois shifts e <span class="mono">ORR</span>.</td>
+          <td>O deslocamento é normalizado com <span class="mono">N &amp; 63</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>12</strong></td>
+          <td>Pipeline: extração de nibble, lookup em tabela de 16 bytes e reinserção em campo de 6 bits.</td>
+          <td>O resultado final também seta um bit de status em <span class="mono">bit 40</span>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Detalhes do pipeline do exercício 12</h3>
+    <div class="callout">
+      <strong>Configuração adotada:</strong> o índice é extraído dos bits
+      <span class="mono">[15:12]</span> da entrada. A lookup table tem 16 entradas e segue a
+      fórmula <span class="mono">t[i] = (0x12 + 11*i) mod 256</span>. Em seguida, apenas os
+      6 bits menos significativos da saída da tabela são reposicionados no campo
+      <span class="mono">[25:20]</span> do valor final, e o <span class="mono">bit 40</span>
+      é forçado para <span class="mono">1</span>.
+    </div>
+
+    <div class="grid-2">
+      <div class="cell">
+        <h3>Lookup tables usadas</h3>
+        <ul>
+          <li>Ex. 1: 256 entradas de 8 bits.</li>
+          <li>Ex. 2: 256 entradas de 16 bits.</li>
+          <li>Ex. 3: 256 entradas de 8 bits, com índice derivado.</li>
+          <li>Ex. 4: 256 entradas de 32 bits.</li>
+          <li>Ex. 12: 16 entradas de 8 bits para o pipeline final.</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <h3>Instruções-chave</h3>
+        <ul>
+          <li><span class="mono">LDRB/LDRH/LDR</span> para acesso escalonado a tabelas.</li>
+          <li><span class="mono">UXTB</span> para derivação disciplinada de índice.</li>
+          <li><span class="mono">BIC/ORR/EOR</span> nas operações de máscara.</li>
+          <li><span class="mono">ANDS + CSET</span> para retorno de status em 0/1.</li>
+          <li><span class="mono">LSL/LSR/ORR</span> na rotação manual e no pipeline.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>4. Validação e evidências</h2>
+    <p>
+      A validação foi automatizada em um harness AArch64. Cada exercício recebeu vários
+      casos de teste, e o programa aborta com código de erro se alguma comparação falhar.
+      O log completo da execução está salvo em
+      <span class="mono">evidencias/qemu_test_output.txt</span>.
+    </p>
+
+    <h3>Confirmação do binário gerado</h3>
+    <pre>build/tp2_arm64_bits: ELF 64-bit LSB executable, ARM aarch64, version 1 (GNU/Linux),
+statically linked, for GNU/Linux 3.7.0, with debug_info, not stripped</pre>
+
+    <h3>Resumo da suíte de testes</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Grupo</th>
+          <th>Casos executados</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Exercícios 1 a 4</td>
+          <td>20 consultas em tabelas de byte, halfword e word</td>
+          <td>Todos aprovados</td>
+        </tr>
+        <tr>
+          <td>Exercícios 5 a 8</td>
+          <td>13 casos de mascaramento, toggle e teste de status</td>
+          <td>Todos aprovados</td>
+        </tr>
+        <tr>
+          <td>Exercícios 9 a 11</td>
+          <td>13 casos de extração, inserção e rotação manual</td>
+          <td>Todos aprovados</td>
+        </tr>
+        <tr>
+          <td>Exercício 12</td>
+          <td>4 casos de pipeline completo</td>
+          <td>Todos aprovados</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Casos de teste do exercício 12</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Entrada</th>
+          <th>Índice extraído</th>
+          <th>Valor da tabela</th>
+          <th>Saída final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">0x123456789ABCDEF0</td>
+          <td class="mono">0xD</td>
+          <td class="mono">0xA1</td>
+          <td class="mono">0x123457789A1CDEF0</td>
+        </tr>
+        <tr>
+          <td class="mono">0x000000000000F123</td>
+          <td class="mono">0xF</td>
+          <td class="mono">0xB7</td>
+          <td class="mono">0x000001000370F123</td>
+        </tr>
+        <tr>
+          <td class="mono">0x13579BDF2468ACE0</td>
+          <td class="mono">0xA</td>
+          <td class="mono">0x80</td>
+          <td class="mono">0x13579BDF2408ACE0</td>
+        </tr>
+        <tr>
+          <td class="mono">0xFFFFFFFFFFFFFFFF</td>
+          <td class="mono">0xF</td>
+          <td class="mono">0xB7</td>
+          <td class="mono">0xFFFFFFFFFF7FFFFF</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Trecho do output de execução</h3>
+    <pre>Validacao automatizada do TP2 - Assembly ARM64
+Execucao cruzada: binario AArch64 rodando em qemu-aarch64
+
+Exercicio 1 - Lookup table byte -> byte
+[ OK ] ex1[0]: 0x29
+[ OK ] ex1[255]: 0xe0
+
+Exercicio 8 - Teste de bits por mascaramento
+[ OK ] ex8_case1: 0x00000000
+[ OK ] ex8_case4: 0x00000001
+
+Exercicio 12 - Pipeline completo
+[ OK ] ex12_case1: 0x123457789a1cdef0
+[ OK ] ex12_case2: 0x000001000370f123
+[ OK ] ex12_case3: 0xffffffffff7fffff
+[ OK ] ex12_case4: 0x13579bdf2408ace0
+
+Resultado final: todos os 12 exercicios passaram nos testes.</pre>
+
+    <p class="note">
+      O arquivo completo com todas as linhas de validação foi preservado em
+      <span class="mono">evidencias/qemu_test_output.txt</span> para servir como evidência
+      textual da execução.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>5. Conclusão</h2>
+    <p>
+      A entrega atende integralmente ao enunciado do TP2: os 12 exercícios foram
+      implementados em Assembly ARM64, organizados em um projeto reproduzível, compilados
+      para AArch64 e validados por execução cruzada em QEMU. O resultado final foi
+      totalmente aprovado pela suíte automatizada, sem falhas.
+    </p>
+    <p>
+      Além da implementação técnica, a entrega inclui evidências textuais, instruções de
+      reprodução, relatório em HTML/PDF e um template reutilizável para futuras entregas
+      com a mesma identidade visual.
+    </p>
+  </div>
+</body>
+</html>
