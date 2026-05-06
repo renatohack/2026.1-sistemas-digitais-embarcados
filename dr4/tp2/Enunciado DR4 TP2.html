@@ -1,0 +1,134 @@
+<p>Olá, <input id="filter_generico_amdopts_fg_177806611727473" type="hidden" value="{&quot;type&quot;:&quot;aluno&quot;,&quot;AUTOID&quot;:&quot;fg_177806611727473&quot;,&quot;MOODLEPAGEID&quot;:463876,&quot;WWWROOT&quot;:&quot;https:\/\/lms.infnet.edu.br\/moodle&quot;,&quot;USER:firstname&quot;:&quot;Renato&quot;,&quot;DATASET&quot;:false,&quot;CSSLINK&quot;:false,&quot;CSSUPLOAD&quot;:false,&quot;CSSCUSTOM&quot;:false,&quot;TEMPLATEID&quot;:1}"></input>Renato.</p>
+<p>Chegamos a uma das etapas de preparação! A cada Teste de Performance (TP) você terá a oportunidade de praticar os conhecimentos adquiridos e receber feedbacks relevantes para o seu aprendizado.</p>
+
+
+<hr>
+<p>Este é o <strong>Teste de Performance 2 (TP2)</strong> da disciplina <strong>DR4 — Processamento Otimizado em Assembly ARM 64-bits</strong>. Neste TP, você irá resolver <strong>12 exercícios práticos de programação em Assembly ARM64</strong>, todos implementados e executados no <strong>Raspberry Pi Zero 2W</strong>, com foco em <strong>técnicas de otimização escalar</strong> baseadas em <strong>manipulação explícita de bits</strong> e <strong>tabelas de consulta (lookup tables)</strong>.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 1</span> <strong>Lookup table byte→byte para normalização de código</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em um projeto de engenharia da computação, é comum precisarmos normalizar códigos recebidos de periféricos ou protocolos internos antes de processá-los. Quando essa normalização ocorre milhares de vezes por segundo, cadeias de condicionais se tornam caras e imprevisíveis para o pipeline. Uma solução clássica em firmware é substituir decisões por uma <strong>lookup table</strong>, tornando o tempo de execução determinístico e reduzindo branches. Neste cenário, você recebeu uma tabela fixa de 256 entradas que mapeia um código de 8 bits para outro código de 8 bits, usada como camada de compatibilidade entre duas versões de um equipamento. Seu papel é implementar esse mapeamento em Assembly, garantindo que o acesso à memória seja correto e que a indexação não provoque leituras fora da tabela.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma <strong>lookup table </strong><strong>f</strong> com <strong>256 bytes</strong> e uma rotina que receba um <strong>byte de entrada</strong> e retorne o <strong>byte de saída</strong> correspondente, usando o byte como índice direto da tabela.</p>
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>A tabela deve estar definida em memória (por exemplo, em .data) e a rotina deve calcular o endereço base + index. O professor validará executando o programa no Raspberry Pi e verificando, para um conjunto de entradas, se a saída corresponde aos bytes definidos na tabela.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 2</span> <strong>Lookup table byte→halfword com indexação por elemento</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Tabelas de consulta não retornam apenas bytes: é comum mapear entradas pequenas para coeficientes, fatores de calibração ou parâmetros prontos para uso, que podem ocupar 16 bits. Nesses casos, um erro típico é tratar a tabela como se fosse de bytes e acessar o endereço errado, retornando valores “quase aleatórios”. Neste cenário, a equipe de hardware definiu uma tabela de 256 valores de 16 bits, onde cada índice representa um nível de sinal e cada saída é o valor já escalado. Você deve implementar o acesso correto em Assembly ARM64, respeitando o tamanho do elemento e garantindo que o offset seja multiplicado por 2.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma <strong>lookup table </strong><strong>f</strong> com <strong>256 halfwords (16 bits)</strong> e uma rotina que receba um <strong>byte de entrada</strong> e retorne o <strong>halfword de saída</strong> correspondente.</p>
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>A rotina deve calcular o endereço base + (index * 2) e carregar um halfword. O professor validará a execução no Raspberry Pi comparando saídas para ao menos 4 entradas distintas.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 3</span> <strong>Lookup table word→byte com derivação explícita de índice</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em sistemas reais, a entrada para uma tabela pode ser maior do que o índice permitido. Por exemplo, um sensor pode produzir uma word com flags e campos compactados, mas apenas um subconjunto de bits deve ser usado como índice. Se essa derivação não for explícita, dois engenheiros podem implementar regras diferentes e o sistema se torna inconsistente. Neste cenário, você recebe uma word de entrada, derivará um índice de 8 bits de forma explícita e consultará uma tabela de bytes. O objetivo é avaliar se você controla a transição entre “valor amplo” e “índice” de maneira disciplinada.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que receba um <strong>word (32 bits)</strong>, derive um índice de <strong>8 bits</strong> (por exemplo, usando os <strong>8 bits menos significativos</strong>) e retorne um <strong>byte</strong> obtido de uma lookup table.</p>
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>No relatório, descreva claramente como o índice é derivado do word. O professor validará com entradas distintas que produzem índices diferentes e acessam posições diferentes da tabela.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 4</span> <strong>Lookup table word→word com indexação por 4 bytes</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em tabelas de parâmetros, é comum que a saída seja um valor de 32 bits pronto para ser escrito em outro registrador ou usado em cálculos. Isso exige indexação por elementos de 4 bytes. Um erro frequente é esquecer o escalonamento do offset e acessar uma word “no meio” de outra, corrompendo a leitura. Neste cenário, você implementará uma tabela de words e acessará o elemento correto a partir de um índice, com offset multiplicado por 4.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma <strong>lookup table</strong> com elementos de <strong>32 bits</strong> e uma rotina que retorne o word correto, calculando o endereço base + (index * 4).</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 5</span> <strong>Limpeza de bits por máscara usando BIC</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em controle de hardware e estruturas compactadas, limpar bits é uma operação constante: desligar recursos, limpar flags de erro, resetar campos antes de inserir novos valores. Em ARM64, isso deve ser feito de forma direta e sem ramificações, aplicando uma máscara que zere apenas os bits desejados. Neste cenário, você precisa preparar um valor base para receber novos campos, limpando previamente a região controlada por uma máscara.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que receba um valor base e uma máscara e produza um valor com os bits indicados pela máscara <strong>zerados</strong>, preservando os demais.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 6</span> <strong>Ativação de bits por máscara usando ORR</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Habilitar bits específicos sem alterar campos adjacentes é essencial para configuração segura de modos e recursos. Em firmware, a operação deve ser idempotente e previsível: aplicar a máscara sempre produz o mesmo efeito. Neste exercício, você implementará a habilitação de flags e documentará o comportamento para casos em que alguns bits já estejam setados.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que receba um valor base e uma máscara e retorne o valor com os bits da máscara <strong>forçados para 1</strong>.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 7</span> <strong>Alternância de bits por máscara usando EOR</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em máquinas de estado e sinalização, alternar bits é mais eficiente do que testar e decidir via branches. A operação XOR permite alternância determinística com uma máscara, mantendo previsibilidade do pipeline. Neste cenário, você foi instruído a implementar um “toggle” de flags com base em uma máscara, garantindo que apenas os bits selecionados invertam.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que receba um valor e uma máscara e retorne o valor com apenas os bits da máscara <strong>invertidos</strong>.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 8</span> <strong>Teste de bits por mascaramento e retorno de status</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Muitos fluxos de firmware precisam responder rapidamente à pergunta: “há algum erro ativo?”, “algum modo está habilitado?”, “existe qualquer bit setado nesse grupo?”. Em vez de múltiplas comparações, o padrão é mascarar e testar zero/não-zero, retornando um status simples para o chamador. Este exercício avalia sua capacidade de construir essa verificação e padronizar uma saída objetiva.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que receba um valor e uma máscara e retorne:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li><strong>1</strong> se pelo menos um bit do grupo estiver setado,</li>
+    <li style="margin-bottom: 20px;"><strong>0</strong> se todos os bits do grupo estiverem zerados.</li>
+</ul>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 9</span> <strong>Extração de campo por máscara e shift (alinhamento à direita)</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Campos empacotados aparecem em protocolos, registradores e formatos binários. Para interpretar um campo, é necessário isolar a região e alinhar o resultado, normalmente deslocando o campo para o bit menos significativo. Um erro de máscara ou shift gera valores coerentes apenas por coincidência em alguns casos. Neste exercício, você extrairá um campo com largura e offset definidos explicitamente, retornando o valor alinhado à direita.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que extraia de um valor de 64 bits um campo definido por <strong>offset</strong> e <strong>largura</strong>, retornando o campo alinhado à direita (LSB).</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 10</span> <strong>Inserção de campo: limpar região + posicionar + ORR</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Inserir campos em uma palavra existente é um padrão de empacotamento. A técnica correta envolve limpar primeiro o campo no valor base, posicionar o novo valor com shift e combinar com ORR. Soluções que apenas “ORR direto” podem sobrescrever bits antigos de forma incorreta. Neste cenário, você implementará uma inserção completa e verificável de campo, preservando o restante da palavra.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que receba um valor base de 64 bits e um valor de campo, e atualize o campo definido por <strong>offset</strong> e <strong>largura</strong>, preservando os demais bits.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 11</span> <strong>Rotação manual à esquerda (rotate left) sem instrução dedicada</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Rotações são usadas em funções de hash, checksums e transformações de dados em baixo nível. Diferente de shift, rotação não descarta bits: os bits que saem por um lado retornam pelo outro. Implementar rotação manual é um exercício fundamental para consolidar o controle sobre largura de palavra e comportamento de bits. Neste cenário, você implementará rotate-left como composição de dois shifts e OR, garantindo preservação completa dos bits.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que realize <strong>rotação à esquerda</strong> de um valor de 64 bits por N posições, usando apenas shifts e OR.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 12</span> <strong>Pipeline completo: extração → lookup → ajuste final</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em rotinas de otimização escalar, é comum combinar técnicas: um valor chega compactado, um campo vira índice para uma tabela, a saída da tabela ainda precisa ser reposicionada e combinada com outros bits. Esse tipo de pipeline substitui decisões por transformações determinísticas e permite desempenho alto com previsibilidade. Neste exercício final, você irá montar uma rotina completa que aplica três etapas encadeadas, com clareza, testes e justificativa técnica. A correção valorizará tanto o resultado quanto a auditabilidade do pipeline.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina que:</p>
+<ol style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Extraia um campo de bits de um valor de entrada de 64 bits (offset e largura definidos no seu código);</li>
+    <li>Use esse campo como índice em uma lookup table;</li>
+    <li style="margin-bottom: 20px;">Ajuste o valor retornado aplicando máscara e posicionamento por shifts e ORR.</li>
+</ol>
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>No relatório, descreva cada etapa e apresente pelo menos 3 casos de teste. O professor validará a coerência entre o campo extraído, o índice usado, o elemento lido na tabela e o valor final produzido.</p>
+
+<hr>
+
+<h3>Formato de entrega</h3>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Todos os arquivos gerados precisam ser compactados e enviados em <strong>.ZIP</strong>.</li>
+    <li>Um <strong>relatório técnico</strong> deve ser entregue em conjunto, com as explicações das soluções.</li>
+    <li>Todos os códigos Assembly devem estar organizados e executáveis no <strong>Raspberry Pi Zero 2W</strong>.</li>
+    <li>Evidências como imagens e vídeos quando solicitado nos exercícios.</li>
+</ul>
+
+
+<hr>
+
+<p>Assim que terminar, salve seu trabalho em um arquivo .zip, nomeando-o conforme a regra “<strong>nome_sobrenome_DR4_TP2.zip</strong>” e envie como resposta a este TP.</p>
