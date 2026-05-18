@@ -1,0 +1,31 @@
+VCD info: dumpfile sim/build/tb_tp3_demo_top.vcd opened for output.
+UART:TP3 mode=UINT8  op=ADD case=0 A=0C B=05 result=11 flags=00 OK        pass=YES
+PASS: initial line starts with T
+PASS: initial line starts with P
+PASS: initial line starts with 3
+PASS: initial mode is unsigned
+PASS: initial operation is add
+PASS: initial case is zero
+PASS: initial A high hex
+PASS: initial A low hex
+PASS: initial B high hex
+PASS: initial B low hex
+PASS: initial result high hex
+PASS: initial result low hex
+PASS: initial flag high hex
+PASS: initial flag low hex
+PASS: initial flag description is OK
+PASS: initial PASS is YES
+PASS: PASS LED is active low
+UART:TP3 mode=INT8   op=ADD case=0 A=0A B=05 result=0F flags=00 OK        pass=YES
+PASS: BTN0 changes mode
+PASS: mode bit 0 LED is active low
+UART:TP3 mode=INT8   op=SUB case=0 A=0A B=05 result=05 flags=00 OK        pass=YES
+PASS: BTN1 changes operation
+UART:TP3 mode=INT8   op=SUB case=1 A=9C B=28 result=74 flags=02 UNDERFLOW pass=YES
+PASS: BTN2 changes case id
+UART:TP3 mode=INT8   op=SUB case=1 A=9C B=28 result=74 flags=02 UNDERFLOW pass=YES
+PASS: BTN3 retransmits current mode
+PASS: BTN3 retransmits current operation
+PASS: BTN3 retransmits current case id
+ALL TESTS PASSED

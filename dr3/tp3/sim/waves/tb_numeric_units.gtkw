@@ -1,0 +1,16 @@
+[*]
+[*] GTKWave save file for DR3 TP3 standalone numeric units
+[dumpfile] "sim/build/tb_fixed_q3_4_alu.vcd"
+[savefile] "sim/waves/tb_numeric_units.gtkw"
+[timestart] 0
+[size] 1400 850
+[pos] -1 -1
+*-Open the matching VCD before using these signals
+@22
+tb_fixed_q3_4_alu.op[1:0]
+tb_fixed_q3_4_alu.a[7:0]
+tb_fixed_q3_4_alu.b[7:0]
+tb_fixed_q3_4_alu.result[7:0]
+tb_fixed_q3_4_alu.flags[5:0]
+@28
+tb_fixed_q3_4_alu.errors[31:0]

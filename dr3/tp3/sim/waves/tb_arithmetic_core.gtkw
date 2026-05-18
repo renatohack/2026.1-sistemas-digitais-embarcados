@@ -1,0 +1,21 @@
+[*]
+[*] GTKWave save file for DR3 TP3 integrated arithmetic core
+[dumpfile] "sim/build/tb_arithmetic_core.vcd"
+[savefile] "sim/waves/tb_arithmetic_core.gtkw"
+[timestart] 0
+[size] 1400 850
+[pos] -1 -1
+*-DR3 TP3 arithmetic core
+@28
+tb_arithmetic_core.mode[1:0]
+tb_arithmetic_core.op[1:0]
+tb_arithmetic_core.case_id[1:0]
+@22
+tb_arithmetic_core.a[7:0]
+tb_arithmetic_core.b[7:0]
+tb_arithmetic_core.result[7:0]
+tb_arithmetic_core.expected[7:0]
+tb_arithmetic_core.flags[5:0]
+tb_arithmetic_core.expected_flags[5:0]
+@28
+tb_arithmetic_core.errors[31:0]

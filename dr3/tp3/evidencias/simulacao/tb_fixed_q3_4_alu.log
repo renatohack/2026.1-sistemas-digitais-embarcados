@@ -1,0 +1,16 @@
+VCD info: dumpfile sim/build/tb_fixed_q3_4_alu.vcd opened for output.
+PASS: fixed add 1.5 + 0.5
+PASS: fixed add positive saturation
+PASS: fixed add negative saturation
+PASS: fixed sub 1.5 - 0.5
+PASS: fixed sub negative saturation
+PASS: fixed sub positive saturation
+PASS: fixed mul exact
+PASS: fixed mul positive saturation
+PASS: fixed mul negative saturation
+PASS: fixed mul truncation
+PASS: fixed div exact
+PASS: fixed div truncation
+PASS: fixed div negative saturation
+PASS: fixed div zero
+ALL TESTS PASSED

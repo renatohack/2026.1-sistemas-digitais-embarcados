@@ -1,0 +1,17 @@
+[*]
+[*] GTKWave save file for DR3 TP3 E4M3 minifloat
+[dumpfile] "sim/build/tb_minifloat_e4m3_addsub.vcd"
+[savefile] "sim/waves/tb_minifloat_e4m3_addsub.gtkw"
+[timestart] 0
+[size] 1400 850
+[pos] -1 -1
+*-DR3 TP3 minifloat E4M3
+@28
+tb_minifloat_e4m3_addsub.op_sub
+@22
+tb_minifloat_e4m3_addsub.a[7:0]
+tb_minifloat_e4m3_addsub.b[7:0]
+tb_minifloat_e4m3_addsub.result[7:0]
+tb_minifloat_e4m3_addsub.flags[5:0]
+@28
+tb_minifloat_e4m3_addsub.errors[31:0]

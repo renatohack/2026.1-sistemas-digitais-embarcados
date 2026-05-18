@@ -1,0 +1,10 @@
+VCD info: dumpfile sim/build/tb_minifloat_e4m3_addsub.vcd opened for output.
+PASS: float add 1.0 + 0.5
+PASS: float add overflow to infinity
+PASS: float add cancellation to zero
+PASS: float add underflow to zero
+PASS: float sub 1.0 - 0.5
+PASS: float sub negative result
+PASS: float sub overflow to infinity
+PASS: float sub underflow to zero
+ALL TESTS PASSED

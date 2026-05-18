@@ -1,0 +1,11 @@
+VCD info: dumpfile sim/build/tb_int_unsigned_alu.vcd opened for output.
+PASS: unsigned add normal
+PASS: unsigned add overflow
+PASS: unsigned sub normal
+PASS: unsigned sub underflow
+PASS: unsigned mul normal
+PASS: unsigned mul overflow
+PASS: unsigned div exact
+PASS: unsigned div inexact
+PASS: unsigned div zero
+ALL TESTS PASSED

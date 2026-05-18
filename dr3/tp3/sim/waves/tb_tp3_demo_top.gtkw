@@ -1,0 +1,30 @@
+[*]
+[*] GTKWave save file for DR3 TP3 Tang Nano 9K top
+[dumpfile] "sim/build/tb_tp3_demo_top.vcd"
+[savefile] "sim/waves/tb_tp3_demo_top.gtkw"
+[timestart] 0
+[size] 1500 900
+[pos] -1 -1
+*-DR3 TP3 top and UART
+@28
+tb_tp3_demo_top.sys_clk
+tb_tp3_demo_top.sys_rst_n
+tb_tp3_demo_top.btn_n[3:0]
+tb_tp3_demo_top.dut.button_pulse[3:0]
+@22
+tb_tp3_demo_top.dut.mode[1:0]
+tb_tp3_demo_top.dut.op[1:0]
+tb_tp3_demo_top.dut.case_id[1:0]
+tb_tp3_demo_top.dut.a[7:0]
+tb_tp3_demo_top.dut.b[7:0]
+tb_tp3_demo_top.dut.result[7:0]
+tb_tp3_demo_top.dut.expected[7:0]
+tb_tp3_demo_top.dut.flags[5:0]
+tb_tp3_demo_top.dut.expected_flags[5:0]
+@28
+tb_tp3_demo_top.dut.pass
+tb_tp3_demo_top.led_n[3:0]
+tb_tp3_demo_top.uart_tx
+tb_tp3_demo_top.dut.uart_start
+tb_tp3_demo_top.dut.uart_busy
+tb_tp3_demo_top.dut.uart_data[7:0]

@@ -1,0 +1,16 @@
+VCD info: dumpfile sim/build/tb_int_signed_alu.vcd opened for output.
+PASS: signed add normal
+PASS: signed add positive overflow
+PASS: signed add negative underflow
+PASS: signed sub normal
+PASS: signed sub negative underflow
+PASS: signed sub positive overflow
+PASS: signed mul normal
+PASS: signed mul overflow
+PASS: signed mul underflow
+PASS: signed div exact
+PASS: signed div inexact
+PASS: signed negative div inexact
+PASS: signed div zero
+PASS: signed min divided by minus one overflow
+ALL TESTS PASSED
