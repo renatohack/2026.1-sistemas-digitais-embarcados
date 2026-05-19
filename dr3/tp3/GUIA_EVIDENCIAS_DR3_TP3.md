@@ -1,8 +1,8 @@
 # Guia de Evidencias - DR3 TP3
 
-Este guia lista as evidencias que faltam gerar manualmente e os caminhos finais onde elas devem ser salvas. O ZIP final nao foi gerado por projeto.
+Este guia registra como as evidencias do TP3 foram geradas e quais caminhos finais devem ser conferidos antes do ZIP. O ZIP final nao foi gerado por projeto.
 
-## 1. Evidencias ja geradas automaticamente
+## 1. Evidencias automaticas e relatorio final
 
 Rode novamente, se precisar atualizar:
 
@@ -16,9 +16,10 @@ Arquivos ja gerados:
 - VCDs: `sim/build/*.vcd`
 - Copia dos VCDs para entrega: `evidencias/simulacao/*.vcd`
 - Projeto Gowin: `gowin/tp3_arithmetic_core.gprj`
-- Relatorio tecnico base: `relatorio/relatorio_DR3_TP3.md`, `relatorio/relatorio_DR3_TP3.html`, `relatorio/relatorio_DR3_TP3.pdf`
+- Relatorio final: `relatorio/relatorio_DR3_TP3.html` e `relatorio/relatorio_DR3_TP3.pdf`
+- Versao textual auxiliar: `relatorio/relatorio_DR3_TP3.md`
 
-Observacao: o relatorio atual e uma base tecnica. Depois que as imagens deste guia forem salvas, o relatorio final deve ser atualizado para incorporar as figuras diretamente no HTML/PDF.
+Observacao: o relatorio HTML/PDF ja incorpora as figuras de simulacao, Gowin e hardware salvas nos caminhos deste guia.
 
 ## 2. Capturas GTKWave
 
@@ -193,6 +194,65 @@ TP3 mode=UINT8  op=ADD case=1 A=FA B=0A result=04 flags=01 OVERFLOW  pass=YES
 TP3 mode=Q3.4   op=ADD case=1 A=78 B=10 result=7F flags=09 OVF+SAT   pass=YES
 TP3 mode=E4M3   op=MUL case=0 A=38 B=30 result=00 flags=10 UNSUP     pass=YES
 ```
+
+### 4.1 Abrindo pelo Windows
+
+Se voce estiver usando WSL, e normal `ls /dev/ttyUSB*` nao mostrar nada. O WSL nao enxerga automaticamente as portas seriais USB do Windows. Para a evidencia, use um terminal serial no proprio Windows.
+
+Passos:
+
+1. Conecte a Tang Nano 9K no USB.
+2. Abra o **Gerenciador de Dispositivos** do Windows.
+3. Procure em **Portas (COM e LPT)**.
+4. Anote a porta, por exemplo `COM3`, `COM4` ou `COM7`.
+5. Abra um terminal serial em:
+   - Baud rate: `115200`
+   - Data bits: `8`
+   - Parity: `None`
+   - Stop bits: `1`
+   - Flow control: `None`
+
+Opcao recomendada com PuTTY:
+
+1. Abra o PuTTY.
+2. Em **Connection type**, escolha **Serial**.
+3. Em **Serial line**, coloque a porta, por exemplo `COM4`.
+4. Em **Speed**, coloque `115200`.
+5. Clique em **Open**.
+6. Pressione reset na Tang ou pressione BTN3 para retransmitir a linha atual.
+
+Opcao com Tera Term:
+
+1. Abra o Tera Term.
+2. Escolha **Serial**.
+3. Selecione a porta `COMx` da Tang.
+4. Em **Setup > Serial port**, configure `115200`, `8 bit`, `none`, `1 bit`, `none`.
+5. Pressione reset ou BTN3.
+
+Opcao sem instalar nada, usando PowerShell:
+
+```powershell
+$port = New-Object System.IO.Ports.SerialPort COM4,115200,None,8,one
+$port.Open()
+while ($true) { $port.ReadLine() }
+```
+
+Troque `COM4` pela porta que apareceu no Gerenciador de Dispositivos. Para parar, pressione `Ctrl+C`. Se a porta ficar presa depois disso, feche a janela do PowerShell ou rode:
+
+```powershell
+$port.Close()
+```
+
+Se nenhuma porta `COMx` aparecer no Gerenciador de Dispositivos:
+
+- Desconecte e reconecte a placa.
+- Teste outro cabo USB, porque alguns cabos so carregam energia.
+- Veja se aparece algum dispositivo com alerta amarelo.
+- Instale o driver USB-Serial correspondente ao chip da sua placa, geralmente WCH/CH34x/CH343 em placas desse tipo.
+
+### 4.2 Abrindo pelo Linux nativo
+
+Use esta parte apenas se voce estiver em Linux nativo, nao no WSL.
 
 Abrindo o terminal no Linux:
 

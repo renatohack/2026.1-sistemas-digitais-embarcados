@@ -1,481 +1,840 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta charset="utf-8">
   <title>Relatorio Tecnico - DR3 TP3</title>
   <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
+    * {
+      box-sizing: border-box;
     }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+
+    body {
+      margin: 0;
+      color: #18202b;
+      background: #ffffff;
+      font-family: "Arial", "Helvetica", sans-serif;
+      font-size: 10.4pt;
+      line-height: 1.45;
     }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+
+    .cover {
+      min-height: 260mm;
+      padding: 28mm 18mm 18mm;
+      background: linear-gradient(180deg, #eef4fb 0%, #ffffff 42%);
+      page-break-after: always;
     }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+    .eyebrow {
+      color: #45617f;
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12mm 0 6mm;
+      color: #102033;
+      font-size: 30pt;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 158mm;
+      color: #38495c;
+      font-size: 13.5pt;
+      line-height: 1.45;
+    }
+
+    .cover-grid,
+    .grid-2,
+    .flow-grid {
+      display: table;
+      width: 100%;
+      border-spacing: 0;
+    }
+
+    .cover-grid {
+      margin-top: 18mm;
+    }
+
+    .cover-card {
+      display: table-cell;
+      width: 50%;
+      padding: 5mm;
+      border: 1px solid #d6e0ea;
+      background: #ffffff;
+      vertical-align: top;
+    }
+
+    .cover-card:first-child {
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .cover-card:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .meta-label {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #617187;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-bottom: 4mm;
+      color: #172334;
+      font-size: 11pt;
+    }
+
+    .section {
+      padding: 8mm 14mm 3mm;
+      page-break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 4mm;
+      padding-bottom: 2mm;
+      color: #12304d;
+      border-bottom: 2px solid #d8e3ee;
+      font-size: 17pt;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 6mm 0 2.5mm;
+      color: #26384c;
+      font-size: 12.2pt;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 3.2mm;
+    }
+
+    .lead {
+      color: #33465b;
+      font-size: 11.2pt;
+    }
+
+    .callout {
+      margin: 4mm 0;
+      padding: 4mm;
+      border-left: 4px solid #2d6da3;
+      background: #f3f7fb;
+      border-radius: 4px;
+    }
+
+    .note {
+      color: #536276;
+      font-size: 9.4pt;
+    }
+
+    .grid-2 {
+      border-spacing: 4mm 0;
+      margin: 3mm -4mm 0;
+    }
+
+    .grid-2 > .cell {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+    }
+
+    table {
+      width: 100%;
+      margin: 2mm 0 5mm;
+      border-collapse: collapse;
+      table-layout: fixed;
+      page-break-inside: avoid;
+    }
+
+    th,
+    td {
+      padding: 2.1mm 2.4mm;
+      border: 1px solid #dce4ed;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    th {
+      color: #203346;
+      background: #edf3f8;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    td {
+      background: #ffffff;
+    }
+
+    .compact td,
+    .compact th {
+      padding: 1.55mm 2mm;
+      font-size: 9.1pt;
+    }
+
+    .num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    code,
+    .mono {
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8.8pt;
+      color: #142238;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    pre {
+      margin: 2mm 0 4mm;
+      padding: 3mm;
+      color: #142238;
+      background: #f6f8fb;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8pt;
+      line-height: 1.35;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    ul {
+      margin: 1mm 0 4mm 5mm;
+      padding: 0 0 0 4mm;
+    }
+
+    li {
+      margin-bottom: 1.4mm;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 1.2mm 1.2mm 0;
+      padding: 1mm 2mm;
+      border: 1px solid #cdd9e6;
+      border-radius: 12px;
+      background: #f7fafc;
+      color: #27394e;
+      font-size: 8.8pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .flow-grid {
+      border-spacing: 2.5mm;
+      margin: 2mm -2.5mm 4mm;
+    }
+
+    .flow-cell {
+      display: table-cell;
+      width: 25%;
+      padding: 3mm;
+      border: 1px solid #d6e0ea;
+      border-radius: 4px;
+      background: #f8fbfe;
+      vertical-align: top;
+      page-break-inside: avoid;
+    }
+
+    .flow-title {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #12304d;
+      font-weight: 700;
+    }
+
+    .figure {
+      margin: 4mm 0 7mm;
+      page-break-inside: avoid;
+    }
+
+    .figure img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      background: #ffffff;
+    }
+
+    .figure.portrait img {
+      max-height: 210mm;
+      margin: 0 auto;
+    }
+
+    .caption {
+      margin-top: 1.5mm;
+      color: #536276;
+      font-size: 9pt;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .tight {
+      margin-bottom: 1.2mm;
+    }
   </style>
-  <link rel="stylesheet" href="relatorio_DR3_TP3.css" />
 </head>
 <body>
-<header id="title-block-header">
-<h1 class="title">Relatorio Tecnico - DR3 TP3</h1>
-</header>
-<h1 id="relatorio-tecnico---dr3-tp3">Relatorio Tecnico - DR3 TP3</h1>
-<p>Aluno: Renato Noronha Hack<br />
-Disciplina: Verilog Avancado e Arquiteturas FPGA<br />
-Projeto: Nucleo Aritmetico Parametrizavel em FPGA<br />
-Placa: Tang Nano 9K</p>
-<p>Este Markdown e a versao textual do relatorio. A versao final diagramada foi gerada em <code>relatorio/relatorio_DR3_TP3.pdf</code> a partir de <code>relatorio/relatorio_DR3_TP3.html</code>.</p>
-<h2 id="resumo">1. Resumo</h2>
-<p>O projeto implementa um nucleo aritmetico parametrizavel em Verilog HDL para a Tang Nano 9K. O nucleo suporta quatro modos numericos: inteiro sem sinal de 8 bits, inteiro com sinal em complemento de dois, ponto fixo assinado <code>Q3.4</code> e ponto flutuante simplificado <code>E4M3</code>, inspirado no padrao IEEE-754.</p>
-<p>O nucleo foi organizado em unidades independentes e integrado em um modulo de topo demonstrativo. Como a montagem disponivel nao possui display de sete segmentos, a validacao fisica usa quatro botoes externos no protoboard, quatro LEDs onboard e uma saida UART em 115200 8N1 para exibir operandos, resultado, flags e status PASS/FAIL.</p>
-<h2 id="formatos-numericos">2. Formatos numericos</h2>
-<table>
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Modo</th>
-<th>Codigo</th>
-<th>Formato</th>
-<th>Faixa principal</th>
-<th>Observacao</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Inteiro sem sinal</td>
-<td><code>00</code></td>
-<td><code>uint8</code></td>
-<td>0 a 255</td>
-<td>Operacoes modulo 8 bits, com flag de overflow/underflow.</td>
-</tr>
-<tr class="even">
-<td>Inteiro com sinal</td>
-<td><code>01</code></td>
-<td><code>int8</code> complemento de dois</td>
-<td>-128 a 127</td>
-<td>Resultado em 8 bits, flags indicam estouro positivo ou negativo.</td>
-</tr>
-<tr class="odd">
-<td>Ponto fixo</td>
-<td><code>10</code></td>
-<td><code>Q3.4</code> assinado</td>
-<td>-8.0000 a 7.9375</td>
-<td>1 bit de sinal, 3 bits inteiros e 4 bits fracionarios.</td>
-</tr>
-<tr class="even">
-<td>Ponto flutuante</td>
-<td><code>11</code></td>
-<td><code>E4M3</code></td>
-<td>normalizado, bias 7</td>
-<td>1 bit de sinal, 4 de expoente e 3 de mantissa.</td>
-</tr>
-</tbody>
-</table>
-<p>No formato <code>Q3.4</code>, o valor real e calculado por:</p>
-<pre class="text"><code>valor = inteiro_com_sinal / 16</code></pre>
-<p>Assim, <code>18h</code> representa <code>1.5</code>, <code>08h</code> representa <code>0.5</code> e <code>80h</code> representa <code>-8.0</code>.</p>
-<p>No formato <code>E4M3</code>, os campos sao:</p>
-<pre class="text"><code>[7]     sinal
-[6:3]   expoente com bias 7
-[2:0]   fracao da mantissa</code></pre>
-<p>Valores com expoente <code>1111</code> e fracao zero representam infinito. Subnormais nao sao preservados como resultado; resultados abaixo do menor normal sao convertidos para zero com flags de underflow e inexatidao.</p>
-<h2 id="arquitetura">3. Arquitetura</h2>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Modulo</th>
-<th>Funcao</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>int_unsigned_alu</code></td>
-<td>Soma, subtracao, multiplicacao e divisao para inteiros sem sinal.</td>
-</tr>
-<tr class="even">
-<td><code>int_signed_alu</code></td>
-<td>Soma, subtracao, multiplicacao e divisao para inteiros em complemento de dois.</td>
-</tr>
-<tr class="odd">
-<td><code>fixed_q3_4_alu</code></td>
-<td>Operacoes em ponto fixo <code>Q3.4</code>, com saturacao em overflow/underflow.</td>
-</tr>
-<tr class="even">
-<td><code>minifloat_e4m3_addsub</code></td>
-<td>Soma/subtracao em ponto flutuante <code>E4M3</code>, com alinhamento, normalizacao e excecoes basicas.</td>
-</tr>
-<tr class="odd">
-<td><code>arithmetic_core</code></td>
-<td>Multiplexa as unidades conforme <code>mode</code> e <code>op</code>.</td>
-</tr>
-<tr class="even">
-<td><code>tp3_demo_vectors</code></td>
-<td>Vetores demonstrativos e valores esperados usados pelo top fisico.</td>
-</tr>
-<tr class="odd">
-<td><code>tp3_demo_top</code></td>
-<td>Integra botoes, LEDs, UART e nucleo aritmetico.</td>
-</tr>
-</tbody>
-</table>
-<p>Operacoes:</p>
-<table>
-<thead>
-<tr class="header">
-<th><code>op</code></th>
-<th>Operacao</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>00</code></td>
-<td>Soma</td>
-</tr>
-<tr class="even">
-<td><code>01</code></td>
-<td>Subtracao</td>
-</tr>
-<tr class="odd">
-<td><code>10</code></td>
-<td>Multiplicacao</td>
-</tr>
-<tr class="even">
-<td><code>11</code></td>
-<td>Divisao</td>
-</tr>
-</tbody>
-</table>
-<p>Para ponto flutuante <code>E4M3</code>, apenas soma e subtracao sao implementadas. Multiplicacao e divisao retornam <code>unsupported</code>.</p>
-<p>Flags:</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Bit</th>
-<th>Nome</th>
-<th>Significado</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td>overflow</td>
-<td>Resultado acima do maximo representavel.</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td>underflow</td>
-<td>Resultado abaixo do minimo representavel.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td>div_zero</td>
-<td>Divisao por zero.</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">3</td>
-<td>saturation</td>
-<td>Resultado foi saturado no limite do formato.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">4</td>
-<td>unsupported</td>
-<td>Operacao nao implementada para o modo selecionado.</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">5</td>
-<td>inexact</td>
-<td>Houve truncamento ou resto descartado.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="integracao-com-a-tang-nano-9k">4. Integracao com a Tang Nano 9K</h2>
-<p>O projeto Gowin esta em <code>gowin/tp3_arithmetic_core.gprj</code>, usando o dispositivo <code>GW1NR-9C</code> (<code>GW1NR-LV9QN88PC6/I5</code>).</p>
-<p>Mapeamento de pinos:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Sinal</th>
-<th style="text-align: right;">Pino</th>
-<th>Uso</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>sys_clk</code></td>
-<td style="text-align: right;">52</td>
-<td>Clock onboard.</td>
-</tr>
-<tr class="even">
-<td><code>sys_rst_n</code></td>
-<td style="text-align: right;">4</td>
-<td>Reset ativo em nivel baixo.</td>
-</tr>
-<tr class="odd">
-<td><code>btn_n[0]</code></td>
-<td style="text-align: right;">25</td>
-<td>Troca modo numerico.</td>
-</tr>
-<tr class="even">
-<td><code>btn_n[1]</code></td>
-<td style="text-align: right;">26</td>
-<td>Troca operacao.</td>
-</tr>
-<tr class="odd">
-<td><code>btn_n[2]</code></td>
-<td style="text-align: right;">27</td>
-<td>Troca vetor de teste.</td>
-</tr>
-<tr class="even">
-<td><code>btn_n[3]</code></td>
-<td style="text-align: right;">28</td>
-<td>Retransmite a linha UART atual.</td>
-</tr>
-<tr class="odd">
-<td><code>led_n[0]</code></td>
-<td style="text-align: right;">10</td>
-<td>PASS do vetor atual.</td>
-</tr>
-<tr class="even">
-<td><code>led_n[1]</code></td>
-<td style="text-align: right;">11</td>
-<td>Alguma flag ativa.</td>
-</tr>
-<tr class="odd">
-<td><code>led_n[2]</code></td>
-<td style="text-align: right;">13</td>
-<td>Bit 0 do modo.</td>
-</tr>
-<tr class="even">
-<td><code>led_n[3]</code></td>
-<td style="text-align: right;">14</td>
-<td>Bit 1 do modo.</td>
-</tr>
-<tr class="odd">
-<td><code>uart_tx</code></td>
-<td style="text-align: right;">17</td>
-<td>Saida serial 115200 8N1.</td>
-</tr>
-</tbody>
-</table>
-<p>Formato da linha UART:</p>
-<pre class="text"><code>TP3 mode=&lt;formato&gt; op=&lt;operacao&gt; case=&lt;n&gt; A=&lt;hex&gt; B=&lt;hex&gt; result=&lt;hex&gt; flags=&lt;hex+texto&gt; pass=&lt;YES/NO&gt;</code></pre>
-<p>Exemplo do reset:</p>
-<pre class="text"><code>TP3 mode=UINT8  op=ADD case=0 A=0C B=05 result=11 flags=00 OK        pass=YES</code></pre>
-<h2 id="testbenches">5. Testbenches</h2>
-<p>As simulacoes foram executadas com Icarus Verilog:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">./sim/run_all.sh</span></span></code></pre></div>
-<p>Testbenches:</p>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Testbench</th>
-<th>Cobertura</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>tb_int_unsigned_alu</code></td>
-<td>Soma, subtracao, multiplicacao, divisao, overflow, underflow, divisao por zero e inexatidao.</td>
-</tr>
-<tr class="even">
-<td><code>tb_int_signed_alu</code></td>
-<td>Operacoes assinadas, overflow positivo, underflow negativo, divisao inexata e caso <code>-128 / -1</code>.</td>
-</tr>
-<tr class="odd">
-<td><code>tb_fixed_q3_4_alu</code></td>
-<td>Operacoes <code>Q3.4</code>, saturacao positiva/negativa, truncamento e divisao por zero.</td>
-</tr>
-<tr class="even">
-<td><code>tb_minifloat_e4m3_addsub</code></td>
-<td>Soma/subtracao <code>E4M3</code>, cancelamento, overflow para infinito e underflow para zero.</td>
-</tr>
-<tr class="odd">
-<td><code>tb_arithmetic_core</code></td>
-<td>Varredura de todos os modos, operacoes e vetores demonstrativos.</td>
-</tr>
-<tr class="even">
-<td><code>tb_tp3_demo_top</code></td>
-<td>Reset, botoes, LEDs e transmissao UART do top da Tang.</td>
-</tr>
-</tbody>
-</table>
-<p>Resultado das simulacoes:</p>
-<pre class="text"><code>All simulations completed.</code></pre>
-<p>Os logs foram salvos em <code>evidencias/simulacao/*.log</code>, e os VCDs foram salvos em <code>sim/build/*.vcd</code> e copiados para <code>evidencias/simulacao/*.vcd</code>.</p>
-<h2 id="interpretacao-das-formas-de-onda">6. Interpretacao das formas de onda</h2>
-<p>No testbench <code>tb_arithmetic_core</code>, a forma de onda mostra a varredura de <code>mode</code>, <code>op</code> e <code>case_id</code>. Para cada combinacao, os sinais <code>a</code>, <code>b</code>, <code>result</code> e <code>flags</code> sao comparados com <code>expected</code> e <code>expected_flags</code>. O contador <code>errors</code> permanece em zero durante toda a simulacao.</p>
-<p>No testbench <code>tb_fixed_q3_4_alu</code>, os casos de saturacao aparecem quando o resultado matematico excede <code>7Fh</code> ou fica abaixo de <code>80h</code>. Nessas situacoes, <code>flags[3]</code> indica saturacao, enquanto <code>flags[0]</code> ou <code>flags[1]</code> indicam overflow ou underflow. O caso de multiplicacao <code>05h * 05h</code> evidencia truncamento com <code>flags[5] = 1</code>.</p>
-<p>No testbench <code>tb_minifloat_e4m3_addsub</code>, <code>77h + 77h</code> gera <code>78h</code>, isto e, infinito positivo, com <code>overflow</code>. Os casos com diferenca menor que o menor normal geram <code>00h</code> com underflow e inexatidao. O cancelamento exato <code>1.0 + (-1.0)</code> gera zero sem flag.</p>
-<p>No testbench <code>tb_tp3_demo_top</code>, os pulsos em <code>button_pulse</code> alteram <code>mode</code>, <code>op</code> e <code>case_id</code>. O sinal <code>uart_tx</code> transmite linhas ASCII contendo os operandos e resultados. O sinal <code>led_n[0]</code> fica em zero quando <code>pass = 1</code>, e <code>led_n[1]</code> fica em zero quando alguma flag esta ativa.</p>
-<h2 id="evidencias">7. Evidencias</h2>
-<p>Evidencias automaticas ja geradas:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Evidencia</th>
-<th>Arquivo</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Logs de simulacao</td>
-<td><code>evidencias/simulacao/*.log</code></td>
-</tr>
-<tr class="even">
-<td>VCDs</td>
-<td><code>evidencias/simulacao/*.vcd</code></td>
-</tr>
-<tr class="odd">
-<td>Savefiles GTKWave</td>
-<td><code>sim/waves/*.gtkw</code></td>
-</tr>
-</tbody>
-</table>
-<p>Evidencias manuais pendentes:</p>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Evidencia</th>
-<th>Caminho esperado</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Core integrado no GTKWave</td>
-<td><code>evidencias/waveforms/core_integrado_todos_modos.png</code></td>
-</tr>
-<tr class="even">
-<td>Top, botoes e UART no GTKWave</td>
-<td><code>evidencias/waveforms/top_uart_botoes.png</code></td>
-</tr>
-<tr class="odd">
-<td>Ponto fixo: saturacao/truncamento</td>
-<td><code>evidencias/waveforms/fixed_saturacao_truncamento.png</code></td>
-</tr>
-<tr class="even">
-<td>Ponto flutuante: overflow/underflow</td>
-<td><code>evidencias/waveforms/float_overflow_underflow.png</code></td>
-</tr>
-<tr class="odd">
-<td>Sintese Gowin</td>
-<td><code>evidencias/gowin/sintese_ok.png</code></td>
-</tr>
-<tr class="even">
-<td>Place &amp; Route Gowin</td>
-<td><code>evidencias/gowin/place_route_ok.png</code></td>
-</tr>
-<tr class="odd">
-<td>Programacao SRAM</td>
-<td><code>evidencias/gowin/programacao_sram_ok.png</code></td>
-</tr>
-<tr class="even">
-<td>Recursos Gowin</td>
-<td><code>evidencias/gowin/relatorio_recursos.txt</code></td>
-</tr>
-<tr class="odd">
-<td>Montagem fisica</td>
-<td><code>evidencias/hardware/montagem_botoes.jpg</code></td>
-</tr>
-<tr class="even">
-<td>Estado inicial nos LEDs</td>
-<td><code>evidencias/hardware/leds_estado_inicial.jpg</code></td>
-</tr>
-<tr class="odd">
-<td>Overflow nos LEDs</td>
-<td><code>evidencias/hardware/leds_overflow.jpg</code></td>
-</tr>
-<tr class="even">
-<td>Saturacao nos LEDs</td>
-<td><code>evidencias/hardware/leds_saturacao.jpg</code></td>
-</tr>
-<tr class="odd">
-<td>Terminal serial</td>
-<td><code>evidencias/hardware/serial_uart_resultados.png</code></td>
-</tr>
-</tbody>
-</table>
-<p>Os passos exatos para gerar cada evidencia manual estao em <code>GUIA_EVIDENCIAS_DR3_TP3.md</code>.</p>
-<h2 id="conclusao">8. Conclusao</h2>
-<p>O nucleo aritmetico atende aos requisitos do TP3: possui formatos numericos documentados, unidades aritmeticas modulares, tratamento de overflow/underflow/saturacao/inexatidao, testbenches com casos de borda e integracao fisica para a Tang Nano 9K. A validacao por simulacao foi concluida com sucesso. As evidencias fisicas dependem da sintese no Gowin e da execucao na placa real.</p>
+  <div class="cover">
+    <div class="eyebrow">DR3 - Teste de Performance 3</div>
+    <h1>Relatorio Tecnico<br>Nucleo Aritmetico Parametrizavel em FPGA</h1>
+    <p class="subtitle">
+      Implementacao em Verilog HDL de um nucleo aritmetico para a Tang Nano 9K,
+      contemplando inteiros com e sem sinal, ponto fixo Q3.4 e ponto flutuante
+      simplificado E4M3, com validacao por simulacao, Gowin e hardware real.
+    </p>
+
+    <div class="cover-grid">
+      <div class="cover-card">
+        <span class="meta-label">Aluno</span>
+        <span class="meta-value">Renato Noronha Hack</span>
+        <span class="meta-label">Disciplina</span>
+        <span class="meta-value">Sistemas Embarcados</span>
+        <span class="meta-label">Entrega</span>
+        <span class="meta-value">DR3 TP3</span>
+      </div>
+      <div class="cover-card">
+        <span class="meta-label">Placa</span>
+        <span class="meta-value">Tang Nano 9K - GW1NR-LV9QN88PC6/I5</span>
+        <span class="meta-label">Ferramenta</span>
+        <span class="meta-value">Gowin IDE, Icarus Verilog e GTKWave</span>
+        <span class="meta-label">Validacao</span>
+        <span class="meta-value">Simulacao, sintese, Place &amp; Route, programacao SRAM e teste fisico</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Descricao Do Projeto</h2>
+    <p class="lead">
+      O TP3 implementa um nucleo aritmetico parametrizavel em FPGA. O nucleo recebe
+      dois operandos de 8 bits, um seletor de formato numerico e um seletor de operacao.
+      A saida contem o resultado de 8 bits e um conjunto de flags que documenta
+      overflow, underflow, divisao por zero, saturacao, operacao nao suportada e
+      inexatidao por truncamento.
+    </p>
+    <p>
+      Para a validacao fisica, a montagem foi adaptada aos recursos disponiveis:
+      nao foi usado display de sete segmentos. A placa usa quatro botoes externos no
+      protoboard, quatro LEDs onboard e uma saida UART textual. A UART foi usada como
+      evidencia complementar porque permite enxergar operandos, resultado, flags e
+      status de validacao diretamente no terminal.
+    </p>
+
+    <div class="callout">
+      <strong>Comportamento no hardware:</strong> BTN0 troca o modo numerico, BTN1 troca
+      a operacao, BTN2 troca o vetor de teste e BTN3 retransmite a linha UART atual.
+      LED0 indica <span class="mono">PASS</span>, LED1 indica flag ativa, e LED2/LED3
+      mostram os bits do modo numerico selecionado.
+    </div>
+
+    <div>
+      <span class="tag">Verilog HDL</span>
+      <span class="tag">Tang Nano 9K</span>
+      <span class="tag">Inteiro sem sinal</span>
+      <span class="tag">Inteiro com sinal</span>
+      <span class="tag">Ponto fixo Q3.4</span>
+      <span class="tag">Minifloat E4M3</span>
+      <span class="tag">UART 115200 8N1</span>
+    </div>
+
+    <h3>Interface Externa</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th>Sinais</th>
+          <th>Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Botoes externos</td>
+          <td class="mono">btn_n[3:0]</td>
+          <td>Selecionam modo, operacao, caso de teste e retransmissao UART.</td>
+        </tr>
+        <tr>
+          <td>LEDs onboard</td>
+          <td class="mono">led_n[3:0]</td>
+          <td>Mostram PASS, flag ativa e bits do modo. Sao ativos em nivel baixo.</td>
+        </tr>
+        <tr>
+          <td>UART</td>
+          <td class="mono">uart_tx</td>
+          <td>Transmite uma linha ASCII com operandos, resultado, flags e pass/fail.</td>
+        </tr>
+        <tr>
+          <td>Clock e reset</td>
+          <td class="mono">sys_clk, sys_rst_n</td>
+          <td>Clock onboard e reset ativo em nivel baixo.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>2. Formatos Numericos</h2>
+    <p>
+      A largura de 8 bits foi adotada para manter o circuito pequeno, observavel nos
+      LEDs/UART e simples de cobrir por testbench. Mesmo com largura reduzida, os
+      formatos exercitam os principais problemas do enunciado: complemento de dois,
+      saturacao em ponto fixo, normalizacao em ponto flutuante e flags de limite.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Modo</th>
+          <th>Codigo</th>
+          <th>Formato</th>
+          <th>Faixa / Campos</th>
+          <th>Decisao de projeto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Inteiro sem sinal</td>
+          <td class="mono">00</td>
+          <td class="mono">uint8</td>
+          <td>0 a 255</td>
+          <td>Operacoes modulo 8 bits; overflow/underflow sao sinalizados por flag.</td>
+        </tr>
+        <tr>
+          <td>Inteiro com sinal</td>
+          <td class="mono">01</td>
+          <td class="mono">int8</td>
+          <td>-128 a 127</td>
+          <td>Complemento de dois; flags separam estouro positivo e negativo.</td>
+        </tr>
+        <tr>
+          <td>Ponto fixo</td>
+          <td class="mono">10</td>
+          <td class="mono">Q3.4</td>
+          <td>-8.0000 a 7.9375</td>
+          <td>1 bit de sinal, 3 bits inteiros e 4 fracionarios; saturacao nos limites.</td>
+        </tr>
+        <tr>
+          <td>Ponto flutuante</td>
+          <td class="mono">11</td>
+          <td class="mono">E4M3</td>
+          <td>1 sinal, 4 expoente, 3 mantissa, bias 7</td>
+          <td>Subconjunto IEEE-754 simplificado, com infinito e normalizacao basica.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Flags De Resultado</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Bit</th>
+          <th>Nome</th>
+          <th>Significado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">0</td><td class="mono">overflow</td><td>Resultado acima do maximo representavel.</td></tr>
+        <tr><td class="num">1</td><td class="mono">underflow</td><td>Resultado abaixo do minimo representavel.</td></tr>
+        <tr><td class="num">2</td><td class="mono">div_zero</td><td>Divisao por zero.</td></tr>
+        <tr><td class="num">3</td><td class="mono">saturation</td><td>Resultado saturado no limite do formato.</td></tr>
+        <tr><td class="num">4</td><td class="mono">unsupported</td><td>Operacao nao implementada para o modo selecionado.</td></tr>
+        <tr><td class="num">5</td><td class="mono">inexact</td><td>Resultado truncado ou resto descartado.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section page-break">
+    <h2>3. Arquitetura Em Verilog</h2>
+    <p>
+      O projeto foi organizado em unidades aritmeticas independentes e um modulo
+      integrador. Essa separacao torna os testbenches mais objetivos e facilita a
+      justificativa dos formatos numericos.
+    </p>
+
+    <div class="flow-grid">
+      <div class="flow-cell">
+        <span class="flow-title">1. Selecao</span>
+        <span class="mono">mode</span>, <span class="mono">op</span> e
+        <span class="mono">case_id</span> selecionam formato, operacao e vetor.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">2. Vetores</span>
+        <span class="mono">tp3_demo_vectors</span> fornece operandos e valores esperados.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">3. Core</span>
+        <span class="mono">arithmetic_core</span> aciona a unidade numerica adequada.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">4. Evidencia</span>
+        LEDs e UART mostram resultado, flags e status de validacao.
+      </div>
+    </div>
+
+    <h3>Modulos Implementados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Modulo</th>
+          <th>Responsabilidade</th>
+          <th>Tratamento numerico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">int_unsigned_alu</td>
+          <td>Soma, subtracao, multiplicacao e divisao sem sinal.</td>
+          <td>Resultado modulo 8 bits; flags para overflow, underflow, divisao por zero e inexatidao.</td>
+        </tr>
+        <tr>
+          <td class="mono">int_signed_alu</td>
+          <td>Operacoes inteiras em complemento de dois.</td>
+          <td>Usa extensao de sinal e detecta estouro fora da faixa -128..127.</td>
+        </tr>
+        <tr>
+          <td class="mono">fixed_q3_4_alu</td>
+          <td>Operacoes em ponto fixo Q3.4.</td>
+          <td>Multiplicacao desloca 4 bits; divisao desloca o dividendo; overflow satura em 7Fh ou 80h.</td>
+        </tr>
+        <tr>
+          <td class="mono">minifloat_e4m3_addsub</td>
+          <td>Soma e subtracao de minifloat E4M3.</td>
+          <td>Alinha expoentes, soma magnitudes sinalizadas, normaliza e trata infinito/underflow.</td>
+        </tr>
+        <tr>
+          <td class="mono">arithmetic_core</td>
+          <td>Seleciona a unidade pelo modo numerico.</td>
+          <td>Marca <span class="mono">unsupported</span> para multiplicacao/divisao em E4M3.</td>
+        </tr>
+        <tr>
+          <td class="mono">tp3_demo_top</td>
+          <td>Integra botoes, LEDs, UART e nucleo.</td>
+          <td>Compara resultado contra o vetor esperado e transmite a linha textual.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Formato Da UART</h3>
+    <p>
+      A saida serial foi usada para tornar a validacao fisica legivel. A linha abaixo
+      representa o estado inicial depois de reset:
+    </p>
+    <pre>TP3 mode=UINT8  op=ADD case=0 A=0C B=05 result=11 flags=00 OK        pass=YES</pre>
+  </div>
+
+  <div class="section">
+    <h2>4. Integracao Na Tang Nano 9K</h2>
+    <p>
+      O projeto Gowin usa o dispositivo <span class="mono">GW1NR-LV9QN88PC6/I5</span>.
+      Os botoes externos foram ligados a GND e usam pull-up interno. Os LEDs onboard
+      da placa sao ativos em nivel baixo.
+    </p>
+
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Sinal</th>
+          <th>Pino</th>
+          <th>Direcao</th>
+          <th>IO Type</th>
+          <th>Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono">sys_clk</td><td class="num">52</td><td>Entrada</td><td>LVCMOS33</td><td>Clock onboard.</td></tr>
+        <tr><td class="mono">sys_rst_n</td><td class="num">4</td><td>Entrada</td><td>LVCMOS18</td><td>Reset ativo em baixo.</td></tr>
+        <tr><td class="mono">btn_n[0]</td><td class="num">25</td><td>Entrada</td><td>LVCMOS33</td><td>Troca modo numerico.</td></tr>
+        <tr><td class="mono">btn_n[1]</td><td class="num">26</td><td>Entrada</td><td>LVCMOS33</td><td>Troca operacao.</td></tr>
+        <tr><td class="mono">btn_n[2]</td><td class="num">27</td><td>Entrada</td><td>LVCMOS33</td><td>Troca vetor/caso.</td></tr>
+        <tr><td class="mono">btn_n[3]</td><td class="num">28</td><td>Entrada</td><td>LVCMOS33</td><td>Retransmite UART.</td></tr>
+        <tr><td class="mono">led_n[0]</td><td class="num">10</td><td>Saida</td><td>LVCMOS18</td><td>PASS do vetor atual.</td></tr>
+        <tr><td class="mono">led_n[1]</td><td class="num">11</td><td>Saida</td><td>LVCMOS18</td><td>Alguma flag ativa.</td></tr>
+        <tr><td class="mono">led_n[2]</td><td class="num">13</td><td>Saida</td><td>LVCMOS18</td><td>Bit 0 do modo.</td></tr>
+        <tr><td class="mono">led_n[3]</td><td class="num">14</td><td>Saida</td><td>LVCMOS18</td><td>Bit 1 do modo.</td></tr>
+        <tr><td class="mono">uart_tx</td><td class="num">17</td><td>Saida</td><td>LVCMOS33</td><td>Serial 115200 8N1.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Ligacao fisica dos botoes:</strong>
+      <span class="mono">pino da Tang -> botao -> GND comum</span>. Nao foi usado 3V3
+      ou 5V nos botoes, pois as entradas ja possuem pull-up configurado no arquivo CST.
+    </div>
+  </div>
+
+  <div class="section page-break">
+    <h2>5. Testbenches E Simulacao</h2>
+    <p>
+      Os testbenches cobrem as unidades aritmeticas isoladas, o core integrado e o
+      top de demonstracao com botoes, LEDs e UART. Todos os logs terminaram com
+      <span class="mono">ALL TESTS PASSED</span>.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Testbench</th>
+          <th>Cobertura</th>
+          <th>Arquivo de evidencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">tb_int_unsigned_alu</td>
+          <td>Operacoes unsigned, overflow, underflow, divisao por zero e resto.</td>
+          <td class="mono">evidencias/simulacao/tb_int_unsigned_alu.log</td>
+        </tr>
+        <tr>
+          <td class="mono">tb_int_signed_alu</td>
+          <td>Complemento de dois, limites -128/127, overflow, underflow e divisao inexata.</td>
+          <td class="mono">evidencias/simulacao/tb_int_signed_alu.log</td>
+        </tr>
+        <tr>
+          <td class="mono">tb_fixed_q3_4_alu</td>
+          <td>Saturacao positiva/negativa, truncamento e divisao por zero em Q3.4.</td>
+          <td class="mono">evidencias/simulacao/tb_fixed_q3_4_alu.log</td>
+        </tr>
+        <tr>
+          <td class="mono">tb_minifloat_e4m3_addsub</td>
+          <td>Alinhamento, cancelamento, overflow para infinito e underflow para zero.</td>
+          <td class="mono">evidencias/simulacao/tb_minifloat_e4m3_addsub.log</td>
+        </tr>
+        <tr>
+          <td class="mono">tb_arithmetic_core</td>
+          <td>Varredura de todos os modos, operacoes e vetores demonstrativos.</td>
+          <td class="mono">evidencias/simulacao/tb_arithmetic_core.log</td>
+        </tr>
+        <tr>
+          <td class="mono">tb_tp3_demo_top</td>
+          <td>Reset, botoes, LEDs e transmissao UART no top.</td>
+          <td class="mono">evidencias/simulacao/tb_tp3_demo_top.log</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pre>./sim/run_all.sh
+...
+ALL TESTS PASSED
+All simulations completed.</pre>
+
+    <h3>Waveforms Das Simulacoes</h3>
+    <div class="figure">
+      <img src="../evidencias/waveforms/core_integrado_todos_modos.png" alt="Waveform do core aritmetico integrado">
+      <div class="caption">
+        Figura 1 - Core integrado percorrendo modos, operacoes e casos. O print mostra
+        resultado igual ao esperado, flags iguais as esperadas e contador de erros em zero.
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="../evidencias/waveforms/fixed_saturacao_truncamento.png" alt="Waveform de ponto fixo Q3.4">
+      <div class="caption">
+        Figura 2 - Ponto fixo Q3.4 com saturacao positiva/negativa e truncamento. As
+        flags <span class="mono">09</span>, <span class="mono">0A</span> e
+        <span class="mono">20</span> evidenciam saturacao e inexatidao.
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="../evidencias/waveforms/float_overflow_underflow.png" alt="Waveform de minifloat E4M3">
+      <div class="caption">
+        Figura 3 - Ponto flutuante simplificado E4M3. A simulacao mostra overflow para
+        infinito com <span class="mono">result=78 flags=01</span> e underflow para zero
+        com <span class="mono">result=00 flags=22</span>.
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="../evidencias/waveforms/top_uart_botoes.png" alt="Waveform do top com botoes e UART">
+      <div class="caption">
+        Figura 4 - Top de demonstracao com pulso em <span class="mono">button_pulse[2]</span>,
+        mudanca de caso para <span class="mono">case_id=1</span>, atualizacao de flags,
+        LEDs e atividade UART.
+      </div>
+    </div>
+  </div>
+
+  <div class="section page-break">
+    <h2>6. Sintese, Place &amp; Route E Recursos</h2>
+    <p>
+      O projeto foi sintetizado e roteado no Gowin IDE para a Tang Nano 9K. A sintese
+      e o Place &amp; Route concluem sem erros. O Place &amp; Route emite apenas o aviso
+      de que <span class="mono">sys_clk</span> foi identificado como clock sem constraint
+      temporal explicita; isso nao impediu a geracao do bitstream e a validacao fisica.
+    </p>
+
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th>Uso</th>
+          <th>Utilizacao</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Logic</td><td>1784 / 8640</td><td>21%</td></tr>
+        <tr><td>LUT / ALU / ROM16</td><td>1545 LUT, 239 ALU, 0 ROM16</td><td>-</td></tr>
+        <tr><td>Register</td><td>154 / 6693</td><td>3%</td></tr>
+        <tr><td>CLS</td><td>1001 / 4320</td><td>24%</td></tr>
+        <tr><td>I/O Port</td><td>11 / 71</td><td>16%</td></tr>
+        <tr><td>DSP</td><td>0.5 / 10; 2 MULT9X9</td><td>5%</td></tr>
+      </tbody>
+    </table>
+
+    <p class="note">
+      Resumo salvo em <span class="mono">evidencias/gowin/relatorio_recursos.txt</span>
+      e relatorio completo em <span class="mono">gowin/impl/pnr/tp3_arithmetic_core.rpt.txt</span>.
+    </p>
+
+    <div class="figure">
+      <img src="../evidencias/gowin/sintese_ok.png" alt="Sintese concluida no Gowin">
+      <div class="caption">
+        Figura 5 - Sintese concluida no Gowin, com o modulo
+        <span class="mono">tp3_demo_top</span> identificado como top.
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="../evidencias/gowin/place_route_ok.png" alt="Place and Route concluido no Gowin">
+      <div class="caption">
+        Figura 6 - Place &amp; Route concluido. A interface mostra uma advertencia de
+        constraint temporal para <span class="mono">sys_clk</span>, sem erros.
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="../evidencias/gowin/programacao_sram_ok.png" alt="Programacao SRAM concluida">
+      <div class="caption">
+        Figura 7 - Programacao SRAM concluida no Gowin Programmer. A janela mostra
+        <span class="mono">Finished</span> e tempo de programacao de 3,38 s.
+      </div>
+    </div>
+  </div>
+
+  <div class="section page-break">
+    <h2>7. Validacao Em Hardware</h2>
+    <p>
+      A validacao fisica foi realizada com a Tang Nano 9K programada em SRAM. A montagem
+      usa quatro botoes no protoboard, ligados ao GND comum, e os LEDs onboard da placa.
+      A UART foi lida pelo PowerShell no Windows, usando uma porta COM em 115200 baud.
+    </p>
+
+    <div class="figure portrait">
+      <img src="../evidencias/hardware/montagem_botoes.jpg" alt="Montagem fisica com botoes no protoboard">
+      <div class="caption">
+        Figura 8 - Montagem fisica com a Tang Nano 9K, quatro botoes externos no
+        protoboard e GND comum.
+      </div>
+    </div>
+
+    <div class="figure">
+      <img src="../evidencias/hardware/serial_uart_resultados.png" alt="Terminal serial com resultados da UART">
+      <div class="caption">
+        Figura 9 - Terminal serial no Windows recebendo linhas UART do hardware real.
+        As linhas mostram casos de soma unsigned, overflow, modo assinado e saturacao
+        em ponto fixo, todos com <span class="mono">pass=YES</span>.
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="cell">
+        <div class="figure portrait">
+          <img src="../evidencias/hardware/leds_estado_inicial.jpg" alt="LEDs no estado inicial">
+          <div class="caption">
+            Figura 10 - Estado inicial apos reset: caso
+            <span class="mono">UINT8 ADD case=0</span>, sem flags e PASS ativo.
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="figure portrait">
+          <img src="../evidencias/hardware/leds_overflow.jpg" alt="LEDs em caso de overflow">
+          <div class="caption">
+            Figura 11 - Caso com overflow unsigned:
+            <span class="mono">A=FA B=0A result=04 flags=01</span>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="figure portrait">
+      <img src="../evidencias/hardware/leds_saturacao.jpg" alt="LEDs em caso de saturacao">
+      <div class="caption">
+        Figura 12 - Caso de saturacao em ponto fixo:
+        <span class="mono">mode=Q3.4 op=ADD case=1 result=7F flags=09</span>.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>8. Interpretacao Dos Resultados</h2>
+    <p>
+      As simulacoes demonstram que as unidades aritmeticas retornam resultados e flags
+      esperados nos casos normais e nos casos de borda. Em inteiros, os testbenches
+      cobrem overflow, underflow, resto de divisao e divisao por zero. Em ponto fixo,
+      a saturacao impede wrap-around silencioso, tornando explicito o limite numerico
+      do formato Q3.4.
+    </p>
+    <p>
+      No minifloat E4M3, a implementacao cobre alinhamento de expoentes, cancelamento,
+      normalizacao, overflow para infinito e underflow para zero. Como o formato e
+      reduzido, a precisao e limitada; por isso a flag <span class="mono">inexact</span>
+      e relevante para documentar truncamentos e perda de representatividade.
+    </p>
+    <p>
+      A validacao fisica confirma que o bitstream programado na FPGA executa os mesmos
+      vetores demonstrativos validados em simulacao. A UART complementa os LEDs porque
+      apresenta texto completo com modo, operacao, operandos, resultado e flags.
+    </p>
+
+    <h3>Arquivos De Entrega</h3>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Grupo</th>
+          <th>Caminho</th>
+          <th>Conteudo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Codigo</td><td class="mono">gowin/src/*.v</td><td>Modulos Verilog do nucleo e top.</td></tr>
+        <tr><td>Gowin</td><td class="mono">gowin/tp3_arithmetic_core.gprj</td><td>Projeto Gowin configurado para Tang Nano 9K.</td></tr>
+        <tr><td>Constraints</td><td class="mono">gowin/src/tp3_arithmetic_core.cst</td><td>Mapeamento de clock, reset, botoes, LEDs e UART.</td></tr>
+        <tr><td>Testes</td><td class="mono">sim/*.v</td><td>Testbenches das unidades e do top.</td></tr>
+        <tr><td>Evidencias</td><td class="mono">evidencias/</td><td>Waveforms, Gowin, UART e fotos do hardware.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>9. Conclusao</h2>
+    <p>
+      O projeto atende ao enunciado do TP3 ao implementar um nucleo aritmetico modular,
+      com suporte a inteiros com e sem sinal, ponto fixo e ponto flutuante simplificado.
+      As operacoes foram verificadas por testbenches com casos tipicos e de borda, e
+      o projeto foi sintetizado, roteado, programado e testado na Tang Nano 9K.
+    </p>
+    <p>
+      A combinacao de logs, waveforms, relatorios Gowin, capturas do Programmer,
+      terminal UART e fotos da placa demonstra a correcao funcional e a reproducibilidade
+      da implementacao.
+    </p>
+  </div>
 </body>
 </html>

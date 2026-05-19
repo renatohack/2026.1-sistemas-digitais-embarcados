@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="tp3_demo_top" Register="23" Alu="13" Lut="338" T_Register="154(23)" T_Alu="202(13)" T_Lut="1546(338)" T_MULT9X9="2(0)">
+ <SubModule name="button_inputs[0].button_conditioner_inst" Register="25" Lut="39" T_Register="25(25)" T_Lut="39(39)"/>
+ <SubModule name="button_inputs[1].button_conditioner_inst" Register="25" Lut="39" T_Register="25(25)" T_Lut="39(39)"/>
+ <SubModule name="button_inputs[2].button_conditioner_inst" Register="25" Lut="38" T_Register="25(25)" T_Lut="38(38)"/>
+ <SubModule name="button_inputs[3].button_conditioner_inst" Register="25" Lut="39" T_Register="25(25)" T_Lut="39(39)"/>
+ <SubModule name="tp3_demo_vectors_inst" Lut="142" T_Lut="142(142)"/>
+ <SubModule name="arithmetic_core_inst" Lut="416" T_Alu="189(0)" T_Lut="854(416)" T_MULT9X9="2(0)">
+  <SubModule name="int_unsigned_alu_inst" Alu="74" Lut="200" MULT9X9="1" T_Alu="74(74)" T_Lut="200(200)" T_MULT9X9="1(1)"/>
+  <SubModule name="int_signed_alu_inst" Alu="76" Lut="139" MULT9X9="1" T_Alu="76(76)" T_Lut="139(139)" T_MULT9X9="1(1)"/>
+  <SubModule name="fixed_q3_4_alu_inst" Alu="9" T_Alu="9(9)"/>
+  <SubModule name="minifloat_e4m3_addsub_inst" Alu="30" Lut="99" T_Alu="30(30)" T_Lut="99(99)"/>
+ </SubModule>
+ <SubModule name="uart_tx_inst" Register="31" Lut="57" T_Register="31(31)" T_Lut="57(57)"/>
+</Module>

@@ -1,0 +1,102 @@
+[
+ {
+  "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+  "InstLine" : 4,
+  "InstName" : "tp3_demo_top",
+  "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+  "ModuleLine" : 4,
+  "ModuleName" : "tp3_demo_top",
+  "SubInsts" : [
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+    "InstLine" : 52,
+    "InstName" : "button_inputs[0].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/button_conditioner.v",
+    "ModuleLine" : 4,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+    "InstLine" : 52,
+    "InstName" : "button_inputs[1].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/button_conditioner.v",
+    "ModuleLine" : 4,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+    "InstLine" : 52,
+    "InstName" : "button_inputs[2].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/button_conditioner.v",
+    "ModuleLine" : 4,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+    "InstLine" : 52,
+    "InstName" : "button_inputs[3].button_conditioner_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/button_conditioner.v",
+    "ModuleLine" : 4,
+    "ModuleName" : "button_conditioner"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+    "InstLine" : 62,
+    "InstName" : "tp3_demo_vectors_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_vectors.v",
+    "ModuleLine" : 4,
+    "ModuleName" : "tp3_demo_vectors"
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+    "InstLine" : 72,
+    "InstName" : "arithmetic_core_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/arithmetic_core.v",
+    "ModuleLine" : 4,
+    "ModuleName" : "arithmetic_core",
+    "SubInsts" : [
+     {
+      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/arithmetic_core.v",
+      "InstLine" : 32,
+      "InstName" : "int_unsigned_alu_inst",
+      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/int_unsigned_alu.v",
+      "ModuleLine" : 4,
+      "ModuleName" : "int_unsigned_alu"
+     },
+     {
+      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/arithmetic_core.v",
+      "InstLine" : 40,
+      "InstName" : "int_signed_alu_inst",
+      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/int_signed_alu.v",
+      "ModuleLine" : 4,
+      "ModuleName" : "int_signed_alu"
+     },
+     {
+      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/arithmetic_core.v",
+      "InstLine" : 48,
+      "InstName" : "fixed_q3_4_alu_inst",
+      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/fixed_q3_4_alu.v",
+      "ModuleLine" : 4,
+      "ModuleName" : "fixed_q3_4_alu"
+     },
+     {
+      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/arithmetic_core.v",
+      "InstLine" : 56,
+      "InstName" : "minifloat_e4m3_addsub_inst",
+      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/minifloat_e4m3_addsub.v",
+      "ModuleLine" : 4,
+      "ModuleName" : "minifloat_e4m3_addsub"
+     }
+    ]
+   },
+   {
+    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/tp3_demo_top.v",
+    "InstLine" : 84,
+    "InstName" : "uart_tx_inst",
+    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/tp3/gowin/src/uart_tx.v",
+    "ModuleLine" : 4,
+    "ModuleName" : "uart_tx"
+   }
+  ]
+ }
+]

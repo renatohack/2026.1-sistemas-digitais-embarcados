@@ -1,0 +1,30 @@
+DR3 TP3 - Resumo de recursos Gowin
+Fonte: gowin/impl/pnr/tp3_arithmetic_core.rpt.txt
+Gerado pelo Gowin em: Tue May 19 08:52:47 2026
+Dispositivo: GW1NR-9 / GW1NR-LV9QN88PC6/I5
+Top module: tp3_demo_top
+
+Resource Usage Summary:
+- Logic: 1784/8640 (21%)
+  - LUT, ALU, ROM16: 1784 total (1545 LUT, 239 ALU, 0 ROM16)
+  - SSRAM/RAM16: 0
+- Register: 154/6693 (3%)
+  - Logic Register as FF: 149/6480 (3%)
+  - I/O Register as FF: 5/213 (3%)
+- CLS: 1001/4320 (24%)
+- I/O Port: 11/71 (16%)
+- I/O Buf: 11
+  - Input Buf: 6
+  - Output Buf: 5
+  - Inout Buf: 0
+- DSP: 0.5/10 (5%)
+  - MULT9X9: 2
+
+I/O usados:
+- sys_clk: pino 52, entrada, LVCMOS33, pull-up
+- sys_rst_n: pino 4, entrada, LVCMOS18, pull-up
+- btn_n[0..3]: pinos 25, 26, 27, 28, entradas, LVCMOS33, pull-up
+- led_n[0..3]: pinos 10, 11, 13, 14, saidas, LVCMOS18
+- uart_tx: pino 17, saida, LVCMOS33
+
+Observacao: Place & Route concluiu com 1 warning de clock ('sys_clk' was determined to be a clock but was not created), sem erros.

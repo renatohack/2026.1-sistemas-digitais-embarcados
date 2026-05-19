@@ -145,7 +145,7 @@ No testbench `tb_tp3_demo_top`, os pulsos em `button_pulse` alteram `mode`, `op`
 
 ## 7. Evidencias
 
-Evidencias automaticas ja geradas:
+Evidencias automaticas geradas:
 
 | Evidencia | Arquivo |
 | --- | --- |
@@ -153,9 +153,9 @@ Evidencias automaticas ja geradas:
 | VCDs | `evidencias/simulacao/*.vcd` |
 | Savefiles GTKWave | `sim/waves/*.gtkw` |
 
-Evidencias manuais pendentes:
+Evidencias finais incorporadas no relatorio HTML/PDF:
 
-| Evidencia | Caminho esperado |
+| Evidencia | Arquivo |
 | --- | --- |
 | Core integrado no GTKWave | `evidencias/waveforms/core_integrado_todos_modos.png` |
 | Top, botoes e UART no GTKWave | `evidencias/waveforms/top_uart_botoes.png` |
@@ -171,8 +171,8 @@ Evidencias manuais pendentes:
 | Saturacao nos LEDs | `evidencias/hardware/leds_saturacao.jpg` |
 | Terminal serial | `evidencias/hardware/serial_uart_resultados.png` |
 
-Os passos exatos para gerar cada evidencia manual estao em `GUIA_EVIDENCIAS_DR3_TP3.md`.
+O relatorio final diagramado em `relatorio/relatorio_DR3_TP3.html` e `relatorio/relatorio_DR3_TP3.pdf` incorpora essas evidencias diretamente como figuras, com legendas explicando o que cada print/foto demonstra.
 
 ## 8. Conclusao
 
-O nucleo aritmetico atende aos requisitos do TP3: possui formatos numericos documentados, unidades aritmeticas modulares, tratamento de overflow/underflow/saturacao/inexatidao, testbenches com casos de borda e integracao fisica para a Tang Nano 9K. A validacao por simulacao foi concluida com sucesso. As evidencias fisicas dependem da sintese no Gowin e da execucao na placa real.
+O nucleo aritmetico atende aos requisitos do TP3: possui formatos numericos documentados, unidades aritmeticas modulares, tratamento de overflow/underflow/saturacao/inexatidao, testbenches com casos de borda e integracao fisica para a Tang Nano 9K. A validacao por simulacao foi concluida com sucesso, o projeto foi sintetizado, posicionado/roteado e programado em SRAM no Gowin, e a execucao em hardware foi evidenciada por LEDs, botoes externos e UART com resultados `pass=YES`.
