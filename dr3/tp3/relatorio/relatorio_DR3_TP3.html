@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>Relatorio Tecnico - DR3 TP3</title>
+  <title>Relatório Técnico - DR3 TP3</title>
   <style>
     * {
       box-sizing: border-box;
@@ -293,11 +293,11 @@
 <body>
   <div class="cover">
     <div class="eyebrow">DR3 - Teste de Performance 3</div>
-    <h1>Relatorio Tecnico<br>Nucleo Aritmetico Parametrizavel em FPGA</h1>
+    <h1>Relatório Técnico<br>Núcleo Aritmético Parametrizável em FPGA</h1>
     <p class="subtitle">
-      Implementacao em Verilog HDL de um nucleo aritmetico para a Tang Nano 9K,
+      Implementação em Verilog HDL de um núcleo aritmético para a Tang Nano 9K,
       contemplando inteiros com e sem sinal, ponto fixo Q3.4 e ponto flutuante
-      simplificado E4M3, com validacao por simulacao, Gowin e hardware real.
+      simplificado E4M3, com validação por simulação, Gowin e hardware real.
     </p>
 
     <div class="cover-grid">
@@ -314,34 +314,34 @@
         <span class="meta-value">Tang Nano 9K - GW1NR-LV9QN88PC6/I5</span>
         <span class="meta-label">Ferramenta</span>
         <span class="meta-value">Gowin IDE, Icarus Verilog e GTKWave</span>
-        <span class="meta-label">Validacao</span>
-        <span class="meta-value">Simulacao, sintese, Place &amp; Route, programacao SRAM e teste fisico</span>
+        <span class="meta-label">Validação</span>
+        <span class="meta-value">Simulação, síntese, Place &amp; Route, programação SRAM e teste físico</span>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <h2>1. Descricao Do Projeto</h2>
+    <h2>1. Descrição do Projeto</h2>
     <p class="lead">
-      O TP3 implementa um nucleo aritmetico parametrizavel em FPGA. O nucleo recebe
-      dois operandos de 8 bits, um seletor de formato numerico e um seletor de operacao.
-      A saida contem o resultado de 8 bits e um conjunto de flags que documenta
-      overflow, underflow, divisao por zero, saturacao, operacao nao suportada e
-      inexatidao por truncamento.
+      O TP3 implementa um núcleo aritmético parametrizável em FPGA. O núcleo recebe
+      dois operandos de 8 bits, um seletor de formato numérico e um seletor de operação.
+      A saída contém o resultado de 8 bits e um conjunto de flags que documenta
+      overflow, underflow, divisão por zero, saturação, operação não suportada e
+      inexatidão por truncamento.
     </p>
     <p>
-      Para a validacao fisica, a montagem foi adaptada aos recursos disponiveis:
-      nao foi usado display de sete segmentos. A placa usa quatro botoes externos no
-      protoboard, quatro LEDs onboard e uma saida UART textual. A UART foi usada como
-      evidencia complementar porque permite enxergar operandos, resultado, flags e
-      status de validacao diretamente no terminal.
+      Para a validação física, a montagem foi adaptada aos recursos disponíveis:
+      não foi usado display de sete segmentos. A placa usa quatro botões externos no
+      protoboard, quatro LEDs onboard e uma saída UART textual. A UART foi usada como
+      evidência complementar porque permite enxergar operandos, resultado, flags e
+      status de validação diretamente no terminal.
     </p>
 
     <div class="callout">
-      <strong>Comportamento no hardware:</strong> BTN0 troca o modo numerico, BTN1 troca
-      a operacao, BTN2 troca o vetor de teste e BTN3 retransmite a linha UART atual.
+      <strong>Comportamento no hardware:</strong> BTN0 troca o modo numérico, BTN1 troca
+      a operação, BTN2 troca o vetor de teste e BTN3 retransmite a linha UART atual.
       LED0 indica <span class="mono">PASS</span>, LED1 indica flag ativa, e LED2/LED3
-      mostram os bits do modo numerico selecionado.
+      mostram os bits do modo numérico selecionado.
     </div>
 
     <div>
@@ -365,14 +365,14 @@
       </thead>
       <tbody>
         <tr>
-          <td>Botoes externos</td>
+          <td>Botões externos</td>
           <td class="mono">btn_n[3:0]</td>
-          <td>Selecionam modo, operacao, caso de teste e retransmissao UART.</td>
+          <td>Selecionam modo, operação, caso de teste e retransmissão UART.</td>
         </tr>
         <tr>
           <td>LEDs onboard</td>
           <td class="mono">led_n[3:0]</td>
-          <td>Mostram PASS, flag ativa e bits do modo. Sao ativos em nivel baixo.</td>
+          <td>Mostram PASS, flag ativa e bits do modo. São ativos em nível baixo.</td>
         </tr>
         <tr>
           <td>UART</td>
@@ -382,29 +382,29 @@
         <tr>
           <td>Clock e reset</td>
           <td class="mono">sys_clk, sys_rst_n</td>
-          <td>Clock onboard e reset ativo em nivel baixo.</td>
+          <td>Clock onboard e reset ativo em nível baixo.</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <div class="section">
-    <h2>2. Formatos Numericos</h2>
+    <h2>2. Formatos Numéricos</h2>
     <p>
-      A largura de 8 bits foi adotada para manter o circuito pequeno, observavel nos
+      A largura de 8 bits foi adotada para manter o circuito pequeno, observável nos
       LEDs/UART e simples de cobrir por testbench. Mesmo com largura reduzida, os
       formatos exercitam os principais problemas do enunciado: complemento de dois,
-      saturacao em ponto fixo, normalizacao em ponto flutuante e flags de limite.
+      saturação em ponto fixo, normalização em ponto flutuante e flags de limite.
     </p>
 
     <table>
       <thead>
         <tr>
           <th>Modo</th>
-          <th>Codigo</th>
+          <th>Código</th>
           <th>Formato</th>
           <th>Faixa / Campos</th>
-          <th>Decisao de projeto</th>
+          <th>Decisão de projeto</th>
         </tr>
       </thead>
       <tbody>
@@ -413,7 +413,7 @@
           <td class="mono">00</td>
           <td class="mono">uint8</td>
           <td>0 a 255</td>
-          <td>Operacoes modulo 8 bits; overflow/underflow sao sinalizados por flag.</td>
+          <td>Operações módulo 8 bits; overflow/underflow são sinalizados por flag.</td>
         </tr>
         <tr>
           <td>Inteiro com sinal</td>
@@ -427,19 +427,19 @@
           <td class="mono">10</td>
           <td class="mono">Q3.4</td>
           <td>-8.0000 a 7.9375</td>
-          <td>1 bit de sinal, 3 bits inteiros e 4 fracionarios; saturacao nos limites.</td>
+          <td>1 bit de sinal, 3 bits inteiros e 4 fracionários; saturação nos limites.</td>
         </tr>
         <tr>
           <td>Ponto flutuante</td>
           <td class="mono">11</td>
           <td class="mono">E4M3</td>
           <td>1 sinal, 4 expoente, 3 mantissa, bias 7</td>
-          <td>Subconjunto IEEE-754 simplificado, com infinito e normalizacao basica.</td>
+          <td>Subconjunto IEEE-754 simplificado, com infinito e normalização básica.</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>Flags De Resultado</h3>
+    <h3>Flags de Resultado</h3>
     <table class="compact">
       <thead>
         <tr>
@@ -449,29 +449,29 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td class="num">0</td><td class="mono">overflow</td><td>Resultado acima do maximo representavel.</td></tr>
-        <tr><td class="num">1</td><td class="mono">underflow</td><td>Resultado abaixo do minimo representavel.</td></tr>
-        <tr><td class="num">2</td><td class="mono">div_zero</td><td>Divisao por zero.</td></tr>
+        <tr><td class="num">0</td><td class="mono">overflow</td><td>Resultado acima do máximo representável.</td></tr>
+        <tr><td class="num">1</td><td class="mono">underflow</td><td>Resultado abaixo do mínimo representável.</td></tr>
+        <tr><td class="num">2</td><td class="mono">div_zero</td><td>Divisão por zero.</td></tr>
         <tr><td class="num">3</td><td class="mono">saturation</td><td>Resultado saturado no limite do formato.</td></tr>
-        <tr><td class="num">4</td><td class="mono">unsupported</td><td>Operacao nao implementada para o modo selecionado.</td></tr>
+        <tr><td class="num">4</td><td class="mono">unsupported</td><td>Operação não implementada para o modo selecionado.</td></tr>
         <tr><td class="num">5</td><td class="mono">inexact</td><td>Resultado truncado ou resto descartado.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="section page-break">
-    <h2>3. Arquitetura Em Verilog</h2>
+    <h2>3. Arquitetura em Verilog</h2>
     <p>
-      O projeto foi organizado em unidades aritmeticas independentes e um modulo
-      integrador. Essa separacao torna os testbenches mais objetivos e facilita a
-      justificativa dos formatos numericos.
+      O projeto foi organizado em unidades aritméticas independentes e um módulo
+      integrador. Essa separação torna os testbenches mais objetivos e facilita a
+      justificativa dos formatos numéricos.
     </p>
 
     <div class="flow-grid">
       <div class="flow-cell">
-        <span class="flow-title">1. Selecao</span>
+        <span class="flow-title">1. Seleção</span>
         <span class="mono">mode</span>, <span class="mono">op</span> e
-        <span class="mono">case_id</span> selecionam formato, operacao e vetor.
+        <span class="mono">case_id</span> selecionam formato, operação e vetor.
       </div>
       <div class="flow-cell">
         <span class="flow-title">2. Vetores</span>
@@ -479,71 +479,71 @@
       </div>
       <div class="flow-cell">
         <span class="flow-title">3. Core</span>
-        <span class="mono">arithmetic_core</span> aciona a unidade numerica adequada.
+        <span class="mono">arithmetic_core</span> aciona a unidade numérica adequada.
       </div>
       <div class="flow-cell">
-        <span class="flow-title">4. Evidencia</span>
-        LEDs e UART mostram resultado, flags e status de validacao.
+        <span class="flow-title">4. Evidência</span>
+        LEDs e UART mostram resultado, flags e status de validação.
       </div>
     </div>
 
-    <h3>Modulos Implementados</h3>
+    <h3>Módulos Implementados</h3>
     <table>
       <thead>
         <tr>
-          <th>Modulo</th>
+          <th>Módulo</th>
           <th>Responsabilidade</th>
-          <th>Tratamento numerico</th>
+          <th>Tratamento numérico</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="mono">int_unsigned_alu</td>
-          <td>Soma, subtracao, multiplicacao e divisao sem sinal.</td>
-          <td>Resultado modulo 8 bits; flags para overflow, underflow, divisao por zero e inexatidao.</td>
+          <td>Soma, subtração, multiplicação e divisão sem sinal.</td>
+          <td>Resultado módulo 8 bits; flags para overflow, underflow, divisão por zero e inexatidão.</td>
         </tr>
         <tr>
           <td class="mono">int_signed_alu</td>
-          <td>Operacoes inteiras em complemento de dois.</td>
-          <td>Usa extensao de sinal e detecta estouro fora da faixa -128..127.</td>
+          <td>Operações inteiras em complemento de dois.</td>
+          <td>Usa extensão de sinal e detecta estouro fora da faixa -128..127.</td>
         </tr>
         <tr>
           <td class="mono">fixed_q3_4_alu</td>
-          <td>Operacoes em ponto fixo Q3.4.</td>
-          <td>Multiplicacao desloca 4 bits; divisao desloca o dividendo; overflow satura em 7Fh ou 80h.</td>
+          <td>Operações em ponto fixo Q3.4.</td>
+          <td>Multiplicação desloca 4 bits; divisão desloca o dividendo; overflow satura em 7Fh ou 80h.</td>
         </tr>
         <tr>
           <td class="mono">minifloat_e4m3_addsub</td>
-          <td>Soma e subtracao de minifloat E4M3.</td>
+          <td>Soma e subtração de minifloat E4M3.</td>
           <td>Alinha expoentes, soma magnitudes sinalizadas, normaliza e trata infinito/underflow.</td>
         </tr>
         <tr>
           <td class="mono">arithmetic_core</td>
-          <td>Seleciona a unidade pelo modo numerico.</td>
-          <td>Marca <span class="mono">unsupported</span> para multiplicacao/divisao em E4M3.</td>
+          <td>Seleciona a unidade pelo modo numérico.</td>
+          <td>Marca <span class="mono">unsupported</span> para multiplicação/divisão em E4M3.</td>
         </tr>
         <tr>
           <td class="mono">tp3_demo_top</td>
-          <td>Integra botoes, LEDs, UART e nucleo.</td>
+          <td>Integra botões, LEDs, UART e núcleo.</td>
           <td>Compara resultado contra o vetor esperado e transmite a linha textual.</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>Formato Da UART</h3>
+    <h3>Formato da UART</h3>
     <p>
-      A saida serial foi usada para tornar a validacao fisica legivel. A linha abaixo
+      A saída serial foi usada para tornar a validação física legível. A linha abaixo
       representa o estado inicial depois de reset:
     </p>
     <pre>TP3 mode=UINT8  op=ADD case=0 A=0C B=05 result=11 flags=00 OK        pass=YES</pre>
   </div>
 
   <div class="section">
-    <h2>4. Integracao Na Tang Nano 9K</h2>
+    <h2>4. Integração na Tang Nano 9K</h2>
     <p>
       O projeto Gowin usa o dispositivo <span class="mono">GW1NR-LV9QN88PC6/I5</span>.
-      Os botoes externos foram ligados a GND e usam pull-up interno. Os LEDs onboard
-      da placa sao ativos em nivel baixo.
+      Os botões externos foram ligados a GND e usam pull-up interno. Os LEDs onboard
+      da placa são ativos em nível baixo.
     </p>
 
     <table class="compact">
@@ -551,7 +551,7 @@
         <tr>
           <th>Sinal</th>
           <th>Pino</th>
-          <th>Direcao</th>
+          <th>Direção</th>
           <th>IO Type</th>
           <th>Uso</th>
         </tr>
@@ -559,30 +559,30 @@
       <tbody>
         <tr><td class="mono">sys_clk</td><td class="num">52</td><td>Entrada</td><td>LVCMOS33</td><td>Clock onboard.</td></tr>
         <tr><td class="mono">sys_rst_n</td><td class="num">4</td><td>Entrada</td><td>LVCMOS18</td><td>Reset ativo em baixo.</td></tr>
-        <tr><td class="mono">btn_n[0]</td><td class="num">25</td><td>Entrada</td><td>LVCMOS33</td><td>Troca modo numerico.</td></tr>
-        <tr><td class="mono">btn_n[1]</td><td class="num">26</td><td>Entrada</td><td>LVCMOS33</td><td>Troca operacao.</td></tr>
+        <tr><td class="mono">btn_n[0]</td><td class="num">25</td><td>Entrada</td><td>LVCMOS33</td><td>Troca modo numérico.</td></tr>
+        <tr><td class="mono">btn_n[1]</td><td class="num">26</td><td>Entrada</td><td>LVCMOS33</td><td>Troca operação.</td></tr>
         <tr><td class="mono">btn_n[2]</td><td class="num">27</td><td>Entrada</td><td>LVCMOS33</td><td>Troca vetor/caso.</td></tr>
         <tr><td class="mono">btn_n[3]</td><td class="num">28</td><td>Entrada</td><td>LVCMOS33</td><td>Retransmite UART.</td></tr>
-        <tr><td class="mono">led_n[0]</td><td class="num">10</td><td>Saida</td><td>LVCMOS18</td><td>PASS do vetor atual.</td></tr>
-        <tr><td class="mono">led_n[1]</td><td class="num">11</td><td>Saida</td><td>LVCMOS18</td><td>Alguma flag ativa.</td></tr>
-        <tr><td class="mono">led_n[2]</td><td class="num">13</td><td>Saida</td><td>LVCMOS18</td><td>Bit 0 do modo.</td></tr>
-        <tr><td class="mono">led_n[3]</td><td class="num">14</td><td>Saida</td><td>LVCMOS18</td><td>Bit 1 do modo.</td></tr>
-        <tr><td class="mono">uart_tx</td><td class="num">17</td><td>Saida</td><td>LVCMOS33</td><td>Serial 115200 8N1.</td></tr>
+        <tr><td class="mono">led_n[0]</td><td class="num">10</td><td>Saída</td><td>LVCMOS18</td><td>PASS do vetor atual.</td></tr>
+        <tr><td class="mono">led_n[1]</td><td class="num">11</td><td>Saída</td><td>LVCMOS18</td><td>Alguma flag ativa.</td></tr>
+        <tr><td class="mono">led_n[2]</td><td class="num">13</td><td>Saída</td><td>LVCMOS18</td><td>Bit 0 do modo.</td></tr>
+        <tr><td class="mono">led_n[3]</td><td class="num">14</td><td>Saída</td><td>LVCMOS18</td><td>Bit 1 do modo.</td></tr>
+        <tr><td class="mono">uart_tx</td><td class="num">17</td><td>Saída</td><td>LVCMOS33</td><td>Serial 115200 8N1.</td></tr>
       </tbody>
     </table>
 
     <div class="callout">
-      <strong>Ligacao fisica dos botoes:</strong>
-      <span class="mono">pino da Tang -> botao -> GND comum</span>. Nao foi usado 3V3
-      ou 5V nos botoes, pois as entradas ja possuem pull-up configurado no arquivo CST.
+      <strong>Ligação física dos botões:</strong>
+      <span class="mono">pino da Tang -> botão -> GND comum</span>. Não foi usado 3V3
+      ou 5V nos botões, pois as entradas já possuem pull-up configurado no arquivo CST.
     </div>
   </div>
 
   <div class="section page-break">
-    <h2>5. Testbenches E Simulacao</h2>
+    <h2>5. Testbenches e Simulação</h2>
     <p>
-      Os testbenches cobrem as unidades aritmeticas isoladas, o core integrado e o
-      top de demonstracao com botoes, LEDs e UART. Todos os logs terminaram com
+      Os testbenches cobrem as unidades aritméticas isoladas, o core integrado e o
+      top de demonstração com botões, LEDs e UART. Todos os logs terminaram com
       <span class="mono">ALL TESTS PASSED</span>.
     </p>
 
@@ -591,23 +591,23 @@
         <tr>
           <th>Testbench</th>
           <th>Cobertura</th>
-          <th>Arquivo de evidencia</th>
+          <th>Arquivo de evidência</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="mono">tb_int_unsigned_alu</td>
-          <td>Operacoes unsigned, overflow, underflow, divisao por zero e resto.</td>
+          <td>Operações unsigned, overflow, underflow, divisão por zero e resto.</td>
           <td class="mono">evidencias/simulacao/tb_int_unsigned_alu.log</td>
         </tr>
         <tr>
           <td class="mono">tb_int_signed_alu</td>
-          <td>Complemento de dois, limites -128/127, overflow, underflow e divisao inexata.</td>
+          <td>Complemento de dois, limites -128/127, overflow, underflow e divisão inexata.</td>
           <td class="mono">evidencias/simulacao/tb_int_signed_alu.log</td>
         </tr>
         <tr>
           <td class="mono">tb_fixed_q3_4_alu</td>
-          <td>Saturacao positiva/negativa, truncamento e divisao por zero em Q3.4.</td>
+          <td>Saturação positiva/negativa, truncamento e divisão por zero em Q3.4.</td>
           <td class="mono">evidencias/simulacao/tb_fixed_q3_4_alu.log</td>
         </tr>
         <tr>
@@ -617,12 +617,12 @@
         </tr>
         <tr>
           <td class="mono">tb_arithmetic_core</td>
-          <td>Varredura de todos os modos, operacoes e vetores demonstrativos.</td>
+          <td>Varredura de todos os modos, operações e vetores demonstrativos.</td>
           <td class="mono">evidencias/simulacao/tb_arithmetic_core.log</td>
         </tr>
         <tr>
           <td class="mono">tb_tp3_demo_top</td>
-          <td>Reset, botoes, LEDs e transmissao UART no top.</td>
+          <td>Reset, botões, LEDs e transmissão UART no top.</td>
           <td class="mono">evidencias/simulacao/tb_tp3_demo_top.log</td>
         </tr>
       </tbody>
@@ -633,50 +633,50 @@
 ALL TESTS PASSED
 All simulations completed.</pre>
 
-    <h3>Waveforms Das Simulacoes</h3>
+    <h3>Waveforms das Simulações</h3>
     <div class="figure">
-      <img src="../evidencias/waveforms/core_integrado_todos_modos.png" alt="Waveform do core aritmetico integrado">
+      <img src="../evidencias/waveforms/core_integrado_todos_modos.png" alt="Waveform do core aritmético integrado">
       <div class="caption">
-        Figura 1 - Core integrado percorrendo modos, operacoes e casos. O print mostra
-        resultado igual ao esperado, flags iguais as esperadas e contador de erros em zero.
+        Figura 1 - Core integrado percorrendo modos, operações e casos. O print mostra
+        resultado igual ao esperado, flags iguais às esperadas e contador de erros em zero.
       </div>
     </div>
 
     <div class="figure">
       <img src="../evidencias/waveforms/fixed_saturacao_truncamento.png" alt="Waveform de ponto fixo Q3.4">
       <div class="caption">
-        Figura 2 - Ponto fixo Q3.4 com saturacao positiva/negativa e truncamento. As
+        Figura 2 - Ponto fixo Q3.4 com saturação positiva/negativa e truncamento. As
         flags <span class="mono">09</span>, <span class="mono">0A</span> e
-        <span class="mono">20</span> evidenciam saturacao e inexatidao.
+        <span class="mono">20</span> evidenciam saturação e inexatidão.
       </div>
     </div>
 
     <div class="figure">
       <img src="../evidencias/waveforms/float_overflow_underflow.png" alt="Waveform de minifloat E4M3">
       <div class="caption">
-        Figura 3 - Ponto flutuante simplificado E4M3. A simulacao mostra overflow para
+        Figura 3 - Ponto flutuante simplificado E4M3. A simulação mostra overflow para
         infinito com <span class="mono">result=78 flags=01</span> e underflow para zero
         com <span class="mono">result=00 flags=22</span>.
       </div>
     </div>
 
     <div class="figure">
-      <img src="../evidencias/waveforms/top_uart_botoes.png" alt="Waveform do top com botoes e UART">
+      <img src="../evidencias/waveforms/top_uart_botoes.png" alt="Waveform do top com botões e UART">
       <div class="caption">
-        Figura 4 - Top de demonstracao com pulso em <span class="mono">button_pulse[2]</span>,
-        mudanca de caso para <span class="mono">case_id=1</span>, atualizacao de flags,
+        Figura 4 - Top de demonstração com pulso em <span class="mono">button_pulse[2]</span>,
+        mudança de caso para <span class="mono">case_id=1</span>, atualização de flags,
         LEDs e atividade UART.
       </div>
     </div>
   </div>
 
   <div class="section page-break">
-    <h2>6. Sintese, Place &amp; Route E Recursos</h2>
+    <h2>6. Síntese, Place &amp; Route e Recursos</h2>
     <p>
-      O projeto foi sintetizado e roteado no Gowin IDE para a Tang Nano 9K. A sintese
+      O projeto foi sintetizado e roteado no Gowin IDE para a Tang Nano 9K. A síntese
       e o Place &amp; Route concluem sem erros. O Place &amp; Route emite apenas o aviso
       de que <span class="mono">sys_clk</span> foi identificado como clock sem constraint
-      temporal explicita; isso nao impediu a geracao do bitstream e a validacao fisica.
+      temporal explícita; isso não impediu a geração do bitstream e a validação física.
     </p>
 
     <table class="compact">
@@ -684,7 +684,7 @@ All simulations completed.</pre>
         <tr>
           <th>Recurso</th>
           <th>Uso</th>
-          <th>Utilizacao</th>
+          <th>Utilização</th>
         </tr>
       </thead>
       <tbody>
@@ -699,46 +699,46 @@ All simulations completed.</pre>
 
     <p class="note">
       Resumo salvo em <span class="mono">evidencias/gowin/relatorio_recursos.txt</span>
-      e relatorio completo em <span class="mono">gowin/impl/pnr/tp3_arithmetic_core.rpt.txt</span>.
+      e relatório completo em <span class="mono">gowin/impl/pnr/tp3_arithmetic_core.rpt.txt</span>.
     </p>
 
     <div class="figure">
-      <img src="../evidencias/gowin/sintese_ok.png" alt="Sintese concluida no Gowin">
+      <img src="../evidencias/gowin/sintese_ok.png" alt="Síntese concluída no Gowin">
       <div class="caption">
-        Figura 5 - Sintese concluida no Gowin, com o modulo
+        Figura 5 - Síntese concluída no Gowin, com o módulo
         <span class="mono">tp3_demo_top</span> identificado como top.
       </div>
     </div>
 
     <div class="figure">
-      <img src="../evidencias/gowin/place_route_ok.png" alt="Place and Route concluido no Gowin">
+      <img src="../evidencias/gowin/place_route_ok.png" alt="Place and Route concluído no Gowin">
       <div class="caption">
-        Figura 6 - Place &amp; Route concluido. A interface mostra uma advertencia de
+        Figura 6 - Place &amp; Route concluído. A interface mostra uma advertência de
         constraint temporal para <span class="mono">sys_clk</span>, sem erros.
       </div>
     </div>
 
     <div class="figure">
-      <img src="../evidencias/gowin/programacao_sram_ok.png" alt="Programacao SRAM concluida">
+      <img src="../evidencias/gowin/programacao_sram_ok.png" alt="Programação SRAM concluída">
       <div class="caption">
-        Figura 7 - Programacao SRAM concluida no Gowin Programmer. A janela mostra
-        <span class="mono">Finished</span> e tempo de programacao de 3,38 s.
+        Figura 7 - Programação SRAM concluída no Gowin Programmer. A janela mostra
+        <span class="mono">Finished</span> e tempo de programação de 3,38 s.
       </div>
     </div>
   </div>
 
   <div class="section page-break">
-    <h2>7. Validacao Em Hardware</h2>
+    <h2>7. Validação em Hardware</h2>
     <p>
-      A validacao fisica foi realizada com a Tang Nano 9K programada em SRAM. A montagem
-      usa quatro botoes no protoboard, ligados ao GND comum, e os LEDs onboard da placa.
+      A validação física foi realizada com a Tang Nano 9K programada em SRAM. A montagem
+      usa quatro botões no protoboard, ligados ao GND comum, e os LEDs onboard da placa.
       A UART foi lida pelo PowerShell no Windows, usando uma porta COM em 115200 baud.
     </p>
 
     <div class="figure portrait">
-      <img src="../evidencias/hardware/montagem_botoes.jpg" alt="Montagem fisica com botoes no protoboard">
+      <img src="../evidencias/hardware/montagem_botoes.jpg" alt="Montagem física com botões no protoboard">
       <div class="caption">
-        Figura 8 - Montagem fisica com a Tang Nano 9K, quatro botoes externos no
+        Figura 8 - Montagem física com a Tang Nano 9K, quatro botões externos no
         protoboard e GND comum.
       </div>
     </div>
@@ -747,7 +747,7 @@ All simulations completed.</pre>
       <img src="../evidencias/hardware/serial_uart_resultados.png" alt="Terminal serial com resultados da UART">
       <div class="caption">
         Figura 9 - Terminal serial no Windows recebendo linhas UART do hardware real.
-        As linhas mostram casos de soma unsigned, overflow, modo assinado e saturacao
+        As linhas mostram casos de soma unsigned, overflow, modo assinado e saturação
         em ponto fixo, todos com <span class="mono">pass=YES</span>.
       </div>
     </div>
@@ -757,7 +757,7 @@ All simulations completed.</pre>
         <div class="figure portrait">
           <img src="../evidencias/hardware/leds_estado_inicial.jpg" alt="LEDs no estado inicial">
           <div class="caption">
-            Figura 10 - Estado inicial apos reset: caso
+            Figura 10 - Estado inicial após reset: caso
             <span class="mono">UINT8 ADD case=0</span>, sem flags e PASS ativo.
           </div>
         </div>
@@ -774,66 +774,66 @@ All simulations completed.</pre>
     </div>
 
     <div class="figure portrait">
-      <img src="../evidencias/hardware/leds_saturacao.jpg" alt="LEDs em caso de saturacao">
+      <img src="../evidencias/hardware/leds_saturacao.jpg" alt="LEDs em caso de saturação">
       <div class="caption">
-        Figura 12 - Caso de saturacao em ponto fixo:
+        Figura 12 - Caso de saturação em ponto fixo:
         <span class="mono">mode=Q3.4 op=ADD case=1 result=7F flags=09</span>.
       </div>
     </div>
   </div>
 
   <div class="section">
-    <h2>8. Interpretacao Dos Resultados</h2>
+    <h2>8. Interpretação dos Resultados</h2>
     <p>
-      As simulacoes demonstram que as unidades aritmeticas retornam resultados e flags
+      As simulações demonstram que as unidades aritméticas retornam resultados e flags
       esperados nos casos normais e nos casos de borda. Em inteiros, os testbenches
-      cobrem overflow, underflow, resto de divisao e divisao por zero. Em ponto fixo,
-      a saturacao impede wrap-around silencioso, tornando explicito o limite numerico
+      cobrem overflow, underflow, resto de divisão e divisão por zero. Em ponto fixo,
+      a saturação impede wrap-around silencioso, tornando explícito o limite numérico
       do formato Q3.4.
     </p>
     <p>
-      No minifloat E4M3, a implementacao cobre alinhamento de expoentes, cancelamento,
-      normalizacao, overflow para infinito e underflow para zero. Como o formato e
-      reduzido, a precisao e limitada; por isso a flag <span class="mono">inexact</span>
-      e relevante para documentar truncamentos e perda de representatividade.
+      No minifloat E4M3, a implementação cobre alinhamento de expoentes, cancelamento,
+      normalização, overflow para infinito e underflow para zero. Como o formato é
+      reduzido, a precisão é limitada; por isso a flag <span class="mono">inexact</span>
+      é relevante para documentar truncamentos e perda de representatividade.
     </p>
     <p>
-      A validacao fisica confirma que o bitstream programado na FPGA executa os mesmos
-      vetores demonstrativos validados em simulacao. A UART complementa os LEDs porque
-      apresenta texto completo com modo, operacao, operandos, resultado e flags.
+      A validação física confirma que o bitstream programado na FPGA executa os mesmos
+      vetores demonstrativos validados em simulação. A UART complementa os LEDs porque
+      apresenta texto completo com modo, operação, operandos, resultado e flags.
     </p>
 
-    <h3>Arquivos De Entrega</h3>
+    <h3>Arquivos de Entrega</h3>
     <table class="compact">
       <thead>
         <tr>
           <th>Grupo</th>
           <th>Caminho</th>
-          <th>Conteudo</th>
+          <th>Conteúdo</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Codigo</td><td class="mono">gowin/src/*.v</td><td>Modulos Verilog do nucleo e top.</td></tr>
+        <tr><td>Código</td><td class="mono">gowin/src/*.v</td><td>Módulos Verilog do núcleo e top.</td></tr>
         <tr><td>Gowin</td><td class="mono">gowin/tp3_arithmetic_core.gprj</td><td>Projeto Gowin configurado para Tang Nano 9K.</td></tr>
-        <tr><td>Constraints</td><td class="mono">gowin/src/tp3_arithmetic_core.cst</td><td>Mapeamento de clock, reset, botoes, LEDs e UART.</td></tr>
+        <tr><td>Constraints</td><td class="mono">gowin/src/tp3_arithmetic_core.cst</td><td>Mapeamento de clock, reset, botões, LEDs e UART.</td></tr>
         <tr><td>Testes</td><td class="mono">sim/*.v</td><td>Testbenches das unidades e do top.</td></tr>
-        <tr><td>Evidencias</td><td class="mono">evidencias/</td><td>Waveforms, Gowin, UART e fotos do hardware.</td></tr>
+        <tr><td>Evidências</td><td class="mono">evidencias/</td><td>Waveforms, Gowin, UART e fotos do hardware.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="section">
-    <h2>9. Conclusao</h2>
+    <h2>9. Conclusão</h2>
     <p>
-      O projeto atende ao enunciado do TP3 ao implementar um nucleo aritmetico modular,
+      O projeto atende ao enunciado do TP3 ao implementar um núcleo aritmético modular,
       com suporte a inteiros com e sem sinal, ponto fixo e ponto flutuante simplificado.
-      As operacoes foram verificadas por testbenches com casos tipicos e de borda, e
+      As operações foram verificadas por testbenches com casos típicos e de borda, e
       o projeto foi sintetizado, roteado, programado e testado na Tang Nano 9K.
     </p>
     <p>
-      A combinacao de logs, waveforms, relatorios Gowin, capturas do Programmer,
-      terminal UART e fotos da placa demonstra a correcao funcional e a reproducibilidade
-      da implementacao.
+      A combinação de logs, waveforms, relatórios Gowin, capturas do Programmer,
+      terminal UART e fotos da placa demonstra a correção funcional e a reprodutibilidade
+      da implementação.
     </p>
   </div>
 </body>
