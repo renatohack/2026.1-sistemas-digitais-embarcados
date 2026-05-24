@@ -1,0 +1,127 @@
+
+build/tp3_exercises.o:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+0000000000000000 <ex1_move_w_to_low_u32>:
+   0:	3dc00020 	ldr	q0, [x1]
+   4:	4e041c00 	mov	v0.s[0], w0
+
+0000000000000008 <ex1_after_insert>:
+   8:	3d800040 	str	q0, [x2]
+   c:	d65f03c0 	ret
+
+0000000000000010 <ex2_move_x_to_low_u64>:
+  10:	3dc00020 	ldr	q0, [x1]
+  14:	4e081c00 	mov	v0.d[0], x0
+
+0000000000000018 <ex2_after_insert>:
+  18:	3d800040 	str	q0, [x2]
+  1c:	d65f03c0 	ret
+
+0000000000000020 <ex3_zero_v0>:
+  20:	4f07e7e0 	movi	v0.16b, #0xff
+  24:	6e201c00 	eor	v0.16b, v0.16b, v0.16b
+
+0000000000000028 <ex3_after_zero>:
+  28:	3d800000 	str	q0, [x0]
+  2c:	d65f03c0 	ret
+
+0000000000000030 <ex4_fill_ones_v0>:
+  30:	4f07e7e0 	movi	v0.16b, #0xff
+
+0000000000000034 <ex4_after_fill>:
+  34:	3d800000 	str	q0, [x0]
+  38:	d65f03c0 	ret
+
+000000000000003c <ex5_shuffle_bytes>:
+  3c:	3dc00000 	ldr	q0, [x0]
+  40:	90000002 	adrp	x2, 0 <ex1_move_w_to_low_u32>
+  44:	91000042 	add	x2, x2, #0x0
+  48:	3dc00041 	ldr	q1, [x2]
+  4c:	4e010002 	tbl	v2.16b, {v0.16b}, v1.16b
+
+0000000000000050 <ex5_after_shuffle>:
+  50:	3d800022 	str	q2, [x1]
+  54:	d65f03c0 	ret
+
+0000000000000058 <ex6_insert_word_lane2>:
+  58:	3dc00020 	ldr	q0, [x1]
+  5c:	4e141c00 	mov	v0.s[2], w0
+
+0000000000000060 <ex6_after_insert>:
+  60:	3d800040 	str	q0, [x2]
+  64:	d65f03c0 	ret
+
+0000000000000068 <ex7_shift_left_2d_by_5>:
+  68:	3dc00000 	ldr	q0, [x0]
+  6c:	4f455400 	shl	v0.2d, v0.2d, #5
+
+0000000000000070 <ex7_after_shift>:
+  70:	3d800020 	str	q0, [x1]
+  74:	d65f03c0 	ret
+
+0000000000000078 <ex8_add_u8x16>:
+  78:	3dc00000 	ldr	q0, [x0]
+  7c:	3dc00021 	ldr	q1, [x1]
+  80:	4e218402 	add	v2.16b, v0.16b, v1.16b
+
+0000000000000084 <ex8_after_add>:
+  84:	3d800042 	str	q2, [x2]
+  88:	d65f03c0 	ret
+
+000000000000008c <ex9_dot_u16x8>:
+  8c:	3dc00000 	ldr	q0, [x0]
+  90:	3dc00021 	ldr	q1, [x1]
+  94:	2e61c002 	umull	v2.4s, v0.4h, v1.4h
+  98:	6e61c003 	umull2	v3.4s, v0.8h, v1.8h
+  9c:	4ea38442 	add	v2.4s, v2.4s, v3.4s
+  a0:	4eb1b844 	addv	s4, v2.4s
+  a4:	1e260080 	fmov	w0, s4
+
+00000000000000a8 <ex9_after_reduce>:
+  a8:	d65f03c0 	ret
+
+00000000000000ac <ex10_add_f32x4>:
+  ac:	3dc00000 	ldr	q0, [x0]
+  b0:	3dc00021 	ldr	q1, [x1]
+  b4:	4e21d402 	fadd	v2.4s, v0.4s, v1.4s
+
+00000000000000b8 <ex10_after_fadd>:
+  b8:	3d800042 	str	q2, [x2]
+  bc:	d65f03c0 	ret
+
+00000000000000c0 <ex11_macro_zero_twice>:
+  c0:	4f02e740 	movi	v0.16b, #0x5a
+  c4:	6e201c00 	eor	v0.16b, v0.16b, v0.16b
+
+00000000000000c8 <ex11_after_first_zero>:
+  c8:	3d800000 	str	q0, [x0]
+  cc:	4f05e4a1 	movi	v1.16b, #0xa5
+  d0:	6e211c21 	eor	v1.16b, v1.16b, v1.16b
+
+00000000000000d4 <ex11_after_second_zero>:
+  d4:	3d800021 	str	q1, [x1]
+  d8:	d65f03c0 	ret
+
+00000000000000dc <ex12_macro_add_two_blocks>:
+  dc:	91000009 	add	x9, x0, #0x0
+  e0:	9100002a 	add	x10, x1, #0x0
+  e4:	9100004b 	add	x11, x2, #0x0
+  e8:	4c407120 	ld1	{v0.16b}, [x9]
+  ec:	4c407141 	ld1	{v1.16b}, [x10]
+  f0:	4e218402 	add	v2.16b, v0.16b, v1.16b
+  f4:	4c007162 	st1	{v2.16b}, [x11]
+
+00000000000000f8 <ex12_after_block0>:
+  f8:	91004009 	add	x9, x0, #0x10
+  fc:	9100402a 	add	x10, x1, #0x10
+ 100:	9100404b 	add	x11, x2, #0x10
+ 104:	4c407123 	ld1	{v3.16b}, [x9]
+ 108:	4c407144 	ld1	{v4.16b}, [x10]
+ 10c:	4e248465 	add	v5.16b, v3.16b, v4.16b
+ 110:	4c007165 	st1	{v5.16b}, [x11]
+
+0000000000000114 <ex12_after_block1>:
+ 114:	d65f03c0 	ret

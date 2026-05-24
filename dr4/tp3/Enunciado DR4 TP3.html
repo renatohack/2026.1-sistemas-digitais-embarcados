@@ -1,0 +1,178 @@
+<p>Este é o <strong>Teste de Performance 3 (TP3)</strong> da disciplina <strong>DR4 — Processamento Otimizado em Assembly ARM 64-bits</strong>. Neste TP, você irá resolver <strong>12 exercícios práticos de programação em Assembly ARM64</strong>, implementados e executados no <strong>Raspberry Pi Zero 2W</strong>, com foco em <strong>rotinas otimizadas com SIMD (NEON)</strong> e em <strong>automação com macros no GAS</strong> para reduzir repetição, padronizar rotinas e aumentar reprodutibilidade.</p>
+
+<hr>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 1</span> <strong>Mover um registrador W (32 bits) para a parte baixa de um registrador vetorial</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em um projeto de engenharia da computação, é comum integrar rotinas escalares existentes com blocos SIMD para acelerar processamento. Em muitos casos, o dado nasce em registradores gerais (GPRs) e precisa ser inserido corretamente em um registrador vetorial, sem corromper outros lanes. Isso é frequente ao preparar vetores para filtros, normalização ou montagem de estruturas compactadas. Neste cenário, você está implementando uma etapa de preparação de dados que recebe um valor em um registrador de 32 bits e deve colocá-lo na parte baixa de um registrador vetorial, preservando controle explícito sobre quais bits foram modificados.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Escreva e valide uma sequência Assembly ARM64 que mova o valor de um <strong>registrador Wn</strong> para os <strong>32 bits menos significativos</strong> de um registrador vetorial <strong>Vd</strong>.</p>
+
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>O professor validará no Raspberry Pi usando GDB, inspecionando o conteúdo de Vd antes e depois da execução e confirmando que apenas a região especificada foi atualizada.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 2</span> <strong>Mover um registrador X (64 bits) para a parte baixa de um registrador vetorial</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em rotinas SIMD, é comum carregar valores escalares de 64 bits para um vetor, especialmente ao montar dados para operações em dupla precisão ou para empacotamento. Diferente do caso de 32 bits, aqui o valor ocupa a metade baixa de um registrador vetorial (64 bits), o que exige atenção ao elemento alvo e ao modo de operação do registrador. Neste cenário, você está implementando uma etapa de preparação de coeficientes que começa em registrador geral de 64 bits e precisa ser posicionado corretamente dentro do vetor.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Escreva e valide uma sequência Assembly ARM64 que mova o valor de um <strong>registrador Xn</strong> para os <strong>64 bits menos significativos</strong> de um registrador vetorial <strong>Vd</strong>.</p>
+
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>A validação deve ser demonstrada via GDB, exibindo Vd em formato vetorial antes/depois, confirmando que a metade baixa foi atualizada corretamente.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 3</span> <strong>Zerar completamente um registrador vetorial V0</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em pipelines SIMD, inicializar vetores de forma determinística é requisito básico para evitar que lixo de execução anterior influencie resultados. Isso é especialmente crítico em depuração e em comparação de saídas, onde o engenheiro precisa garantir que as operações partem de um estado conhecido. Neste cenário, você precisa implementa uma rotina de inicialização que zere um registrador vetorial de forma explícita e validável.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma sequência que defina <strong>todos os bits</strong> do registrador <strong>V0</strong> como zero e comprove o resultado por depuração.</p>
+
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>O professor irá validar via GDB, verificando que todos os lanes/elementos de V0 estão zerados.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 4</span> <strong>Preencher completamente um registrador vetorial V0 com 1s</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Algumas rotinas de máscara e operações bitwise em SIMD exigem registradores preenchidos com 1s para construir negações, seleções e complementos. Ter uma forma disciplinada de construir esse vetor é útil para validar operações e evitar constantes espalhadas pelo código. Neste cenário, você precisa inicializar um registrador vetorial com todos os bits setados.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma sequência que defina <strong>todos os bits</strong> do registrador <strong>V0</strong> como 1 e demonstre evidência em depuração.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 5</span> <strong>Reorganização de bytes de um vetor (pattern arbitrário)</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Reorganizar bytes (shuffle) em um registrador vetorial é uma operação fundamental em parsing binário, conversão de endianness, manipulação de formatos e preparação de dados para operações posteriores. Em NEON, isso geralmente exige instruções específicas e um padrão de reordenação explícito. Neste cenário, você recebeu um vetor com 16 bytes e precisa reorganizá-lo para atender um formato de transmissão diferente, aplicando um padrão arbitrário.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Escreva uma instrução (ou sequência mínima) que reorganize os bytes de um registrador vetorial conforme um <strong>padrão arbitrário definido no seu código</strong> e valide o resultado.</p>
+
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>O professor validará via GDB mostrando o vetor original e o vetor reordenado, comparando byte a byte.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 6</span> <strong>Inserir um elemento escalar em uma posição específica de um registrador vetorial</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Muitas rotinas SIMD são construídas incrementalmente, inserindo valores em lanes específicos para formar vetores com layout exato. Isso ocorre em empacotamento, montagem de buffers e preparação de janelas de amostras. O erro mais comum é inserir no lane errado (posição errada), o que produz resultados sutilmente incorretos. Neste cenário, você precisa inserir um valor vindo de registrador geral em uma posição específica do vetor.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma sequência que insira um <strong>byte/word/doubleword</strong> vindo de um <strong>registrador geral</strong> em uma <strong>posição específica</strong> dentro de um registrador vetorial.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 7</span> <strong>Shift de ambos os quadwords do vetor à esquerda por n bits</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Shifts vetoriais são usados para normalizar, escalonar e preparar campos para combinações posteriores. Em NEON, o shift pode ser aplicado por elemento, e o comportamento precisa ser entendido com clareza para não confundir “shift por lane” com “shift cruzando lanes”. Neste exercício, a tarefa é deslocar os quadwords de forma uniforme dentro do registrador vetorial, evidenciando o efeito.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma operação que desloque <strong>ambos os quadwords</strong> de um registrador vetorial <strong>à esquerda por n bits</strong>, com n definido no seu teste.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 8</span> <strong>SIMD com inteiros: soma vetorial de 16 bytes (paralelização explícita)</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Um caso clássico de ganho com SIMD é substituir um loop de soma elemento a elemento por uma única operação vetorial, processando múltiplos elementos por instrução. Esse padrão aparece em processamento de sinal, pré-processamento de imagem e análise de telemetria. Neste cenário, você tem dois vetores de 16 bytes e precisa somá-los produzindo um terceiro vetor de saída, com o objetivo explícito de evitar iteração escalar.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina NEON que some <strong>dois vetores de 16 bytes</strong> e produza um vetor resultado, demonstrando que os 16 elementos foram processados em paralelo.</p>
+
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>O professor validará via execução e inspeção de memória/registros, verificando ao menos 4 posições do vetor de saída.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 9</span> <strong>SIMD com inteiros: dot product parcial com redução controlada</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Cálculos repetitivos como dot products aparecem em filtros, correlação e métricas simples. Em SIMD, é possível multiplicar vetores inteiros e acumular resultados de forma eficiente, mas é necessário controlar como a redução (soma final) é feita. Neste cenário, você implementará uma versão controlada: multiplica elemento a elemento e acumula, exibindo o acumulador final em registrador geral.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina NEON que realize multiplicação elemento a elemento entre dois vetores inteiros e acumule um resultado final em registrador geral.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 10</span> <strong>SIMD com ponto flutuante: soma vetorial e validação numérica</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>NEON também suporta operações com ponto flutuante e é usado para acelerar operações numéricas em pipelines de análise, controle e simulação. Diferente de inteiros, validações precisam considerar representação e formato do dado. Neste cenário, você receberá dois vetores de floats e deve produzir o vetor soma, garantindo que a operação ocorreu em modo SIMD e que o resultado final é coerente.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina NEON que some <strong>vetores de ponto flutuante</strong> (float32 ou float64, conforme você definir no código) e valide o resultado.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 11</span> <strong>Macro GAS básica para padronizar inicialização de registradores vetoriais</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Em código Assembly real, repetição é fonte de erro: um registrador pode ser inicializado de forma ligeiramente diferente em pontos distintos do programa, dificultando depuração e manutenção. Macros no GAS permitem padronizar sequências e reduzir variação. Neste cenário, você deve criar uma macro simples para inicialização de registradores vetoriais, de modo que a mesma operação seja aplicada de forma consistente sempre que chamada.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Defina uma <strong>macro GAS básica</strong> que inicialize um registrador vetorial em um estado conhecido (por exemplo, zero) e utilize essa macro em pelo menos dois pontos do seu código.</p>
+
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>O professor validará no binário (via objdump) a expansão da macro e em execução (via GDB) que o registrador foi inicializado conforme esperado.</p>
+
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 12</span> <strong>Macro parametrizada para gerar blocos SIMD repetitivos</strong></p>
+</div>
+<p><strong>Contexto</strong></p>
+<p>Um padrão frequente em otimização SIMD é aplicar a mesma sequência sobre múltiplos blocos de dados, mudando apenas registradores ou offsets. Implementar isso manualmente produz código longo e com alto risco de inconsistência. Macros parametrizadas permitem gerar rotinas repetitivas com clareza e reprodutibilidade. Neste cenário final, você criará uma macro parametrizada que gere um bloco SIMD completo com parâmetros explícitos, reduzindo repetição e tornando o código mais profissional e escalável.</p>
+
+<p><strong>Tarefa</strong></p>
+<p>Crie uma <strong>macro GAS parametrizada</strong> que gere uma sequência SIMD repetitiva (por exemplo, carregar vetor, operar, armazenar), aceitando como parâmetros ao menos:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>registradores de entrada/saída;</li>
+    <li>offsets base para load/store;</li>
+    <li style="margin-bottom: 20px;">e invoque a macro múltiplas vezes com argumentos concretos.</li>
+</ul>
+
+<p><strong>Requisitos Técnicos e Saídas Esperadas</strong></p>
+<p>O relatório deve explicar quais parâmetros a macro recebe e por que isso reduz repetição. O professor validará por objdump que a macro foi expandida com variações coerentes e por execução no Raspberry Pi que o resultado final está correto.</p>
+
+<hr>
+
+<h3>Formato de entrega</h3>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Um <strong>relatório técnico</strong> deve ser entregue em conjunto, com as explicações das soluções e justificativas.</li>
+    <li>Todos os códigos Assembly devem estar organizados e executáveis no <strong>Raspberry Pi Zero 2W</strong> mas também podem ser testados e validados utilizando o QEMU.</li>
+    <li>Evidências como imagens e vídeos quando solicitado nos exercícios.</li>
+
+<hr>
+
+<tbody><tr class="">
+<th class="cell c0" style="" scope="row">Status da entrega</th>
+<td class="cell c1 lastcol" style="">Nenhuma tentativa</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Status da avaliação</th>
+<td class="submissionnotgraded cell c1 lastcol" style="">Não avaliado</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Data de entrega</th>
+<td class="cell c1 lastcol" style="">quarta, 3 jun 2026, 23:59</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Tempo restante</th>
+<td class="cell c1 lastcol" style="">11 dias 2 horas</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Rubrica</th>
+<td class="cell c1 lastcol" style=""><div class="box py-3 gradingform_rubric-description"><p>Template de Rubrica para ser utilizado com a extensão Rubricator</p></div><div id="rubric-rubric" class="clearfix gradingform_rubric editor preview"><table class="criteria" id="rubric-criteria" aria-label="Rubrica"><tr class="criterion first even" id="rubric-criteria-505692"><td class="description" id="rubric-criteria-505692-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe identificar registradores e modos de operação do NEON SIMD?">[c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe identificar registradores e modos de operação do NEON SIMD?</td><td class="levels"><table id="rubric-criteria-505692-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-505692-levels" role="radiogroup"><td id="rubric-criteria-505692-levels-1025420" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-505692-levels-1025420-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-505692-levels-1025421" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-505692-levels-1025421-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-520050"><td class="description" id="rubric-criteria-520050-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe implementar operações SIMD com vetores inteiros?">[c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe implementar operações SIMD com vetores inteiros?</td><td class="levels"><table id="rubric-criteria-520050-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-520050-levels" role="radiogroup"><td id="rubric-criteria-520050-levels-1055310" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520050-levels-1055310-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-520050-levels-1055311" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520050-levels-1055311-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-520051"><td class="description" id="rubric-criteria-520051-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe implementar operações SIMD com vetores de ponto flutuante?">[c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe implementar operações SIMD com vetores de ponto flutuante?</td><td class="levels"><table id="rubric-criteria-520051-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-520051-levels" role="radiogroup"><td id="rubric-criteria-520051-levels-1055312" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520051-levels-1055312-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-520051-levels-1055313" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520051-levels-1055313-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-520052"><td class="description" id="rubric-criteria-520052-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe paralelizar cálculos repetitivos usando instruções NEON?">[c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe paralelizar cálculos repetitivos usando instruções NEON?</td><td class="levels"><table id="rubric-criteria-520052-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-520052-levels" role="radiogroup"><td id="rubric-criteria-520052-levels-1055314" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520052-levels-1055314-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-520052-levels-1055315" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520052-levels-1055315-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-520053"><td class="description" id="rubric-criteria-520053-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe definir macros básicas usando GAS?">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe definir macros básicas usando GAS?</td><td class="levels"><table id="rubric-criteria-520053-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-520053-levels" role="radiogroup"><td id="rubric-criteria-520053-levels-1055316" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520053-levels-1055316-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-520053-levels-1055317" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520053-levels-1055317-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-520054"><td class="description" id="rubric-criteria-520054-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe expandir macros para automatizar sequências repetitivas de instruções?">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe expandir macros para automatizar sequências repetitivas de instruções?</td><td class="levels"><table id="rubric-criteria-520054-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-520054-levels" role="radiogroup"><td id="rubric-criteria-520054-levels-1055318" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520054-levels-1055318-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-520054-levels-1055319" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520054-levels-1055319-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-520055"><td class="description" id="rubric-criteria-520055-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe criar macros parametrizadas para geração automática de rotinas?">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe criar macros parametrizadas para geração automática de rotinas?</td><td class="levels"><table id="rubric-criteria-520055-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-520055-levels" role="radiogroup"><td id="rubric-criteria-520055-levels-1055320" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520055-levels-1055320-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-520055-levels-1055321" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520055-levels-1055321-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-520056"><td class="description" id="rubric-criteria-520056-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe justificar decisões técnicas e demonstrar evidências objetivas via GDB/objdump? ">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe justificar decisões técnicas e demonstrar evidências objetivas via GDB/objdump? </td><td class="levels"><table id="rubric-criteria-520056-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-520056-levels" role="radiogroup"><td id="rubric-criteria-520056-levels-1055322" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520056-levels-1055322-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-520056-levels-1055323" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520056-levels-1055323-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion last even" id="rubric-criteria-520057"><td class="description" id="rubric-criteria-520057-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou organização e documentação compatíveis com prática profissional, permitindo validação objetiva? ">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou organização e documentação compatíveis com prática profissional, permitindo validação objetiva? </td><td class="levels"><table id="rubric-criteria-520057-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-520057-levels" role="radiogroup"><td id="rubric-criteria-520057-levels-1055324" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520057-levels-1055324-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-520057-levels-1055325" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-520057-levels-1055325-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr></table></div></td>
+</tr>
