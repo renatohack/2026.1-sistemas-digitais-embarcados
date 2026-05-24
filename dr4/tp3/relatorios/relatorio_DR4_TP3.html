@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>Relatorio Tecnico - DR4 TP3</title>
+  <title>Relatório Técnico - DR4 TP3</title>
   <style>
     * {
       box-sizing: border-box;
@@ -259,12 +259,12 @@
 <body>
   <div class="cover">
     <div class="eyebrow">DR4 - Teste de Performance 3</div>
-    <h1>Relatorio Tecnico<br>NEON SIMD e Macros GAS</h1>
+    <h1>Relatório Técnico<br>NEON SIMD e Macros GAS</h1>
     <p class="subtitle">
-      Implementacao completa dos 12 exercicios praticos do TP3, cobrindo manipulacao
-      de registradores vetoriais ARM64, operacoes SIMD com inteiros e ponto flutuante,
-      shuffle de bytes, reducao controlada e macros GAS basicas e parametrizadas.
-      A validacao foi feita por execucao AArch64 em <span class="mono">qemu-aarch64</span>,
+      Implementação completa dos 12 exercícios práticos do TP3, cobrindo manipulação
+      de registradores vetoriais ARM64, operações SIMD com inteiros e ponto flutuante,
+      shuffle de bytes, redução controlada e macros GAS básicas e parametrizadas.
+      A validação foi feita por execução AArch64 em <span class="mono">qemu-aarch64</span>,
       desassemblagem com <span class="mono">objdump</span> e amostras de registradores
       por <span class="mono">gdb-multiarch</span>.
     </p>
@@ -279,12 +279,12 @@
         <span class="meta-value">TP3</span>
       </div>
       <div class="cover-card">
-        <span class="meta-label">Ambiente de validacao</span>
+        <span class="meta-label">Ambiente de validação</span>
         <span class="meta-value">aarch64-linux-gnu-gcc + qemu-aarch64 + gdb-multiarch</span>
         <span class="meta-label">Alvo previsto</span>
         <span class="meta-value">Raspberry Pi Zero 2W / Linux ARM64</span>
         <span class="meta-label">Artefatos</span>
-        <span class="meta-value">Codigo Assembly, suite de testes, evidencias textuais e relatorio</span>
+        <span class="meta-value">Código Assembly, suíte de testes, evidências textuais e relatório</span>
       </div>
     </div>
   </div>
@@ -292,41 +292,41 @@
   <div class="section">
     <h2>1. Objetivo e escopo</h2>
     <p class="lead">
-      O objetivo deste TP3 foi implementar doze exercicios em Assembly ARM64 com foco em
-      NEON SIMD e automacao por macros do GAS, mantendo cada solucao pequena,
-      reproduzivel e diretamente validavel por testes automatizados.
+      O objetivo deste TP3 foi implementar doze exercícios em Assembly ARM64 com foco em
+      NEON SIMD e automação por macros do GAS, mantendo cada solução pequena,
+      reproduzível e diretamente validável por testes automatizados.
     </p>
     <p>
       As rotinas foram expostas para um harness em C que prepara vetores de entrada,
-      chama o codigo Assembly e compara todas as saidas com valores esperados calculados
+      chama o código Assembly e compara todas as saídas com valores esperados calculados
       independentemente. Isso permite validar o comportamento funcional no QEMU e,
-      ao mesmo tempo, preservar labels internos para inspecao por GDB.
+      ao mesmo tempo, preservar labels internos para inspeção por GDB.
     </p>
 
     <div class="callout">
-      <strong>Decisao de ambiente:</strong> o enunciado permite executar no Raspberry Pi
-      Zero 2W ou validar com QEMU. A entrega gera um executavel
-      <span class="mono">ELF 64-bit ARM aarch64</span> estatico, com simbolos de debug,
-      compativel com Linux ARM64 e testado localmente por emulacao.
+      <strong>Decisão de ambiente:</strong> o enunciado permite executar no Raspberry Pi
+      Zero 2W ou validar com QEMU. A entrega gera um executável
+      <span class="mono">ELF 64-bit ARM aarch64</span> estático, com símbolos de debug,
+      compatível com Linux ARM64 e testado localmente por emulação.
     </div>
 
     <h3>Pontos relevantes da entrega</h3>
     <ul>
       <li>As 12 rotinas pedidas no enunciado foram implementadas em Assembly ARM64.</li>
-      <li>Os exercicios 1 a 7 validam manipulacao direta de lanes e registradores vetoriais.</li>
-      <li>Os exercicios 8 a 10 validam paralelismo SIMD para inteiros e float32.</li>
-      <li>Os exercicios 11 e 12 validam macros GAS basicas e parametrizadas por objdump.</li>
-      <li>As evidencias foram registradas em texto: QEMU, GDB, objdump e metadados do binario.</li>
+      <li>Os exercícios 1 a 7 validam manipulação direta de lanes e registradores vetoriais.</li>
+      <li>Os exercícios 8 a 10 validam paralelismo SIMD para inteiros e float32.</li>
+      <li>Os exercícios 11 e 12 validam macros GAS básicas e parametrizadas por objdump.</li>
+      <li>As evidências foram registradas em texto: QEMU, GDB, objdump e metadados do binário.</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>2. Organizacao do projeto</h2>
+    <h2>2. Organização do projeto</h2>
     <p>
-      O projeto segue a mesma organizacao utilizada no TP2: implementacao isolada em
-      <span class="mono">src</span>, declaracoes em <span class="mono">include</span>,
-      testes em <span class="mono">tests</span>, evidencias em
-      <span class="mono">evidencias</span> e relatorio final em
+      O projeto segue a mesma organização utilizada no TP2: implementação isolada em
+      <span class="mono">src</span>, declarações em <span class="mono">include</span>,
+      testes em <span class="mono">tests</span>, evidências em
+      <span class="mono">evidencias</span> e relatório final em
       <span class="mono">relatorios</span>.
     </p>
 
@@ -336,28 +336,28 @@
       <span class="tag">Macros GAS</span>
       <span class="tag">QEMU user mode</span>
       <span class="tag">GDB remoto</span>
-      <span class="tag">Relatorio HTML + PDF</span>
+      <span class="tag">Relatório HTML + PDF</span>
     </div>
 
     <table class="compact">
       <thead>
         <tr>
           <th>Arquivo / pasta</th>
-          <th>Funcao</th>
+          <th>Função</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="mono">src/tp3_exercises.S</td>
-          <td>Implementa as 12 rotinas, a macro basica, a macro parametrizada e o padrao de shuffle.</td>
+          <td>Implementa as 12 rotinas, a macro básica, a macro parametrizada e o padrão de shuffle.</td>
         </tr>
         <tr>
           <td class="mono">include/tp3.h</td>
-          <td>Declara as interfaces usadas pelo harness de validacao.</td>
+          <td>Declara as interfaces usadas pelo harness de validação.</td>
         </tr>
         <tr>
           <td class="mono">tests/test_tp3.c</td>
-          <td>Executa a validacao automatizada com comparacao lane a lane e byte a byte.</td>
+          <td>Executa a validação automatizada com comparação lane a lane e byte a byte.</td>
         </tr>
         <tr>
           <td class="mono">scripts/capture_gdb_registers.sh</td>
@@ -365,31 +365,31 @@
         </tr>
         <tr>
           <td class="mono">Makefile</td>
-          <td>Coordena compilacao, execucao em QEMU, objdump, GDB e geracao do PDF.</td>
+          <td>Coordena compilação, execução em QEMU, objdump, GDB e geração do PDF.</td>
         </tr>
         <tr>
           <td class="mono">evidencias/</td>
-          <td>Contem saidas de teste, formato do binario, desassemblagem e captura GDB.</td>
+          <td>Contém saídas de teste, formato do binário, desassemblagem e captura GDB.</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>Fluxo de validacao</h3>
+    <h3>Fluxo de validação</h3>
     <div class="flow-grid">
       <div class="flow-cell">
-        <span class="flow-title">1. Implementacao</span>
+        <span class="flow-title">1. Implementação</span>
         Rotinas em Assembly ARM64 usam NEON, convenção AAPCS64 e buffers C para observabilidade.
       </div>
       <div class="flow-cell">
         <span class="flow-title">2. Cross-build</span>
-        O projeto e compilado por <span class="mono">aarch64-linux-gnu-gcc</span> e ligado estaticamente.
+        O projeto é compilado por <span class="mono">aarch64-linux-gnu-gcc</span> e ligado estaticamente.
       </div>
       <div class="flow-cell">
-        <span class="flow-title">3. Execucao</span>
-        O binario AArch64 roda em <span class="mono">qemu-aarch64</span> e retorna erro em qualquer falha.
+        <span class="flow-title">3. Execução</span>
+        O binário AArch64 roda em <span class="mono">qemu-aarch64</span> e retorna erro em qualquer falha.
       </div>
       <div class="flow-cell">
-        <span class="flow-title">4. Evidencias</span>
+        <span class="flow-title">4. Evidências</span>
         <span class="mono">make evidence</span> salva QEMU, ELF e objdump; <span class="mono">make gdb-evidence</span> salva GDB.
       </div>
     </div>
@@ -402,25 +402,25 @@ make report</pre>
   </div>
 
   <div class="section page-break">
-    <h2>3. Implementacao dos exercicios</h2>
+    <h2>3. Implementação dos exercícios</h2>
     <p>
-      A tabela resume a solucao tecnica adotada. As funcoes foram escritas para expor
-      o estado final em memoria ou em registrador geral, facilitando validacao automatica
-      e inspecao manual.
+      A tabela resume a solução técnica adotada. As funções foram escritas para expor
+      o estado final em memória ou em registrador geral, facilitando validação automática
+      e inspeção manual.
     </p>
 
     <table class="compact">
       <thead>
         <tr>
           <th>Ex.</th>
-          <th>Implementacao</th>
-          <th>Observacao tecnica</th>
+          <th>Implementação</th>
+          <th>Observação técnica</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>1</strong></td>
-          <td><span class="mono">mov v0.s[0], w0</span> apos carregar um vetor inicial.</td>
+          <td><span class="mono">mov v0.s[0], w0</span> após carregar um vetor inicial.</td>
           <td>Atualiza somente os 32 bits baixos e preserva os demais lanes.</td>
         </tr>
         <tr>
@@ -431,27 +431,27 @@ make report</pre>
         <tr>
           <td><strong>3</strong></td>
           <td><span class="mono">eor v0.16b, v0.16b, v0.16b</span>.</td>
-          <td>Zera todos os 128 bits de V0 de forma deterministica.</td>
+          <td>Zera todos os 128 bits de V0 de forma determinística.</td>
         </tr>
         <tr>
           <td><strong>4</strong></td>
           <td><span class="mono">movi v0.16b, #0xff</span>.</td>
-          <td>Cria mascara com todos os bits setados.</td>
+          <td>Cria máscara com todos os bits setados.</td>
         </tr>
         <tr>
           <td><strong>5</strong></td>
-          <td><span class="mono">tbl v2.16b, {v0.16b}, v1.16b</span> com tabela de indices propria.</td>
-          <td>Padrao aplicado: <span class="mono">15,14,13,12,8,9,10,11,3,2,1,0,4,5,6,7</span>.</td>
+          <td><span class="mono">tbl v2.16b, {v0.16b}, v1.16b</span> com tabela de índices própria.</td>
+          <td>Padrão aplicado: <span class="mono">15,14,13,12,8,9,10,11,3,2,1,0,4,5,6,7</span>.</td>
         </tr>
         <tr>
           <td><strong>6</strong></td>
           <td><span class="mono">mov v0.s[2], w0</span>.</td>
-          <td>Insere uma word no lane especifico <span class="mono">s[2]</span>.</td>
+          <td>Insere uma word no lane específico <span class="mono">s[2]</span>.</td>
         </tr>
         <tr>
           <td><strong>7</strong></td>
           <td><span class="mono">shl v0.2d, v0.2d, #5</span>.</td>
-          <td>Desloca os dois lanes de 64 bits sem propagacao entre lanes.</td>
+          <td>Desloca os dois lanes de 64 bits sem propagação entre lanes.</td>
         </tr>
         <tr>
           <td><strong>8</strong></td>
@@ -471,12 +471,12 @@ make report</pre>
         <tr>
           <td><strong>11</strong></td>
           <td>Macro <span class="mono">INIT_VEC_ZERO reg</span> expandida em dois registradores.</td>
-          <td>O objdump mostra duas expansoes independentes com <span class="mono">eor</span>.</td>
+          <td>O objdump mostra duas expansões independentes com <span class="mono">eor</span>.</td>
         </tr>
         <tr>
           <td><strong>12</strong></td>
           <td>Macro <span class="mono">SIMD_ADD16_U8_BLOCK</span> parametriza registradores, bases e offset.</td>
-          <td>A macro e invocada para offsets <span class="mono">0</span> e <span class="mono">16</span>.</td>
+          <td>A macro é invocada para offsets <span class="mono">0</span> e <span class="mono">16</span>.</td>
         </tr>
       </tbody>
     </table>
@@ -484,10 +484,10 @@ make report</pre>
     <h3>Macros implementadas</h3>
     <div class="grid-2">
       <div class="cell">
-        <h3>Macro basica</h3>
+        <h3>Macro básica</h3>
         <p>
           <span class="mono">INIT_VEC_ZERO reg</span> recebe o registrador vetorial e gera
-          uma operacao <span class="mono">eor reg.16b, reg.16b, reg.16b</span>. Ela foi
+          uma operação <span class="mono">eor reg.16b, reg.16b, reg.16b</span>. Ela foi
           usada sobre <span class="mono">v0</span> e <span class="mono">v1</span>.
         </p>
       </div>
@@ -495,70 +495,70 @@ make report</pre>
         <h3>Macro parametrizada</h3>
         <p>
           <span class="mono">SIMD_ADD16_U8_BLOCK</span> recebe registradores vetoriais de
-          destino/entradas, registradores-base de memoria e offset. Assim, a mesma
-          sequencia load-operate-store e gerada para multiplos blocos.
+          destino/entradas, registradores-base de memória e offset. Assim, a mesma
+          sequência load-operate-store é gerada para múltiplos blocos.
         </p>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <h2>4. Validacao e evidencias</h2>
+    <h2>4. Validação e evidências</h2>
     <p>
-      A validacao principal foi automatizada no harness C. Cada exercicio compara todos
-      os bytes, lanes ou escalares relevantes e o programa retorna codigo de erro se
-      qualquer comparacao falhar. O log completo esta em
+      A validação principal foi automatizada no harness C. Cada exercício compara todos
+      os bytes, lanes ou escalares relevantes e o programa retorna código de erro se
+      qualquer comparação falhar. O log completo está em
       <span class="mono">evidencias/qemu_test_output.txt</span>.
     </p>
 
-    <h3>Confirmacao do binario gerado</h3>
+    <h3>Confirmação do binário gerado</h3>
     <pre>build/tp3_neon_macros: ELF 64-bit LSB executable, ARM aarch64, version 1 (GNU/Linux),
 statically linked, for GNU/Linux 3.7.0, with debug_info, not stripped</pre>
 
-    <h3>Resumo da suite</h3>
+    <h3>Resumo da suíte</h3>
     <table class="compact">
       <thead>
         <tr>
           <th>Grupo</th>
-          <th>Validacao executada</th>
+          <th>Validação executada</th>
           <th>Resultado</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Exercicios 1 a 7</td>
-          <td>Insercao de lanes, zeragem, preenchimento, shuffle e shift por lane.</td>
+          <td>Exercícios 1 a 7</td>
+          <td>Inserção de lanes, zeragem, preenchimento, shuffle e shift por lane.</td>
           <td>Todos aprovados</td>
         </tr>
         <tr>
-          <td>Exercicios 8 a 10</td>
+          <td>Exercícios 8 a 10</td>
           <td>Soma u8x16, dot product u16x8 e soma float32x4.</td>
           <td>Todos aprovados</td>
         </tr>
         <tr>
-          <td>Exercicios 11 e 12</td>
-          <td>Execucao funcional das macros e evidencia de expansao por objdump.</td>
+          <td>Exercícios 11 e 12</td>
+          <td>Execução funcional das macros e evidência de expansão por objdump.</td>
           <td>Todos aprovados</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>Trecho do output de execucao</h3>
-    <pre>Validacao automatizada do TP3 - NEON SIMD e macros GAS
-Execucao cruzada: binario AArch64 rodando em qemu-aarch64
+    <h3>Trecho do output de execução</h3>
+    <pre>Validação automatizada do TP3 - NEON SIMD e macros GAS
+Execução cruzada: binário AArch64 rodando em qemu-aarch64
 
-Exercicio 1 - Wn para lane baixa de Vd
+Exercício 1 - Wn para lane baixa de Vd
 [ OK ] lane s[0] atualizada e demais lanes preservados: [0x12345678, 0xbbbbbbbb, 0xcccccccc, 0xdddddddd]
 
-Exercicio 8 - Soma SIMD de 16 bytes
+Exercício 8 - Soma SIMD de 16 bytes
 [ OK ] 16 somas u8 processadas em paralelo: f1 f7 fd 03 09 0f 15 1b 21 27 2d 33 39 3f 45 4b
 
-Exercicio 12 - Macro parametrizada para dois blocos SIMD
+Exercício 12 - Macro parametrizada para dois blocos SIMD
 [ OK ] dois blocos de 16 bytes gerados por macro: a0 9e 9c 9a 98 96 94 92 90 8e 8c 8a 88 86 84 82 80 7e 7c 7a 78 76 74 72 70 6e 6c 6a 68 66 64 62
 
-Resultado final: todos os 12 exercicios passaram nos testes.</pre>
+Resultado final: todos os 12 exercícios passaram nos testes.</pre>
 
-    <h3>Evidencia de objdump para macros</h3>
+    <h3>Evidência de objdump para macros</h3>
     <pre>ex11_macro_zero_twice:
   movi  v0.16b, #0x5a
   eor   v0.16b, v0.16b, v0.16b
@@ -583,7 +583,7 @@ ex12_macro_add_two_blocks:
 [ex11_after_first_zero] v0.b = {0x00 repetido 16 vezes}</pre>
 
     <p class="note">
-      As saidas completas foram preservadas em
+      As saídas completas foram preservadas em
       <span class="mono">evidencias/qemu_test_output.txt</span>,
       <span class="mono">evidencias/objdump_tp3_exercises.txt</span> e
       <span class="mono">evidencias/gdb_registers.txt</span>.
@@ -591,16 +591,16 @@ ex12_macro_add_two_blocks:
   </div>
 
   <div class="section">
-    <h2>5. Conclusao</h2>
+    <h2>5. Conclusão</h2>
     <p>
-      A entrega atende ao enunciado do TP3: os 12 exercicios foram implementados em
+      A entrega atende ao enunciado do TP3: os 12 exercícios foram implementados em
       Assembly ARM64 usando NEON SIMD e macros GAS, organizados em um projeto
-      reproduzivel, compilados para AArch64 e validados por execucao cruzada em QEMU.
+      reproduzível, compilados para AArch64 e validados por execução cruzada em QEMU.
     </p>
     <p>
-      Alem da validacao funcional, a entrega inclui evidencias por objdump para
-      expansao das macros e capturas GDB de registradores vetoriais em pontos internos
-      da execucao. A suite automatizada terminou sem falhas.
+      Além da validação funcional, a entrega inclui evidências por objdump para
+      expansão das macros e capturas GDB de registradores vetoriais em pontos internos
+      da execução. A suíte automatizada terminou sem falhas.
     </p>
   </div>
 </body>

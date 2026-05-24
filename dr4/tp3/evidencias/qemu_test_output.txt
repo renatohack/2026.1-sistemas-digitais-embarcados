@@ -1,41 +1,41 @@
-Validacao automatizada do TP3 - NEON SIMD e macros GAS
-Execucao cruzada: binario AArch64 rodando em qemu-aarch64
+Validação automatizada do TP3 - NEON SIMD e macros GAS
+Execução cruzada: binário AArch64 rodando em qemu-aarch64
 
-Exercicio 1 - Wn para lane baixa de Vd
+Exercício 1 - Wn para lane baixa de Vd
 [ OK ] lane s[0] atualizada e demais lanes preservados: [0x12345678, 0xbbbbbbbb, 0xcccccccc, 0xdddddddd]
 
-Exercicio 2 - Xn para metade baixa de Vd
+Exercício 2 - Xn para metade baixa de Vd
 [ OK ] lane d[0] atualizada e d[1] preservada: [0x0123456789abcdef, 0xbbbbbbbbbbbbbbbb]
 
-Exercicio 3 - Zerar V0
+Exercício 3 - Zerar V0
 [ OK ] todos os 16 bytes zerados: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
-Exercicio 4 - Preencher V0 com 1s
+Exercício 4 - Preencher V0 com 1s
 [ OK ] todos os 16 bytes em 0xff: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
 
-Exercicio 5 - Reorganizacao arbitraria de bytes
-[ OK ] padrao TBL aplicado byte a byte: ff ee dd cc 88 99 aa bb 33 22 11 00 44 55 66 77
+Exercício 5 - Reorganização arbitrária de bytes
+[ OK ] padrão TBL aplicado byte a byte: ff ee dd cc 88 99 aa bb 33 22 11 00 44 55 66 77
 
-Exercicio 6 - Inserir word em lane especifico
+Exercício 6 - Inserir word em lane específico
 [ OK ] lane s[2] atualizado e demais preservados: [0x11111111, 0x22222222, 0xdeadbeef, 0x44444444]
 
-Exercicio 7 - Shift left por 5 bits nos dois lanes de 64 bits
+Exercício 7 - Shift left por 5 bits nos dois lanes de 64 bits
 [ OK ] SHL v.2d sem cruzar lanes: [0x0000000000000060, 0x0000000000000020]
 
-Exercicio 8 - Soma SIMD de 16 bytes
+Exercício 8 - Soma SIMD de 16 bytes
 [ OK ] 16 somas u8 processadas em paralelo: f1 f7 fd 03 09 0f 15 1b 21 27 2d 33 39 3f 45 4b
 
-Exercicio 9 - Dot product u16x8 com reducao
+Exercício 9 - Dot product u16x8 com redução
 [ OK ] produto escalar parcial reduzido em registrador geral: 0x00002b3e
 
-Exercicio 10 - Soma SIMD float32x4
+Exercício 10 - Soma SIMD float32x4
 [ OK ] fadd v.4s validado numericamente: [4.00, -0.50, 59.50, 1.00]
 
-Exercicio 11 - Macro GAS basica de inicializacao
-[ OK ] primeira expansao da macro INIT_VEC_ZERO: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-[ OK ] segunda expansao da macro INIT_VEC_ZERO: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Exercício 11 - Macro GAS básica de inicialização
+[ OK ] primeira expansão da macro INIT_VEC_ZERO: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+[ OK ] segunda expansão da macro INIT_VEC_ZERO: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
-Exercicio 12 - Macro parametrizada para dois blocos SIMD
+Exercício 12 - Macro parametrizada para dois blocos SIMD
 [ OK ] dois blocos de 16 bytes gerados por macro: a0 9e 9c 9a 98 96 94 92 90 8e 8c 8a 88 86 84 82 80 7e 7c 7a 78 76 74 72 70 6e 6c 6a 68 66 64 62
 
-Resultado final: todos os 12 exercicios passaram nos testes.
+Resultado final: todos os 12 exercícios passaram nos testes.
