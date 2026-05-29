@@ -1,0 +1,26 @@
+[*]
+[*] GTKWave Analyzer save file for DR3 UART simulation
+[dumpfile] "build/waves/tb_uart_results.vcd"
+[timestart] 700000
+[size] 1280 720
+[treeopen] tb_uart_results.
+[treeopen] tb_uart_results.dut.
+@28
+tb_uart_results.clk
+tb_uart_results.rst_n
+tb_uart_results.start
+@22
+tb_uart_results.state[3:0]
+tb_uart_results.next_state[3:0]
+tb_uart_results.tx_byte[7:0]
+@28
+tb_uart_results.tx_valid
+tb_uart_results.tx_ready
+tb_uart_results.uart_tx
+tb_uart_results.done
+@22
+tb_uart_results.sum_out[31:0]
+tb_uart_results.mean_out[31:0]
+tb_uart_results.rms2_out[31:0]
+tb_uart_results.led[5:0]
+

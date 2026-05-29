@@ -1,0 +1,216 @@
+<hr>
+
+<h3><strong>Contexto</strong></h3>
+<p>Em projetos profissionais de <strong>engenharia da computação</strong>, é comum desenvolver sistemas digitais dedicados em FPGA para <strong>monitoramento e análise de sinais provenientes de sensores físicos</strong>. Em diversas aplicações industriais — como monitoramento de vibração de motores, análise de consumo elétrico, supervisão de equipamentos mecânicos ou detecção de anomalias em linhas de produção — sensores produzem <strong>sequências de amostras digitais ao longo do tempo</strong>, representando variações de um fenômeno físico.</p>
+<p>Nesses sistemas, a FPGA atua como um <strong>processador dedicado de sinais discretos</strong>, capaz de analisar essas amostras e extrair <strong>métricas simples utilizadas para monitoramento e diagnóstico</strong>. Entre as métricas mais comuns em engenharia estão:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li><strong>Soma acumulada</strong>, usada para avaliar tendência ou deslocamento do sinal;</li>
+    <li><strong>Valor médio</strong>, que representa o nível médio observado;</li>
+    <li style="margin-bottom: 20px;"><strong>RMS (Root Mean Square)</strong>, amplamente utilizado para medir a <strong>intensidade efetiva de um sinal variável</strong>, sendo comum em monitoramento de vibração, potência elétrica e amplitude de sinais.</li>
+</ul>
+
+<p>Em sistemas reais, essas amostras seriam provenientes de sensores físicos. Neste Assessment Final, entretanto, o comportamento do sensor será <strong>simulado dentro da própria FPGA</strong>, por meio de um <strong>módulo gerador de amostras digitais</strong>. Isso permite reproduzir o comportamento de um sensor real sem depender de hardware externo, mantendo o foco do projeto na <strong>arquitetura digital do sistema</strong>.</p>
+
+<hr>
+
+<h3><strong>Sistema a ser desenvolvido</strong></h3>
+<p>Neste <strong>Assessment Final (AT)</strong>, você deverá desenvolver um <strong>sistema digital de monitoramento de sinal discreto</strong>, implementado em <strong>Verilog HDL</strong> e executado na <strong>FPGA Tang Nano 9k</strong>.</p>
+<p>O sistema deverá:</p>
+<ol style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li><strong>Gerar uma sequência de amostras digitais</strong> por meio de um módulo simulador de sensor;</li>
+    <li><strong>Armazenar essas amostras em BRAM interna da FPGA</strong>;</li>
+    <li><strong>Calcular métricas aritméticas sobre essas amostras</strong>;</li>
+    <li><strong>Transmitir os resultados por uma interface digital</strong>;</li>
+    <li style="margin-bottom: 20px;"><strong>Ser controlado por uma FSM central</strong> responsável por coordenar todas as etapas do sistema.</li>
+</ol>
+<hr>
+<h3><strong>Amostras do sinal</strong></h3>
+<p>O módulo gerador deverá produzir <strong>16 amostras digitais</strong>, representando valores provenientes de um sensor hipotético.</p>
+<p>Cada amostra deverá ser representada como:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Número <strong>inteiro com sinal</strong></li>
+    <li>Em <strong>complemento de dois</strong></li>
+    <li style="margin-bottom: 20px;">Com largura mínima de <strong>16 bits</strong></li>
+</ul>
+<p>Essas amostras devem ser armazenadas na <strong>BRAM interna da FPGA</strong> para posterior processamento.</p>
+<hr>
+<h3><strong>Métricas a serem calculadas</strong></h3>
+<p>O sistema deverá calcular três métricas sobre as amostras armazenadas.</p>
+
+<p><strong>Soma acumulada</strong></p>
+<p><span class="nolink">$$S = \sum_{i=0}^{15} x_i$$</span></p>
+
+<p><strong>Média</strong></p>
+<p><span class="nolink">$$\bar{x} = \frac{1}{16}\sum_{i=0}^{15} x_i$$</span></p>
+
+<p><strong>RMS simplificado</strong></p>
+<p>O RMS simplificado corresponde à <strong>média dos quadrados das amostras</strong>, sem aplicar a raiz quadrada.</p>
+<p><span class="nolink">$$RMS_{simplificado} = \frac{1}{16}\sum_{i=0}^{15} x_i^2$$</span></p>
+
+<p>Essa forma simplificada é frequentemente utilizada em hardware quando o objetivo é <strong>comparar a intensidade de sinais</strong>, sem necessidade do cálculo completo da raiz.</p>
+<p>As operações devem ser realizadas <strong>diretamente em hardware</strong>, utilizando <strong>DSP blocks sempre que aplicável</strong>.</p>
+<hr>
+<h3><strong>Interface do sistema</strong></h3>
+<p>O sistema deverá possuir uma interface mínima composta por:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li><strong>Botão de início (START)</strong> para iniciar o processamento</li>
+    <li><strong>LEDs de estado</strong> indicando o estado do sistema</li>
+    <li style="margin-bottom: 20px;"><strong>Interface digital de saída</strong> para transmissão dos resultados</li>
+</ul>
+
+<p>A FSM deverá coordenar estados como:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Inicialização</li>
+    <li>Geração de amostras</li>
+    <li>Armazenamento na memória</li>
+    <li>Processamento aritmético</li>
+    <li>Transmissão de resultados</li>
+    <li style="margin-bottom: 20px;">Estado final ou erro</li>
+</ul>
+
+<hr>
+
+<h3><strong>Tarefa do aluno</strong></h3>
+<p>Com base na especificação acima, desenvolva o sistema completo.</p>
+<hr>
+<ol style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li style="margin-bottom: 20px;"><strong>Projeto arquitetural</strong>
+        <p style="margin-top: 5px; margin-bottom: 10px;">Projete a arquitetura do sistema, identificando explicitamente:</p>
+        <ul style="margin-top: 0; margin-bottom: 10px; padding-left: 30px;">
+            <li>FSM de controle</li>
+            <li>Módulo gerador de amostras</li>
+            <li>Módulo de memória BRAM</li>
+            <li>Datapath aritmético</li>
+            <li>Interface de comunicação</li>
+            <li>Geração de clock com PLL</li>
+        </ul>
+        <p style="margin-bottom: 0;">Inclua no relatório um <strong>diagrama arquitetural do sistema</strong>.</p>
+    </li>
+    <hr>
+    <li style="margin-bottom: 20px;"><strong>Implementação da FSM</strong>
+        <p style="margin-top: 5px; margin-bottom: 10px;">Implemente em <strong>Verilog HDL</strong> a FSM responsável por coordenar:</p>
+        <ul style="margin-top: 0; margin-bottom: 10px; padding-left: 30px;">
+            <li>Geração das amostras</li>
+            <li>Armazenamento em memória</li>
+            <li>Execução dos cálculos</li>
+            <li>Transmissão dos resultados</li>
+        </ul>
+        <p style="margin-bottom: 0;">A implementação deve apresentar <strong>separação clara entre lógica de transição e lógica de saída</strong>.</p>
+    </li>
+    <hr>
+    <li style="margin-bottom: 20px;"><strong>Uso de BRAM</strong>
+        <p style="margin-top: 5px; margin-bottom: 10px;">Implemente o armazenamento das <strong>16 amostras</strong> utilizando <strong>BRAM interna da FPGA</strong>.</p>
+        <p style="margin-bottom: 10px;">O acesso à memória deve ser:</p>
+        <ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+            <li>Síncrono</li>
+            <li>Controlado pela FSM</li>
+        </ul>
+    </li>
+    <hr>
+    <li style="margin-bottom: 20px;"><strong>Implementação do datapath aritmético</strong>
+        <p style="margin-top: 5px; margin-bottom: 10px;">Implemente os módulos responsáveis pelo cálculo de:</p>
+        <ul style="margin-top: 0; margin-bottom: 10px; padding-left: 30px;">
+            <li>Soma acumulada</li>
+            <li>Média</li>
+            <li>RMS simplificado</li>
+        </ul>
+        <p style="margin-bottom: 0;">Sempre que possível, utilize <strong>DSP blocks</strong> da FPGA.</p>
+    </li>
+    <hr>
+    <li style="margin-bottom: 20px;"><strong>Uso de PLL</strong>
+        <p style="margin-top: 5px; margin-bottom: 10px;">Configure uma <strong>PLL</strong> para gerar um <strong>clock derivado</strong> utilizado em parte do sistema.</p>
+        <p style="margin-bottom: 0;">Demonstre o funcionamento em simulação.</p>
+    </li>
+    <hr>
+    <li style="margin-bottom: 20px;"><strong>Comunicação digital</strong>
+        <p style="margin-top: 5px; margin-bottom: 10px;">Implemente uma interface digital que permita transmitir os resultados calculados.</p>
+        <p style="margin-bottom: 10px;">A interface deve funcionar:</p>
+        <ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+            <li>Em simulação</li>
+            <li>Em hardware real.</li>
+        </ul>
+    </li>
+    <hr>
+    <li style="margin-bottom: 20px;"><strong>Simulação e testes</strong>
+        <p style="margin-top: 5px; margin-bottom: 10px;">Desenvolva <strong>testbenches completos</strong> que verifiquem:</p>
+        <ul style="margin-top: 0; margin-bottom: 10px; padding-left: 30px;">
+            <li>Funcionamento típico</li>
+            <li>Valores extremos</li>
+            <li>Possíveis overflow</li>
+        </ul>
+        <p style="margin-bottom: 0;">Analise as <strong>formas de onda geradas nas simulações</strong>.</p>
+    </li>
+    <hr>
+    <li style="margin-bottom: 20px;"><strong>Síntese e validação em hardware</strong>
+        <p style="margin-top: 5px; margin-bottom: 10px;">Sintetize o projeto, aplique as <strong>constraints de pinagem</strong> e programe a <strong>Tang Nano 9k</strong>.</p>
+        <p style="margin-bottom: 0;">Valide fisicamente o funcionamento do sistema e registre evidências.</p>
+    </li>
+</ol>
+
+<hr>
+
+<h3><strong>Formato de entrega</strong></h3>
+<p>A entrega do Assessment Final deve seguir rigorosamente os critérios abaixo.</p>
+
+<p><strong>Código do projeto</strong></p>
+<p>Devem ser incluídos:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Arquivos <strong>Verilog (.v)</strong> contendo todos os módulos do sistema</li>
+    <li>Módulo <strong>top level</strong> integrando todos os blocos</li>
+    <li>Arquivos de <strong>testbench utilizados nas simulações</strong></li>
+    <li style="margin-bottom: 20px;">Arquivo de <strong>constraints da Tang Nano 9k</strong></li>
+</ul>
+<p>O código deve estar <strong>organizado, identificado e modularizado</strong>.</p>
+
+<p><strong>Relatório técnico</strong></p>
+<p>Deve ser entregue um <strong>relatório técnico em PDF</strong>, contendo:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Descrição da arquitetura do sistema</li>
+    <li>Diagrama arquitetural</li>
+    <li>Explicação da FSM</li>
+    <li>Descrição do datapath aritmético</li>
+    <li>Justificativa das decisões de projeto</li>
+    <li style="margin-bottom: 20px;">Interpretação das <strong>formas de onda da simulação</strong></li>
+</ul>
+
+<p><strong>Evidências de funcionamento</strong></p>
+<p>Devem ser incluídas:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Imagens da placa <strong>Tang Nano 9k</strong> em funcionamento</li>
+    <li style="margin-bottom: 20px;">Capturas de tela das <strong>simulações ou waveforms</strong></li>
+</ul>
+<hr>
+<h3><strong>Vídeo demonstrativo</strong></h3>
+<p>Deve ser entregue um <strong>vídeo demonstrando o funcionamento completo do sistema</strong>.</p>
+<p>O vídeo deve mostrar:</p>
+<ul style="margin-top: 0; margin-bottom: 0; padding-left: 30px;">
+    <li>Execução do sistema na <strong>Tang Nano 9k</strong></li>
+    <li>Funcionamento da FSM</li>
+    <li>Cálculo das métricas</li>
+    <li style="margin-bottom: 20px;">Transmissão dos resultados</li>
+</ul>
+
+<h3>Status da entrega</h3><div class="box py-3 boxaligncenter submissionsummarytable"><table class="generaltable">
+<tbody><tr class="">
+<th class="cell c0" style="" scope="row">Número da tentativa</th>
+<td class="cell c1 lastcol" style="">Esta é a tentativa 1 (2 tentativas permitidas).</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Status da entrega</th>
+<td class="cell c1 lastcol" style="">Nenhuma tentativa</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Status da avaliação</th>
+<td class="submissionnotgraded cell c1 lastcol" style="">Não avaliado</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Data de entrega</th>
+<td class="cell c1 lastcol" style="">quinta, 18 jun 2026, 23:59</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Tempo restante</th>
+<td class="cell c1 lastcol" style="">24 dias 15 horas</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Rubrica</th>
+<td class="cell c1 lastcol" style=""><div class="box py-3 gradingform_rubric-description"><p>Template de Rubrica para ser utilizado com a extensão Rubricator</p></div><div id="rubric-rubric" class="clearfix gradingform_rubric editor preview"><table class="criteria" id="rubric-criteria" aria-label="Rubrica"><tr class="criterion first even" id="rubric-criteria-505697"><td class="description" id="rubric-criteria-505697-description-cell" tabindex="0" aria-label="Critério [c]1. Implementar máquinas de estados finitos em Verilog HDL[/c] O aluno projetou um diagrama de estados completo, contendo estados, transições e eventos coerentes com o funcionamento do sistema?">[c]1. Implementar máquinas de estados finitos em Verilog HDL[/c] O aluno projetou um diagrama de estados completo, contendo estados, transições e eventos coerentes com o funcionamento do sistema?</td><td class="levels"><table id="rubric-criteria-505697-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-505697-levels" role="radiogroup"><td id="rubric-criteria-505697-levels-1025435" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-505697-levels-1025435-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-505697-levels-1025436" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-505697-levels-1025436-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-519536"><td class="description" id="rubric-criteria-519536-description-cell" tabindex="0" aria-label="Critério [c]1. Implementar máquinas de estados finitos em Verilog HDL[/c] O aluno implementou a FSM em Verilog HDL, utilizando estrutura síncrona correta?">[c]1. Implementar máquinas de estados finitos em Verilog HDL[/c] O aluno implementou a FSM em Verilog HDL, utilizando estrutura síncrona correta?</td><td class="levels"><table id="rubric-criteria-519536-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519536-levels" role="radiogroup"><td id="rubric-criteria-519536-levels-1054259" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519536-levels-1054259-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519536-levels-1054260" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519536-levels-1054260-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-519537"><td class="description" id="rubric-criteria-519537-description-cell" tabindex="0" aria-label="Critério [c]1. Implementar máquinas de estados finitos em Verilog HDL[/c] O aluno separou corretamente lógica de transição e lógica de saída na implementação da FSM?">[c]1. Implementar máquinas de estados finitos em Verilog HDL[/c] O aluno separou corretamente lógica de transição e lógica de saída na implementação da FSM?</td><td class="levels"><table id="rubric-criteria-519537-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519537-levels" role="radiogroup"><td id="rubric-criteria-519537-levels-1054261" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519537-levels-1054261-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519537-levels-1054262" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519537-levels-1054262-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-519538"><td class="description" id="rubric-criteria-519538-description-cell" tabindex="0" aria-label="Critério [c]1. Implementar máquinas de estados finitos em Verilog HDL[/c] O aluno simulou a FSM e demonstrou transições corretas de estado por meio de waveforms?">[c]1. Implementar máquinas de estados finitos em Verilog HDL[/c] O aluno simulou a FSM e demonstrou transições corretas de estado por meio de waveforms?</td><td class="levels"><table id="rubric-criteria-519538-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519538-levels" role="radiogroup"><td id="rubric-criteria-519538-levels-1054263" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519538-levels-1054263-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519538-levels-1054264" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519538-levels-1054264-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-519539"><td class="description" id="rubric-criteria-519539-description-cell" tabindex="0" aria-label="Critério [c]2. Implemente projetos digitais utilizando recursos internos do FPGA (memória, DSP e PLL)[/c] O aluno implementou armazenamento síncrono de amostras utilizando BRAM?">[c]2. Implemente projetos digitais utilizando recursos internos do FPGA (memória, DSP e PLL)[/c] O aluno implementou armazenamento síncrono de amostras utilizando BRAM?</td><td class="levels"><table id="rubric-criteria-519539-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519539-levels" role="radiogroup"><td id="rubric-criteria-519539-levels-1054265" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519539-levels-1054265-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519539-levels-1054266" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519539-levels-1054266-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-519540"><td class="description" id="rubric-criteria-519540-description-cell" tabindex="0" aria-label="Critério [c]2. Implemente projetos digitais utilizando recursos internos do FPGA (memória, DSP e PLL)[/c] O aluno utilizou DSP blocks para realizar operações aritméticas no datapath?">[c]2. Implemente projetos digitais utilizando recursos internos do FPGA (memória, DSP e PLL)[/c] O aluno utilizou DSP blocks para realizar operações aritméticas no datapath?</td><td class="levels"><table id="rubric-criteria-519540-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519540-levels" role="radiogroup"><td id="rubric-criteria-519540-levels-1054267" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519540-levels-1054267-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519540-levels-1054268" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519540-levels-1054268-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-519541"><td class="description" id="rubric-criteria-519541-description-cell" tabindex="0" aria-label="Critério [c]2. Implemente projetos digitais utilizando recursos internos do FPGA (memória, DSP e PLL)[/c] O aluno configurou uma PLL para gerar clock derivado utilizado no sistema?">[c]2. Implemente projetos digitais utilizando recursos internos do FPGA (memória, DSP e PLL)[/c] O aluno configurou uma PLL para gerar clock derivado utilizado no sistema?</td><td class="levels"><table id="rubric-criteria-519541-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519541-levels" role="radiogroup"><td id="rubric-criteria-519541-levels-1054269" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519541-levels-1054269-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519541-levels-1054270" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519541-levels-1054270-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-519542"><td class="description" id="rubric-criteria-519542-description-cell" tabindex="0" aria-label="Critério [c]2. Implemente projetos digitais utilizando recursos internos do FPGA (memória, DSP e PLL)[/c] O aluno integrou BRAM, DSP e PLL em uma arquitetura funcional validada em hardware?">[c]2. Implemente projetos digitais utilizando recursos internos do FPGA (memória, DSP e PLL)[/c] O aluno integrou BRAM, DSP e PLL em uma arquitetura funcional validada em hardware?</td><td class="levels"><table id="rubric-criteria-519542-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519542-levels" role="radiogroup"><td id="rubric-criteria-519542-levels-1054271" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519542-levels-1054271-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519542-levels-1054272" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519542-levels-1054272-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-519543"><td class="description" id="rubric-criteria-519543-description-cell" tabindex="0" aria-label="Critério [c]3. Implementar operações aritméticas inteiras e de ponto flutuante em FPGA[/c] O aluno implementou operações aritméticas inteiras corretas em complemento de dois?">[c]3. Implementar operações aritméticas inteiras e de ponto flutuante em FPGA[/c] O aluno implementou operações aritméticas inteiras corretas em complemento de dois?</td><td class="levels"><table id="rubric-criteria-519543-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519543-levels" role="radiogroup"><td id="rubric-criteria-519543-levels-1054273" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519543-levels-1054273-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519543-levels-1054274" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519543-levels-1054274-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-519544"><td class="description" id="rubric-criteria-519544-description-cell" tabindex="0" aria-label="Critério [c]3. Implementar operações aritméticas inteiras e de ponto flutuante em FPGA[/c] O aluno implementou o cálculo da média utilizando o conjunto de amostras armazenado?">[c]3. Implementar operações aritméticas inteiras e de ponto flutuante em FPGA[/c] O aluno implementou o cálculo da média utilizando o conjunto de amostras armazenado?</td><td class="levels"><table id="rubric-criteria-519544-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519544-levels" role="radiogroup"><td id="rubric-criteria-519544-levels-1054275" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519544-levels-1054275-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519544-levels-1054276" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519544-levels-1054276-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-519545"><td class="description" id="rubric-criteria-519545-description-cell" tabindex="0" aria-label="Critério [c]3. Implementar operações aritméticas inteiras e de ponto flutuante em FPGA[/c] O aluno implementou o cálculo do RMS simplificado utilizando os quadrados das amostras?">[c]3. Implementar operações aritméticas inteiras e de ponto flutuante em FPGA[/c] O aluno implementou o cálculo do RMS simplificado utilizando os quadrados das amostras?</td><td class="levels"><table id="rubric-criteria-519545-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519545-levels" role="radiogroup"><td id="rubric-criteria-519545-levels-1054277" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519545-levels-1054277-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519545-levels-1054278" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519545-levels-1054278-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-519546"><td class="description" id="rubric-criteria-519546-description-cell" tabindex="0" aria-label="Critério [c]3. Implementar operações aritméticas inteiras e de ponto flutuante em FPGA[/c] O aluno testou o datapath aritmético utilizando testbenches com casos típicos e de borda?">[c]3. Implementar operações aritméticas inteiras e de ponto flutuante em FPGA[/c] O aluno testou o datapath aritmético utilizando testbenches com casos típicos e de borda?</td><td class="levels"><table id="rubric-criteria-519546-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519546-levels" role="radiogroup"><td id="rubric-criteria-519546-levels-1054279" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519546-levels-1054279-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519546-levels-1054280" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519546-levels-1054280-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-519547"><td class="description" id="rubric-criteria-519547-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar comunicação digital em FPGA[/c] O aluno configurou corretamente pinos digitais de entrada e saída da FPGA?">[c]4. Implementar comunicação digital em FPGA[/c] O aluno configurou corretamente pinos digitais de entrada e saída da FPGA?</td><td class="levels"><table id="rubric-criteria-519547-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519547-levels" role="radiogroup"><td id="rubric-criteria-519547-levels-1054281" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519547-levels-1054281-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519547-levels-1054282" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519547-levels-1054282-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-519548"><td class="description" id="rubric-criteria-519548-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar comunicação digital em FPGA[/c] O aluno implementou uma interface digital funcional para transmissão de resultados?">[c]4. Implementar comunicação digital em FPGA[/c] O aluno implementou uma interface digital funcional para transmissão de resultados?</td><td class="levels"><table id="rubric-criteria-519548-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519548-levels" role="radiogroup"><td id="rubric-criteria-519548-levels-1054283" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519548-levels-1054283-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519548-levels-1054284" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519548-levels-1054284-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-519549"><td class="description" id="rubric-criteria-519549-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar comunicação digital em FPGA[/c] O aluno simulou o funcionamento da interface de comunicação digital?">[c]4. Implementar comunicação digital em FPGA[/c] O aluno simulou o funcionamento da interface de comunicação digital?</td><td class="levels"><table id="rubric-criteria-519549-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519549-levels" role="radiogroup"><td id="rubric-criteria-519549-levels-1054285" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519549-levels-1054285-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519549-levels-1054286" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519549-levels-1054286-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion last odd" id="rubric-criteria-519550"><td class="description" id="rubric-criteria-519550-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar comunicação digital em FPGA[/c] O aluno validou fisicamente a comunicação digital na Tang Nano 9k?">[c]4. Implementar comunicação digital em FPGA[/c] O aluno validou fisicamente a comunicação digital na Tang Nano 9k?</td><td class="levels"><table id="rubric-criteria-519550-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-519550-levels" role="radiogroup"><td id="rubric-criteria-519550-levels-1054287" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519550-levels-1054287-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-519550-levels-1054288" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-519550-levels-1054288-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr></table></div></td>

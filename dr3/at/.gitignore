@@ -1,0 +1,7 @@
+build/
+*.fst
+*.vcd
+*.log
+*.jou
+*.fs
+
