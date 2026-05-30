@@ -1,0 +1,18 @@
+[*]
+[*] GTKWave Analyzer save file for DR3 datapath evidence
+[dumpfile] "build/waves/tb_signal_monitor_core.vcd"
+[timestart] 420000
+[size] 1280 720
+[treeopen] tb_signal_monitor_core.
+@22
+tb_signal_monitor_core.state[3:0]
+tb_signal_monitor_core.process_index[3:0]
+tb_signal_monitor_core.bram_dout[15:0]
+tb_signal_monitor_core.sum_acc[31:0]
+tb_signal_monitor_core.sumsq_acc[39:0]
+tb_signal_monitor_core.sum_out[31:0]
+tb_signal_monitor_core.mean_out[31:0]
+tb_signal_monitor_core.rms2_out[31:0]
+@28
+tb_signal_monitor_core.overflow
+

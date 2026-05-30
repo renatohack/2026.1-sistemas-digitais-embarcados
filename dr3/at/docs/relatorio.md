@@ -194,7 +194,11 @@ Inserir os prints gerados pelo GTKWave:
 
 ![FSM fluxo tipico](../evidencias/sim/01_fsm_fluxo_tipico.png)
 
-Neste print, destacar a sequencia de estados desde `INIT` ate `DONE`, mostrando que a FSM passa por geracao, armazenamento, leitura, processamento e transmissao.
+Neste print, destacar a sequencia de estados desde `INIT` ate `TX`, mostrando que a FSM passa por geracao, armazenamento, leitura, processamento e inicio da transmissao.
+
+![FSM estado final](../evidencias/sim/01b_fsm_estado_done.png)
+
+Neste print, destacar o final da transmissao e a transicao `TX -> DONE`, com ativacao do sinal `done`.
 
 ![BRAM escrita e leitura](../evidencias/sim/02_bram_escrita_leitura.png)
 
@@ -208,15 +212,21 @@ Neste print, destacar os valores finais `sum_out=64`, `mean_out=4` e `rms2_out=3
 
 Neste print, destacar `tx_valid`, `tx_ready`, `tx_byte` e `uart_tx`, mostrando a transmissao ASCII da mensagem final.
 
+![PLL e clock derivado](../evidencias/sim/05_pll_clock_derivado.png)
+
+Neste print, destacar `pll_locked`, o clock de entrada `clk_27` e o clock derivado `clk_proc`, demonstrando o funcionamento da PLL em simulacao.
+
 ## 9. Validacao em hardware
 
 Inserir as evidencias:
 
-![Placa conectada](../evidencias/hardware/01_placa_conectada.jpg)
+![Relatorio de utilizacao Gowin](../evidencias/hardware/01_relatorio_utilizacao_gowin.png)
 
-![Estado processando](../evidencias/hardware/02_estado_processando.jpg)
+![Uso da PLL no Gowin](../evidencias/hardware/01b_relatorio_pll.png)
 
-![Estado DONE nos LEDs](../evidencias/hardware/03_estado_done_leds.jpg)
+![Placa conectada](../evidencias/hardware/02_placa_conectada_idle.jpeg)
+
+![Estado DONE nos LEDs](../evidencias/hardware/03_estado_done_leds.jpeg)
 
 ![Terminal UART com resultados](../evidencias/hardware/04_terminal_uart_resultados.png)
 
@@ -230,6 +240,11 @@ Procedimento:
 6. Pressionar START.
 7. Conferir LEDs e mensagem UART.
 8. Registrar fotos e prints com os nomes indicados.
+
+Observacao sobre os LEDs: os estados de geracao, armazenamento e processamento
+duram menos de um microssegundo e normalmente nao sao perceptiveis a olho nu.
+O LED de transmissao UART pode piscar brevemente por aproximadamente `5,6 ms`;
+em seguida, o LED de `DONE` permanece aceso. Esse comportamento e esperado.
 
 ## 10. Justificativas de projeto
 

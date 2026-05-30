@@ -1,0 +1,16 @@
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#f3f7fb", "primaryTextColor": "#12304d", "primaryBorderColor": "#2d6da3", "lineColor": "#45617f", "secondaryColor": "#edf3f8", "tertiaryColor": "#ffffff", "fontFamily": "Arial"}}}%%
+stateDiagram-v2
+    [*] --> INIT
+    INIT --> IDLE
+    IDLE --> GENERATE: START
+    GENERATE --> STORE
+    STORE --> GENERATE: índice < 15
+    STORE --> READ: índice = 15
+    READ --> PROCESS
+    PROCESS --> READ: índice < 15
+    PROCESS --> FORMAT: índice = 15
+    PROCESS --> ERROR: overflow
+    FORMAT --> TX
+    TX --> DONE: fim da UART
+    DONE --> GENERATE: novo START
+    ERROR --> GENERATE: novo START

@@ -49,3 +49,4 @@ Projeto Gowin:
 - Guia GTKWave: `docs/guia_gtkwave.md`
 - Guia de fotos: `docs/guia_fotos_hardware.md`
 - Roteiro do video: `docs/roteiro_video.md`
+- Checklist final: `docs/checklist_entrega.md`

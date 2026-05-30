@@ -1,0 +1,18 @@
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#f3f7fb", "primaryTextColor": "#12304d", "primaryBorderColor": "#2d6da3", "lineColor": "#45617f", "secondaryColor": "#edf3f8", "tertiaryColor": "#ffffff", "fontFamily": "Arial"}}}%%
+flowchart LR
+    CLK["Clock onboard<br/>27 MHz"] --> PLL["PLL<br/>54 MHz"]
+    RESET["RESET<br/>onboard"] --> TOP["Top level"]
+    START["START<br/>onboard"] --> DEB["Debounce<br/>pulso único"]
+    PLL --> CORE["FSM central"]
+    DEB --> CORE
+    TOP --> CORE
+
+    CORE --> GEN["Gerador<br/>16 amostras signed"]
+    GEN --> BRAM["BRAM interna<br/>16 x 16 bits"]
+    CORE --> BRAM
+    BRAM --> DP["Datapath<br/>soma, média e RMS2"]
+    CORE --> DP
+    DP --> FMT["Formatador<br/>ASCII hexadecimal"]
+    FMT --> UART["UART TX<br/>115200 8N1"]
+    UART --> USB["USB-UART<br/>onboard"]
+    CORE --> LEDS["LEDs onboard<br/>estado da FSM"]

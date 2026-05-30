@@ -13,6 +13,8 @@ tb_uart_results.start
 tb_uart_results.state[3:0]
 tb_uart_results.next_state[3:0]
 tb_uart_results.tx_byte[7:0]
+tb_uart_results.dut.uart_tx_inst.tx_data_latch[7:0]
+tb_uart_results.dut.uart_tx_inst.bit_cnt[2:0]
 @28
 tb_uart_results.tx_valid
 tb_uart_results.tx_ready
@@ -23,4 +25,3 @@ tb_uart_results.sum_out[31:0]
 tb_uart_results.mean_out[31:0]
 tb_uart_results.rms2_out[31:0]
 tb_uart_results.led[5:0]
-

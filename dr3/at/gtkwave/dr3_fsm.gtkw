@@ -1,0 +1,16 @@
+[*]
+[*] GTKWave Analyzer save file for DR3 FSM evidence
+[dumpfile] "build/waves/tb_signal_monitor_core.vcd"
+[timestart] 0
+[size] 1280 720
+[treeopen] tb_signal_monitor_core.
+@28
+tb_signal_monitor_core.rst_n
+tb_signal_monitor_core.start
+@22
+tb_signal_monitor_core.state[3:0]
+tb_signal_monitor_core.next_state[3:0]
+tb_signal_monitor_core.led[5:0]
+@28
+tb_signal_monitor_core.done
+

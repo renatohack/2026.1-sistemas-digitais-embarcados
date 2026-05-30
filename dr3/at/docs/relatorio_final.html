@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>DR3 AT - Monitor de Sinal Discreto em FPGA</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      margin: 0;
+      color: #18202b;
+      background: #ffffff;
+      font-family: "Arial", "Helvetica", sans-serif;
+      font-size: 10.4pt;
+      line-height: 1.45;
+    }
+
+    .cover {
+      min-height: 260mm;
+      padding: 28mm 18mm 18mm;
+      background: linear-gradient(180deg, #eef4fb 0%, #ffffff 42%);
+      page-break-after: always;
+    }
+
+    .eyebrow {
+      color: #45617f;
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12mm 0 6mm;
+      color: #102033;
+      font-size: 30pt;
+      line-height: 1.08;
+    }
+
+    .subtitle {
+      max-width: 158mm;
+      color: #38495c;
+      font-size: 13.5pt;
+      line-height: 1.45;
+    }
+
+    .cover-grid,
+    .flow-grid,
+    .columns {
+      display: table;
+      width: 100%;
+      border-spacing: 0;
+    }
+
+    .cover-grid {
+      margin-top: 18mm;
+    }
+
+    .cover-card {
+      display: table-cell;
+      width: 50%;
+      padding: 5mm;
+      border: 1px solid #d6e0ea;
+      background: #ffffff;
+      vertical-align: top;
+    }
+
+    .cover-card:first-child {
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .cover-card:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .meta-label {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #617187;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-bottom: 4mm;
+      color: #172334;
+      font-size: 11pt;
+    }
+
+    .section {
+      padding: 8mm 14mm 3mm;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .avoid-break,
+    figure,
+    table,
+    pre {
+      page-break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 4mm;
+      padding-bottom: 2mm;
+      color: #12304d;
+      border-bottom: 2px solid #d8e3ee;
+      font-size: 17pt;
+      line-height: 1.2;
+    }
+
+    h3 {
+      margin: 6mm 0 2.5mm;
+      color: #26384c;
+      font-size: 12.2pt;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 3.2mm;
+    }
+
+    .lead {
+      color: #33465b;
+      font-size: 11.2pt;
+    }
+
+    .callout {
+      margin: 4mm 0;
+      padding: 4mm;
+      border-left: 4px solid #2d6da3;
+      background: #f3f7fb;
+      border-radius: 4px;
+    }
+
+    table {
+      width: 100%;
+      margin: 2mm 0 5mm;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th,
+    td {
+      padding: 2.1mm 2.4mm;
+      border: 1px solid #dce4ed;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    th {
+      color: #203346;
+      background: #edf3f8;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    code,
+    .mono {
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8.8pt;
+      color: #142238;
+    }
+
+    pre {
+      margin: 2mm 0 4mm;
+      padding: 3mm;
+      color: #142238;
+      background: #f6f8fb;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8pt;
+      line-height: 1.35;
+      white-space: pre-wrap;
+    }
+
+    ul {
+      margin: 1mm 0 4mm 5mm;
+      padding: 0 0 0 4mm;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 1.2mm 1.2mm 0;
+      padding: 1mm 2mm;
+      border: 1px solid #cdd9e6;
+      border-radius: 12px;
+      background: #f7fafc;
+      color: #27394e;
+      font-size: 8.8pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .flow-grid {
+      border-spacing: 2.5mm;
+      margin: 2mm -2.5mm 4mm;
+    }
+
+    .flow-cell {
+      display: table-cell;
+      width: 25%;
+      padding: 3mm;
+      border: 1px solid #d6e0ea;
+      border-radius: 4px;
+      background: #f8fbfe;
+      vertical-align: top;
+    }
+
+    .flow-title {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #12304d;
+      font-weight: 700;
+    }
+
+    .columns {
+      border-spacing: 3mm 0;
+      margin: 1mm -3mm 0;
+    }
+
+    .column {
+      display: table-cell;
+      width: 50%;
+      padding-left: 3mm;
+      vertical-align: top;
+    }
+
+    figure {
+      margin: 3mm 0 5mm;
+      padding: 3mm;
+      border: 1px solid #d6e0ea;
+      border-radius: 4px;
+      background: #fbfdff;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      max-height: 176mm;
+      object-fit: contain;
+    }
+
+    .diagram img {
+      max-height: 150mm;
+    }
+
+    .wave img {
+      max-height: 91mm;
+    }
+
+    .resource img {
+      max-height: 104mm;
+    }
+
+    .photo img {
+      height: 101mm;
+      object-fit: contain;
+      background: #eef3f7;
+    }
+
+    .terminal img {
+      max-height: 124mm;
+    }
+
+    figcaption {
+      margin-top: 2.5mm;
+      color: #42556a;
+      font-size: 8.8pt;
+      line-height: 1.38;
+    }
+
+    .formula {
+      margin: 2mm 0 4mm;
+      padding: 3mm;
+      color: #15334f;
+      border: 1px solid #d6e0ea;
+      background: #f8fbfe;
+      border-radius: 4px;
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 9.3pt;
+      line-height: 1.65;
+    }
+
+    .small {
+      color: #53677b;
+      font-size: 8.8pt;
+    }
+
+    .reference-list {
+      font-size: 9pt;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="eyebrow">Sistemas Embarcados - DR3 AT</div>
+    <h1>Monitor de Sinal<br>Discreto em FPGA</h1>
+    <p class="subtitle">
+      Implementação em Verilog HDL para Tang Nano 9K com geração de amostras,
+      armazenamento em BRAM, processamento aritmético com DSP, controle por FSM,
+      PLL e transmissão dos resultados por UART.
+    </p>
+
+    <div class="cover-grid">
+      <div class="cover-card">
+        <span class="meta-label">Aluno</span>
+        <span class="meta-value">Renato Hack</span>
+        <span class="meta-label">Disciplina</span>
+        <span class="meta-value">Sistemas Embarcados</span>
+        <span class="meta-label">Entrega</span>
+        <span class="meta-value">DR3 AT</span>
+      </div>
+      <div class="cover-card">
+        <span class="meta-label">Ambiente</span>
+        <span class="meta-value">Tang Nano 9K, Gowin EDA, Icarus Verilog e GTKWave</span>
+        <span class="meta-label">Validação</span>
+        <span class="meta-value">Simulação, relatório de síntese e execução na placa</span>
+        <span class="meta-label">Artefatos</span>
+        <span class="meta-value">RTL, testbenches, constraints, diagramas e evidências</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Objetivo e escopo</h2>
+    <p class="lead">
+      O projeto implementa um monitor de sinal discreto em FPGA. A cada comando
+      de início, o circuito gera 16 amostras signed de 16 bits, armazena o vetor
+      em memória interna, calcula soma, média inteira e RMS simplificado e envia
+      os resultados pela interface digital UART.
+    </p>
+
+    <div class="callout">
+      <strong>Montagem física:</strong> a implementação utiliza apenas recursos
+      onboard da Tang Nano 9K. START, RESET, LEDs e UART já estão disponíveis na
+      placa. Não é necessária protoboard para executar ou demonstrar o projeto.
+    </div>
+
+    <div>
+      <span class="tag">Verilog HDL</span>
+      <span class="tag">Tang Nano 9K</span>
+      <span class="tag">BRAM</span>
+      <span class="tag">DSP</span>
+      <span class="tag">PLL</span>
+      <span class="tag">FSM</span>
+      <span class="tag">UART 115200 8N1</span>
+    </div>
+
+    <div class="flow-grid">
+      <div class="flow-cell">
+        <span class="flow-title">1. Aquisição</span>
+        O gerador interno fornece as 16 amostras signed usadas como sinal de
+        entrada controlado.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">2. Memória</span>
+        A FSM grava o vetor e realiza a leitura síncrona da BRAM inferida.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">3. Processamento</span>
+        O datapath acumula soma e quadrados, usando multiplicador inferido em DSP.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">4. Resultado</span>
+        Os valores são formatados em hexadecimal e transmitidos pela UART onboard.
+      </div>
+    </div>
+
+    <h3>Recursos físicos utilizados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th>Uso no projeto</th>
+          <th>Montagem externa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Botão START</td>
+          <td>Inicia uma nova aquisição após debounce.</td>
+          <td>Não necessária.</td>
+        </tr>
+        <tr>
+          <td>Botão RESET</td>
+          <td>Retorna a FSM ao estado inicial.</td>
+          <td>Não necessária.</td>
+        </tr>
+        <tr>
+          <td>LEDs onboard</td>
+          <td>Indicam estados relevantes da FSM, incluindo IDLE, TX, DONE e ERROR.</td>
+          <td>Não necessária.</td>
+        </tr>
+        <tr>
+          <td>USB-UART onboard</td>
+          <td>Expõe a saída digital em texto ASCII pelo cabo USB.</td>
+          <td>Não necessária.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section page-break">
+    <h2>2. Arquitetura</h2>
+    <p>
+      O top level integra clock, botões, LEDs e UART. O núcleo agrupa a FSM,
+      o gerador de amostras, a BRAM, o datapath, o formatador hexadecimal e o
+      transmissor UART. A PLL recebe o clock onboard de 27 MHz e fornece o clock
+      de processamento de 54 MHz.
+    </p>
+
+    <figure class="diagram">
+      <img src="diagrams/arquitetura.svg" alt="Diagrama da arquitetura do projeto">
+      <figcaption>
+        Figura 1 - Arquitetura do monitor discreto. O caminho de dados parte do
+        gerador interno, passa pela BRAM e pelo datapath e termina na UART TX.
+      </figcaption>
+    </figure>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 33%;">Arquivo</th>
+          <th>Responsabilidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">signal_monitor_top.v</td>
+          <td>Integra PLL, debounce, núcleo, botões, LEDs e UART.</td>
+        </tr>
+        <tr>
+          <td class="mono">signal_monitor_core.v</td>
+          <td>Implementa a FSM central e coordena memória, datapath e transmissão.</td>
+        </tr>
+        <tr>
+          <td class="mono">sample_generator.v</td>
+          <td>Gera as 16 amostras signed utilizadas pelo fluxo típico.</td>
+        </tr>
+        <tr>
+          <td class="mono">sample_bram.v</td>
+          <td>Define a RAM síncrona 16 x 16 com anotação de inferência de BRAM.</td>
+        </tr>
+        <tr>
+          <td class="mono">arithmetic_datapath.v</td>
+          <td>Acumula soma e soma dos quadrados e registra média e RMS2.</td>
+        </tr>
+        <tr>
+          <td class="mono">hex_result_stream.v</td>
+          <td>Formata a mensagem ASCII com os resultados em hexadecimal.</td>
+        </tr>
+        <tr>
+          <td class="mono">uart_tx.v</td>
+          <td>Serializa bytes no formato 115200 baud, 8N1.</td>
+        </tr>
+        <tr>
+          <td class="mono">pll_54mhz.v</td>
+          <td>Instancia a PLL Gowin em síntese e fornece modelo comportamental em simulação.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section page-break">
+    <h2>3. Métricas e datapath</h2>
+    <p>
+      O vetor utilizado como sinal típico foi mantido fixo para permitir
+      conferência direta dos resultados em simulação e em hardware.
+    </p>
+
+    <pre>[-28, -20, -12, -4, 4, 12, 20, 28, 36, 28, 20, 12, 4, -4, -12, -20]</pre>
+
+    <div class="formula">
+      S = sum(x_i)<br>
+      média = S / 16<br>
+      RMS2 = sum(x_i * x_i) / 16
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Métrica</th>
+          <th style="width: 24%;">Decimal</th>
+          <th style="width: 32%;">Hexadecimal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Soma acumulada</td>
+          <td>64</td>
+          <td class="mono">0x00000040</td>
+        </tr>
+        <tr>
+          <td>Média inteira</td>
+          <td>4</td>
+          <td class="mono">0x00000004</td>
+        </tr>
+        <tr>
+          <td>Soma dos quadrados</td>
+          <td>5888</td>
+          <td class="mono">0x00001700</td>
+        </tr>
+        <tr>
+          <td>RMS simplificado (RMS2)</td>
+          <td>368</td>
+          <td class="mono">0x00000170</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Decisões de implementação</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Implementação</th>
+          <th>Motivação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>BRAM</td>
+          <td>RAM síncrona de 16 posições por 16 bits, com <code>syn_ramstyle = "block_ram"</code>.</td>
+          <td>Demonstrar armazenamento interno e leitura síncrona coordenada pela FSM.</td>
+        </tr>
+        <tr>
+          <td>DSP</td>
+          <td>Multiplicação signed <code>sample_in * sample_in</code>, com <code>syn_dspstyle = "dsp"</code>.</td>
+          <td>Inferir o multiplicador dedicado usado na soma dos quadrados.</td>
+        </tr>
+        <tr>
+          <td>Acumuladores</td>
+          <td>Soma signed e acumulador de quadrados com largura suficiente para os extremos testados.</td>
+          <td>Evitar perda de informação intermediária durante o processamento.</td>
+        </tr>
+        <tr>
+          <td>PLL</td>
+          <td>Clock de entrada de 27 MHz e clock derivado de 54 MHz.</td>
+          <td>Utilizar recurso dedicado da FPGA e separar clock externo de processamento.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Observação:</strong> RMS2 é o RMS simplificado solicitado, sem
+      extração de raiz quadrada. O valor transmitido é a média da soma dos
+      quadrados: <code>5888 / 16 = 368</code>.
+    </div>
+  </div>
+
+  <div class="section page-break">
+    <h2>4. FSM de controle</h2>
+    <p>
+      A máquina de estados controla a sequência completa: inicialização, espera,
+      geração, armazenamento, leitura, processamento, formatação, transmissão e
+      indicação final. Há também estado de erro para overflow ou condição inválida.
+    </p>
+
+    <figure class="diagram">
+      <img src="diagrams/fsm.svg" alt="Diagrama de estados da FSM">
+      <figcaption>
+        Figura 2 - FSM central. Durante a aquisição, GENERATE e STORE se repetem
+        para as 16 amostras; durante o cálculo, READ e PROCESS realizam a leitura
+        síncrona e a acumulação.
+      </figcaption>
+    </figure>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 23%;">Estado</th>
+          <th>Função</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono">INIT</td><td>Limpa o datapath e prepara o sistema.</td></tr>
+        <tr><td class="mono">IDLE</td><td>Aguarda pulso único de START.</td></tr>
+        <tr><td class="mono">GENERATE</td><td>Seleciona a próxima amostra do gerador interno.</td></tr>
+        <tr><td class="mono">STORE</td><td>Grava a amostra na BRAM.</td></tr>
+        <tr><td class="mono">READ</td><td>Aplica endereço para leitura síncrona da BRAM.</td></tr>
+        <tr><td class="mono">PROCESS</td><td>Acumula a amostra e seu quadrado.</td></tr>
+        <tr><td class="mono">FORMAT</td><td>Registra os resultados finais e prepara o fluxo ASCII.</td></tr>
+        <tr><td class="mono">TX</td><td>Transmite a mensagem pela UART.</td></tr>
+        <tr><td class="mono">DONE</td><td>Mantém indicação visual até um novo START.</td></tr>
+        <tr><td class="mono">ERROR</td><td>Indica overflow ou erro de controle.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section page-break">
+    <h2>5. Interface digital e pinagem</h2>
+    <p>
+      A interface digital de saída é a UART TX onboard, conectada ao conversor
+      USB-UART/BL702 da placa. Dessa forma, o resultado pode ser capturado no
+      Windows pela porta COM exposta ao conectar a Tang Nano 9K por USB.
+    </p>
+
+    <div class="callout">
+      <strong>Mensagem esperada:</strong><br>
+      <code>DR3_AT N=16 SUM=0x00000040 MEAN=0x00000004 RMS2=0x00000170 DONE</code>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Sinal</th>
+          <th style="width: 22%;">Pino FPGA</th>
+          <th>Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono">clk</td><td>52</td><td>Clock onboard de 27 MHz.</td></tr>
+        <tr><td class="mono">rst_n</td><td>4</td><td>Botão RESET onboard, ativo em nível baixo.</td></tr>
+        <tr><td class="mono">start_n</td><td>3</td><td>Botão START onboard, ativo em nível baixo.</td></tr>
+        <tr><td class="mono">uart_tx</td><td>17</td><td>Saída TX para USB-UART onboard.</td></tr>
+        <tr><td class="mono">led[0]</td><td>10</td><td>LED de estado onboard.</td></tr>
+        <tr><td class="mono">led[1]</td><td>11</td><td>LED de estado onboard.</td></tr>
+        <tr><td class="mono">led[2]</td><td>13</td><td>LED de estado onboard.</td></tr>
+        <tr><td class="mono">led[3]</td><td>14</td><td>LED de estado onboard.</td></tr>
+        <tr><td class="mono">led[4]</td><td>15</td><td>LED de estado onboard.</td></tr>
+        <tr><td class="mono">led[5]</td><td>16</td><td>LED de estado onboard.</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Os estados de geração, armazenamento e processamento duram menos de um
+      microssegundo e não são perceptíveis a olho nu. O LED de transmissão pisca
+      por aproximadamente 5,6 ms e, em seguida, o LED de DONE permanece aceso.
+    </p>
+  </div>
+
+  <div class="section page-break">
+    <h2>6. Simulação e testes automatizados</h2>
+    <p>
+      A suíte local utiliza Icarus Verilog e cobre o fluxo completo, o datapath
+      em cenários extremos, a BRAM, a UART, a PLL simulada e o debounce do botão.
+      O comando executado foi <code>make sim</code>.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 36%;">Testbench</th>
+          <th>Validação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono">tb_signal_monitor_core.v</td><td>Fluxo típico completo e métricas finais.</td></tr>
+        <tr><td class="mono">tb_extreme_metrics.v</td><td>Vetor típico, máximos, mínimos e alternado extremo.</td></tr>
+        <tr><td class="mono">tb_bram.v</td><td>Escrita e leitura síncrona da memória.</td></tr>
+        <tr><td class="mono">tb_uart_results.v</td><td>Decodificação serial da mensagem UART.</td></tr>
+        <tr><td class="mono">tb_pll_54mhz.v</td><td>Lock e clock derivado no modelo de simulação.</td></tr>
+        <tr><td class="mono">tb_button_debounce.v</td><td>Geração de um único pulso START por acionamento.</td></tr>
+      </tbody>
+    </table>
+
+    <pre>PASS: core typical flow produced SUM=64 MEAN=4 RMS2=368
+PASS: datapath typical, extreme and alternating cases
+PASS: synchronous BRAM write/read
+PASS: UART transmitted expected metrics string
+PASS: pll simulation model locked and generated derived clock
+PASS: debounce generated one start pulse</pre>
+  </div>
+
+  <div class="section page-break">
+    <h2>7. Interpretação das formas de onda</h2>
+    <h3>Fluxo principal da FSM</h3>
+    <figure class="wave">
+      <img src="../evidencias/sim/01_fsm_fluxo_tipico.png" alt="Forma de onda do fluxo principal da FSM">
+      <figcaption>
+        Figura 3 - A sequência de estados parte de INIT e IDLE, percorre os ciclos
+        de GENERATE/STORE e READ/PROCESS e alcança FORMAT e TX. A repetição dos
+        estados intermediários corresponde às 16 amostras do vetor.
+      </figcaption>
+    </figure>
+
+    <h3>Estado final</h3>
+    <figure class="wave">
+      <img src="../evidencias/sim/01b_fsm_estado_done.png" alt="Forma de onda da transição TX para DONE">
+      <figcaption>
+        Figura 4 - Ao fim da mensagem UART ocorre a transição TX para DONE.
+        O sinal <code>done</code> é ativado e a saída dos LEDs assume o padrão
+        estável de conclusão.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="section page-break">
+    <h2>7. Interpretação das formas de onda</h2>
+    <h3>BRAM síncrona</h3>
+    <figure class="wave">
+      <img src="../evidencias/sim/02_bram_escrita_leitura.png" alt="Forma de onda de escrita e leitura da BRAM">
+      <figcaption>
+        Figura 5 - Durante STORE, <code>bram_we</code> é ativado e os endereços
+        avançam de 0 a 15 com os respectivos dados signed. Em READ, a FSM aplica
+        os endereços novamente para processamento da saída síncrona.
+      </figcaption>
+    </figure>
+
+    <h3>Resultados do datapath</h3>
+    <figure class="wave">
+      <img src="../evidencias/sim/03_metricas_datapath.png" alt="Forma de onda das métricas finais do datapath">
+      <figcaption>
+        Figura 6 - No fim do processamento, os sinais exibem
+        <code>sum_out=0x40</code>, <code>mean_out=0x04</code> e
+        <code>rms2_out=0x170</code>. O acumulador de quadrados alcança
+        <code>0x1700</code> e <code>overflow</code> permanece desativado.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="section page-break">
+    <h2>7. Interpretação das formas de onda</h2>
+    <h3>Transmissão UART</h3>
+    <figure class="wave">
+      <img src="../evidencias/sim/04_uart_transmissao.png" alt="Forma de onda da transmissão UART">
+      <figcaption>
+        Figura 7 - <code>tx_valid</code>, <code>tx_ready</code>,
+        <code>tx_byte</code> e <code>uart_tx</code> demonstram o handshake e a
+        serialização dos bytes ASCII. O início da mensagem pode ser lido como
+        <code>D</code>, <code>R</code>, <code>3</code>, <code>_</code> e
+        <code>A</code>.
+      </figcaption>
+    </figure>
+
+    <h3>PLL e clock derivado</h3>
+    <figure class="wave">
+      <img src="../evidencias/sim/05_pll_clock_derivado.png" alt="Forma de onda da PLL simulada">
+      <figcaption>
+        Figura 8 - Após o reset, <code>pll_locked</code> é ativado. A comparação
+        entre <code>clk_27</code> e <code>clk_proc</code> mostra o clock derivado
+        de 54 MHz com o dobro da frequência de entrada.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="section page-break">
+    <h2>8. Síntese e implementação no Gowin</h2>
+    <p>
+      O projeto foi sintetizado e implementado no Gowin EDA para a Tang Nano 9K.
+      O relatório confirma que a codificação inferiu os recursos dedicados
+      previstos: BRAM, multiplicador em DSP e PLL.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th style="width: 30%;">Uso</th>
+          <th style="width: 30%;">Detalhe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Lógica</td><td>718 / 8640 (9%)</td><td>644 LUT e 74 ALU.</td></tr>
+        <tr><td>Registradores</td><td>245 / 6693 (4%)</td><td>243 FF lógicos e 2 FF de I/O.</td></tr>
+        <tr><td>BSRAM</td><td>1 / 26 (4%)</td><td>1 memória SP.</td></tr>
+        <tr><td>DSP</td><td>0,5 / 10 (5%)</td><td>1 multiplicador MULT18X18.</td></tr>
+        <tr><td>rPLL</td><td>1 / 2 (50%)</td><td>PLL dedicada para <code>clk_proc</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <figure class="resource">
+      <img src="../evidencias/hardware/01_relatorio_utilizacao_gowin.png" alt="Relatório de utilização de BRAM e DSP no Gowin">
+      <figcaption>
+        Figura 9 - Relatório de utilização do Gowin com uma BSRAM SP e um
+        MULT18X18 em DSP, comprovando a inferência dos blocos dedicados.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="section page-break">
+    <h2>8. Síntese e implementação no Gowin</h2>
+    <h3>Clock dedicado</h3>
+    <figure class="resource">
+      <img src="../evidencias/hardware/01b_relatorio_pll.png" alt="Relatório de utilização da PLL no Gowin">
+      <figcaption>
+        Figura 10 - O relatório de clock registra o uso de uma rPLL entre as
+        duas disponíveis no dispositivo.
+      </figcaption>
+    </figure>
+
+    <div class="callout">
+      <strong>Resultado da síntese:</strong> a arquitetura descrita em RTL foi
+      mapeada para os três recursos dedicados relevantes para a atividade:
+      memória BSRAM, multiplicador MULT18X18 e rPLL.
+    </div>
+
+    <h3>Artefatos gerados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 43%;">Arquivo</th>
+          <th>Finalidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono">dr3_at.gprj</td><td>Projeto para abertura no Gowin EDA.</td></tr>
+        <tr><td class="mono">constraints/tangnano9k.cst</td><td>Pinagem da Tang Nano 9K.</td></tr>
+        <tr><td class="mono">constraints/tangnano9k.sdc</td><td>Restrição temporal do clock de entrada.</td></tr>
+        <tr><td class="mono">impl/pnr/dr3_at.fs</td><td>Bitstream gerado após place-and-route.</td></tr>
+        <tr><td class="mono">impl/pnr/dr3_at.rpt.txt</td><td>Relatório textual de utilização e pinagem.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section page-break">
+    <h2>9. Validação em hardware</h2>
+    <p>
+      Após programar o bitstream, a placa foi validada usando apenas o cabo USB.
+      A fotografia à esquerda registra o estado IDLE após conexão ou RESET. Após
+      pressionar START, a fotografia à direita registra o LED estável de DONE.
+    </p>
+
+    <div class="columns">
+      <div class="column">
+        <figure class="photo">
+          <img src="../evidencias/hardware/02_placa_conectada_idle.jpeg" alt="Tang Nano 9K conectada no estado IDLE">
+          <figcaption>
+            Figura 11 - Tang Nano 9K conectada por USB no estado IDLE.
+          </figcaption>
+        </figure>
+      </div>
+      <div class="column">
+        <figure class="photo">
+          <img src="../evidencias/hardware/03_estado_done_leds.jpeg" alt="Tang Nano 9K no estado DONE">
+          <figcaption>
+            Figura 12 - LED de DONE aceso após processamento e transmissão.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <p>
+      O comportamento visual observado corresponde ao projeto: os estados
+      intermediários são rápidos, o LED de TX aparece brevemente e o LED de DONE
+      permanece aceso ao fim da execução.
+    </p>
+  </div>
+
+  <div class="section page-break">
+    <h2>9. Validação em hardware</h2>
+    <h3>Captura da UART no Windows</h3>
+    <p>
+      A captura foi realizada no PowerShell do Windows, pois a porta COM do
+      USB-UART da placa está exposta ao sistema hospedeiro. Após abrir a porta em
+      115200 baud e pressionar START, a linha completa foi recebida.
+    </p>
+
+    <figure class="terminal">
+      <img src="../evidencias/hardware/04_terminal_uart_resultados.png" alt="Terminal PowerShell com mensagem UART recebida">
+      <figcaption>
+        Figura 13 - Evidência da interface digital em hardware. A mensagem
+        recebida contém <code>SUM=0x00000040</code>,
+        <code>MEAN=0x00000004</code> e <code>RMS2=0x00000170</code>, exatamente
+        os valores esperados para o vetor típico.
+      </figcaption>
+    </figure>
+
+    <div class="callout">
+      <strong>Conferência cruzada:</strong> os mesmos resultados aparecem no
+      cálculo manual, nos testbenches, nas formas de onda e na UART capturada
+      diretamente da Tang Nano 9K.
+    </div>
+  </div>
+
+  <div class="section page-break">
+    <h2>10. Conclusão</h2>
+    <p class="lead">
+      O monitor de sinal discreto foi implementado e validado de ponta a ponta.
+      A solução atende ao fluxo requerido com FSM explícita, memória interna,
+      processamento aritmético, clock derivado e interface digital de saída.
+    </p>
+
+    <p>
+      A simulação confirmou o comportamento funcional e os casos extremos. O
+      relatório do Gowin comprovou a inferência de uma BSRAM SP, um multiplicador
+      MULT18X18 em DSP e uma rPLL. Na placa, o acionamento do botão START levou ao
+      estado DONE e a UART onboard transmitiu a linha com soma, média e RMS2
+      corretos. A montagem final requer somente a Tang Nano 9K conectada por USB.
+    </p>
+
+    <h3>Referências</h3>
+    <ul class="reference-list">
+      <li>Sipeed Tang Nano 9K Wiki: <span class="mono">https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/Nano-9K.html</span></li>
+      <li>Exemplos oficiais TangNano-9K: <span class="mono">https://github.com/sipeed/TangNano-9K-example</span></li>
+      <li>Gowin EDA: documentação de síntese e primitivas PLL, DSP e BSRAM.</li>
+    </ul>
+
+    <p class="small">
+      Relatório gerado em 30 de maio de 2026. Os fontes Mermaid utilizados nos
+      diagramas estão disponíveis em <code>docs/diagrams/</code>.
+    </p>
+  </div>
+</body>
+</html>

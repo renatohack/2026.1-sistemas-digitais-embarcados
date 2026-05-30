@@ -1,0 +1,12 @@
+[*]
+[*] GTKWave Analyzer save file for DR3 PLL simulation
+[dumpfile] "build/waves/tb_pll_54mhz.vcd"
+[timestart] 0
+[size] 1280 720
+[treeopen] tb_pll_54mhz.
+@28
+tb_pll_54mhz.clk_27
+tb_pll_54mhz.reset
+tb_pll_54mhz.pll_locked
+tb_pll_54mhz.clk_proc
+

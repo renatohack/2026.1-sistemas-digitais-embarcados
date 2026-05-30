@@ -58,7 +58,14 @@ Mostrar:
 
 - Tang Nano 9K conectada
 - Pressionar START
-- LEDs durante processamento e no estado DONE
+- Piscar breve durante TX e LED estavel no estado DONE
+
+Observacao para a gravacao:
+
+- Os estados de calculo duram menos de um microssegundo e nao precisam aparecer
+  visualmente no video.
+- Se o piscar de TX nao ficar visivel, mostre o acionamento de START, o LED de
+  DONE e as waveforms da FSM na parte de simulacao.
 
 ## 02:40-03:10 - Saida UART
 
@@ -84,4 +91,3 @@ Mostrar:
 
 - `docs/relatorio.md`
 - Evidencias salvas em `evidencias/`
-
