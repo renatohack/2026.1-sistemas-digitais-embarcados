@@ -1,0 +1,339 @@
+<p>Chegamos ao momento de avaliar o conhecimento construído ao longo da disciplina <strong>DR4 – Processamento Otimizado em Assembly ARM 64-bits</strong>.<br>Durante esta disciplina, você avançou do uso básico de Assembly para uma abordagem <strong>engenheirada</strong>, aprendendo a estruturar projetos executáveis reais, automatizar compilação e depuração, manipular dados em baixo nível e aplicar técnicas modernas de otimização na arquitetura ARM64.</p>
+<p>Agora, você irá utilizar esse conjunto completo de conhecimentos para construir um <strong>sistema funcional, reproduzível e auditável</strong>, executando diretamente no <strong>Raspberry Pi Zero 2W</strong>.</p>
+<p>Este Assessment Final foi projetado para simular uma situação profissional real, na qual o engenheiro precisa entregar não apenas código que “funciona”, mas um <strong>executável confiável</strong>, bem organizado, validado tecnicamente e justificável do ponto de vista de engenharia.</p>
+<hr>
+<h3>Contexto</h3>
+<p>Em projetos reais de engenharia de computação, especialmente em sistemas embarcados e ambientes de edge computing, é comum a necessidade de <strong>validar e inspecionar dados antes que eles sejam transmitidos, persistidos ou processados por sistemas mais complexos</strong>. Essa validação inicial precisa ser rápida, determinística e auditável, operando muitas vezes diretamente sobre hardware com recursos limitados.</p>
+<p>Nesse contexto, um engenheiro pode ser responsável por desenvolver um <strong>módulo de diagnóstico e validação rápida de dados</strong>, capaz de:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">operar sobre buffers binários e/ou texto;</li>
+    <li style="margin-bottom: 10px;">extrair estatísticas básicas;</li>
+    <li style="margin-bottom: 10px;">verificar integridade simples;</li>
+    <li style="margin-bottom: 10px;">detectar padrões elementares;</li>
+    <li style="margin-bottom: 0;">produzir um relatório compacto para inspeção técnica.</li>
+</ul>
+<p>Esse módulo deve ser implementado como um <strong>executável stand-alone</strong>, sem dependência de bibliotecas externas, rodando diretamente em um <strong>Raspberry Pi Zero 2W</strong>, com suporte a depuração e análise do binário gerado.</p>
+<hr>
+<h3>Objetivo geral do trabalho</h3>
+<p>Desenvolver um <strong>executável CLI em Assembly ARM 64-bits</strong>, organizado em múltiplos módulos, capaz de receber dados de entrada (arquivo, stdin ou buffer interno), processá-los por diferentes estratégias e gerar um <strong>relatório técnico compacto</strong> em stdout.</p>
+<p>O trabalho está dividido em <strong>12 exercícios integrados</strong>, que juntos compõem um único sistema funcional. Cada exercício adiciona capacidades ao sistema, mantendo coerência arquitetural e técnica.</p>
+<hr>
+<h3>Cenário</h3>
+<p>Uma equipe de desenvolvimento está construindo um módulo de telemetria para um equipamento industrial baseado no Raspberry Pi Zero 2W.</p>
+<p>O módulo recebe amostras periódicas de sensores e precisa produzir um pequeno relatório operacional contendo informações estatísticas e indicadores de estado do sistema.</p>
+<p>Todo o processamento deverá ser implementado em Assembly ARM64, utilizando técnicas de programação escalar e otimizações básicas com SIMD NEON.</p>
+<hr>
+<h3>Dados de Entrada</h3>
+<p>Os dados deverão estar armazenados em memória no próprio programa.</p>
+<p><strong>Vetor de Valores:</strong></p>
+<div style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+    <strong>10 20 30 40 50 60 70 80</strong>
+</div>
+
+<p><strong>Vetor de Status:</strong></p>
+<div style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+    <strong>0x01 0x01 0x05 0x01 0x09 0x01 0x00 0x01</strong>
+</div>
+
+<p>Cada posição do vetor de status corresponde à posição equivalente do vetor de valores.</p>
+<p><strong>Exemplo</strong>:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">Valor 10 -&gt; Status 0x01</li>
+    <li style="margin-bottom: 10px;">Valor 20 -&gt; Status 0x01</li>
+    <li style="margin-bottom: 10px;">Valor 30 -&gt; Status 0x05</li>
+    <li style="margin-bottom: 0;">...</li>
+</ul>
+
+<p><strong>Interpretação do Campo de Status</strong></p>
+<div style="overflow-x: auto; margin-bottom: 20px;">
+    <table class="pl-table pl-table-hover" style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr>
+                <th style="background-color: #0056b3; color: #ffffff; padding: 10px; border: 1px solid #ddd;"><strong>Bit</strong></th>
+                <th style="background-color: #0056b3; color: #ffffff; padding: 10px; border: 1px solid #ddd;"><strong>Significado</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">0</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Amostra válida</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">2</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Alarme ativo</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">3</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Bateria baixa</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p><strong>Exemplos</strong>:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">0x01 = válido</li>
+    <li style="margin-bottom: 10px;">0x05 = válido + alarme</li>
+    <li style="margin-bottom: 10px;">0x09 = válido + bateria baixa</li>
+    <li style="margin-bottom: 0;">0x00 = inválido</li>
+</ul>
+<p>Somente amostras com o bit de validade ativado deverão participar dos cálculos estatísticos.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 1</span> <strong>Estrutura inicial do projeto</strong></p>
+</div>
+<p>Estruture o projeto Assembly ARM64 em múltiplos arquivos, separando claramente o código principal, rotinas utilitárias e macros. O projeto deve resultar em um executável stand-alone funcional no Raspberry Pi Zero 2W.</p>
+<p><strong>Requisitos Técnicos</strong></p>
+<p>O projeto deverá conter pelo menos:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">main.s</li>
+    <li style="margin-bottom: 10px;">processamento.s</li>
+    <li style="margin-bottom: 10px;">conversao.s</li>
+    <li style="margin-bottom: 10px;">macros.inc</li>
+    <li style="margin-bottom: 0;">Makefile</li>
+</ul>
+<p>Cada arquivo deverá possuir uma responsabilidade claramente definida.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 2</span> <strong>Automação de compilação e linking</strong></p>
+</div>
+<p>Implemente um <strong>Makefile funcional e modular</strong> que automatize a montagem, o linking e a geração do binário final. O projeto deve poder ser recompilado integralmente a partir de um único comando.</p>
+<p><strong>Contexto</strong></p>
+<p>A compilação manual de múltiplos arquivos aumenta a probabilidade de erros operacionais.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente um Makefile capaz de:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">make</li>
+    <li style="margin-bottom: 0;">make clean</li>
+</ul>
+<p><strong>Requisitos Técnicos</strong></p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">O comando <strong>make</strong> deverá gerar o executável final.</li>
+    <li style="margin-bottom: 0;">O comando <strong>make clean</strong> deverá remover arquivos intermediários e binários.</li>
+</ul>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 3</span> <strong>Execução e depuração no Raspberry Pi Zero 2W</strong></p>
+</div>
+<p>Execute o binário no Raspberry Pi Zero 2W e demonstre, por meio de <strong>GDB</strong>, a inspeção de registradores gerais e do fluxo de execução em um ponto relevante do programa.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 4</span> <strong>Análise do executável gerado</strong></p>
+</div>
+<p>Utilize objdump para analisar o binário final, validando seções, símbolos e instruções presentes no executável, incluindo instruções escalares e vetoriais.</p>
+<h4>Contagem de Amostras Válidas</h4>
+<p><strong>Contexto</strong></p>
+<p>O primeiro passo do processamento consiste em identificar quais amostras poderão ser utilizadas.</p>
+<p><strong>Tarefa</strong></p>
+<p>Percorra o vetor de status e conte quantas amostras possuem o bit de validade ativado.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 5</span> <strong>Processamento aritmético dos dados</strong></p>
+</div>
+<p>Implemente operações aritméticas sobre os dados de entrada, como contadores, somatórios ou outras métricas simples, respeitando tamanho de dados, sinal e propagação correta de resultados.</p>
+<p><strong>Contexto</strong></p>
+<p>Após a filtragem das amostras válidas, métricas simples devem ser produzidas.</p>
+<p><strong>Tarefa</strong></p>
+<p>Calcule:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">quantidade de amostras válidas;</li>
+    <li style="margin-bottom: 10px;">soma dos valores válidos;</li>
+    <li style="margin-bottom: 0;">média inteira dos valores válidos.</li>
+</ul>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 6</span> <strong>Conversão e validação de dados numéricos</strong></p>
+</div>
+<p>Implemente rotinas de conversão entre representações numéricas e strings. As entradas devem ser validadas explicitamente quanto a faixa, sinal e formato antes de serem utilizadas no processamento.</p>
+<p><strong>Contexto</strong></p>
+<p>Os resultados produzidos pelo sistema deverão ser apresentados ao usuário em formato textual.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina capaz de converter números inteiros positivos para strings ASCII terminadas por caractere nulo.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 7</span> <strong>Manipulação de bits e campos</strong></p>
+</div>
+<p>Implemente operações de manipulação de bits sobre os dados processados, incluindo extração, recomposição de campos e rotações manuais, utilizando máscaras e deslocamentos apropriados.</p>
+<p><strong>Contexto</strong></p>
+<p>Flags compactadas são amplamente utilizadas em protocolos e registradores de dispositivos.</p>
+<p><strong>Tarefa</strong></p>
+<p>Utilizando operações lógicas e mascaramento:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">conte quantas amostras possuem alarme ativo;</li>
+    <li style="margin-bottom: 0;">conte quantas amostras possuem bateria baixa.</li>
+</ul>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 8</span> <strong>Uso de tabelas de consulta (LUT)</strong></p>
+</div>
+<p>Implemente uma tabela de consulta armazenada em memória para acelerar parte do processamento, substituindo lógica escalar equivalente e integrando-a corretamente ao fluxo do sistema.</p>
+<p><strong>Contexto</strong></p>
+<p>Transformações conhecidas antecipadamente podem ser aceleradas utilizando tabelas de consulta.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente a seguinte LUT:</p>
+
+<div style="overflow-x: auto; margin-bottom: 20px;">
+    <table class="pl-table pl-table-hover" style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr>
+                <th style="background-color: #0056b3; color: #ffffff; padding: 10px; border: 1px solid #ddd;"><strong>Entrada</strong></th>
+                <th style="background-color: #0056b3; color: #ffffff; padding: 10px; border: 1px solid #ddd;"><strong>Saída</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">10</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">100</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">20</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">200</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">30</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">300</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">40</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">400</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">50</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">500</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">60</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">600</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">70</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">700</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">80</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">800</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>Utilize a LUT para converter os valores válidos.</p>
+<p><strong>Exemplo</strong>:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">10 -&gt; 100</li>
+    <li style="margin-bottom: 10px;">20 -&gt; 200</li>
+    <li style="margin-bottom: 0;">30 -&gt; 300</li>
+</ul>
+<p><strong>Requisitos Técnicos</strong></p>
+<p>O acesso deverá ocorrer através de indexação na tabela armazenada em memória.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 9</span> <strong>Otimização com SIMD (NEON) para dados inteiros</strong></p>
+</div>
+<p>Implemente uma versão otimizada com <strong>NEON</strong> para uma operação já existente no sistema, processando múltiplos dados inteiros em paralelo e mantendo equivalência funcional com a versão escalar.</p>
+<p><strong>Contexto</strong></p>
+<p>Processadores ARM64 possuem extensões SIMD capazes de processar múltiplos elementos simultaneamente.</p>
+<p><strong>Tarefa</strong></p>
+<p>Utilize registradores vetoriais NEON para somar os quatro primeiros elementos do vetor de valores.</p>
+<p><strong>Dados</strong>:</p>
+<p><strong>10 20 30 40</strong></p>
+<p><strong>Requisitos Técnicos</strong></p>
+<p>O código deverá utilizar pelo menos uma instrução SIMD NEON.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 10</span> <strong>SIMD com ponto flutuante</strong></p>
+</div>
+<p>Implemente uma rotina SIMD utilizando vetores de ponto flutuante (NEON), integrando-a ao sistema e garantindo correção funcional e coerência com os dados processados.</p>
+<p><strong>Contexto</strong></p>
+<p>Além de operações inteiras, aplicações embarcadas frequentemente realizam processamento numérico utilizando ponto flutuante, especialmente em sistemas de controle, instrumentação e processamento de sinais.</p>
+<p>O conjunto de instruções NEON permite processar múltiplos valores de ponto flutuante em paralelo, reduzindo o tempo de execução de operações vetoriais.</p>
+<p>Neste exercício, você implementará uma etapa de normalização dos dados convertidos pela LUT.</p>
+<p><strong>Dados</strong></p>
+<p>Considere os seguintes valores produzidos pela LUT:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">100</li>
+    <li style="margin-bottom: 10px;">200</li>
+    <li style="margin-bottom: 10px;">300</li>
+    <li style="margin-bottom: 0;">400</li>
+</ul>
+<p>Converta-os para ponto flutuante:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">100.0</li>
+    <li style="margin-bottom: 10px;">200.0</li>
+    <li style="margin-bottom: 10px;">300.0</li>
+    <li style="margin-bottom: 0;">400.0</li>
+</ul>
+<p><strong>Tarefa</strong></p>
+<p>Implemente uma rotina SIMD utilizando registradores vetoriais NEON que normalize os valores dividindo cada elemento por:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 0;">1000.0</li>
+</ul>
+<p><strong>Requisitos Técnicos</strong></p>
+<p>A implementação deve:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">utilizar registradores vetoriais NEON;</li>
+    <li style="margin-bottom: 10px;">utilizar instruções vetoriais de ponto flutuante;</li>
+    <li style="margin-bottom: 10px;">processar os quatro elementos simultaneamente;</li>
+    <li style="margin-bottom: 0;">armazenar os resultados em memória.</li>
+</ul>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 11</span> <strong>Macros e funções utilitárias de string</strong></p>
+</div>
+<p>Defina e utilize <strong>macros GAS</strong>, incluindo macros parametrizadas, para padronizar trechos repetitivos do código. Implemente funções utilitárias de string para manipulação segura de buffers.</p>
+<p><strong>Contexto</strong></p>
+<p>Chamadas repetitivas para syscalls e trechos padronizados devem ser encapsulados para reduzir duplicação de código.</p>
+<p><strong>Tarefa</strong></p>
+<p>Implemente macros Assembly para:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">escrita em stdout;</li>
+    <li style="margin-bottom: 0;">encerramento do programa.</li>
+</ul>
+<p><strong>Requisitos Técnicos</strong></p>
+<p>As macros deverão ser utilizadas pelo programa principal.</p>
+
+<div class="editor-indent" style="margin-left: 30px;">
+    <p class="pl-rotulo"><span>Exercício 12</span> <strong>Integração final do sistema</strong></p>
+</div>
+<p>Integre <strong>todas as funcionalidades desenvolvidas</strong> em um único sistema coerente, resultando em um executável stand-alone que:</p>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">receba dados de entrada;</li>
+    <li style="margin-bottom: 10px;">execute processamento escalar, baseado em LUT e otimizado com SIMD;</li>
+    <li style="margin-bottom: 10px;">produza um relatório compacto em stdout;</li>
+    <li style="margin-bottom: 0;">possa ser validado integralmente por execução real, depuração e análise do binário.</li>
+</ul>
+<p>O <strong>relatório técnico final</strong> deve consolidar todos os resultados técnicos produzidos, explicando e justificando as decisões de engenharia adotadas, com evidências reais de execução.</p>
+
+<hr>
+
+<h3>Formato de entrega:</h3>
+<ul style="margin-top: 0; margin-bottom: 20px; padding-left: 30px;">
+    <li style="margin-bottom: 10px;">Evidências visuais quando aplicável;</li>
+</ul>
+
+<hr>
+
+<tbody><tr class="">
+<th class="cell c0" style="" scope="row">Número da tentativa</th>
+<td class="cell c1 lastcol" style="">Esta é a tentativa 1 (2 tentativas permitidas).</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Status da entrega</th>
+<td class="cell c1 lastcol" style="">Nenhuma tentativa</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Status da avaliação</th>
+<td class="submissionnotgraded cell c1 lastcol" style="">Não avaliado</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Data de entrega</th>
+<td class="cell c1 lastcol" style="">quarta, 17 jun 2026, 23:59</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Tempo restante</th>
+<td class="cell c1 lastcol" style="">4 dias 13 horas</td>
+</tr>
+<tr class="">
+<th class="cell c0" style="" scope="row">Rubrica</th>
+<td class="cell c1 lastcol" style=""><div class="box py-3 gradingform_rubric-description"><p>Template de Rubrica para ser utilizado com a extensão Rubricator</p></div><div id="rubric-rubric" class="clearfix gradingform_rubric editor preview"><table class="criteria" id="rubric-criteria" aria-label="Rubrica"><tr class="criterion first even" id="rubric-criteria-505693"><td class="description" id="rubric-criteria-505693-description-cell" tabindex="0" aria-label="Critério [c]1. Implementar a infraestrutura de projeto no Raspberry Pi Zero 2W integrando o mapeamento físico à automação de compilação e depuração[/c] O aluno demonstrou que sabe organizar um projeto Assembly ARM64 em múltiplos arquivos, com separação clara entre código principal, rotinas utilitárias e macros?">[c]1. Implementar a infraestrutura de projeto no Raspberry Pi Zero 2W integrando o mapeamento físico à automação de compilação e depuração[/c] O aluno demonstrou que sabe organizar um projeto Assembly ARM64 em múltiplos arquivos, com separação clara entre código principal, rotinas utilitárias e macros?</td><td class="levels"><table id="rubric-criteria-505693-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-505693-levels" role="radiogroup"><td id="rubric-criteria-505693-levels-1025423" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-505693-levels-1025423-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-505693-levels-1025424" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-505693-levels-1025424-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521417"><td class="description" id="rubric-criteria-521417-description-cell" tabindex="0" aria-label="Critério [c]1. Implementar a infraestrutura de projeto no Raspberry Pi Zero 2W integrando o mapeamento físico à automação de compilação e depuração[/c] O aluno demonstrou que sabe automatizar a compilação e o linking do projeto por meio de um Makefile funcional, modular e reproduzível no Raspberry Pi Zero 2W?">[c]1. Implementar a infraestrutura de projeto no Raspberry Pi Zero 2W integrando o mapeamento físico à automação de compilação e depuração[/c] O aluno demonstrou que sabe automatizar a compilação e o linking do projeto por meio de um Makefile funcional, modular e reproduzível no Raspberry Pi Zero 2W?</td><td class="levels"><table id="rubric-criteria-521417-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521417-levels" role="radiogroup"><td id="rubric-criteria-521417-levels-1058271" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521417-levels-1058271-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521417-levels-1058272" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521417-levels-1058272-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521418"><td class="description" id="rubric-criteria-521418-description-cell" tabindex="0" aria-label="Critério [c]1. Implementar a infraestrutura de projeto no Raspberry Pi Zero 2W integrando o mapeamento físico à automação de compilação e depuração[/c] O aluno demonstrou que sabe executar e depurar o binário no ambiente real, utilizando GDB para inspeção de registradores e fluxo de execução?">[c]1. Implementar a infraestrutura de projeto no Raspberry Pi Zero 2W integrando o mapeamento físico à automação de compilação e depuração[/c] O aluno demonstrou que sabe executar e depurar o binário no ambiente real, utilizando GDB para inspeção de registradores e fluxo de execução?</td><td class="levels"><table id="rubric-criteria-521418-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521418-levels" role="radiogroup"><td id="rubric-criteria-521418-levels-1058273" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521418-levels-1058273-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521418-levels-1058274" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521418-levels-1058274-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521419"><td class="description" id="rubric-criteria-521419-description-cell" tabindex="0" aria-label="Critério [c]1. Implementar a infraestrutura de projeto no Raspberry Pi Zero 2W integrando o mapeamento físico à automação de compilação e depuração[/c] O aluno demonstrou que sabe analisar o executável gerado, utilizando objdump para validar seções, símbolos e instruções presentes no binário final?">[c]1. Implementar a infraestrutura de projeto no Raspberry Pi Zero 2W integrando o mapeamento físico à automação de compilação e depuração[/c] O aluno demonstrou que sabe analisar o executável gerado, utilizando objdump para validar seções, símbolos e instruções presentes no binário final?</td><td class="levels"><table id="rubric-criteria-521419-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521419-levels" role="radiogroup"><td id="rubric-criteria-521419-levels-1058275" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521419-levels-1058275-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521419-levels-1058276" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521419-levels-1058276-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521420"><td class="description" id="rubric-criteria-521420-description-cell" tabindex="0" aria-label="Critério [c]2. Implementar rotinas Assembly ARM 64-bits de aritmética avançada e conversão de tipos numéricos[/c] O aluno demonstrou que sabe implementar operações aritméticas corretas em Assembly ARM64, respeitando tamanho de dados, sinal e propagação de resultados?">[c]2. Implementar rotinas Assembly ARM 64-bits de aritmética avançada e conversão de tipos numéricos[/c] O aluno demonstrou que sabe implementar operações aritméticas corretas em Assembly ARM64, respeitando tamanho de dados, sinal e propagação de resultados?</td><td class="levels"><table id="rubric-criteria-521420-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521420-levels" role="radiogroup"><td id="rubric-criteria-521420-levels-1058277" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521420-levels-1058277-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521420-levels-1058278" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521420-levels-1058278-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521421"><td class="description" id="rubric-criteria-521421-description-cell" tabindex="0" aria-label="Critério [c]2. Implementar rotinas Assembly ARM 64-bits de aritmética avançada e conversão de tipos numéricos[/c] O aluno demonstrou que sabe converter dados entre representações numéricas, mantendo coerência entre entrada, processamento e saída?">[c]2. Implementar rotinas Assembly ARM 64-bits de aritmética avançada e conversão de tipos numéricos[/c] O aluno demonstrou que sabe converter dados entre representações numéricas, mantendo coerência entre entrada, processamento e saída?</td><td class="levels"><table id="rubric-criteria-521421-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521421-levels" role="radiogroup"><td id="rubric-criteria-521421-levels-1058279" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521421-levels-1058279-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521421-levels-1058280" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521421-levels-1058280-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521422"><td class="description" id="rubric-criteria-521422-description-cell" tabindex="0" aria-label="Critério [c]2. Implementar rotinas Assembly ARM 64-bits de aritmética avançada e conversão de tipos numéricos[/c] O aluno demonstrou que sabe validar entradas numéricas, tratando faixa, sinal e formato conforme o esperado pelo sistema?">[c]2. Implementar rotinas Assembly ARM 64-bits de aritmética avançada e conversão de tipos numéricos[/c] O aluno demonstrou que sabe validar entradas numéricas, tratando faixa, sinal e formato conforme o esperado pelo sistema?</td><td class="levels"><table id="rubric-criteria-521422-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521422-levels" role="radiogroup"><td id="rubric-criteria-521422-levels-1058281" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521422-levels-1058281-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521422-levels-1058282" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521422-levels-1058282-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521423"><td class="description" id="rubric-criteria-521423-description-cell" tabindex="0" aria-label="Critério [c]2. Implementar rotinas Assembly ARM 64-bits de aritmética avançada e conversão de tipos numéricos[/c] O aluno demonstrou que sabe integrar os resultados numéricos ao fluxo do programa, sem corromper registradores, memória ou estado da execução?">[c]2. Implementar rotinas Assembly ARM 64-bits de aritmética avançada e conversão de tipos numéricos[/c] O aluno demonstrou que sabe integrar os resultados numéricos ao fluxo do programa, sem corromper registradores, memória ou estado da execução?</td><td class="levels"><table id="rubric-criteria-521423-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521423-levels" role="radiogroup"><td id="rubric-criteria-521423-levels-1058283" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521423-levels-1058283-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521423-levels-1058284" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521423-levels-1058284-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521424"><td class="description" id="rubric-criteria-521424-description-cell" tabindex="0" aria-label="Critério [c]3. Implementar técnicas de otimização escalar com manipulação de bits e tabelas de consulta[/c] O aluno demonstrou que sabe manipular bits individuais e campos de bits, utilizando corretamente AND, ORR, EOR, BIC, shifts e rotações?">[c]3. Implementar técnicas de otimização escalar com manipulação de bits e tabelas de consulta[/c] O aluno demonstrou que sabe manipular bits individuais e campos de bits, utilizando corretamente AND, ORR, EOR, BIC, shifts e rotações?</td><td class="levels"><table id="rubric-criteria-521424-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521424-levels" role="radiogroup"><td id="rubric-criteria-521424-levels-1058285" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521424-levels-1058285-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521424-levels-1058286" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521424-levels-1058286-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521425"><td class="description" id="rubric-criteria-521425-description-cell" tabindex="0" aria-label="Critério [c]3. Implementar técnicas de otimização escalar com manipulação de bits e tabelas de consulta[/c] O aluno demonstrou que sabe extrair e recompor subconjuntos de bits, com máscaras e deslocamentos corretos?">[c]3. Implementar técnicas de otimização escalar com manipulação de bits e tabelas de consulta[/c] O aluno demonstrou que sabe extrair e recompor subconjuntos de bits, com máscaras e deslocamentos corretos?</td><td class="levels"><table id="rubric-criteria-521425-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521425-levels" role="radiogroup"><td id="rubric-criteria-521425-levels-1058287" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521425-levels-1058287-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521425-levels-1058288" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521425-levels-1058288-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521426"><td class="description" id="rubric-criteria-521426-description-cell" tabindex="0" aria-label="Critério [c]3. Implementar técnicas de otimização escalar com manipulação de bits e tabelas de consulta[/c] O aluno demonstrou que sabe implementar e acessar tabelas de consulta (LUTs) armazenadas em memória de forma consistente?">[c]3. Implementar técnicas de otimização escalar com manipulação de bits e tabelas de consulta[/c] O aluno demonstrou que sabe implementar e acessar tabelas de consulta (LUTs) armazenadas em memória de forma consistente?</td><td class="levels"><table id="rubric-criteria-521426-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521426-levels" role="radiogroup"><td id="rubric-criteria-521426-levels-1058289" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521426-levels-1058289-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521426-levels-1058290" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521426-levels-1058290-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521427"><td class="description" id="rubric-criteria-521427-description-cell" tabindex="0" aria-label="Critério [c]3. Implementar técnicas de otimização escalar com manipulação de bits e tabelas de consulta[/c] O aluno demonstrou que sabe empregar LUTs como técnica de otimização, integrando-as corretamente ao processamento escalar?">[c]3. Implementar técnicas de otimização escalar com manipulação de bits e tabelas de consulta[/c] O aluno demonstrou que sabe empregar LUTs como técnica de otimização, integrando-as corretamente ao processamento escalar?</td><td class="levels"><table id="rubric-criteria-521427-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521427-levels" role="radiogroup"><td id="rubric-criteria-521427-levels-1058291" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521427-levels-1058291-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521427-levels-1058292" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521427-levels-1058292-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521428"><td class="description" id="rubric-criteria-521428-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe identificar e utilizar corretamente registradores SIMD (NEON) no contexto da arquitetura ARM64?">[c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe identificar e utilizar corretamente registradores SIMD (NEON) no contexto da arquitetura ARM64?</td><td class="levels"><table id="rubric-criteria-521428-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521428-levels" role="radiogroup"><td id="rubric-criteria-521428-levels-1058293" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521428-levels-1058293-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521428-levels-1058294" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521428-levels-1058294-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521429"><td class="description" id="rubric-criteria-521429-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe implementar operações SIMD com vetores inteiros, processando múltiplos dados em paralelo?">[c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe implementar operações SIMD com vetores inteiros, processando múltiplos dados em paralelo?</td><td class="levels"><table id="rubric-criteria-521429-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521429-levels" role="radiogroup"><td id="rubric-criteria-521429-levels-1058295" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521429-levels-1058295-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521429-levels-1058296" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521429-levels-1058296-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521430"><td class="description" id="rubric-criteria-521430-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe implementar operações SIMD com vetores de ponto flutuante, respeitando tipos e modos de operação?">[c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe implementar operações SIMD com vetores de ponto flutuante, respeitando tipos e modos de operação?</td><td class="levels"><table id="rubric-criteria-521430-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521430-levels" role="radiogroup"><td id="rubric-criteria-521430-levels-1058297" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521430-levels-1058297-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521430-levels-1058298" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521430-levels-1058298-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521431"><td class="description" id="rubric-criteria-521431-description-cell" tabindex="0" aria-label="Critério [c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe integrar rotinas SIMD ao sistema, mantendo equivalência funcional com as versões escalares?">[c]4. Implementar rotinas otimizadas em Assembly ARM 64-bits usando instruções SIMD (NEON)[/c] O aluno demonstrou que sabe integrar rotinas SIMD ao sistema, mantendo equivalência funcional com as versões escalares?</td><td class="levels"><table id="rubric-criteria-521431-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521431-levels" role="radiogroup"><td id="rubric-criteria-521431-levels-1058299" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521431-levels-1058299-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521431-levels-1058300" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521431-levels-1058300-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521432"><td class="description" id="rubric-criteria-521432-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe definir macros básicas em GAS, reduzindo repetição e padronizando sequências de instruções?">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe definir macros básicas em GAS, reduzindo repetição e padronizando sequências de instruções?</td><td class="levels"><table id="rubric-criteria-521432-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521432-levels" role="radiogroup"><td id="rubric-criteria-521432-levels-1058301" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521432-levels-1058301-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521432-levels-1058302" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521432-levels-1058302-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521433"><td class="description" id="rubric-criteria-521433-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe criar macros parametrizadas, compreendendo a diferença entre tempo de montagem e tempo de execução?">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe criar macros parametrizadas, compreendendo a diferença entre tempo de montagem e tempo de execução?</td><td class="levels"><table id="rubric-criteria-521433-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521433-levels" role="radiogroup"><td id="rubric-criteria-521433-levels-1058303" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521433-levels-1058303-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521433-levels-1058304" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521433-levels-1058304-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521434"><td class="description" id="rubric-criteria-521434-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe utilizar macros de forma consistente no projeto, melhorando legibilidade e manutenção do código?">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe utilizar macros de forma consistente no projeto, melhorando legibilidade e manutenção do código?</td><td class="levels"><table id="rubric-criteria-521434-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521434-levels" role="radiogroup"><td id="rubric-criteria-521434-levels-1058305" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521434-levels-1058305-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521434-levels-1058306" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521434-levels-1058306-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521435"><td class="description" id="rubric-criteria-521435-description-cell" tabindex="0" aria-label="Critério [c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe implementar e utilizar funções utilitárias de string, manipulando buffers com segurança e correção?">[c]5. Automatizar rotinas Assembly ARM 64-bits com macros e funções de string[/c] O aluno demonstrou que sabe implementar e utilizar funções utilitárias de string, manipulando buffers com segurança e correção?</td><td class="levels"><table id="rubric-criteria-521435-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521435-levels" role="radiogroup"><td id="rubric-criteria-521435-levels-1058307" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521435-levels-1058307-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521435-levels-1058308" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521435-levels-1058308-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521436"><td class="description" id="rubric-criteria-521436-description-cell" tabindex="0" aria-label="Critério [c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe estruturar um projeto stand-alone, sem dependência de bibliotecas externas como a libc?">[c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe estruturar um projeto stand-alone, sem dependência de bibliotecas externas como a libc?</td><td class="levels"><table id="rubric-criteria-521436-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521436-levels" role="radiogroup"><td id="rubric-criteria-521436-levels-1058309" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521436-levels-1058309-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521436-levels-1058310" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521436-levels-1058310-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521437"><td class="description" id="rubric-criteria-521437-description-cell" tabindex="0" aria-label="Critério [c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe integrar múltiplos módulos Assembly, aplicando corretamente convenções de linking?">[c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe integrar múltiplos módulos Assembly, aplicando corretamente convenções de linking?</td><td class="levels"><table id="rubric-criteria-521437-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521437-levels" role="radiogroup"><td id="rubric-criteria-521437-levels-1058311" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521437-levels-1058311-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521437-levels-1058312" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521437-levels-1058312-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521438"><td class="description" id="rubric-criteria-521438-description-cell" tabindex="0" aria-label="Critério [c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe implementar chamadas de sistema (syscalls) para entrada, saída e encerramento do programa?">[c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe implementar chamadas de sistema (syscalls) para entrada, saída e encerramento do programa?</td><td class="levels"><table id="rubric-criteria-521438-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521438-levels" role="radiogroup"><td id="rubric-criteria-521438-levels-1058313" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521438-levels-1058313-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521438-levels-1058314" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521438-levels-1058314-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion odd" id="rubric-criteria-521439"><td class="description" id="rubric-criteria-521439-description-cell" tabindex="0" aria-label="Critério [c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe entregar um executável funcional, reproduzível e auditável, executado com sucesso no Raspberry Pi Zero 2W?">[c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe entregar um executável funcional, reproduzível e auditável, executado com sucesso no Raspberry Pi Zero 2W?</td><td class="levels"><table id="rubric-criteria-521439-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521439-levels" role="radiogroup"><td id="rubric-criteria-521439-levels-1058315" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521439-levels-1058315-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521439-levels-1058316" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521439-levels-1058316-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion even" id="rubric-criteria-521440"><td class="description" id="rubric-criteria-521440-description-cell" tabindex="0" aria-label="Critério [c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe integrar todas as funcionalidades desenvolvidas em um único sistema coerente, sem conflitos de registradores, memória ou fluxo de execução?">[c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe integrar todas as funcionalidades desenvolvidas em um único sistema coerente, sem conflitos de registradores, memória ou fluxo de execução?</td><td class="levels"><table id="rubric-criteria-521440-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521440-levels" role="radiogroup"><td id="rubric-criteria-521440-levels-1058317" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521440-levels-1058317-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521440-levels-1058318" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521440-levels-1058318-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr><tr class="criterion last odd" id="rubric-criteria-521441"><td class="description" id="rubric-criteria-521441-description-cell" tabindex="0" aria-label="Critério [c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe justificar decisões técnicas no relatório, relacionando escolhas de implementação com comportamento observado na execução real?">[c]6. Preparar a organização de arquivos Assembly ARM 64-bits para compilação e execução stand-alone[/c] O aluno demonstrou que sabe justificar decisões técnicas no relatório, relacionando escolhas de implementação com comportamento observado na execução real?</td><td class="levels"><table id="rubric-criteria-521441-levels-table" aria-label="Grupo de níveis"><tr id="rubric-criteria-521441-levels" role="radiogroup"><td id="rubric-criteria-521441-levels-1058319" class="level first even" width="50%" tabindex="0" aria-label="Nível Não demonstrou o item de rubrica, 0 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521441-levels-1058319-definition-container">Não demonstrou o item de rubrica</div></div></td><td id="rubric-criteria-521441-levels-1058320" class="level last odd" width="50%" tabindex="0" aria-label="Nível Demonstrou o item de rubrica, 1 pontos."><div class="level-wrapper"><div class="definition" id="rubric-criteria-521441-levels-1058320-definition-container">Demonstrou o item de rubrica</div></div></td></tr></table></td></tr></table></div></td>
+</tr>

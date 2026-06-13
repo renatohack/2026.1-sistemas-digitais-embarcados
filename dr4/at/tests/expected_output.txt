@@ -1,0 +1,16 @@
+DR4 AT - Diagnostico de Telemetria
+entrada_valores: 10 20 30 40 50 60 70 80
+entrada_status: 0x01 0x01 0x05 0x01 0x09 0x01 0x00 0x01
+amostras_validas: 7
+soma_validos: 290
+media_inteira: 41
+alarmes_ativos: 1
+bateria_baixa: 1
+palavra_status: 0x1117
+rotacao_status: 0x22e2
+assinatura_status: 0x33f5
+lut_validos: 100 200 300 400 500 600 800
+soma_lut_validos: 2900
+simd_soma4: 100
+simd_normalizado: 0.100 0.200 0.300 0.400
+validacao_numerica: ok

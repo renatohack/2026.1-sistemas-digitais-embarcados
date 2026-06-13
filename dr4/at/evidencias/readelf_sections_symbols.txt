@@ -1,0 +1,144 @@
+There are 13 section headers, starting at offset 0x1e28:
+
+Section Headers:
+  [Nr] Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .text             PROGBITS         00000000004000b0  000000b0
+       000000000000083c  0000000000000000  AX       0     0     4
+  [ 2] .rodata           PROGBITS         00000000004008ec  000008ec
+       000000000000017d  0000000000000000   A       0     0     1
+  [ 3] .data             PROGBITS         0000000000410a70  00000a70
+       0000000000000070  0000000000000000  WA       0     0     16
+  [ 4] .bss              NOBITS           0000000000410ae0  00000ae0
+       00000000000000d0  0000000000000000  WA       0     0     16
+  [ 5] .debug_aranges    PROGBITS         0000000000000000  00000ae0
+       0000000000000090  0000000000000000           0     0     16
+  [ 6] .debug_info       PROGBITS         0000000000000000  00000b70
+       000000000000008a  0000000000000000           0     0     1
+  [ 7] .debug_abbrev     PROGBITS         0000000000000000  00000bfa
+       000000000000003c  0000000000000000           0     0     1
+  [ 8] .debug_line       PROGBITS         0000000000000000  00000c36
+       000000000000021a  0000000000000000           0     0     1
+  [ 9] .debug_str        PROGBITS         0000000000000000  00000e50
+       0000000000000075  0000000000000001  MS       0     0     1
+  [10] .symtab           SYMTAB           0000000000000000  00000ec8
+       00000000000009d8  0000000000000018          11    67     8
+  [11] .strtab           STRTAB           0000000000000000  000018a0
+       0000000000000510  0000000000000000           0     0     1
+  [12] .shstrtab         STRTAB           0000000000000000  00001db0
+       0000000000000074  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  D (mbind), p (processor specific)
+
+Symbol table '.symtab' contains 105 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 00000000004000b0     0 SECTION LOCAL  DEFAULT    1 .text
+     2: 00000000004008ec     0 SECTION LOCAL  DEFAULT    2 .rodata
+     3: 0000000000410a70     0 SECTION LOCAL  DEFAULT    3 .data
+     4: 0000000000410ae0     0 SECTION LOCAL  DEFAULT    4 .bss
+     5: 0000000000000000     0 SECTION LOCAL  DEFAULT    5 .debug_aranges
+     6: 0000000000000000     0 SECTION LOCAL  DEFAULT    6 .debug_info
+     7: 0000000000000000     0 SECTION LOCAL  DEFAULT    7 .debug_abbrev
+     8: 0000000000000000     0 SECTION LOCAL  DEFAULT    8 .debug_line
+     9: 0000000000000000     0 SECTION LOCAL  DEFAULT    9 .debug_str
+    10: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS main.o
+    11: 00000000004000b0     0 NOTYPE  LOCAL  DEFAULT    1 $x
+    12: 0000000000400a65     0 NOTYPE  LOCAL  DEFAULT    2 expected_sum_ascii
+    13: 00000000004008ec     0 NOTYPE  LOCAL  DEFAULT    2 msg_header
+    14: 0000000000000023     0 NOTYPE  LOCAL  DEFAULT  ABS msg_header_len
+    15: 000000000040090f     0 NOTYPE  LOCAL  DEFAULT    2 msg_values
+    16: 0000000000000029     0 NOTYPE  LOCAL  DEFAULT  ABS msg_values_len
+    17: 0000000000400938     0 NOTYPE  LOCAL  DEFAULT    2 msg_status
+    18: 0000000000000038     0 NOTYPE  LOCAL  DEFAULT  ABS msg_status_len
+    19: 0000000000400970     0 NOTYPE  LOCAL  DEFAULT    2 msg_valid_count
+    20: 0000000000000012     0 NOTYPE  LOCAL  DEFAULT  ABS msg_valid_count_len
+    21: 0000000000400a61     0 NOTYPE  LOCAL  DEFAULT    2 msg_newline
+    22: 0000000000000001     0 NOTYPE  LOCAL  DEFAULT  ABS msg_newline_len
+    23: 0000000000400982     0 NOTYPE  LOCAL  DEFAULT    2 msg_valid_sum
+    24: 000000000000000e     0 NOTYPE  LOCAL  DEFAULT  ABS msg_valid_sum_len
+    25: 0000000000400990     0 NOTYPE  LOCAL  DEFAULT    2 msg_valid_avg
+    26: 000000000000000f     0 NOTYPE  LOCAL  DEFAULT  ABS msg_valid_avg_len
+    27: 000000000040099f     0 NOTYPE  LOCAL  DEFAULT    2 msg_alarm_count
+    28: 0000000000000010     0 NOTYPE  LOCAL  DEFAULT  ABS msg_alarm_count_len
+    29: 00000000004009af     0 NOTYPE  LOCAL  DEFAULT    2 msg_battery_count
+    30: 000000000000000f     0 NOTYPE  LOCAL  DEFAULT  ABS msg_battery_count_len
+    31: 00000000004009be     0 NOTYPE  LOCAL  DEFAULT    2 msg_status_word
+    32: 0000000000000010     0 NOTYPE  LOCAL  DEFAULT  ABS msg_status_word_len
+    33: 00000000004009ce     0 NOTYPE  LOCAL  DEFAULT    2 msg_status_rotl
+    34: 0000000000000010     0 NOTYPE  LOCAL  DEFAULT  ABS msg_status_rotl_len
+    35: 00000000004009de     0 NOTYPE  LOCAL  DEFAULT    2 msg_status_signature
+    36: 0000000000000013     0 NOTYPE  LOCAL  DEFAULT  ABS msg_status_signa[...]
+    37: 00000000004009f1     0 NOTYPE  LOCAL  DEFAULT    2 msg_lut_values
+    38: 000000000000000d     0 NOTYPE  LOCAL  DEFAULT  ABS msg_lut_values_len
+    39: 0000000000400a62     0 NOTYPE  LOCAL  DEFAULT    2 msg_space
+    40: 0000000000000001     0 NOTYPE  LOCAL  DEFAULT  ABS msg_space_len
+    41: 00000000004009fe     0 NOTYPE  LOCAL  DEFAULT    2 msg_lut_sum
+    42: 0000000000000012     0 NOTYPE  LOCAL  DEFAULT  ABS msg_lut_sum_len
+    43: 0000000000400a10     0 NOTYPE  LOCAL  DEFAULT    2 msg_neon_sum
+    44: 000000000000000c     0 NOTYPE  LOCAL  DEFAULT  ABS msg_neon_sum_len
+    45: 0000000000400a1c     0 NOTYPE  LOCAL  DEFAULT    2 msg_norm
+    46: 000000000000002a     0 NOTYPE  LOCAL  DEFAULT  ABS msg_norm_len
+    47: 0000000000400a46     0 NOTYPE  LOCAL  DEFAULT    2 msg_numeric_vali[...]
+    48: 0000000000000014     0 NOTYPE  LOCAL  DEFAULT  ABS msg_numeric_vali[...]
+    49: 0000000000400a5a     0 NOTYPE  LOCAL  DEFAULT    2 msg_ok
+    50: 0000000000000002     0 NOTYPE  LOCAL  DEFAULT  ABS msg_ok_len
+    51: 0000000000400a5c     0 NOTYPE  LOCAL  DEFAULT    2 msg_fail
+    52: 0000000000000005     0 NOTYPE  LOCAL  DEFAULT  ABS msg_fail_len
+    53: 0000000000410ae0     0 NOTYPE  LOCAL  DEFAULT    4 num_buffer
+    54: 0000000000400a63     0 NOTYPE  LOCAL  DEFAULT    2 msg_hex_prefix
+    55: 0000000000000002     0 NOTYPE  LOCAL  DEFAULT  ABS msg_hex_prefix_len
+    56: 0000000000410b00     0 NOTYPE  LOCAL  DEFAULT    4 hex_buffer
+    57: 0000000000410ae0     0 NOTYPE  LOCAL  DEFAULT    4 $d
+    58: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS processamento.o
+    59: 0000000000400550     0 NOTYPE  LOCAL  DEFAULT    1 $x
+    60: 0000000000410aa0     0 NOTYPE  LOCAL  DEFAULT    3 lut_values
+    61: 0000000000410ac0     0 NOTYPE  LOCAL  DEFAULT    3 lut_first4_f32
+    62: 0000000000410ad0     0 NOTYPE  LOCAL  DEFAULT    3 f32_divisor_1000
+    63: 0000000000410a70     0 NOTYPE  LOCAL  DEFAULT    3 $d
+    64: 0000000000410b20     0 NOTYPE  LOCAL  DEFAULT    4 $d
+    65: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS conversao.o
+    66: 0000000000400760     0 NOTYPE  LOCAL  DEFAULT    1 $x
+    67: 0000000000410b58     0 NOTYPE  GLOBAL DEFAULT    4 status_rotl_result
+    68: 0000000000410ba0     0 NOTYPE  GLOBAL DEFAULT    4 normalized_values
+    69: 0000000000410b40     0 NOTYPE  GLOBAL DEFAULT    4 battery_count_result
+    70: 0000000000410b80     0 NOTYPE  GLOBAL DEFAULT    4 lut_output_values
+    71: 0000000000410bb0     0 NOTYPE  GLOBAL DEFAULT    4 _bss_end__
+    72: 00000000004004f8    88 FUNC    GLOBAL DEFAULT    1 print_hex16
+    73: 0000000000410b50     0 NOTYPE  GLOBAL DEFAULT    4 status_word_result
+    74: 0000000000410a70     0 NOTYPE  GLOBAL DEFAULT    3 values
+    75: 0000000000410b28     0 NOTYPE  GLOBAL DEFAULT    4 valid_sum_result
+    76: 0000000000410ae0     0 NOTYPE  GLOBAL DEFAULT    4 __bss_start__
+    77: 0000000000410b78     0 NOTYPE  GLOBAL DEFAULT    4 neon_sum4_result
+    78: 000000000040086c   128 FUNC    GLOBAL DEFAULT    1 parse_u64_checked
+    79: 0000000000400734    44 FUNC    GLOBAL DEFAULT    1 normalize_lut_f3[...]
+    80: 000000000040075c     0 NOTYPE  GLOBAL DEFAULT    1 neon_float_done
+    81: 0000000000410bb0     0 NOTYPE  GLOBAL DEFAULT    4 __bss_end__
+    82: 0000000000410b70     0 NOTYPE  GLOBAL DEFAULT    4 lut_sum_result
+    83: 0000000000400688     0 NOTYPE  GLOBAL DEFAULT    1 metrics_done
+    84: 00000000004000b0  1040 FUNC    GLOBAL DEFAULT    1 _start
+    85: 0000000000400730     0 NOTYPE  GLOBAL DEFAULT    1 neon_int_done
+    86: 000000000040070c     0 NOTYPE  GLOBAL DEFAULT    1 lut_done
+    87: 0000000000410b68     0 NOTYPE  GLOBAL DEFAULT    4 lut_count_result
+    88: 0000000000400760    24 FUNC    GLOBAL DEFAULT    1 strlen_ascii
+    89: 00000000004004c0    56 FUNC    GLOBAL DEFAULT    1 print_u64
+    90: 0000000000410ae0     0 NOTYPE  GLOBAL DEFAULT    4 __bss_start
+    91: 0000000000410b20     0 NOTYPE  GLOBAL DEFAULT    4 valid_count_result
+    92: 0000000000410b60     0 NOTYPE  GLOBAL DEFAULT    4 status_signature[...]
+    93: 0000000000410bb0     0 NOTYPE  GLOBAL DEFAULT    4 __end__
+    94: 0000000000410b30     0 NOTYPE  GLOBAL DEFAULT    4 valid_avg_result
+    95: 000000000040068c   132 FUNC    GLOBAL DEFAULT    1 convert_valid_va[...]
+    96: 0000000000410b48     0 NOTYPE  GLOBAL DEFAULT    4 invalid_count_result
+    97: 0000000000410ae0     0 NOTYPE  GLOBAL DEFAULT    3 _edata
+    98: 0000000000410bb0     0 NOTYPE  GLOBAL DEFAULT    4 _end
+    99: 0000000000410b38     0 NOTYPE  GLOBAL DEFAULT    4 alarm_count_result
+   100: 0000000000400710    36 FUNC    GLOBAL DEFAULT    1 sum_first_four_neon
+   101: 0000000000400810    92 FUNC    GLOBAL DEFAULT    1 u64_to_hex_fixed
+   102: 0000000000400550   316 FUNC    GLOBAL DEFAULT    1 process_metrics
+   103: 0000000000400778   152 FUNC    GLOBAL DEFAULT    1 u64_to_ascii
+   104: 0000000000410a90     0 NOTYPE  GLOBAL DEFAULT    3 status

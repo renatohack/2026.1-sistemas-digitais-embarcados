@@ -1,0 +1,307 @@
+
+build/main.o:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+0000000000000000 <_start>:
+   0:	94000000 	bl	0 <process_metrics>
+   4:	94000000 	bl	0 <convert_valid_values_lut>
+   8:	94000000 	bl	0 <sum_first_four_neon>
+   c:	94000000 	bl	0 <normalize_lut_f32_neon>
+  10:	90000000 	adrp	x0, 0 <_start>
+  14:	91000000 	add	x0, x0, #0x0
+  18:	d2807d01 	mov	x1, #0x3e8                 	// #1000
+  1c:	94000000 	bl	0 <parse_u64_checked>
+  20:	b40000e0 	cbz	x0, 3c <_start+0x3c>
+  24:	90000002 	adrp	x2, 0 <valid_sum_result>
+  28:	91000042 	add	x2, x2, #0x0
+  2c:	f9400042 	ldr	x2, [x2]
+  30:	eb02003f 	cmp	x1, x2
+  34:	9a9f17f3 	cset	x19, eq  // eq = none
+  38:	14000002 	b	40 <_start+0x40>
+  3c:	d2800013 	mov	x19, #0x0                   	// #0
+  40:	d2800020 	mov	x0, #0x1                   	// #1
+  44:	90000001 	adrp	x1, 0 <_start>
+  48:	91000021 	add	x1, x1, #0x0
+  4c:	d2800462 	mov	x2, #0x23                  	// #35
+  50:	d2800808 	mov	x8, #0x40                  	// #64
+  54:	d4000001 	svc	#0x0
+  58:	d2800020 	mov	x0, #0x1                   	// #1
+  5c:	90000001 	adrp	x1, 0 <_start>
+  60:	91000021 	add	x1, x1, #0x0
+  64:	d2800522 	mov	x2, #0x29                  	// #41
+  68:	d2800808 	mov	x8, #0x40                  	// #64
+  6c:	d4000001 	svc	#0x0
+  70:	d2800020 	mov	x0, #0x1                   	// #1
+  74:	90000001 	adrp	x1, 0 <_start>
+  78:	91000021 	add	x1, x1, #0x0
+  7c:	d2800702 	mov	x2, #0x38                  	// #56
+  80:	d2800808 	mov	x8, #0x40                  	// #64
+  84:	d4000001 	svc	#0x0
+  88:	d2800020 	mov	x0, #0x1                   	// #1
+  8c:	90000001 	adrp	x1, 0 <_start>
+  90:	91000021 	add	x1, x1, #0x0
+  94:	d2800242 	mov	x2, #0x12                  	// #18
+  98:	d2800808 	mov	x8, #0x40                  	// #64
+  9c:	d4000001 	svc	#0x0
+  a0:	90000000 	adrp	x0, 0 <valid_count_result>
+  a4:	91000000 	add	x0, x0, #0x0
+  a8:	f9400000 	ldr	x0, [x0]
+  ac:	94000000 	bl	410 <print_u64>
+  b0:	d2800020 	mov	x0, #0x1                   	// #1
+  b4:	90000001 	adrp	x1, 0 <_start>
+  b8:	91000021 	add	x1, x1, #0x0
+  bc:	d2800022 	mov	x2, #0x1                   	// #1
+  c0:	d2800808 	mov	x8, #0x40                  	// #64
+  c4:	d4000001 	svc	#0x0
+  c8:	d2800020 	mov	x0, #0x1                   	// #1
+  cc:	90000001 	adrp	x1, 0 <_start>
+  d0:	91000021 	add	x1, x1, #0x0
+  d4:	d28001c2 	mov	x2, #0xe                   	// #14
+  d8:	d2800808 	mov	x8, #0x40                  	// #64
+  dc:	d4000001 	svc	#0x0
+  e0:	90000000 	adrp	x0, 0 <valid_sum_result>
+  e4:	91000000 	add	x0, x0, #0x0
+  e8:	f9400000 	ldr	x0, [x0]
+  ec:	94000000 	bl	410 <print_u64>
+  f0:	d2800020 	mov	x0, #0x1                   	// #1
+  f4:	90000001 	adrp	x1, 0 <_start>
+  f8:	91000021 	add	x1, x1, #0x0
+  fc:	d2800022 	mov	x2, #0x1                   	// #1
+ 100:	d2800808 	mov	x8, #0x40                  	// #64
+ 104:	d4000001 	svc	#0x0
+ 108:	d2800020 	mov	x0, #0x1                   	// #1
+ 10c:	90000001 	adrp	x1, 0 <_start>
+ 110:	91000021 	add	x1, x1, #0x0
+ 114:	d28001e2 	mov	x2, #0xf                   	// #15
+ 118:	d2800808 	mov	x8, #0x40                  	// #64
+ 11c:	d4000001 	svc	#0x0
+ 120:	90000000 	adrp	x0, 0 <valid_avg_result>
+ 124:	91000000 	add	x0, x0, #0x0
+ 128:	f9400000 	ldr	x0, [x0]
+ 12c:	94000000 	bl	410 <print_u64>
+ 130:	d2800020 	mov	x0, #0x1                   	// #1
+ 134:	90000001 	adrp	x1, 0 <_start>
+ 138:	91000021 	add	x1, x1, #0x0
+ 13c:	d2800022 	mov	x2, #0x1                   	// #1
+ 140:	d2800808 	mov	x8, #0x40                  	// #64
+ 144:	d4000001 	svc	#0x0
+ 148:	d2800020 	mov	x0, #0x1                   	// #1
+ 14c:	90000001 	adrp	x1, 0 <_start>
+ 150:	91000021 	add	x1, x1, #0x0
+ 154:	d2800202 	mov	x2, #0x10                  	// #16
+ 158:	d2800808 	mov	x8, #0x40                  	// #64
+ 15c:	d4000001 	svc	#0x0
+ 160:	90000000 	adrp	x0, 0 <alarm_count_result>
+ 164:	91000000 	add	x0, x0, #0x0
+ 168:	f9400000 	ldr	x0, [x0]
+ 16c:	94000000 	bl	410 <print_u64>
+ 170:	d2800020 	mov	x0, #0x1                   	// #1
+ 174:	90000001 	adrp	x1, 0 <_start>
+ 178:	91000021 	add	x1, x1, #0x0
+ 17c:	d2800022 	mov	x2, #0x1                   	// #1
+ 180:	d2800808 	mov	x8, #0x40                  	// #64
+ 184:	d4000001 	svc	#0x0
+ 188:	d2800020 	mov	x0, #0x1                   	// #1
+ 18c:	90000001 	adrp	x1, 0 <_start>
+ 190:	91000021 	add	x1, x1, #0x0
+ 194:	d28001e2 	mov	x2, #0xf                   	// #15
+ 198:	d2800808 	mov	x8, #0x40                  	// #64
+ 19c:	d4000001 	svc	#0x0
+ 1a0:	90000000 	adrp	x0, 0 <battery_count_result>
+ 1a4:	91000000 	add	x0, x0, #0x0
+ 1a8:	f9400000 	ldr	x0, [x0]
+ 1ac:	94000000 	bl	410 <print_u64>
+ 1b0:	d2800020 	mov	x0, #0x1                   	// #1
+ 1b4:	90000001 	adrp	x1, 0 <_start>
+ 1b8:	91000021 	add	x1, x1, #0x0
+ 1bc:	d2800022 	mov	x2, #0x1                   	// #1
+ 1c0:	d2800808 	mov	x8, #0x40                  	// #64
+ 1c4:	d4000001 	svc	#0x0
+ 1c8:	d2800020 	mov	x0, #0x1                   	// #1
+ 1cc:	90000001 	adrp	x1, 0 <_start>
+ 1d0:	91000021 	add	x1, x1, #0x0
+ 1d4:	d2800202 	mov	x2, #0x10                  	// #16
+ 1d8:	d2800808 	mov	x8, #0x40                  	// #64
+ 1dc:	d4000001 	svc	#0x0
+ 1e0:	90000000 	adrp	x0, 0 <status_word_result>
+ 1e4:	91000000 	add	x0, x0, #0x0
+ 1e8:	f9400000 	ldr	x0, [x0]
+ 1ec:	94000000 	bl	448 <print_hex16>
+ 1f0:	d2800020 	mov	x0, #0x1                   	// #1
+ 1f4:	90000001 	adrp	x1, 0 <_start>
+ 1f8:	91000021 	add	x1, x1, #0x0
+ 1fc:	d2800022 	mov	x2, #0x1                   	// #1
+ 200:	d2800808 	mov	x8, #0x40                  	// #64
+ 204:	d4000001 	svc	#0x0
+ 208:	d2800020 	mov	x0, #0x1                   	// #1
+ 20c:	90000001 	adrp	x1, 0 <_start>
+ 210:	91000021 	add	x1, x1, #0x0
+ 214:	d2800202 	mov	x2, #0x10                  	// #16
+ 218:	d2800808 	mov	x8, #0x40                  	// #64
+ 21c:	d4000001 	svc	#0x0
+ 220:	90000000 	adrp	x0, 0 <status_rotl_result>
+ 224:	91000000 	add	x0, x0, #0x0
+ 228:	f9400000 	ldr	x0, [x0]
+ 22c:	94000000 	bl	448 <print_hex16>
+ 230:	d2800020 	mov	x0, #0x1                   	// #1
+ 234:	90000001 	adrp	x1, 0 <_start>
+ 238:	91000021 	add	x1, x1, #0x0
+ 23c:	d2800022 	mov	x2, #0x1                   	// #1
+ 240:	d2800808 	mov	x8, #0x40                  	// #64
+ 244:	d4000001 	svc	#0x0
+ 248:	d2800020 	mov	x0, #0x1                   	// #1
+ 24c:	90000001 	adrp	x1, 0 <_start>
+ 250:	91000021 	add	x1, x1, #0x0
+ 254:	d2800262 	mov	x2, #0x13                  	// #19
+ 258:	d2800808 	mov	x8, #0x40                  	// #64
+ 25c:	d4000001 	svc	#0x0
+ 260:	90000000 	adrp	x0, 0 <status_signature_result>
+ 264:	91000000 	add	x0, x0, #0x0
+ 268:	f9400000 	ldr	x0, [x0]
+ 26c:	94000000 	bl	448 <print_hex16>
+ 270:	d2800020 	mov	x0, #0x1                   	// #1
+ 274:	90000001 	adrp	x1, 0 <_start>
+ 278:	91000021 	add	x1, x1, #0x0
+ 27c:	d2800022 	mov	x2, #0x1                   	// #1
+ 280:	d2800808 	mov	x8, #0x40                  	// #64
+ 284:	d4000001 	svc	#0x0
+ 288:	d2800020 	mov	x0, #0x1                   	// #1
+ 28c:	90000001 	adrp	x1, 0 <_start>
+ 290:	91000021 	add	x1, x1, #0x0
+ 294:	d28001a2 	mov	x2, #0xd                   	// #13
+ 298:	d2800808 	mov	x8, #0x40                  	// #64
+ 29c:	d4000001 	svc	#0x0
+ 2a0:	90000014 	adrp	x20, 0 <lut_output_values>
+ 2a4:	91000294 	add	x20, x20, #0x0
+ 2a8:	90000015 	adrp	x21, 0 <lut_count_result>
+ 2ac:	910002b5 	add	x21, x21, #0x0
+ 2b0:	f94002b5 	ldr	x21, [x21]
+ 2b4:	d2800016 	mov	x22, #0x0                   	// #0
+ 2b8:	eb1502df 	cmp	x22, x21
+ 2bc:	54000182 	b.cs	2ec <_start+0x2ec>  // b.hs, b.nlast
+ 2c0:	b40000f6 	cbz	x22, 2dc <_start+0x2dc>
+ 2c4:	d2800020 	mov	x0, #0x1                   	// #1
+ 2c8:	90000001 	adrp	x1, 0 <_start>
+ 2cc:	91000021 	add	x1, x1, #0x0
+ 2d0:	d2800022 	mov	x2, #0x1                   	// #1
+ 2d4:	d2800808 	mov	x8, #0x40                  	// #64
+ 2d8:	d4000001 	svc	#0x0
+ 2dc:	b8767a80 	ldr	w0, [x20, x22, lsl #2]
+ 2e0:	94000000 	bl	410 <print_u64>
+ 2e4:	910006d6 	add	x22, x22, #0x1
+ 2e8:	17fffff4 	b	2b8 <_start+0x2b8>
+ 2ec:	d2800020 	mov	x0, #0x1                   	// #1
+ 2f0:	90000001 	adrp	x1, 0 <_start>
+ 2f4:	91000021 	add	x1, x1, #0x0
+ 2f8:	d2800022 	mov	x2, #0x1                   	// #1
+ 2fc:	d2800808 	mov	x8, #0x40                  	// #64
+ 300:	d4000001 	svc	#0x0
+ 304:	d2800020 	mov	x0, #0x1                   	// #1
+ 308:	90000001 	adrp	x1, 0 <_start>
+ 30c:	91000021 	add	x1, x1, #0x0
+ 310:	d2800242 	mov	x2, #0x12                  	// #18
+ 314:	d2800808 	mov	x8, #0x40                  	// #64
+ 318:	d4000001 	svc	#0x0
+ 31c:	90000000 	adrp	x0, 0 <lut_sum_result>
+ 320:	91000000 	add	x0, x0, #0x0
+ 324:	f9400000 	ldr	x0, [x0]
+ 328:	94000000 	bl	410 <print_u64>
+ 32c:	d2800020 	mov	x0, #0x1                   	// #1
+ 330:	90000001 	adrp	x1, 0 <_start>
+ 334:	91000021 	add	x1, x1, #0x0
+ 338:	d2800022 	mov	x2, #0x1                   	// #1
+ 33c:	d2800808 	mov	x8, #0x40                  	// #64
+ 340:	d4000001 	svc	#0x0
+ 344:	d2800020 	mov	x0, #0x1                   	// #1
+ 348:	90000001 	adrp	x1, 0 <_start>
+ 34c:	91000021 	add	x1, x1, #0x0
+ 350:	d2800182 	mov	x2, #0xc                   	// #12
+ 354:	d2800808 	mov	x8, #0x40                  	// #64
+ 358:	d4000001 	svc	#0x0
+ 35c:	90000000 	adrp	x0, 0 <neon_sum4_result>
+ 360:	91000000 	add	x0, x0, #0x0
+ 364:	f9400000 	ldr	x0, [x0]
+ 368:	94000000 	bl	410 <print_u64>
+ 36c:	d2800020 	mov	x0, #0x1                   	// #1
+ 370:	90000001 	adrp	x1, 0 <_start>
+ 374:	91000021 	add	x1, x1, #0x0
+ 378:	d2800022 	mov	x2, #0x1                   	// #1
+ 37c:	d2800808 	mov	x8, #0x40                  	// #64
+ 380:	d4000001 	svc	#0x0
+ 384:	d2800020 	mov	x0, #0x1                   	// #1
+ 388:	90000001 	adrp	x1, 0 <_start>
+ 38c:	91000021 	add	x1, x1, #0x0
+ 390:	d2800542 	mov	x2, #0x2a                  	// #42
+ 394:	d2800808 	mov	x8, #0x40                  	// #64
+ 398:	d4000001 	svc	#0x0
+ 39c:	d2800020 	mov	x0, #0x1                   	// #1
+ 3a0:	90000001 	adrp	x1, 0 <_start>
+ 3a4:	91000021 	add	x1, x1, #0x0
+ 3a8:	d2800282 	mov	x2, #0x14                  	// #20
+ 3ac:	d2800808 	mov	x8, #0x40                  	// #64
+ 3b0:	d4000001 	svc	#0x0
+ 3b4:	b4000113 	cbz	x19, 3d4 <_start+0x3d4>
+ 3b8:	d2800020 	mov	x0, #0x1                   	// #1
+ 3bc:	90000001 	adrp	x1, 0 <_start>
+ 3c0:	91000021 	add	x1, x1, #0x0
+ 3c4:	d2800042 	mov	x2, #0x2                   	// #2
+ 3c8:	d2800808 	mov	x8, #0x40                  	// #64
+ 3cc:	d4000001 	svc	#0x0
+ 3d0:	14000007 	b	3ec <_start+0x3ec>
+ 3d4:	d2800020 	mov	x0, #0x1                   	// #1
+ 3d8:	90000001 	adrp	x1, 0 <_start>
+ 3dc:	91000021 	add	x1, x1, #0x0
+ 3e0:	d28000a2 	mov	x2, #0x5                   	// #5
+ 3e4:	d2800808 	mov	x8, #0x40                  	// #64
+ 3e8:	d4000001 	svc	#0x0
+ 3ec:	d2800020 	mov	x0, #0x1                   	// #1
+ 3f0:	90000001 	adrp	x1, 0 <_start>
+ 3f4:	91000021 	add	x1, x1, #0x0
+ 3f8:	d2800022 	mov	x2, #0x1                   	// #1
+ 3fc:	d2800808 	mov	x8, #0x40                  	// #64
+ 400:	d4000001 	svc	#0x0
+ 404:	d2800000 	mov	x0, #0x0                   	// #0
+ 408:	d2800ba8 	mov	x8, #0x5d                  	// #93
+ 40c:	d4000001 	svc	#0x0
+
+0000000000000410 <print_u64>:
+ 410:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+ 414:	910003fd 	mov	x29, sp
+ 418:	90000001 	adrp	x1, 0 <_start>
+ 41c:	91000021 	add	x1, x1, #0x0
+ 420:	d2800402 	mov	x2, #0x20                  	// #32
+ 424:	94000000 	bl	0 <u64_to_ascii>
+ 428:	aa0003e2 	mov	x2, x0
+ 42c:	90000001 	adrp	x1, 0 <_start>
+ 430:	91000021 	add	x1, x1, #0x0
+ 434:	d2800020 	mov	x0, #0x1                   	// #1
+ 438:	d2800808 	mov	x8, #0x40                  	// #64
+ 43c:	d4000001 	svc	#0x0
+ 440:	a8c17bfd 	ldp	x29, x30, [sp], #16
+ 444:	d65f03c0 	ret
+
+0000000000000448 <print_hex16>:
+ 448:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+ 44c:	910003fd 	mov	x29, sp
+ 450:	aa0003f7 	mov	x23, x0
+ 454:	d2800020 	mov	x0, #0x1                   	// #1
+ 458:	90000001 	adrp	x1, 0 <_start>
+ 45c:	91000021 	add	x1, x1, #0x0
+ 460:	d2800042 	mov	x2, #0x2                   	// #2
+ 464:	d2800808 	mov	x8, #0x40                  	// #64
+ 468:	d4000001 	svc	#0x0
+ 46c:	aa1703e0 	mov	x0, x23
+ 470:	90000001 	adrp	x1, 0 <_start>
+ 474:	91000021 	add	x1, x1, #0x0
+ 478:	d2800082 	mov	x2, #0x4                   	// #4
+ 47c:	94000000 	bl	0 <u64_to_hex_fixed>
+ 480:	aa0003e2 	mov	x2, x0
+ 484:	90000001 	adrp	x1, 0 <_start>
+ 488:	91000021 	add	x1, x1, #0x0
+ 48c:	d2800020 	mov	x0, #0x1                   	// #1
+ 490:	d2800808 	mov	x8, #0x40                  	// #64
+ 494:	d4000001 	svc	#0x0
+ 498:	a8c17bfd 	ldp	x29, x30, [sp], #16
+ 49c:	d65f03c0 	ret

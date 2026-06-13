@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Relatório Técnico - DR4 AT</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #18202b;
+      background: #ffffff;
+      font-family: "Arial", "Helvetica", sans-serif;
+      font-size: 10.4pt;
+      line-height: 1.45;
+    }
+
+    .cover {
+      min-height: 260mm;
+      padding: 28mm 18mm 18mm;
+      background: linear-gradient(180deg, #eef4fb 0%, #ffffff 42%);
+      page-break-after: always;
+    }
+
+    .eyebrow {
+      color: #45617f;
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12mm 0 6mm;
+      color: #102033;
+      font-size: 30pt;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 158mm;
+      color: #38495c;
+      font-size: 13.5pt;
+      line-height: 1.45;
+    }
+
+    .cover-grid,
+    .grid-2,
+    .flow-grid {
+      display: table;
+      width: 100%;
+      border-spacing: 0;
+    }
+
+    .cover-grid {
+      margin-top: 18mm;
+    }
+
+    .cover-card {
+      display: table-cell;
+      width: 50%;
+      padding: 5mm;
+      border: 1px solid #d6e0ea;
+      background: #ffffff;
+      vertical-align: top;
+    }
+
+    .cover-card:first-child {
+      border-right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .cover-card:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    .meta-label {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #617187;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-bottom: 4mm;
+      color: #172334;
+      font-size: 11pt;
+    }
+
+    .section {
+      padding: 8mm 14mm 3mm;
+      page-break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 4mm;
+      padding-bottom: 2mm;
+      color: #12304d;
+      border-bottom: 2px solid #d8e3ee;
+      font-size: 17pt;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 6mm 0 2.5mm;
+      color: #26384c;
+      font-size: 12.2pt;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 3.2mm;
+    }
+
+    .lead {
+      color: #33465b;
+      font-size: 11.2pt;
+    }
+
+    .callout {
+      margin: 4mm 0;
+      padding: 4mm;
+      border-left: 4px solid #2d6da3;
+      background: #f3f7fb;
+      border-radius: 4px;
+    }
+
+    .note {
+      color: #536276;
+      font-size: 9.4pt;
+    }
+
+    .grid-2 {
+      border-spacing: 4mm 0;
+      margin: 3mm -4mm 0;
+    }
+
+    .grid-2 > .cell {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+    }
+
+    table {
+      width: 100%;
+      margin: 2mm 0 5mm;
+      border-collapse: collapse;
+      table-layout: fixed;
+      page-break-inside: avoid;
+    }
+
+    th,
+    td {
+      padding: 2.1mm 2.4mm;
+      border: 1px solid #dce4ed;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    th {
+      color: #203346;
+      background: #edf3f8;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    td {
+      background: #ffffff;
+    }
+
+    .compact td,
+    .compact th {
+      padding: 1.55mm 2mm;
+      font-size: 9.1pt;
+    }
+
+    code,
+    .mono {
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8.8pt;
+      color: #142238;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    pre {
+      margin: 2mm 0 4mm;
+      padding: 3mm;
+      color: #142238;
+      background: #f6f8fb;
+      border: 1px solid #dce4ed;
+      border-radius: 4px;
+      font-family: "DejaVu Sans Mono", "Consolas", monospace;
+      font-size: 8pt;
+      line-height: 1.35;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    ul {
+      margin: 1mm 0 4mm 5mm;
+      padding: 0 0 0 4mm;
+    }
+
+    li {
+      margin-bottom: 1.4mm;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 1.2mm 1.2mm 0;
+      padding: 1mm 2mm;
+      border: 1px solid #cdd9e6;
+      border-radius: 12px;
+      background: #f7fafc;
+      color: #27394e;
+      font-size: 8.8pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .flow-grid {
+      border-spacing: 2.5mm;
+      margin: 2mm -2.5mm 4mm;
+    }
+
+    .flow-cell {
+      display: table-cell;
+      width: 25%;
+      padding: 3mm;
+      border: 1px solid #d6e0ea;
+      border-radius: 4px;
+      background: #f8fbfe;
+      vertical-align: top;
+      page-break-inside: avoid;
+    }
+
+    .flow-title {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: #12304d;
+      font-weight: 700;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="eyebrow">DR4 - Assessment Final</div>
+    <h1>Relatório Técnico<br>Diagnóstico de Telemetria em Assembly ARM64</h1>
+    <p class="subtitle">
+      Sistema CLI stand-alone implementado em Assembly ARM64 para processar dados
+      internos de telemetria, gerar métricas escalares, manipular campos de bits,
+      aplicar LUT, executar rotinas SIMD NEON inteiras e de ponto flutuante, e emitir
+      um relatório compacto em stdout. A validação foi feita no QEMU, com evidências
+      de execução, GDB, objdump e readelf.
+    </p>
+
+    <div class="cover-grid">
+      <div class="cover-card">
+        <span class="meta-label">Aluno</span>
+        <span class="meta-value">Renato</span>
+        <span class="meta-label">Disciplina</span>
+        <span class="meta-value">DR4 - Processamento Otimizado em Assembly ARM 64-bits</span>
+        <span class="meta-label">Entrega</span>
+        <span class="meta-value">Assessment Final</span>
+      </div>
+      <div class="cover-card">
+        <span class="meta-label">Ambiente de validação</span>
+        <span class="meta-value">aarch64-linux-gnu-as/ld + qemu-aarch64 + gdb-multiarch</span>
+        <span class="meta-label">Alvo previsto</span>
+        <span class="meta-value">Raspberry Pi Zero 2W / Linux ARM64</span>
+        <span class="meta-label">Artefatos</span>
+        <span class="meta-value">Código Assembly, Makefile, evidências textuais e relatório</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Objetivo e escopo</h2>
+    <p class="lead">
+      O objetivo do AT foi transformar os 12 exercícios integrados em um único sistema
+      funcional, reproduzível e auditável. O executável final usa apenas Assembly
+      ARM64, sem libc, recebe os dados a partir da memória interna do programa e escreve
+      o relatório operacional por syscalls Linux diretas.
+    </p>
+    <p>
+      Os dados de entrada seguem o enunciado: valores
+      <span class="mono">10 20 30 40 50 60 70 80</span> e status
+      <span class="mono">0x01 0x01 0x05 0x01 0x09 0x01 0x00 0x01</span>.
+      Apenas amostras com bit 0 ativo entram nas métricas estatísticas.
+    </p>
+
+    <div class="callout">
+      <strong>Decisão de ambiente:</strong> embora o alvo seja o Raspberry Pi Zero 2W,
+      o professor liberou a validação em QEMU. O projeto, portanto, gera um ELF AArch64
+      stand-alone e estático, com símbolos de depuração, executado e depurado por
+      <span class="mono">qemu-aarch64</span> e <span class="mono">gdb-multiarch</span>.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>2. Organização do projeto</h2>
+    <p>
+      A estrutura foi separada em módulos com responsabilidade explícita, exatamente
+      para atender ao enunciado e aos critérios de organização, linking e auditoria.
+    </p>
+
+    <div>
+      <span class="tag">Assembly ARM64</span>
+      <span class="tag">Stand-alone</span>
+      <span class="tag">Syscalls Linux</span>
+      <span class="tag">LUT</span>
+      <span class="tag">NEON SIMD</span>
+      <span class="tag">Macros GAS</span>
+      <span class="tag">QEMU + GDB</span>
+    </div>
+
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Arquivo / pasta</th>
+          <th>Função</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">src/main.s</td>
+          <td>Ponto de entrada <span class="mono">_start</span>, integração do fluxo e emissão do relatório por stdout.</td>
+        </tr>
+        <tr>
+          <td class="mono">src/processamento.s</td>
+          <td>Métricas escalares, contagem de flags, recomposição/rotação de campos, LUT e rotinas NEON.</td>
+        </tr>
+        <tr>
+          <td class="mono">src/conversao.s</td>
+          <td>Conversão inteiro-string, hexadecimal fixo, <span class="mono">strlen</span> e parser validado.</td>
+        </tr>
+        <tr>
+          <td class="mono">src/macros.inc</td>
+          <td>Macros GAS parametrizadas para carregar endereços, escrever em stdout e encerrar o programa.</td>
+        </tr>
+        <tr>
+          <td class="mono">Makefile</td>
+          <td>Automatiza montagem, linking, execução, teste por diff, evidências, GDB e relatório.</td>
+        </tr>
+        <tr>
+          <td class="mono">tests/expected_output.txt</td>
+          <td>Saída esperada usada por <span class="mono">make test</span> para validação byte a byte.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Fluxo de validação</h3>
+    <div class="flow-grid">
+      <div class="flow-cell">
+        <span class="flow-title">1. Build</span>
+        <span class="mono">aarch64-linux-gnu-as</span> monta cada módulo e
+        <span class="mono">aarch64-linux-gnu-ld</span> gera o ELF final.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">2. Execução</span>
+        <span class="mono">qemu-aarch64</span> executa o binário AArch64 sem depender de libc.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">3. Teste</span>
+        A saída real é comparada com <span class="mono">tests/expected_output.txt</span>.
+      </div>
+      <div class="flow-cell">
+        <span class="flow-title">4. Auditoria</span>
+        <span class="mono">objdump</span>, <span class="mono">readelf</span> e GDB registram instruções, símbolos e registradores.
+      </div>
+    </div>
+
+    <pre>make
+make test
+make evidence
+make gdb-evidence
+make report</pre>
+  </div>
+
+  <div class="section page-break">
+    <h2>3. Implementação dos exercícios</h2>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Ex.</th>
+          <th>Implementação</th>
+          <th>Evidência técnica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Projeto dividido em <span class="mono">main.s</span>, <span class="mono">processamento.s</span>, <span class="mono">conversao.s</span> e <span class="mono">macros.inc</span>.</td>
+          <td>Separação física dos módulos no diretório <span class="mono">src/</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Makefile com <span class="mono">make</span> e <span class="mono">make clean</span>, além de alvos de teste e evidência.</td>
+          <td>Build reproduzível por um comando.</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>GDB remoto via <span class="mono">qemu-aarch64 -g</span>, com breakpoints em métricas, LUT e NEON.</td>
+          <td><span class="mono">evidencias/gdb_registers.txt</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Análise por objdump/readelf com seções, símbolos e instruções escalares/vetoriais.</td>
+          <td><span class="mono">objdump_full.txt</span> e <span class="mono">readelf_sections_symbols.txt</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Loop escalar conta válidos, soma valores válidos e calcula média inteira com <span class="mono">udiv</span>.</td>
+          <td>Resultados: <span class="mono">7</span>, <span class="mono">290</span>, <span class="mono">41</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td><span class="mono">u64_to_ascii</span>, <span class="mono">strlen_ascii</span>, <span class="mono">u64_to_hex_fixed</span> e <span class="mono">parse_u64_checked</span>.</td>
+          <td>Conversões usadas no relatório e validação interna de <span class="mono">290</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Bits de alarme/bateria por <span class="mono">tst</span>, campos por <span class="mono">and/orr/lsl</span>, rotação por <span class="mono">lsl/lsr/orr</span>, assinatura por <span class="mono">eor</span> e limpeza por <span class="mono">bic</span>.</td>
+          <td><span class="mono">0x1117</span>, <span class="mono">0x22e2</span>, <span class="mono">0x33f5</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td>LUT em memória com indexação <span class="mono">valor / 10 - 1</span> e acesso <span class="mono">ldr [base, index, uxtw #2]</span>.</td>
+          <td>Saída: <span class="mono">100 200 300 400 500 600 800</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>9</strong></td>
+          <td>NEON inteiro carrega <span class="mono">10 20 30 40</span> em <span class="mono">q0</span> e reduz com <span class="mono">addv s1, v0.4s</span>.</td>
+          <td>Resultado: <span class="mono">100</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>10</strong></td>
+          <td>NEON float32 carrega <span class="mono">100.0 200.0 300.0 400.0</span> e divide por <span class="mono">1000.0</span> com <span class="mono">fdiv v2.4s</span>.</td>
+          <td>Memória: <span class="mono">0.100000001 0.200000003 0.300000012 0.400000006</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>11</strong></td>
+          <td>Macros GAS parametrizadas <span class="mono">WRITE_STDOUT</span>, <span class="mono">WRITE_REG</span>, <span class="mono">EXIT_PROGRAM</span> e <span class="mono">LOAD_ADDR</span>.</td>
+          <td>Uso direto em <span class="mono">main.s</span> para syscalls de saída e encerramento.</td>
+        </tr>
+        <tr>
+          <td><strong>12</strong></td>
+          <td>Todas as rotinas são chamadas por <span class="mono">_start</span> e integradas em um único relatório operacional.</td>
+          <td>Execução final validada por <span class="mono">make test</span>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>4. Cobertura da rubrica</h2>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Critério da rubrica</th>
+          <th>Como foi demonstrado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Infraestrutura, múltiplos arquivos, Makefile, GDB e objdump</td>
+          <td>Projeto em módulos Assembly, Makefile reproduzível, GDB remoto e desassemblagem/readelf preservados em evidências.</td>
+        </tr>
+        <tr>
+          <td>Aritmética e conversão numérica</td>
+          <td>Métricas com soma/média inteiras, parser validado, conversão decimal e hexadecimal para stdout.</td>
+        </tr>
+        <tr>
+          <td>Bits, campos, rotações e LUT</td>
+          <td>Contadores por bits de status, recomposição de palavra compacta, rotação manual, assinatura por EOR e LUT indexada.</td>
+        </tr>
+        <tr>
+          <td>SIMD NEON inteiro e ponto flutuante</td>
+          <td><span class="mono">addv v0.4s</span> para soma inteira e <span class="mono">fdiv v2.4s</span> para normalização float32.</td>
+        </tr>
+        <tr>
+          <td>Macros GAS e funções de string</td>
+          <td>Macros parametrizadas para syscalls e funções utilitárias seguras em <span class="mono">conversao.s</span>.</td>
+        </tr>
+        <tr>
+          <td>Stand-alone sem libc e integração final</td>
+          <td>Link com <span class="mono">ld -static</span>, ponto de entrada próprio <span class="mono">_start</span> e syscalls Linux diretas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section page-break">
+    <h2>5. Validação e evidências</h2>
+    <p>
+      A validação funcional principal compara a saída completa do executável com uma
+      saída esperada versionada em <span class="mono">tests/expected_output.txt</span>.
+      Se qualquer byte divergir, <span class="mono">make test</span> falha.
+    </p>
+
+    <h3>Saída final do programa</h3>
+    <pre>DR4 AT - Diagnostico de Telemetria
+entrada_valores: 10 20 30 40 50 60 70 80
+entrada_status: 0x01 0x01 0x05 0x01 0x09 0x01 0x00 0x01
+amostras_validas: 7
+soma_validos: 290
+media_inteira: 41
+alarmes_ativos: 1
+bateria_baixa: 1
+palavra_status: 0x1117
+rotacao_status: 0x22e2
+assinatura_status: 0x33f5
+lut_validos: 100 200 300 400 500 600 800
+soma_lut_validos: 2900
+simd_soma4: 100
+simd_normalizado: 0.100 0.200 0.300 0.400
+validacao_numerica: ok</pre>
+
+    <h3>Binário gerado</h3>
+    <pre>build/dr4_at: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV),
+statically linked, with debug_info, not stripped</pre>
+
+    <h3>GDB remoto</h3>
+    <pre>[metrics_done]
+x0 = 7      x1 = 290      x2 = 41
+x3 = 1      x4 = 1        x5 = 0x1117
+x6 = 0x33f5
+
+[lut_done]
+x0 = 7      x1 = 2900
+lut_output_values = 100 200 300 400 500 600 800
+
+[neon_int_done]
+x0 = 100
+v0.s = {0x0a, 0x14, 0x1e, 0x28}
+
+[neon_float_done]
+normalized_values = 0.100000001 0.200000003 0.300000012 0.400000006</pre>
+
+    <h3>Objdump</h3>
+    <pre>and x12, x3, #0xf
+orr x12, x12, x13
+lsl x13, x13, #4
+lsr x14, x12, #11
+bic x16, x15, x12
+eor x14, x12, x13
+addv s1, v0.4s
+fdiv v2.4s, v0.4s, v1.4s
+svc #0x0</pre>
+
+    <p class="note">
+      Os arquivos completos estão em <span class="mono">evidencias/qemu_output.txt</span>,
+      <span class="mono">evidencias/gdb_registers.txt</span>,
+      <span class="mono">evidencias/objdump_full.txt</span>,
+      <span class="mono">evidencias/objdump_processamento.txt</span> e
+      <span class="mono">evidencias/readelf_sections_symbols.txt</span>.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>6. Conclusão</h2>
+    <p>
+      A entrega atende ao enunciado do AT e aos itens de rubrica: o projeto é
+      modular, stand-alone, reproduzível por Makefile, auditável por objdump/readelf,
+      depurável por GDB e validado por execução AArch64 em QEMU. O sistema integra
+      processamento escalar, conversão textual, manipulação de bits, LUT, SIMD inteiro,
+      SIMD float32, macros GAS e syscalls Linux diretas.
+    </p>
+    <p>
+      A validação final passou sem divergências no teste por diff e as evidências
+      preservadas permitem reproduzir os resultados e inspecionar o comportamento do
+      binário em pontos internos relevantes.
+    </p>
+  </div>
+</body>
+</html>
