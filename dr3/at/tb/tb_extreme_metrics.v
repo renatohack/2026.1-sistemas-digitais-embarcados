@@ -115,25 +115,6 @@ module tb_extreme_metrics;
         rst_n = 1'b1;
 
         reset_datapath();
-        feed_sample(-16'sd28);
-        feed_sample(-16'sd20);
-        feed_sample(-16'sd12);
-        feed_sample(-16'sd4);
-        feed_sample(16'sd4);
-        feed_sample(16'sd12);
-        feed_sample(16'sd20);
-        feed_sample(16'sd28);
-        feed_sample(16'sd36);
-        feed_sample(16'sd28);
-        feed_sample(16'sd20);
-        feed_sample(16'sd12);
-        feed_sample(16'sd4);
-        feed_sample(-16'sd4);
-        feed_sample(-16'sd12);
-        feed_sample(-16'sd20);
-        finish_and_check(32'sd64, 32'sd4, 32'd368);
-
-        reset_datapath();
         for (i = 0; i < 16; i = i + 1)
             feed_sample(16'sd32767);
         finish_and_check(32'sd524272, 32'sd32767, 32'd1073676289);
@@ -150,7 +131,7 @@ module tb_extreme_metrics;
         end
         finish_and_check(-32'sd8, 32'sd0, 32'd1073709056);
 
-        $display("PASS: datapath typical, extreme and alternating cases");
+        $display("PASS: datapath extreme and alternating directed cases");
         $finish;
     end
 endmodule

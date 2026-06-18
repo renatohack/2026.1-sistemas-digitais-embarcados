@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Module name="signal_monitor_top" Lut="1" T_Register="245(0)" T_Alu="71(0)" T_Lut="644(1)" T_MULT18X18="1(0)" T_Bsram="1(0)">
+<Module name="signal_monitor_top" Lut="1" T_Register="281(0)" T_Alu="87(0)" T_Lut="649(1)" T_MULT18X18="1(0)" T_Bsram="1(0)">
  <SubModule name="pll_54mhz_inst"/>
- <SubModule name="start_button_debounce" Register="25" Lut="42" T_Register="25(25)" T_Lut="42(42)"/>
- <SubModule name="signal_monitor_core_inst" Register="13" Lut="46" T_Register="220(13)" T_Alu="71(0)" T_Lut="601(46)" T_MULT18X18="1(0)" T_Bsram="1(0)">
-  <SubModule name="sample_generator_inst" Lut="3" T_Lut="3(3)"/>
+ <SubModule name="start_button_debounce" Register="25" Lut="41" T_Register="25(25)" T_Lut="41(41)"/>
+ <SubModule name="signal_monitor_core_inst" Register="13" Lut="44" T_Register="256(13)" T_Alu="87(0)" T_Lut="607(44)" T_MULT18X18="1(0)" T_Bsram="1(0)">
+  <SubModule name="sample_generator_inst" Register="32" Alu="15" Lut="20" T_Register="32(32)" T_Alu="15(15)" T_Lut="20(20)"/>
   <SubModule name="sample_bram_inst" Bsram="1" T_Bsram="1(1)"/>
-  <SubModule name="arithmetic_datapath_inst" Register="161" Alu="71" Lut="189" MULT18X18="1" T_Register="161(161)" T_Alu="71(71)" T_Lut="189(189)" T_MULT18X18="1(1)"/>
-  <SubModule name="hex_result_stream_inst" Register="16" Lut="315" T_Register="16(16)" T_Lut="315(315)"/>
-  <SubModule name="uart_tx_inst" Register="30" Lut="48" T_Register="30(30)" T_Lut="48(48)"/>
+  <SubModule name="arithmetic_datapath_inst" Register="165" Alu="72" Lut="196" MULT18X18="1" T_Register="165(165)" T_Alu="72(72)" T_Lut="196(196)" T_MULT18X18="1(1)"/>
+  <SubModule name="hex_result_stream_inst" Register="16" Lut="300" T_Register="16(16)" T_Lut="300(300)"/>
+  <SubModule name="uart_tx_inst" Register="30" Lut="47" T_Register="30(30)" T_Lut="47(47)"/>
  </SubModule>
 </Module>

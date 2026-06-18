@@ -1,73 +1,73 @@
 [
  {
-  "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
+  "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
   "InstLine" : 3,
   "InstName" : "signal_monitor_top",
-  "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
+  "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
   "ModuleLine" : 3,
   "ModuleName" : "signal_monitor_top",
   "SubInsts" : [
    {
-    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
+    "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
     "InstLine" : 18,
     "InstName" : "pll_54mhz_inst",
-    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/pll_54mhz.v",
+    "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/pll_54mhz.v",
     "ModuleLine" : 3,
     "ModuleName" : "pll_54mhz"
    },
    {
-    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
+    "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
     "InstLine" : 27,
     "InstName" : "start_button_debounce",
-    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/button_debounce.v",
+    "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/button_debounce.v",
     "ModuleLine" : 3,
     "ModuleName" : "button_debounce"
    },
    {
-    "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
+    "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
     "InstLine" : 39,
     "InstName" : "signal_monitor_core_inst",
-    "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
+    "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
     "ModuleLine" : 3,
     "ModuleName" : "signal_monitor_core",
     "SubInsts" : [
      {
-      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
-      "InstLine" : 77,
+      "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
+      "InstLine" : 80,
       "InstName" : "sample_generator_inst",
-      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/sample_generator.v",
+      "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/sample_generator.v",
       "ModuleLine" : 3,
       "ModuleName" : "sample_generator"
      },
      {
-      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
-      "InstLine" : 82,
+      "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
+      "InstLine" : 89,
       "InstName" : "sample_bram_inst",
-      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/sample_bram.v",
+      "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/sample_bram.v",
       "ModuleLine" : 3,
       "ModuleName" : "sample_bram"
      },
      {
-      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
-      "InstLine" : 90,
+      "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
+      "InstLine" : 97,
       "InstName" : "arithmetic_datapath_inst",
-      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/arithmetic_datapath.v",
+      "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/arithmetic_datapath.v",
       "ModuleLine" : 3,
       "ModuleName" : "arithmetic_datapath"
      },
      {
-      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
-      "InstLine" : 107,
+      "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
+      "InstLine" : 114,
       "InstName" : "hex_result_stream_inst",
-      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/hex_result_stream.v",
+      "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/hex_result_stream.v",
       "ModuleLine" : 3,
       "ModuleName" : "hex_result_stream"
      },
      {
-      "InstFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
-      "InstLine" : 124,
+      "InstFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
+      "InstLine" : 131,
       "InstName" : "uart_tx_inst",
-      "ModuleFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/uart_tx.v",
+      "ModuleFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/uart_tx.v",
       "ModuleLine" : 3,
       "ModuleName" : "uart_tx"
      }

@@ -5,7 +5,7 @@ VVP ?= vvp
 GTKWAVE ?= gtkwave
 
 RTL := $(wildcard src/rtl/*.v)
-TESTS := tb_signal_monitor_core tb_extreme_metrics tb_bram tb_uart_results tb_pll_54mhz tb_button_debounce
+TESTS := tb_sample_generator tb_signal_monitor_core tb_extreme_metrics tb_bram tb_uart_results tb_pll_54mhz tb_button_debounce
 
 .PHONY: all sim clean wave-core wave-fsm wave-bram wave-metrics wave-uart wave-pll list
 

@@ -5,34 +5,34 @@
 1. PnR Messages
 
   <Report Title>: PnR Report
-  <Design File>: \\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\impl\gwsynthesis\dr3_at.vg
-  <Physical Constraints File>: \\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\constraints\tangnano9k.cst
-  <Timing Constraints File>: \\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\constraints\tangnano9k.sdc
+  <Design File>: U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\impl\gwsynthesis\dr3_at.vg
+  <Physical Constraints File>: U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\constraints\tangnano9k.cst
+  <Timing Constraints File>: U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\constraints\tangnano9k.sdc
   <Tool Version>: V1.9.12.01 (64-bit)
   <Part Number>: GW1NR-LV9QN88PC6/I5
   <Device>: GW1NR-9
   <Device Version>: C
-  <Created Time>:Sat May 30 18:30:09 2026
+  <Created Time>:Thu Jun 18 09:03:13 2026
 
 
 2. PnR Details
 
   Running placement:
-    Placement Phase 0: CPU time = 0h 0m 0.097s, Elapsed time = 0h 0m 0.097s
-    Placement Phase 1: CPU time = 0h 0m 0.108s, Elapsed time = 0h 0m 0.108s
-    Placement Phase 2: CPU time = 0h 0m 0.12s, Elapsed time = 0h 0m 0.12s
-    Placement Phase 3: CPU time = 0h 0m 0.939s, Elapsed time = 0h 0m 0.939s
+    Placement Phase 0: CPU time = 0h 0m 0.115s, Elapsed time = 0h 0m 0.115s
+    Placement Phase 1: CPU time = 0h 0m 0.105s, Elapsed time = 0h 0m 0.105s
+    Placement Phase 2: CPU time = 0h 0m 0.141s, Elapsed time = 0h 0m 0.141s
+    Placement Phase 3: CPU time = 0h 0m 0.927s, Elapsed time = 0h 0m 0.927s
     Total Placement: CPU time = 0h 0m 1s, Elapsed time = 0h 0m 1s
  Running routing:
     Routing Phase 0: CPU time = 0h 0m 0.001s, Elapsed time = 0h 0m 0.001s
-    Routing Phase 1: CPU time = 0h 0m 0.285s, Elapsed time = 0h 0m 0.284s
-    Routing Phase 2: CPU time = 0h 0m 0.397s, Elapsed time = 0h 0m 0.397s
+    Routing Phase 1: CPU time = 0h 0m 0.353s, Elapsed time = 0h 0m 0.353s
+    Routing Phase 2: CPU time = 0h 0m 0.422s, Elapsed time = 0h 0m 0.422s
     Routing Phase 3: CPU time = 0h 0m 0s, Elapsed time = 0h 0m 0s
-    Total Routing: CPU time = 0h 0m 0.683s, Elapsed time = 0h 0m 0.682s
+    Total Routing: CPU time = 0h 0m 0.776s, Elapsed time = 0h 0m 0.776s
  Generate output files:
-    CPU time = 0h 0m 2s, Elapsed time = 0h 0m 2s
+    CPU time = 0h 0m 3s, Elapsed time = 0h 0m 3s
 
- Total Time and Memory Usage: CPU time = 0h 0m 4s, Elapsed time = 0h 0m 4s, Peak memory usage = 306MB
+ Total Time and Memory Usage: CPU time = 0h 0m 5s, Elapsed time = 0h 0m 5s, Peak memory usage = 304MB
 
 
 3. Resource Usage Summary
@@ -40,15 +40,15 @@
   --------------------------------------------------------------------------------
   Resources                   | Usage                               | Utilization
   --------------------------------------------------------------------------------
-  Logic                       | 718/8640                            |  9%
-    --LUT,ALU,ROM16           | 718(644 LUT, 74 ALU, 0 ROM16)       | -
+  Logic                       | 741/8640                            |  9%
+    --LUT,ALU,ROM16           | 741(649 LUT, 92 ALU, 0 ROM16)       | -
     --SSRAM(RAM16)            | 0                                   | -
-  Register                    | 245/6693                            |  4%
+  Register                    | 281/6693                            |  5%
     --Logic Register as Latch | 0/6480                              |  0%
-    --Logic Register as FF    | 243/6480                            |  4%
+    --Logic Register as FF    | 279/6480                            |  5%
     --I/O Register as Latch   | 0/213                               |  0%
     --I/O Register as FF      | 2/213                               |  <1%
-  CLS                         | 400/4320                            |  10%
+  CLS                         | 409/4320                            |  10%
   I/O Port                    | 10/71                               |  15%
   I/O Buf                     | 10                                  | -
     --Input Buf               | 3                                   | -

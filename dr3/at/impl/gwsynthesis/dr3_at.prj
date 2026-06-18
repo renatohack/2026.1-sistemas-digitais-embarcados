@@ -4,21 +4,21 @@
     <Version>beta</Version>
     <Device id="GW1NR-9C" package="QFN88P" speed="6" partNumber="GW1NR-LV9QN88PC6/I5"/>
     <FileList>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\arithmetic_datapath.v" type="verilog"/>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\button_debounce.v" type="verilog"/>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\hex_result_stream.v" type="verilog"/>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\pll_54mhz.v" type="verilog"/>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\sample_bram.v" type="verilog"/>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\sample_generator.v" type="verilog"/>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\signal_monitor_core.v" type="verilog"/>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\signal_monitor_top.v" type="verilog"/>
-        <File path="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\uart_tx.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\arithmetic_datapath.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\button_debounce.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\hex_result_stream.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\pll_54mhz.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\sample_bram.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\sample_generator.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\signal_monitor_core.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\signal_monitor_top.v" type="verilog"/>
+        <File path="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\src\rtl\uart_tx.v" type="verilog"/>
     </FileList>
     <OptionList>
         <Option type="disable_insert_pad" value="0"/>
         <Option type="global_freq" value="50.000"/>
         <Option type="looplimit" value="2000"/>
-        <Option type="output_file" value="\\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\impl\gwsynthesis\dr3_at.vg"/>
+        <Option type="output_file" value="U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\impl\gwsynthesis\dr3_at.vg"/>
         <Option type="print_all_synthesis_warning" value="0"/>
         <Option type="ram_rw_check" value="0"/>
         <Option type="vcc" value="1.2"/>

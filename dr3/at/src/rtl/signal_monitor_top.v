@@ -33,7 +33,7 @@ module signal_monitor_top (
     );
 
     signal_monitor_core #(
-        .SAMPLE_MODE(0),
+        .SAMPLE_SEED(16'hACE1),
         .CLK_FREQ_HZ(54000000),
         .BAUD_RATE(115200)
     ) signal_monitor_core_inst (
@@ -63,4 +63,3 @@ module signal_monitor_top (
         .done()
     );
 endmodule
-

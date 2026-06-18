@@ -1,9 +1,9 @@
--d \\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\impl\gwsynthesis\dr3_at.vg
+-d U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\impl\gwsynthesis\dr3_at.vg
 -p GW1NR-9C-QFN88P-6
 -pn GW1NR-LV9QN88PC6/I5
--cst \\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\constraints\tangnano9k.cst
--cfg \\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\impl\pnr\device.cfg
--sdc \\wsl.localhost\Ubuntu\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\constraints\tangnano9k.sdc
+-cst U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\constraints\tangnano9k.cst
+-cfg U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\impl\pnr\device.cfg
+-sdc U:\home\renato\faculdade\26.1-sistemasembarcados\drs\dr3\at\constraints\tangnano9k.sdc
 -bit
 -tr
 -ph

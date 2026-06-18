@@ -2,39 +2,39 @@
  "Device" : "GW1NR-9C",
  "Files" : [
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/arithmetic_datapath.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/arithmetic_datapath.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/button_debounce.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/button_debounce.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/hex_result_stream.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/hex_result_stream.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/pll_54mhz.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/pll_54mhz.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/sample_bram.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/sample_bram.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/sample_generator.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/sample_generator.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_core.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/signal_monitor_top.v",
    "Type" : "verilog"
   },
   {
-   "Path" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/uart_tx.v",
+   "Path" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/src/rtl/uart_tx.v",
    "Type" : "verilog"
   }
  ],
@@ -42,7 +42,7 @@
 
  ],
  "LoopLimit" : 2000,
- "ResultFile" : "//wsl.localhost/Ubuntu/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/impl/temp/rtl_parser.result",
+ "ResultFile" : "U:/home/renato/faculdade/26.1-sistemasembarcados/drs/dr3/at/impl/temp/rtl_parser.result",
  "Top" : "",
  "VerilogStd" : "verilog_2001",
  "VhdlStd" : "vhdl_93"

@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 module signal_monitor_core #(
-    parameter SAMPLE_MODE = 0,
+    parameter [15:0] SAMPLE_SEED = 16'hACE1,
     parameter CLK_FREQ_HZ = 54000000,
     parameter BAUD_RATE = 115200
 ) (
@@ -51,8 +51,11 @@ module signal_monitor_core #(
     reg datapath_finalize;
     reg tx_started;
     reg stream_start;
+    reg sample_reseed;
+    reg sample_next;
 
     wire signed [15:0] bram_dout;
+    wire [15:0] random_state;
     wire datapath_done;
     wire [4:0] datapath_count;
     wire tx_ready;
@@ -73,10 +76,14 @@ module signal_monitor_core #(
     assign done = (state_reg == STATE_DONE);
 
     sample_generator #(
-        .SAMPLE_MODE(SAMPLE_MODE)
+        .SEED(SAMPLE_SEED)
     ) sample_generator_inst (
-        .index(sample_index),
-        .sample(sample_value)
+        .clk(clk),
+        .rst_n(rst_n),
+        .reseed(sample_reseed),
+        .next_sample(sample_next),
+        .sample(sample_value),
+        .random_state(random_state)
     );
 
     sample_bram sample_bram_inst (
@@ -194,6 +201,8 @@ module signal_monitor_core #(
         datapath_sample_valid = 1'b0;
         datapath_finalize = 1'b0;
         stream_start = 1'b0;
+        sample_reseed = 1'b0;
+        sample_next = 1'b0;
 
         case (state_reg)
             STATE_INIT: begin
@@ -203,6 +212,8 @@ module signal_monitor_core #(
             STATE_IDLE: begin
                 datapath_clear = 1'b1;
                 bram_addr = 4'd0;
+                if (start)
+                    sample_reseed = 1'b1;
             end
             STATE_GENERATE: begin
                 bram_addr = sample_index;
@@ -212,6 +223,7 @@ module signal_monitor_core #(
                 bram_we = 1'b1;
                 bram_addr = sample_index;
                 bram_din = sample_value;
+                sample_next = 1'b1;
             end
             STATE_READ: begin
                 bram_addr = process_index;
@@ -228,12 +240,16 @@ module signal_monitor_core #(
                     stream_start = 1'b1;
             end
             STATE_DONE: begin
-                if (start)
+                if (start) begin
                     datapath_clear = 1'b1;
+                    sample_reseed = 1'b1;
+                end
             end
             STATE_ERROR: begin
-                if (start)
+                if (start) begin
                     datapath_clear = 1'b1;
+                    sample_reseed = 1'b1;
+                end
             end
             default: begin
                 datapath_clear = 1'b1;
@@ -309,4 +325,3 @@ module signal_monitor_core #(
         endcase
     end
 endmodule
-

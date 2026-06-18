@@ -27,8 +27,18 @@ module tb_signal_monitor_core;
     wire [7:0] tx_byte;
     wire done;
 
+    reg signed [15:0] captured_samples [0:15];
+    reg signed [31:0] expected_sum;
+    reg [39:0] expected_sumsq;
+    reg signed [31:0] expected_mean;
+    reg [31:0] expected_rms2;
+    reg [31:0] sample_square;
+    reg all_samples_equal;
+    integer write_count;
+    integer i;
+
     signal_monitor_core #(
-        .SAMPLE_MODE(0),
+        .SAMPLE_SEED(16'hACE1),
         .CLK_FREQ_HZ(1152000),
         .BAUD_RATE(115200)
     ) dut (
@@ -63,6 +73,20 @@ module tb_signal_monitor_core;
         forever #5 clk = ~clk;
     end
 
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            expected_sum <= 32'sd0;
+            expected_sumsq <= 40'd0;
+            write_count <= 0;
+        end else if (bram_we) begin
+            captured_samples[bram_addr] <= bram_din;
+            sample_square = bram_din * bram_din;
+            expected_sum <= expected_sum + {{16{bram_din[15]}}, bram_din};
+            expected_sumsq <= expected_sumsq + {8'd0, sample_square};
+            write_count <= write_count + 1;
+        end
+    end
+
     initial begin
         $dumpfile("build/waves/tb_signal_monitor_core.vcd");
         $dumpvars(0, tb_signal_monitor_core);
@@ -80,18 +104,37 @@ module tb_signal_monitor_core;
         wait (done);
         @(posedge clk);
 
-        if (sum_out !== 32'sd64) begin
-            $display("FAIL: expected sum 64, got %0d", sum_out);
+        expected_mean = expected_sum / 32'sd16;
+        expected_rms2 = expected_sumsq / 40'd16;
+
+        if (write_count !== 16) begin
+            $display("FAIL: expected 16 random samples written to BRAM, got %0d", write_count);
             $finish_and_return(1);
         end
 
-        if (mean_out !== 32'sd4) begin
-            $display("FAIL: expected mean 4, got %0d", mean_out);
+        all_samples_equal = 1'b1;
+        for (i = 1; i < 16; i = i + 1) begin
+            if (captured_samples[i] !== captured_samples[0])
+                all_samples_equal = 1'b0;
+        end
+
+        if (all_samples_equal) begin
+            $display("FAIL: random generator produced 16 identical samples");
             $finish_and_return(1);
         end
 
-        if (rms2_out !== 32'd368) begin
-            $display("FAIL: expected rms2 368, got %0d", rms2_out);
+        if (sum_out !== expected_sum) begin
+            $display("FAIL: expected sum %0d, got %0d", expected_sum, sum_out);
+            $finish_and_return(1);
+        end
+
+        if (mean_out !== expected_mean) begin
+            $display("FAIL: expected mean %0d, got %0d", expected_mean, mean_out);
+            $finish_and_return(1);
+        end
+
+        if (rms2_out !== expected_rms2) begin
+            $display("FAIL: expected rms2 %0d, got %0d", expected_rms2, rms2_out);
             $finish_and_return(1);
         end
 
@@ -100,7 +143,7 @@ module tb_signal_monitor_core;
             $finish_and_return(1);
         end
 
-        $display("PASS: core typical flow produced SUM=%0d MEAN=%0d RMS2=%0d", sum_out, mean_out, rms2_out);
+        $display("PASS: core random flow wrote 16 samples and produced SUM=%0d MEAN=%0d RMS2=%0d", sum_out, mean_out, rms2_out);
         $finish;
     end
 
